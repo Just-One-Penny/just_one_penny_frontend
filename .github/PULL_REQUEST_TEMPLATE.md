@@ -1,4 +1,4 @@
-## React Boilerplate CRA Template
+## Just One Penny Template
 
 ### ⚠️ Clear this template before you submit (after you read the things below)
 
