@@ -1,14 +1,18 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { NavBar } from '../NavBar';
 
 export function HomePage() {
   return (
     <>
       <Helmet>
-        <title>Home Page</title>
-        <meta name="description" content="A Boilerplate application homepage" />
+        <title>Just One Penny</title>
+        <meta
+          name="description"
+          content="Charitable giving one penny at a time"
+        />
       </Helmet>
-      <span>HomePage container</span>
+      <NavBar />
     </>
   );
 }
