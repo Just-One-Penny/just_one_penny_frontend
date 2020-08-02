@@ -1,7 +1,6 @@
 ‌# Summary​
 
 - [Quick Start](quick-start.md)
-- [Understading react-boilerplate](understanding-react-boilerplate.md)
 
 ## Tools
 
@@ -20,13 +19,6 @@
 - [i18n Internationalization & Pluralization](building-blocks/i18n.md)
 - [Styling (CSS)](building-blocks/css.md)
 - [Testing](building-blocks/testing.md)
-
-## Deployment
-
-- [AWS](deployment/aws.md)
-- [Azure](deployment/azure.md)
-- [Heroku](deployment/heroku.md)
-- [Netlify](deployment/netlify.md)
 
 ## Misc
 

@@ -1,4 +1,4 @@
-<img width="914" alt="Just One Penny" src="https://user-images.githubusercontent.com/3495307/80274591-2d5daa00-86e4-11ea-8fba-404f1cdba87e.png" align="center">
+<img width="914" alt="Just One Penny" src="https://share.getcloudapp.com/items/bLuRo0pm/download?utm_source=viewer" align="center">
 <br />
 
 <div align="center">

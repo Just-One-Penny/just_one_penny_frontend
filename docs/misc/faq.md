@@ -1,7 +1,6 @@
 # FAQ
 
 - [Using global reducers instead of injecting](#load-reducers-optimistically)
-- [Keeping up-to-date with the template](#keeping-up-to-date-with-the-template)
 - [Are there any examples or tutorials?](#examples-and-tutorials)
 
 ## Using reducers optimistically
@@ -26,10 +25,6 @@ export function createReducer(injectedReducers: InjectedReducersType = {}) {
   return rootReducer;
 }
 ```
-
-## Keeping up-to-date with the template
-
-Eventhough the template is an npm package it's not possible for you to **just update** the package, since you start CRA with this template initially. The suggested way to keep an eye on the [CHANGELOG](../../CHANGELOG.md) file. All the changes that **concerns** the template user will be displayed there, like bug fixes, documentation updates, new features etc... You can check each change's commits and file changes and see what has been changed. Then, the decision is yours if you want to apply those to your code.
 
 ## Examples & Tutorials
 

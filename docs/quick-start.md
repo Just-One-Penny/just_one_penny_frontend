@@ -1,24 +1,24 @@
 # Quickstart
 
-**3** easy peasy steps to do :)
+**3** easy steps
 
-**1)** Create **CRA** app with the custom template
+**1)** Clone the repository
 
 ```shell
-npx create-react-app --template cra-template-rb my-app
+git clone https://github.com/Just-One-Penny/just_one_penny_frontend.git
 ```
 
-**2)** Start the the example application and checkout the features made ready for you.
+**2)** Navigate to the new directory and install the dependencies.
 
 ```shell
-cd my-app
-npm start
+cd just_one_penny_frontend
+npm i
 ```
 
-**3)** When you are done examining the sample application. Clean it and start your own app!!
+**3)** Now you are ready to go!
 
 ```shell
-npm run cleanAndSetup
+npm run start
 ```
 
 {% hint style="success" %}

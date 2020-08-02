@@ -1,20 +1,6 @@
-# React Boilerplate CRA Template
+# Just One Penny frontend
 
-## What is React Boilerplate CRA Template
-
-{% hint style="info" %}
-
-💁‍♂️ **TL;DR:** **`CRA`** handles the bootstrapping and **`React Boilerplate`** gets you started with the best tools and practices.
-
-{% endhint %}
-
-This is a custom [create-react-app] template of [react-boilerplate]. React Boilerplate has been developing the ultimate react starter kit for many years now. On the other hand **`CRA`**(create-react-app) is currently the people's favourite choice. This template has been created to join their strengths together. **`CRA`** provides the necessary bootstrapping to start your projects but does not provide a guide on how to built it. That is where **react-boilerplate** comes in and prepares the bases with the battle-tested techniques and tools to guide you into creating state-of-the-art web applications.
-
-{% hint style="warning" %}
-
-This documentation assumes that you are familiar with the [create-react-app]. The template is built on top of it ;)
-
-{% endhint %}
+This is the react repository for Just One Penny. Here we build all of our pages and components which are used to build our awesome UI. This repo features a lot of exciting technologies on the cutting edge of web development. In this gitbook there are breakdowns of each of the tools that are being utilized. There is also a quick start and an FAQ section. If anything is unclear or you think we are missing something feel free to create a github issue. Thanks!
 
 ## Let's get started with the documentation
 
@@ -22,11 +8,6 @@ In the following sections we will introduce this boilerplate to you shortly and 
 
 {% hint style="info" %}
 
-Source Code & Repo: [Github](https://github.com/react-boilerplate/react-boilerplate-cra-template)
-
-NPM Package: [npm](https://www.npmjs.com/package/cra-template-rb)
+Source Code & Repo: [Github](https://github.com/Just-One-Penny/just_one_penny_frontend)
 
 {% endhint %}
-
-[create-react-app]: https://github.com/facebook/create-react-app
-[react-boilerplate]: https://github.com/react-boilerplate/react-boilerplate
