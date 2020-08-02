@@ -1,4 +1,5 @@
 import { ThemeState } from 'styles/theme/types';
+import { AuthenticationState } from 'app/containers/Authentication/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -7,5 +8,6 @@ import { ThemeState } from 'styles/theme/types';
 */
 export interface RootState {
   theme?: ThemeState;
+  authentication?: AuthenticationState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

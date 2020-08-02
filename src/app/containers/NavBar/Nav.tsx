@@ -1,29 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 import { ReactComponent as DocumentationIcon } from './assets/documentation-icon.svg';
 import { ReactComponent as GithubIcon } from './assets/github-icon.svg';
+import { Authentication } from '../Authentication';
+import { Modal } from 'app/components/Modal';
+import { useAuth } from 'context/auth-context';
 
 export function Nav() {
+  const { user } = useAuth();
   return (
     <Wrapper>
-      <Item
-        href="https://cansahin.gitbook.io/react-boilerplate-cra-template/"
-        target="_blank"
-        title="Documentation Page"
-        rel="noopener noreferrer"
-      >
-        <DocumentationIcon />
-        Documentation
-      </Item>
-      <Item
-        href="https://github.com/react-boilerplate/react-boilerplate-cra-template"
-        target="_blank"
-        title="Github Page"
-        rel="noopener noreferrer"
-      >
-        <GithubIcon />
-        Github
-      </Item>
+      {user ? (
+        user?.email
+      ) : (
+        <>
+          <Modal
+            buttonElement={
+              <Button>
+                <DocumentationIcon />
+                Login
+              </Button>
+            }
+            modalBody={<Authentication />}
+          />
+          <Modal
+            buttonElement={
+              <Button>
+                <DocumentationIcon />
+                Sign Up
+              </Button>
+            }
+            modalBody={<Authentication newAccount />}
+          />
+        </>
+      )}
     </Wrapper>
   );
 }
@@ -33,8 +43,8 @@ const Wrapper = styled.nav`
   margin-right: -1rem;
 `;
 
-const Item = styled.a`
-  color: ${p => p.theme.primary};
+const Button = styled.button`
+  background-color: ${p => p.theme.primary};
   cursor: pointer;
   text-decoration: none;
   display: flex;
