@@ -26,6 +26,7 @@ export const selectTheme = createSelector(
     // if (theme.selected === 'system') {
     //   return isSystemDark ? themes.dark : themes.light;
     // }
+
     // return themes[theme.selected];
   },
 );
