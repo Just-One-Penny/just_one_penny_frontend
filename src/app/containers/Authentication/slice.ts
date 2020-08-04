@@ -37,7 +37,7 @@ const authenticationSlice = createSlice({
       state.error = null;
     },
     authenticationSuccess(state, action: PayloadAction<AuthenticationSuccess>) {
-      const token = action.payload;
+      // const token = action.payload;
       state.loading = false;
     },
     authenticationError(state, action: PayloadAction<AuthenticationErrorType>) {
