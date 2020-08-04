@@ -33,7 +33,7 @@
   "scripts": {
     "// ---DEFAULT CRA---": "",
     "start": "PORT=8080 npm run watch:css & react-scripts start",
-    "build": "npm run build:css && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "// ---TEMPLATE---": "Scripts will be also in the template",
     "start:prod": "npm run build && serve -s build",
