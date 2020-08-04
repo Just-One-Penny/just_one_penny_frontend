@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { queryCache } from 'react-query';
 import { userApi } from 'api/userApi';
-import { LoadingSpinner } from '../app/components/LoadingSpinner';
+// import { LoadingSpinner } from '../app/components/LoadingSpinner';
 import { Fallback } from '../app/components/Fallback';
-import { User } from 'types/User';
+// import { User } from 'types/User';
 import { useAsync } from 'utils/hooks';
 
 async function bootstrapAppData() {

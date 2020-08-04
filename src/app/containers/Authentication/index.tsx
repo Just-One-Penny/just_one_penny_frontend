@@ -7,19 +7,11 @@
 import React, { memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components/macro';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { reducer, sliceKey, actions } from './slice';
-import {
-  selectEmail,
-  selectPassword,
-  selectFullName,
-  selectError,
-  selectLoading,
-} from './selectors';
+import { selectEmail, selectPassword, selectFullName } from './selectors';
 import { authenticationSaga } from './saga';
-import { Input } from 'app/components/Input';
 
 import { ReactComponent as GithubIcon } from './assets/github.svg';
 import { ReactComponent as GoogleIcon } from './assets/google.svg';
@@ -37,8 +29,6 @@ export const Authentication = memo((props: Props) => {
   const email = useSelector(selectEmail);
   const password = useSelector(selectPassword);
   const fullName = useSelector(selectFullName);
-  const error = useSelector(selectError);
-  const isLoading = useSelector(selectLoading);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
 
@@ -226,5 +216,3 @@ export const Authentication = memo((props: Props) => {
     </div>
   );
 });
-
-const Div = styled.div``;

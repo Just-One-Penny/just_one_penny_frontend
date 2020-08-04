@@ -4,7 +4,6 @@
  *
  */
 import React, { memo } from 'react';
-import styled from 'styled-components/macro';
 import { PortalWithState } from 'react-portal';
 
 interface Props {
@@ -15,7 +14,6 @@ interface Props {
 }
 
 export const Modal = memo((props: Props) => {
-  const [showModal, setShowModal] = React.useState(false);
   return (
     <PortalWithState closeOnOutsideClick closeOnEsc>
       {({ openPortal, closePortal, isOpen, portal }) => (
@@ -78,5 +76,3 @@ export const Modal = memo((props: Props) => {
     </PortalWithState>
   );
 });
-
-const Div = styled.div``;
