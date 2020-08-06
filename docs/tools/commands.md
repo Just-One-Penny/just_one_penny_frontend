@@ -1,20 +1,5 @@
 # CLI & Scaffolding
 
-## Cleaning
-
-```Shell
-npm run cleanAndSetup
-```
-
-Removes the example app, replacing it with the smallest amount of boilerplate
-code necessary to start writing your app! Also, it makes some necessary changes to your setup to give you a clean and working start
-
-{% hint style="warning" %}
-
-**Note:** This command is self-destructive, once you've run it you cannot run it again. This is for your own safety, so you can't delete portions of your project irreversibly by accident.
-
-{% endhint %}
-
 ## Generators
 
 ```Shell
@@ -30,18 +15,6 @@ npm run test:generators
 ```
 
 If you want to test if generators are working fine. It generates components and containers with various settings. It would be usefull if you start customizing the generators for your needs
-
-## Production
-
-```Shell
-npm run start:prod
-```
-
-- Builds your app (see `npm run build`)
-- Serves the `build` folder locally
-
-The app is built for optimal performance: assets are
-minified and served gzipped.
 
 ## Unit testing
 

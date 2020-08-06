@@ -36,7 +36,7 @@ Clone and setup the repository
 ```shell
 git clone https://github.com/Just-One-Penny/just_one_penny_frontend.git
 cd just_one_penny_frontend
-npm cleanAndSetup
+npm install
 npm start
 ```
 
