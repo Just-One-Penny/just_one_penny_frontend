@@ -12,6 +12,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import FontFaceObserver from 'fontfaceobserver';
 import * as serviceWorker from 'serviceWorker';
+import LogRocket from 'logrocket';
+import setupLogRocketReact from 'logrocket-react';
 
 import 'sanitize.css/sanitize.css';
 
@@ -55,6 +57,11 @@ if (module.hot) {
     const App = require('./app').App;
     render(App);
   });
+}
+
+if (process.env.NODE_ENV === 'production') {
+  LogRocket.init('hk6vxh/just-one-penny');
+  setupLogRocketReact(LogRocket);
 }
 
 render(App);
