@@ -59,6 +59,7 @@ if (module.hot) {
   });
 }
 
+console.log('process.env', process.env);
 if (process.env.LOGROCKET_KEY) {
   LogRocket.init(process.env.LOGROCKET_KEY);
   setupLogRocketReact(LogRocket);
