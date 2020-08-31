@@ -1,0 +1,10 @@
+org: nfinger
+app: just-one-penny-frontend
+name: just-one-penny-frontend
+component: website
+
+inputs:
+  src:
+    src: ./src
+    hook: yarn build
+    dist: ./build
