@@ -59,8 +59,8 @@ if (module.hot) {
   });
 }
 
-if (process.env.NODE_ENV === 'production') {
-  LogRocket.init('hk6vxh/just-one-penny');
+if (process.env.LOGROCKET_KEY) {
+  LogRocket.init(process.env.LOGROCKET_KEY);
   setupLogRocketReact(LogRocket);
 }
 
