@@ -10,5 +10,5 @@ inputs:
     dist: ./build
 
 environment: 
-  LOGROCKET_KEY: ${param:LOGROCKET_KEY}
-  API_BASE: ${param:API_BASE}
+  REACT_APP_LOGROCKET_KEY: ${param:LOGROCKET_KEY}
+  REACT_APP_API_BASE: ${param:API_BASE}

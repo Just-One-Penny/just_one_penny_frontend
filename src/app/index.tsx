@@ -17,6 +17,7 @@ import { HomePage } from './containers/HomePage/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 
 export function App() {
+  console.log('process.env', process.env);
   return (
     <BrowserRouter>
       <Helmet
