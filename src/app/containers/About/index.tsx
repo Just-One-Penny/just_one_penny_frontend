@@ -18,8 +18,8 @@ export const About = memo((props: Props) => {
   return (
     <>
       <Helmet>
-        <title>About</title>
-        <meta name="description" content="Description of About" />
+        <title>About Us</title>
+        <meta name="description" content="About Just One Penny" />
       </Helmet>
       <header>About Us</header>
       <div>
