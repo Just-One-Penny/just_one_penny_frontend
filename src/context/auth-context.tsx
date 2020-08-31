@@ -1,5 +1,6 @@
 import React from 'react';
 import { queryCache } from 'react-query';
+import LogRocket from 'logrocket';
 import { userApi } from 'api/userApi';
 // import { LoadingSpinner } from '../app/components/LoadingSpinner';
 import { Fallback } from '../app/components/Fallback';
@@ -43,11 +44,21 @@ function AuthProvider(props) {
   }, [run]);
 
   const login = React.useCallback(
-    form => userApi.loginUser(form).then(user => setData(user)),
+    form =>
+      userApi.loginUser(form).then(user => {
+        // This is an example script - don't forget to change it!
+        LogRocket.identify('THE_USER_ID_IN_YOUR_APP', user);
+        setData(user);
+      }),
     [setData],
   );
   const register = React.useCallback(
-    form => userApi.registerUser(form).then(user => setData(user)),
+    form =>
+      userApi.registerUser(form).then(user => {
+        // This is an example script - don't forget to change it!
+        LogRocket.identify('THE_USER_ID_IN_YOUR_APP', user);
+        setData(user);
+      }),
     [setData],
   );
   const logout = React.useCallback(() => {

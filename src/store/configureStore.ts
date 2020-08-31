@@ -1,7 +1,7 @@
 /**
  * Create the store with dynamic reducers
  */
-
+import LogRocket from 'logrocket';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { createInjectorsEnhancer, forceReducerReload } from 'redux-injectors';
 import createSagaMiddleware from 'redux-saga';
@@ -14,7 +14,7 @@ export function configureAppStore() {
   const { run: runSaga } = sagaMiddleware;
 
   // Create the store with saga middleware
-  const middlewares = [sagaMiddleware];
+  const middlewares = [sagaMiddleware, LogRocket.reduxMiddleware()];
 
   const enhancers = [
     createInjectorsEnhancer({

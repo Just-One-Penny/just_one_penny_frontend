@@ -10,17 +10,7 @@ interface Props {}
 
 export function Fallback({ error }) {
   return (
-    <div
-      role="alert"
-      css={{
-        color: theme.primary,
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <div role="alert">
       <p>Uh oh... There's a problem. Try refreshing the app.</p>
       <pre>{error.message}</pre>
     </div>

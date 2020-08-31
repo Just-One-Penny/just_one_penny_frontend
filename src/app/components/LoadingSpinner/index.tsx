@@ -24,16 +24,7 @@ Spinner.defaultProps = {
 
 export const LoadingSpinner = () => {
   return (
-    <div
-      css={{
-        fontSize: '4em',
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <div>
       <Spinner />
     </div>
   );
