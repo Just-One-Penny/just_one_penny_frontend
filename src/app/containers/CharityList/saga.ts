@@ -1,8 +1,16 @@
 // import { take, call, put, select, takeLatest } from 'redux-saga/effects';
-// import { actions } from './slice';
+import { takeEvery } from 'redux-saga/effects';
+import { actions } from './slice';
+// import { Charity } from '/types/Charity';
+import { charityApi } from 'api/charityApi';
+// import { call } from "redux-saga/effects";
+import { authStorageKey } from 'api/userApi';
 
-// export function* doSomething() {}
+export function* getCharities() {
+  const charities = yield charityApi.getCharities;
+  localStorage.setItem(authStorageKey, charities.charityListState.charities);
+}
 
 export function* charityListSaga() {
-  // yield takeLatest(actions.someAction.type, doSomething);
+  yield takeEvery(actions.getCharitiesRequest.type, getCharities);
 }

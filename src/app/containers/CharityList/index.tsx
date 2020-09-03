@@ -21,6 +21,8 @@ export const CharityList = memo((props: Props) => {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: charityListSaga });
 
+  console.log(props);
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const charityList = useSelector(selectCharityList);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -32,10 +34,25 @@ export const CharityList = memo((props: Props) => {
   return (
     <>
       <Helmet>
-        <title>CharityList</title>
-        <meta name="description" content="Description of CharityList" />
+        <title>Charities</title>
+        <meta name="description" content="List of Charities" />
       </Helmet>
-      <Div>{t('')}</Div>
+      <header>Charities</header>
+      <table>
+        <thead>
+          <th>Search Results</th>
+          <th>Keywords</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      {/*<Div>{t('')}</Div>*/}
     </>
   );
 });
