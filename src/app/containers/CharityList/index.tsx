@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/macro';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { reducer, sliceKey } from './slice';
+import { reducer, sliceKey, actions } from './slice';
 import { selectCharityList } from './selectors';
 import { charityListSaga } from './saga';
 
@@ -21,12 +21,15 @@ export const CharityList = memo((props: Props) => {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: charityListSaga });
 
-  console.log(props);
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const charityList = useSelector(selectCharityList);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
+
+  const charities = dispatch(actions.getCharitiesRequest);
+
+  console.log(charities);
+  console.log('hi');
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
