@@ -3,13 +3,16 @@ import { takeEvery, put, call } from 'redux-saga/effects';
 import { actions } from './slice';
 // import { Charity } from '/types/Charity';
 import { charityApi } from 'api/charityApi';
+import { GetCharitiesErrorType } from './types';
 // import { call } from "redux-saga/effects";
-import { authStorageKey } from 'api/userApi';
 
 export function* getCharities() {
-  //put
   const charities = yield call(charityApi.getCharities);
-  put(actions.getCharitiesSuccess(charities));
+  if (charities != null) {
+    put(actions.getCharitiesSuccess(charities));
+  } else {
+    yield put(actions.getCharitiesError(GetCharitiesErrorType.GENERAL_ERROR));
+  }
   return charities;
 }
 

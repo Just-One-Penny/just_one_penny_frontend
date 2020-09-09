@@ -51,8 +51,13 @@ export const CharityList = memo((props: Props) => {
                 <td>
                   {charity.name} ({charity.city}/{charity.state})
                 </td>
-                <td>{charity.lastYearRevenue}</td>
                 <td>
+                  {charity.lastYearRevenue.revenue}
+                  {/*Lower two subcategories for implementation when API is running*/}
+                  {charity.categories}
+                </td>
+                <td>
+                  {/* Donate button functionality needed after implementation of donation api and such*/}
                   <button>Donate</button>
                 </td>
               </tr>

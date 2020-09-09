@@ -4,7 +4,11 @@ import { Charity } from 'types/Charity';
 export interface CharityListState {
   charities: Charity[];
   loading: boolean;
-  error?: null;
+  error?: GetCharitiesErrorType | null;
+}
+
+export enum GetCharitiesErrorType {
+  GENERAL_ERROR = 1,
 }
 
 export type ContainerState = CharityListState;

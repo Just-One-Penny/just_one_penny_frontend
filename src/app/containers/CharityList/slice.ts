@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
-import { ContainerState } from './types';
+import { ContainerState, GetCharitiesErrorType } from './types';
 import { Charity } from 'types/Charity';
 
 // The initial state of the CharityList container
@@ -22,6 +22,10 @@ const charityListSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.charities = action.payload;
+    },
+    getCharitiesError(state, action: PayloadAction<GetCharitiesErrorType>) {
+      state.error = action.payload;
+      state.loading = false;
     },
   },
 });

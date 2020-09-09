@@ -14,7 +14,6 @@ export function HomePage() {
         />
       </Helmet>
       <NavBar />
-      <CharityList></CharityList>
     </>
   );
 }
