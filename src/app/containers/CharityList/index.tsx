@@ -24,9 +24,7 @@ export const CharityList = memo((props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const charityList = useSelector(selectCharityList);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const dispatch = useDispatch();
-
-  const charities = dispatch(actions.getCharitiesRequest);
+  const charities = charityList.charities;
 
   console.log(charities);
   console.log('hi');
