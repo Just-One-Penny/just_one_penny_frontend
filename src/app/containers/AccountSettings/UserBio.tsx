@@ -96,37 +96,37 @@ export function UserBio() {
               </div>
             </div>
           ) : (
-            <div></div>
+            <Form
+              initialValues={{
+                fullName: selectedFullName,
+                email: selectedEmail,
+                role: selectedRole,
+              }}
+            >
+              <ConnectedField
+                name="fullName"
+                component={InputText}
+                onChange={onChange}
+              />
+              <ConnectedField
+                name="email"
+                component={InputText}
+                onChange={onChange}
+              />
+              <ConnectedField
+                name="role"
+                component={InputText}
+                onChange={onChange}
+              />
+              <Button onClick={() => submitForm()}>SAVE</Button>
+              <Button name="cancel" onClick={() => cancelForm()}>
+                CANCEL
+              </Button>
+            </Form>
           )}
         </div>
       ) : (
-        <Form
-          initialValues={{
-            fullName: selectedFullName,
-            email: selectedEmail,
-            role: selectedRole,
-          }}
-        >
-          <ConnectedField
-            name="fullName"
-            component={InputText}
-            onChange={onChange}
-          />
-          <ConnectedField
-            name="email"
-            component={InputText}
-            onChange={onChange}
-          />
-          <ConnectedField
-            name="role"
-            component={InputText}
-            onChange={onChange}
-          />
-          <Button onClick={() => submitForm()}>SAVE</Button>
-          <Button name="cancel" onClick={() => cancelForm()}>
-            CANCEL
-          </Button>
-        </Form>
+        <div></div>
       )}
     </PageWrapper>
   );

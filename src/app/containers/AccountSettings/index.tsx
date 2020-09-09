@@ -32,8 +32,8 @@ export const AccountSettings = memo((props: Props) => {
   return (
     <>
       <Helmet>
-        <title>AccountSettings</title>
-        <meta name="description" content="Description of AccountSettings" />
+        <title>Account Settings</title>
+        <meta name="description" content="Just One Penny Account" />
       </Helmet>
       <Div>{t('')}</Div>
     </>
