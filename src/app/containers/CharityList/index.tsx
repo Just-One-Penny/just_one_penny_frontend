@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/macro';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { reducer, sliceKey, actions } from './slice';
+import { reducer, sliceKey } from './slice';
 import { selectCharityList } from './selectors';
 import { charityListSaga } from './saga';
 
@@ -26,8 +26,7 @@ export const CharityList = memo((props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const charities = charityList.charities;
 
-  console.log(charities);
-  console.log('hi');
+  //const dispatch = useDispatch();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
@@ -45,12 +44,20 @@ export const CharityList = memo((props: Props) => {
           <th>Keywords</th>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+          {charities.map((charity, i) => {
+            return (
+              <tr>
+                <td>{charity.logo}</td>
+                <td>
+                  {charity.name} ({charity.city}/{charity.state})
+                </td>
+                <td>{charity.lastYearRevenue}</td>
+                <td>
+                  <button>Donate</button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       {/*<Div>{t('')}</Div>*/}

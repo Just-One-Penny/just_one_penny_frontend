@@ -10,7 +10,6 @@ export function* getCharities() {
   //put
   const charities = yield call(charityApi.getCharities);
   put(actions.getCharitiesSuccess(charities));
-  //localStorage.setItem(authStorageKey, charities.charityListState.charities);
   return charities;
 }
 
