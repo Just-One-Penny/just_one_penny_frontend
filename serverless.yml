@@ -1,0 +1,12 @@
+org: nfinger
+app: just-one-penny-frontend
+name: just-one-penny-frontend
+component: website
+
+inputs:
+  src:
+    src: ./build
+    hook: npm run build
+  environment: 
+    REACT_APP_LOGROCKET_KEY: ${param:LOGROCKET_KEY}
+    REACT_APP_API_BASE: ${param:API_BASE}
