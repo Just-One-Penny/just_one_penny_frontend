@@ -16,8 +16,6 @@ import {
   selectPassword,
 } from './selectors';
 import { authenticationModalSaga } from './saga';
-import { ReactComponent as GithubIcon } from './assets/github.svg';
-import { ReactComponent as GoogleIcon } from './assets/google.svg';
 
 interface Props {
   isSignup: boolean;
@@ -63,11 +61,9 @@ export function AuthenticationModal(props: Props) {
     if (evt !== undefined && evt.preventDefault) {
       evt.preventDefault();
     }
-    console.log('submitForm -> isSignup', isSignup);
     if (isSignup) {
       dispatch(actions.registerUser());
     } else {
-      console.log('submitForm -> isSignup', isSignup);
       dispatch(actions.loginUser());
     }
   };
@@ -89,15 +85,7 @@ export function AuthenticationModal(props: Props) {
                   type="button"
                   style={{ transition: 'all .15s ease' }}
                 >
-                  <GithubIcon />
-                  Github
-                </button>
-                <button
-                  className="bg-white active:bg-gray-100 text-gray-800 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
-                  type="button"
-                  style={{ transition: 'all .15s ease' }}
-                >
-                  <GoogleIcon />
+                  {/* INSERT SOCIAL AUTH BUTTON */}
                   Google
                 </button>
               </div>
