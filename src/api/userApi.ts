@@ -54,6 +54,14 @@ export class UserApi extends Api {
     );
   };
 
+  //MINE
+
+  public getDonatedCharities = (id: number): Promise<User> => {
+    return this.get<User, AxiosResponse<User>>(`/users/${id}/charities`).then(
+      this.success,
+    );
+  };
+
   public getProfile = (): Promise<User> => {
     return this.get<User, AxiosResponse<User>>(`/users/profile`).then(
       this.success,
