@@ -4,7 +4,7 @@
  *
  */
 import React from 'react';
-import { theme } from 'tailwind.config';
+// import { theme } from 'tailwind.config';
 
 interface Props {}
 
