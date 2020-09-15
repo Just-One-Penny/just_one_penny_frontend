@@ -1,6 +1,12 @@
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Api } from './api';
-import { Credentials, Token, User } from 'types/User';
+import {
+  Credentials,
+  Token,
+  User,
+  UpdatedUser,
+  UpdatingUser,
+} from 'types/User';
 import { apiConfig } from './api.config';
 
 export const authStorageKey = 'jop_auth_token';
@@ -58,6 +64,13 @@ export class UserApi extends Api {
     return this.get<User, AxiosResponse<User>>(`/users/profile`).then(
       this.success,
     );
+  };
+
+  public updateUser = (userObject: UpdatingUser): Promise<UpdatedUser> => {
+    return this.put<UpdatedUser, UpdatingUser, AxiosResponse<UpdatedUser>>(
+      `/users/${userObject.id}`,
+      userObject,
+    ).then(this.success);
   };
 
   public logout = () => {
