@@ -1,6 +1,7 @@
 import { ThemeState } from 'styles/theme/types';
 import { AuthenticationState } from 'app/containers/Authentication/types';
 import { CharityListState } from 'app/containers/CharityList/types';
+
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -11,5 +12,6 @@ export interface RootState {
   theme?: ThemeState;
   authentication?: AuthenticationState;
   charityList?: CharityListState;
+
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

@@ -30,6 +30,7 @@ export function App() {
 
       <Switch>
         <Route exact path="/" component={HomePage} />
+
         <Route component={NotFoundPage} />
         <Route exact path="/charities" component={CharityList} />
       </Switch>
