@@ -9,7 +9,7 @@ import { GetCharitiesErrorType } from './types';
 export function* getCharities() {
   const charities = yield call(charityApi.getCharities);
   if (charities != null) {
-    put(actions.getCharitiesSuccess(charities));
+    yield put(actions.getCharitiesSuccess(charities));
   } else {
     yield put(actions.getCharitiesError(GetCharitiesErrorType.GENERAL_ERROR));
   }

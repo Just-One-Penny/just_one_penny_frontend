@@ -24,7 +24,6 @@ export const CharityList = memo((props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const charityList = useSelector(selectCharityList);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const charities = charityList.charities;
 
   //const dispatch = useDispatch();
 
@@ -44,7 +43,7 @@ export const CharityList = memo((props: Props) => {
           <th>Keywords</th>
         </thead>
         <tbody>
-          {charities.map((charity, i) => {
+          {charityList.map((charity, i) => {
             return (
               <tr>
                 <td>{charity.logo}</td>

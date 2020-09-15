@@ -7,5 +7,5 @@ const selectDomain = (state: RootState) => state.charityList || initialState;
 
 export const selectCharityList = createSelector(
   [selectDomain],
-  charityListState => charityListState,
+  charityListState => charityListState.charities,
 );
