@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { NavBar } from '../NavBar';
+import { CharityDisplay } from '../CharityDisplay';
 
 export function HomePage() {
   return (
@@ -13,6 +14,7 @@ export function HomePage() {
         />
       </Helmet>
       <NavBar />
+      <CharityDisplay />
     </>
   );
 }
