@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { NavBar } from '../NavBar';
 import { CharityDisplay } from '../CharityDisplay';
+import { CharityList } from '../CharityList';
 
 export function HomePage() {
   return (
