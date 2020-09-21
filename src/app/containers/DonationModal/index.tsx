@@ -52,6 +52,15 @@ export function DonationModal(props: Props) {
     dispatch(actions.submitDonation());
   };
 
+  const cancelPayment = (evt?: React.FormEvent<HTMLFormElement>) => {
+    /* istanbul ignore next  */
+    if (evt !== undefined && evt.preventDefault) {
+      evt.preventDefault();
+    }
+    dispatch(actions.changeIds({ userId: '', charityId: '' }));
+    dispatch(actions.changeAmount(0));
+  };
+
   return (
     <Wrapper>
       <Header>Donate to {props.charityName}</Header>
@@ -74,7 +83,7 @@ export function DonationModal(props: Props) {
         required
       />
       <DonateButton onClick={() => submitPayment()}>Donate</DonateButton>
-      <CancelButton>Cancel</CancelButton>
+      <CancelButton onClick={() => cancelPayment()}>Cancel</CancelButton>
     </Wrapper>
   );
 }

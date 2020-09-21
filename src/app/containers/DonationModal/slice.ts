@@ -26,6 +26,13 @@ const donationModalSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
+    donationSuccess(state) {
+      state.userId = '';
+      state.charityId = '';
+      state.amount = 0;
+      state.loading = false;
+      state.error = null;
+    },
     donationModalError(state, action: PayloadAction<DonationModalError>) {
       state.error = action.payload;
       state.loading = false;
