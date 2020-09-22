@@ -57,8 +57,7 @@ export function DonationModal(props: Props) {
     if (evt !== undefined && evt.preventDefault) {
       evt.preventDefault();
     }
-    dispatch(actions.changeIds({ userId: '', charityId: '' }));
-    dispatch(actions.changeAmount(0));
+    dispatch(actions.cancelDonation());
   };
 
   return (

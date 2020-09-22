@@ -26,6 +26,9 @@ const donationModalSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
+    cancelDonation(state) {
+      state.amount = 0;
+    },
     donationSuccess(state) {
       state.userId = '';
       state.charityId = '';
