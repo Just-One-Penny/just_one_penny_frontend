@@ -26,6 +26,7 @@ export const CharityDisplay = memo((props: Props) => {
   const charityDisplay = useSelector(selectCharityDisplay);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
+  //const charityId = useParams();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();

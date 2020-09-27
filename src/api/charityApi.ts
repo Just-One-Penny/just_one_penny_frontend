@@ -20,6 +20,12 @@ export class CharityApi extends Api {
       throw error;
     }
   };
+
+  public getCharityById = (id: string): Promise<Charity> => {
+    return this.get<Charity, AxiosResponse<Charity>>(`/charities/${id}`).then(
+      this.success,
+    );
+  };
 }
 
 export const charityApi = new CharityApi(apiConfig);
