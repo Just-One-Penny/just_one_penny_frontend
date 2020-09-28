@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { ReactComponent as DocumentationIcon } from './assets/documentation-icon.svg';
 // import { ReactComponent as GithubIcon } from './assets/github-icon.svg';
-import { Authentication } from '../Authentication';
+import { AuthenticationModal } from '../AuthenticationModal';
 import { Modal } from 'app/components/Modal';
 import { useAuth } from 'context/auth-context';
 
@@ -21,7 +21,7 @@ export function Nav() {
                 Login
               </Button>
             }
-            modalBody={<Authentication />}
+            modalBody={<AuthenticationModal />}
           />
           <Modal
             buttonElement={
@@ -30,7 +30,7 @@ export function Nav() {
                 Sign Up
               </Button>
             }
-            modalBody={<Authentication newAccount />}
+            modalBody={<AuthenticationModal isSignup />}
           />
         </>
       )}
