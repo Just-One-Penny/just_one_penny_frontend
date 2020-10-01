@@ -1,8 +1,7 @@
 import { ThemeState } from 'styles/theme/types';
-import { AuthenticationState } from 'app/containers/Authentication/types';
 import { CharityListState } from 'app/containers/CharityList/types';
-
 import { AccountSettingsState } from 'app/containers/AccountSettings/types';
+import { AuthenticationModalState } from 'app/containers/AuthenticationModal/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -11,9 +10,8 @@ import { AccountSettingsState } from 'app/containers/AccountSettings/types';
 */
 export interface RootState {
   theme?: ThemeState;
-  authentication?: AuthenticationState;
   charityList?: CharityListState;
-
   accountSettings?: AccountSettingsState;
+  authenticationModal?: AuthenticationModalState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

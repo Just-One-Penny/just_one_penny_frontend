@@ -7,8 +7,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
-import styled from '@emotion/styled';
-import { keyframes } from '@emotion/core';
+import styled, { keyframes } from 'styled-components';
 import { loadStripe } from '@stripe/stripe-js';
 import {
   CardElement,
@@ -28,7 +27,7 @@ const CardElementContainer = styled.div`
   }
 `;
 
-export const AccountPaymentInfo = ({ price, onSuccessfulCheckout }) => {
+export function AccountPaymentInfo(price, onSuccessfulCheckout) {
   const [isProcessing, setProcessingTo] = useState(false);
   const [checkoutError, setCheckoutError] = useState();
 
@@ -63,29 +62,32 @@ export const AccountPaymentInfo = ({ price, onSuccessfulCheckout }) => {
     // a client_secret is returned from the payment intent, which we need
 
     // need ref to cardElement that we defined earlier.
-    const cardElement = elements.getElement(CardElement);
+    const cardElement = elements?.getElement(CardElement);
 
     // need stripe.js
     // create a payment method
-    const paymentMethodReq = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
-      billing_details: billingDetails,
-    });
+    if (cardElement) {
+      const paymentMethodReq = await stripe?.createPaymentMethod({
+        type: 'card',
+        card: cardElement,
+        billing_details: billingDetails,
+      });
+      console.log(paymentMethodReq);
+      // confirm the card payments
+      const confirmedCardPayment = await stripe?.confirmCardPayment(
+        clientSecret,
+        {
+          payment_method: paymentMethodReq?.paymentMethod?.id,
+        },
+      );
 
-    console.log(paymentMethodReq);
+      console.log(confirmedCardPayment);
+      // payment method id
+      // client_secret
 
-    // confirm the card payments
-    const confirmedCardPayment = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: paymentMethodReq.paymentMethod.id,
-    });
-
-    console.log(confirmedCardPayment);
-    // payment method id
-    // client_secret
-
-    //on success
-    onSuccessfulCheckout();
+      //on success
+      onSuccessfulCheckout();
+    }
   };
 
   // stripe.com/docs/js
@@ -128,7 +130,7 @@ export const AccountPaymentInfo = ({ price, onSuccessfulCheckout }) => {
       </Row>
     </form>
   );
-};
+}
 
 const FormFieldContainer = styled.div`
   display: -ms-flexbox;

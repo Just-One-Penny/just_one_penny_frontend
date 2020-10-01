@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Authentication /> should match the snapshot 1`] = `
+exports[`<AuthenticationModal /> should match the snapshot 1`] = `
 <div
   class="container mx-auto px-4 h-full"
 >
