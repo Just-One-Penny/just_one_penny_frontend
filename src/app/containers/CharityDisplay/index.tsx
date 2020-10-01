@@ -24,12 +24,13 @@ export const CharityDisplay = memo((props: Props) => {
   useInjectSaga({ key: sliceKey, saga: charityDisplaySaga });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const charityDisplay = useSelector(selectCharityDisplay);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
   const charityId: string = useParams();
 
   dispatch(actions.getCharityByIdRequest(charityId));
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const charityDisplay = useSelector(selectCharityDisplay);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
@@ -43,19 +44,18 @@ export const CharityDisplay = memo((props: Props) => {
       <header>Charity Details</header>
       <Wrapper>
         <MainDiv>
-          <H2>Charity Name</H2>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore,
-          enim, repellat animi explicabo ad dolorum dolorem qui illo quae, nemo
-          iste distinctio alias expedita dolor provident! Exercitationem nemo
-          impedit mollitia!
+          <H2>{charityDisplay?.name}</H2>
+          {charityDisplay?.summary}
         </MainDiv>
         <SubDiv>
           {t('')}
           <H3>Contact Information</H3>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas,
-          reprehenderit provident eaque, delectus deleniti minima quaerat sequi
-          adipisci aspernatur veniam, sapiente eum eius voluptatibus! Corporis
-          aspernatur eaque similique explicabo accusamus?
+          Address?
+          {charityDisplay?.city}, {charityDisplay?.state}
+          <br />
+          Phone?
+          <br />
+          <a href={charityDisplay?.website}>{charityDisplay?.website}</a>
           <DonateButton>Donate to This Charity</DonateButton>
         </SubDiv>
       </Wrapper>
