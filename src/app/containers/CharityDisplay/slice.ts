@@ -2,9 +2,11 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { ContainerState, GetCharityErrorType } from './types';
 import { Charity } from 'types/Charity';
+import { string } from 'prop-types';
 
 // The initial state of the CharityDisplay container
 export const initialState: ContainerState = {
+  id: '',
   charity: null,
   loading: false,
   error: null,
@@ -17,6 +19,7 @@ const charityDisplaySlice = createSlice({
     getCharityByIdRequest(state, action: PayloadAction<string>) {
       state.loading = true;
       state.error = null;
+      state.id = action.payload;
     },
     getCharityByIdSuccess(state, action: PayloadAction<Charity>) {
       state.loading = false;

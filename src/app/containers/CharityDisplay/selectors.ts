@@ -9,3 +9,8 @@ export const selectCharityDisplay = createSelector(
   [selectDomain],
   charityDisplayState => charityDisplayState,
 );
+
+export const selectCharityDisplayId = createSelector(
+  [selectDomain],
+  charityDisplayState => charityDisplayState.id,
+);

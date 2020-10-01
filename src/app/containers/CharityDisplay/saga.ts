@@ -5,8 +5,10 @@ import { actions } from './slice';
 import { Charity } from "types/Charity";
 import { GetCharityErrorType } from './types';
 import { charityApi } from 'api/charityApi';
+import { selectCharityDisplayId } from './selectors';
 
-export function* getCharityById(id: string) {
+export function* getCharityById() {
+  const id: string = yield select(selectCharityDisplayId);
   const charity: Charity = yield call(charityApi.getCharityById, id);
   if (charity != null) {
     yield put(actions.getCharityByIdSuccess(charity));
@@ -17,5 +19,5 @@ export function* getCharityById(id: string) {
 }
 
 export function* charityDisplaySaga() {
-  //yield takeEvery(actions.getCharityByIdRequest.type, getCharityById);
+  yield takeEvery(actions.getCharityByIdRequest.type, getCharityById);
 }

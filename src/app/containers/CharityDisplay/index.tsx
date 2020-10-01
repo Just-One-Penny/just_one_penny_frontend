@@ -12,7 +12,7 @@ import styled from 'styled-components/macro';
 import { withRouter } from 'react-router';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { reducer, sliceKey } from './slice';
+import { reducer, sliceKey, actions } from './slice';
 import { selectCharityDisplay } from './selectors';
 import { charityDisplaySaga } from './saga';
 import { useParams } from 'react-router-dom';
@@ -27,7 +27,9 @@ export const CharityDisplay = memo((props: Props) => {
   const charityDisplay = useSelector(selectCharityDisplay);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
-  const charityId = useParams();
+  const charityId: string = useParams();
+
+  dispatch(actions.getCharityByIdRequest(charityId));
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
