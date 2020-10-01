@@ -4,16 +4,16 @@ import { Store } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 
 import { configureAppStore } from 'store/configureStore';
-import { Authentication } from '..';
+import { AuthenticationModal } from '..';
 
 const renderComponent = (store: Store) =>
   render(
     <Provider store={store}>
-      <Authentication />
+      <AuthenticationModal />
     </Provider>,
   );
 
-describe('<Authentication />', () => {
+describe('<AuthenticationModal />', () => {
   let store: ReturnType<typeof configureAppStore>;
 
   beforeEach(() => {
