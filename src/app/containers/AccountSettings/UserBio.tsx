@@ -3,7 +3,11 @@ import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { useAuth } from 'context/auth-context';
 import styled from 'styled-components/macro';
 import { ReactComponent as EditIcon } from './assets/edit-regular.svg';
-import { Button, InputText, Form, ConnectedField, Box } from '@welcome-ui/core';
+import { InputText } from '@welcome-ui/input-text';
+import { Box } from '@welcome-ui/box';
+import { Button } from '@welcome-ui/button';
+import { Field } from '@welcome-ui/field';
+import { Form } from 'react-final-form';
 import { reducer, sliceKey, actions } from './slice';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -19,11 +23,22 @@ export function UserBio() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: accountSettingsSaga });
 
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  // const currentUser: UpdatedUser = {
+  //   id: user.id!,
+  //   fullName: user.fullName!,
+  //   email: user.email!,
+  // };
+
+  const user = {
+    id: 'user.id!',
+    fullName: 'user.fullName!',
+    email: 'user.email!@gmail.com',
+  };
   const currentUser: UpdatedUser = {
-    id: user.id!,
-    fullName: user.fullName!,
-    email: user.email!,
+    id: '1',
+    fullName: 'Gary',
+    email: 'Gary@gmail.com',
   };
 
   const dispatch = useDispatch();
@@ -97,27 +112,20 @@ export function UserBio() {
             </div>
           ) : (
             <Form
+              onSubmit={submitForm}
               initialValues={{
                 fullName: selectedFullName,
                 email: selectedEmail,
                 role: selectedRole,
               }}
             >
-              <ConnectedField
+              <Field
                 name="fullName"
                 component={InputText}
                 onChange={onChange}
               />
-              <ConnectedField
-                name="email"
-                component={InputText}
-                onChange={onChange}
-              />
-              <ConnectedField
-                name="role"
-                component={InputText}
-                onChange={onChange}
-              />
+              <Field name="email" component={InputText} onChange={onChange} />
+              <Field name="role" component={InputText} onChange={onChange} />
               <Button onClick={() => submitForm()}>SAVE</Button>
               <Button name="cancel" onClick={() => cancelForm()}>
                 CANCEL
