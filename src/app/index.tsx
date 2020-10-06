@@ -17,6 +17,9 @@ import { HomePage } from './containers/HomePage/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { CharityList } from './containers/CharityList/Loadable';
 import { About } from './containers/About/Loadable';
+import { ContactUs } from './containers/ContactUs/Loadable';
+import { Footer } from './components/Footer';
+import { NavBar } from './containers/NavBar';
 
 export function App() {
   console.log('process.env', process.env);
@@ -28,15 +31,16 @@ export function App() {
       >
         <meta name="description" content="A React Boilerplate application" />
       </Helmet>
-
+      <NavBar />
       <Switch>
         <Route exact path="/" component={HomePage} />
-
+        <Route exact path="/contactUs" component={ContactUs} />
         <Route exact path="/about" component={About} />
         <Route component={NotFoundPage} />
         <Route exact path="/charities" component={CharityList} />
       </Switch>
       <GlobalStyle />
+      <Footer />
     </BrowserRouter>
   );
 }
