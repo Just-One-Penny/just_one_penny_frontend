@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
+interface SearchDefault {
+  readonly defaultSearch: boolean;
+}
+
 export const Header = () => {
   return (
     <>
@@ -11,11 +15,16 @@ export const Header = () => {
 
             <H3>See how your spare change can change the world</H3>
 
-            <Search type="text" placeholder="Search charity name" />
+            <Search
+              defaultSearch={true}
+              type="text"
+              placeholder="Search charity name"
+            />
           </SearchDiv>
 
           <CategoryDiv>
-            <Categories
+            <Search
+              defaultSearch={false}
               list="categories"
               type="text"
               placeholder="Search by category"
@@ -97,28 +106,13 @@ const Button = styled.button`
   margin-left: 3rem;
 `;
 
-const Search = styled.input`
-  width: 64.25%;
+const Search = styled.input<SearchDefault>`
+  width: ${props => (props.defaultSearch ? '64.25%;' : '34%;')}
   border: 1px solid #fff;
   border-radius: 50px;
   color: #333333;
-  padding-left: 1rem;
-
-  height: 48px;
-
-  &::placeholder {
-    color: #333333;
-  }
-`;
-
-const Categories = styled.input`
-  width: 34%;
-  border: 1px solid #fff;
-  border-radius: 50px;
-  color: #333333;
-  padding-left: 1rem;
-
-  height: 48px;
+  padding-left:  1rem;
+  height: 3rem;
 
   &::placeholder {
     color: #333333;
