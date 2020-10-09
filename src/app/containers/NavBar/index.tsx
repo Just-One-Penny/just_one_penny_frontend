@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { Logo } from './Logo';
+import { Hamburger } from './Hamburger';
 import { StyleConstants } from 'styles/StyleConstants';
 import { Nav } from './Nav';
 import { PageWrapper } from '../../components/PageWrapper';
@@ -8,13 +9,24 @@ import { PageWrapper } from '../../components/PageWrapper';
 export function NavBar() {
   return (
     <Wrapper>
-      <PageWrapper>
+      <NavWrapper>
+        <Hamburger />
         <Logo />
-        <Nav />
-      </PageWrapper>
+        {/* <Nav /> */}
+        <Box>&nbsp;</Box>
+      </NavWrapper>
     </Wrapper>
   );
 }
+
+const NavWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr;
+  padding: 0 1.5rem;
+  width: 100%;
+  align-items: center;
+  background-color: #f2f2f2;
+`;
 
 const Wrapper = styled.header`
   box-shadow: 0 1px 0 0 ${p => p.theme.borderLight};
@@ -39,3 +51,4 @@ const Wrapper = styled.header`
     justify-content: space-between;
   }
 `;
+const Box = styled.div``;

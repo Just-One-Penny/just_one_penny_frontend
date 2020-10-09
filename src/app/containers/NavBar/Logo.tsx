@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
+import logo from './assets/image001.png';
+
 export function Logo() {
   return (
     <Wrapper>
-      <Title>Just One Penny</Title>
-      <Description>Charitable giving, a penny at a time</Description>
+      <Title>
+        <img src={logo} alt="Just One Penny" />
+      </Title>
+      {/* <Description>Charitable giving, a penny at a time</Description> */}
     </Wrapper>
   );
 }
@@ -13,13 +17,18 @@ export function Logo() {
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
+  img {
+    height: 100%;
+  }
 `;
 
 const Title = styled.div`
   font-size: 1.25rem;
   color: ${p => p.theme.text};
   font-weight: bold;
-  margin-right: 1rem;
+  text-align: center;
+  height: 3rem;
 `;
 
 const Description = styled.div`
