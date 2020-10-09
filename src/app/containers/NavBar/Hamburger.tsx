@@ -36,6 +36,9 @@ const Div = styled.div`
       cursor: pointer;
     }
   }
+  @media (min-width: 640px) {
+    display: none;
+  }
 `;
 
 const Menu = styled.div`
