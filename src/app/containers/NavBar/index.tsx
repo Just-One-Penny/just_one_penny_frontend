@@ -12,15 +12,7 @@ export function NavBar() {
       <NavWrapper>
         <Hamburger />
         <Logo />
-        <Links>
-          <a href="/">Charities</a>
-          <a href="/">About</a>
-          <a href="/">Login</a>
-          <a className="button-border" href="/">
-            Sign Up
-          </a>
-          {/* <Nav /> */}
-        </Links>
+        <Nav />
         <Box>&nbsp;</Box>
       </NavWrapper>
     </Wrapper>
@@ -67,29 +59,5 @@ const Wrapper = styled.header`
 const Box = styled.div`
   @media (min-width: 640px) {
     display: none;
-  }
-`;
-
-const Links = styled.div`
-  display: none;
-  > a:hover {
-    opacity: 0.6;
-  }
-  .button-border {
-    color: #0a559e;
-    border: 2px solid;
-    border-radius: 20px;
-    padding: 5px 15px;
-    &:hover {
-      opacity: 0.6;
-    }
-  }
-
-  @media (min-width: 640px) {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 40vw;
-    max-width: 400px;
   }
 `;

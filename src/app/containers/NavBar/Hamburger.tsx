@@ -8,7 +8,6 @@ export function Hamburger() {
 
   function _toggleMenu() {
     toggle(!show);
-    console.log('show ', show);
   }
   return (
     <Div>
@@ -17,7 +16,7 @@ export function Hamburger() {
         <Menu>
           <p onClick={_toggleMenu}>X</p>
           <ul>
-            <a href="/">Home</a>
+            <a href="/">dummy link</a>
           </ul>
         </Menu>
       )}

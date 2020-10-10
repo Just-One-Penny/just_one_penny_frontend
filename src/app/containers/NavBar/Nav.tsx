@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { ReactComponent as DocumentationIcon } from './assets/documentation-icon.svg';
-// import { ReactComponent as GithubIcon } from './assets/github-icon.svg';
+
 import { AuthenticationModal } from '../AuthenticationModal';
 import { Modal } from 'app/components/Modal';
 import { useAuth } from 'context/auth-context';
@@ -10,26 +9,20 @@ export function Nav() {
   const { user } = useAuth();
   return (
     <Wrapper>
+      <a href="/">Charities</a>
+      <a href="/">About</a>
       {user ? (
-        user?.email
+        <a className="button-border" href="/">
+          Logout
+        </a>
       ) : (
         <>
           <Modal
-            buttonElement={
-              <Button>
-                <DocumentationIcon />
-                Login
-              </Button>
-            }
+            buttonElement={<button>Login</button>}
             modalBody={<AuthenticationModal />}
           />
           <Modal
-            buttonElement={
-              <Button>
-                <DocumentationIcon />
-                Sign Up
-              </Button>
-            }
+            buttonElement={<button className="button-border">Signup</button>}
             modalBody={<AuthenticationModal isSignup />}
           />
         </>
@@ -39,26 +32,34 @@ export function Nav() {
 }
 
 const Wrapper = styled.nav`
-  display: flex;
-  margin-right: -1rem;
-`;
-
-const Button = styled.button`
-  background-color: ${p => p.theme.primary};
-  cursor: pointer;
-  text-decoration: none;
-  display: flex;
-  padding: 0.25rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  align-items: center;
-  &:hover {
-    opacity: 0.8;
+  display: none;
+  a:hover,
+  button:hover {
+    opacity: 0.6;
   }
-  &:active {
+  a:active,
+  button:active {
     opacity: 0.4;
   }
-  .icon {
-    margin-right: 0.25rem;
+
+  & > button {
+    all: unset;
+  }
+  & > button:hover {
+    all: unset;
+  }
+  .button-border {
+    color: #0a559e;
+    border: 2px solid;
+    border-radius: 20px;
+    padding: 5px 15px;
+  }
+
+  @media (min-width: 640px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 40vw;
+    max-width: 400px;
   }
 `;
