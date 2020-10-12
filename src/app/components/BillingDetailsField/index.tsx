@@ -14,7 +14,7 @@ interface Props {
   city?: string;
   state?: string;
   zip?: string;
-  onChange?: Function;
+  onChange: Function;
 }
 
 export function BillingDetailsField(props: Props) {
@@ -29,7 +29,7 @@ export function BillingDetailsField(props: Props) {
         type="text"
         value={`${props.fullName}`}
         placeholder="Jane Doe"
-        onChange={props.onChange}
+        onChange={evt => props.onChange(evt)}
         required
       />
       <FormField
@@ -38,6 +38,7 @@ export function BillingDetailsField(props: Props) {
         type="email"
         value={`${props.email}`}
         placeholder="jane.doe@example.com"
+        onChange={evt => props.onChange(evt)}
         required
       />
       <FormField
@@ -46,6 +47,7 @@ export function BillingDetailsField(props: Props) {
         type="text"
         value={`${props.address}`}
         placeholder="185 Berry St. Suite 550"
+        onChange={evt => props.onChange(evt)}
         required
       />
       <FormField
@@ -54,6 +56,7 @@ export function BillingDetailsField(props: Props) {
         type="text"
         value={`${props.city}`}
         placeholder="San Francisco"
+        onChange={evt => props.onChange(evt)}
         required
       />
       <FormField
@@ -62,6 +65,7 @@ export function BillingDetailsField(props: Props) {
         type="text"
         value={`${props.state}`}
         placeholder="California"
+        onChange={evt => props.onChange(evt)}
         required
       />
       <FormField
@@ -70,6 +74,7 @@ export function BillingDetailsField(props: Props) {
         type="text"
         value={`${props.zip}`}
         placeholder="94103"
+        onChange={evt => props.onChange(evt)}
         required
       />
     </>

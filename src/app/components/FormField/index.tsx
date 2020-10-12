@@ -3,9 +3,9 @@
  * FormField
  *
  */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 interface Props {
   name?: string;
@@ -14,7 +14,7 @@ interface Props {
   placeholder?: string;
   value?: string;
   required?: boolean;
-  onChange?: Function;
+  onChange: Function;
 }
 
 export function FormField(props: Props) {
@@ -22,68 +22,15 @@ export function FormField(props: Props) {
   const { t, i18n } = useTranslation();
   const { label, type, name, placeholder, value, onChange } = props;
 
-  /**
-   * TODO: allow the change to happen and keep pure component.
-   */
-  const [newValue, setNewValue] = useState(value);
-  // if i use a useEffect() react hook, it's no longer a pure component
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [zip, setZip] = useState('');
-
-  useEffect(() => {
-    console.log('use Effect is being triggered');
-    console.log('fullName = ', fullName);
-    console.log('email = ', email);
-  }, [fullName, email, address, city, state, zip]);
-
-  // const handleChange = event => {
-  //   console.log('FormField event => ', event?.currentTarget.value);
-  //   setNewValue(event);
-  // };
-
-  // useEffect(() => {
-  //   handleChange(newValue);
-  // }, [newValue]);
-
-  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    evt.preventDefault();
-    switch (evt.currentTarget.name) {
-      case 'email':
-        setEmail(evt.currentTarget.value);
-        break;
-      case 'fullName':
-        setFullName(evt.currentTarget.value);
-        break;
-      case 'address':
-        setAddress(evt.currentTarget.value);
-        break;
-      case 'city':
-        setCity(evt.currentTarget.value);
-        break;
-      case 'state':
-        setState(evt.currentTarget.value);
-        break;
-      case 'zip':
-        setZip(evt.currentTarget.value);
-        break;
-      default:
-        break;
-    }
-  };
-
   return (
     <FormFieldContainer>
       <Label htmlFor={name}>{label}</Label>
       <Input
         name={name}
         type={type}
-        value={newValue}
+        value={value}
         placeholder={placeholder}
-        onChange={e => handleChange(e)}
+        onChange={evt => onChange(evt)}
         required
       />
     </FormFieldContainer>
