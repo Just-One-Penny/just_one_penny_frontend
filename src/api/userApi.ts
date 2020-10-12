@@ -7,6 +7,11 @@ import {
   UpdatedUser,
   UpdatingUser,
 } from 'types/User';
+import {
+  BillingInfo,
+  UpdatingBillingInfo,
+  UpdatedBillingInfo,
+} from 'types/Stripe';
 import { apiConfig } from './api.config';
 
 export const authStorageKey = 'jop_auth_token';
@@ -75,6 +80,16 @@ export class UserApi extends Api {
 
   public logout = () => {
     localStorage.removeItem(authStorageKey);
+  };
+
+  public updatePayment = (
+    paymentObj: UpdatingBillingInfo,
+  ): Promise<UpdatedBillingInfo> => {
+    return this.put<
+      UpdatedBillingInfo,
+      UpdatingBillingInfo,
+      AxiosResponse<UpdatedBillingInfo>
+    >(`/users/${paymentObj.id}/`, paymentObj).then(this.success);
   };
 }
 

@@ -31,6 +31,47 @@ export const selectIsEditing = createSelector(
   accountSettingsState => accountSettingsState.isEditing,
 );
 
+// BillingInfo selectors start here
+export const selectAddress = createSelector(
+  [selectDomain],
+  accountSettingsState => accountSettingsState.address,
+);
+
+export const selectCity = createSelector(
+  [selectDomain],
+  accountSettingsState => accountSettingsState.city,
+);
+
+export const selectState = createSelector(
+  [selectDomain],
+  accountSettingsState => accountSettingsState.state,
+);
+
+export const selectZip = createSelector(
+  [selectDomain],
+  accountSettingsState => accountSettingsState.zip,
+);
+
+export const selectCardType = createSelector(
+  [selectDomain],
+  accountSettingsState => accountSettingsState.cardType,
+);
+
+export const selectCardNumber = createSelector(
+  [selectDomain],
+  accountSettingsState => accountSettingsState.cardNumber,
+);
+
+export const selectExpiry = createSelector(
+  [selectDomain],
+  accountSettingsState => accountSettingsState.expiry,
+);
+
+export const selectCvc = createSelector(
+  [selectDomain],
+  accountSettingsState => accountSettingsState.cvc,
+);
+
 export const selectAccountSettings = createSelector(
   [selectDomain],
   accountSettingsState => accountSettingsState,

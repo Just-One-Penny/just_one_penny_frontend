@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { NavBar } from '../NavBar';
 import { CharityList } from '../CharityList';
 import { AccountPaymentInfo } from '../AccountSettings/AccountPaymentInfo';
+import { UserBio } from '../AccountSettings/UserBio';
 
 export function HomePage() {
   return (
@@ -16,6 +17,7 @@ export function HomePage() {
       </Helmet>
       <NavBar />
       <div>
+        {/* <UserBio /> */}
         <AccountPaymentInfo />
       </div>
     </>

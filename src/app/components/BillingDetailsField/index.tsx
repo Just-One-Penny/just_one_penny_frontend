@@ -7,7 +7,15 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormField } from '../FormField';
 
-interface Props {}
+interface Props {
+  fullName?: string;
+  email?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  onChange?: Function;
+}
 
 export function BillingDetailsField(props: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -16,16 +24,19 @@ export function BillingDetailsField(props: Props) {
   return (
     <>
       <FormField
-        name="name"
+        name="fullName"
         label="Name"
         type="text"
+        value={`${props.fullName}`}
         placeholder="Jane Doe"
+        onChange={props.onChange}
         required
       />
       <FormField
         name="email"
         label="Email"
         type="email"
+        value={`${props.email}`}
         placeholder="jane.doe@example.com"
         required
       />
@@ -33,6 +44,7 @@ export function BillingDetailsField(props: Props) {
         name="address"
         label="Address"
         type="text"
+        value={`${props.address}`}
         placeholder="185 Berry St. Suite 550"
         required
       />
@@ -40,6 +52,7 @@ export function BillingDetailsField(props: Props) {
         name="city"
         label="City"
         type="text"
+        value={`${props.city}`}
         placeholder="San Francisco"
         required
       />
@@ -47,6 +60,7 @@ export function BillingDetailsField(props: Props) {
         name="state"
         label="State"
         type="text"
+        value={`${props.state}`}
         placeholder="California"
         required
       />
@@ -54,6 +68,7 @@ export function BillingDetailsField(props: Props) {
         name="zip"
         label="ZIP"
         type="text"
+        value={`${props.zip}`}
         placeholder="94103"
         required
       />

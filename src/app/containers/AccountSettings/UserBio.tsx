@@ -24,22 +24,22 @@ export function UserBio() {
   useInjectSaga({ key: sliceKey, saga: accountSettingsSaga });
 
   // const { user } = useAuth();
-  // const currentUser: UpdatedUser = {
-  //   id: user.id!,
-  //   fullName: user.fullName!,
-  //   email: user.email!,
-  // };
-
   const user = {
-    id: 'user.id!',
-    fullName: 'user.fullName!',
-    email: 'user.email!@gmail.com',
+    id: '7',
+    fullName: 'John Smith',
+    email: 'JSmitty@gmail.com',
   };
   const currentUser: UpdatedUser = {
-    id: '1',
-    fullName: 'Gary',
-    email: 'Gary@gmail.com',
+    id: user.id!,
+    fullName: user.fullName!,
+    email: user.email!,
   };
+
+  // const currentUser: UpdatedUser = {
+  //   id: '1',
+  //   fullName: 'Gary',
+  //   email: 'Gary@gmail.com',
+  // };
 
   const dispatch = useDispatch();
 

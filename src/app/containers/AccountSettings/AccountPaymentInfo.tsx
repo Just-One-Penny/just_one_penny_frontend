@@ -3,10 +3,32 @@
  * AccountPaymentInfo
  *
  */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled, { keyframes } from 'styled-components';
-import { Helmet } from 'react-helmet-async';
+import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
+import { useAuth } from 'context/auth-context';
+import { Button } from '@welcome-ui/button';
+
+import { reducer, sliceKey, actions } from './slice';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectIsEditing,
+  selectEmail,
+  selectFullName,
+  selectRole,
+  selectId,
+  selectAddress,
+  selectCity,
+  selectState,
+  selectZip,
+  selectCardType,
+  selectCardNumber,
+  selectExpiry,
+  selectCvc,
+} from './selectors';
+import { accountSettingsSaga } from './saga';
+import { UpdatedBillingInfoSuccess } from './types';
 
 import { loadStripe } from '@stripe/stripe-js';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
@@ -14,14 +36,215 @@ import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { PaymentInfo } from '../../components/PaymentInfo';
 import { BillingDetailsField } from '../../components/BillingDetailsField';
 import { CheckoutError } from '../../components/CheckoutError';
+// import { FormField } from '../../components/FormField';
+
+import { StripeForm } from '../../components/StripeForm';
+
+const stripePromise = loadStripe(
+  'pk_test_51HWR6NHp3C1otng9BzgliWzedOOJE7iXz0hE4vKQpB2txOHPdD97Kfvzh4wvHtmSxK7QMbSG2xmI7hmFdf1uOBEt00Vh35ooIT',
+);
+
+// THIS IS MEANT FOR THE SERVER SIDE
+// const stripe = require('stripe')(
+//   'sk_test_51HWR6NHp3C1otng92tkQKzhs2w1ctqPjF0A3tHW1uPDdFvDnuFbuBUJUPZA7taUYIgNhnkz3h08Y8ckn8i7pPkbJ00mYi35Ag7',
+// );
+
+// const session = await stripe.checkout.sessions.create({
+//   payment_method_types: ['card'],
+//   mode: 'setup',
+//   customer: 'cus_I9fq1FXGkrpjMa',
+//   success_url: `https://example.com/success?session_id=${CHECKOUT_SESSION_ID}`,
+//   cancel_url: 'https://example.com/cancel',
+// });
 
 export function AccountPaymentInfo() {
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [zip, setZip] = useState('');
+
+  // useEffect(() => {
+  //   console.log('use Effect is being triggered');
+  //   setFullName(fullName);
+  // }, [fullName, email, address, city, state, zip]);
+
+  const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    evt.preventDefault();
+    switch (evt.currentTarget.name) {
+      case 'email':
+        console.log('evt.currentTarget >>> ', evt.currentTarget);
+        setEmail(evt.currentTarget.value);
+        break;
+      case 'fullName':
+        setFullName(evt.currentTarget.value);
+        break;
+      case 'address':
+        setAddress(evt.currentTarget.value);
+        break;
+      case 'city':
+        setCity(evt.currentTarget.value);
+        break;
+      case 'state':
+        setState(evt.currentTarget.value);
+        break;
+      case 'zip':
+        setZip(evt.currentTarget.value);
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <PaymentInfo title="Just One Penny" stripePromise={stripePromise}>
-      <CheckoutForm
-        price={10}
-        onSuccessfulCheckout={() => console.log('/success')}
+      {/* <StripeForm /> */}
+      <StripeForm
+        fullName={fullName}
+        email={email}
+        address={address}
+        city={city}
+        state={state}
+        zip={zip}
+        onChange={onChange}
       />
+      {/* <CheckoutForm /> */}
+      {/* <Row>
+        <FormFieldContainer>
+          <Label htmlFor={'name'}>{'Full Name'}</Label>
+          <Input
+            name="fullName"
+            type="text"
+            // value={fullName}
+            placeholder="Full Name"
+            // onChange={onChange}
+            required
+          />
+        </FormFieldContainer>
+        <FormFieldContainer>
+          <Label htmlFor={'email'}>{'Email'}</Label>
+          <Input
+            name="email"
+            type="text"
+            // value={email}
+            placeholder="email"
+            // // onChange={onChange}
+            required
+          />
+        </FormFieldContainer>
+        <FormFieldContainer>
+          <Label htmlFor={'address'}>{'Address'}</Label>
+          <Input
+            name="address"
+            type="text"
+            // value={address}
+            placeholder="Address"
+            // // onChange={onChange}
+            required
+          />
+        </FormFieldContainer>
+        <FormFieldContainer>
+          <Label htmlFor={'city'}>{'City'}</Label>
+          <Input
+            name="city"
+            type="text"
+            // value={city}
+            placeholder="City"
+            // // onChange={onChange}
+            required
+          />
+        </FormFieldContainer>
+        <FormFieldContainer>
+          <Label htmlFor={'state'}>{'State'}</Label>
+          <Input
+            name="state"
+            type="text"
+            // value={state}
+            placeholder="State"
+            // onChange={onChange}
+            required
+          />
+        </FormFieldContainer>
+        <FormFieldContainer>
+          <Label htmlFor={'zip'}>{'Zip'}</Label>
+          <Input
+            name="zip"
+            type="text"
+            // value={zip}
+            placeholder="Zip"
+            // onChange={onChange}
+            required
+          />
+        </FormFieldContainer>
+        <Row>
+          <CardElementContainer>
+            <CardElement options={cardElementOptions} />
+          </CardElementContainer>
+        </Row> */}
+      {/* <div>
+          <Button onClick={() => submitForm()}>SAVE</Button>
+          <Button name="cancel" onClick={evt => cancelForm(evt)}>
+            CANCEL
+          </Button>
+        </div> */}
+      {/* </Row> */}
+
+      {/* <FormField
+          name="name"
+          label="Name"
+          type="text"
+          value={fullName}
+          placeholder="Jane Doe"
+          onChange={onChange}
+          required
+        />
+        <FormField
+          name="email"
+          label="Email"
+          type="email"
+          value={email}
+          onChange={onChange}
+          placeholder="jane.doe@example.com"
+          required
+        />
+        <FormField
+          name="address"
+          label="Address"
+          type="text"
+          value={address}
+          onChange={onChange}
+          placeholder="185 Berry St. Suite 550"
+          required
+        />
+        <FormField
+          name="city"
+          label="City"
+          type="text"
+          value={city}
+          onChange={onChange}
+          placeholder="San Francisco"
+          required
+        />
+        <FormField
+          name="state"
+          label="State"
+          type="text"
+          value={state}
+          onChange={onChange}
+          placeholder="California"
+          required
+        />
+        <FormField
+          name="zip"
+          label="ZIP"
+          type="text"
+          value={zip}
+          onChange={onChange}
+          placeholder="94103"
+          required
+        />
+        </Row> */}
     </PaymentInfo>
   );
 }
@@ -53,14 +276,14 @@ export const SubmitButton = styled.button`
   cursor: pointer;
 `;
 
-const API_KEY =
-  'pk_test_51HWR6NHp3C1otng9BzgliWzedOOJE7iXz0hE4vKQpB2txOHPdD97Kfvzh4wvHtmSxK7QMbSG2xmI7hmFdf1uOBEt00Vh35ooIT';
+// const API_KEY =
+//   'pk_test_51HWR6NHp3C1otng9BzgliWzedOOJE7iXz0hE4vKQpB2txOHPdD97Kfvzh4wvHtmSxK7QMbSG2xmI7hmFdf1uOBEt00Vh35ooIT';
 
-const stripePromise = loadStripe(API_KEY);
+// // const stripePromise = loadStripe(API_KEY);
 
 // don't call loadStipe within render method of a component
 // because you don't want to load more than you have to.
-const CardElementContainer = styled.div`
+export const CardElementContainer = styled.div`
   height: 40px;
   display: flex;
   align-items: center;
@@ -70,98 +293,3 @@ const CardElementContainer = styled.div`
     padding: 15px;
   }
 `;
-
-export function CheckoutForm(price, onSuccessfulCheckout) {
-  const [isProcessing, setProcessingTo] = useState(false);
-  const [checkoutError, setCheckoutError] = useState();
-
-  const stripe = useStripe();
-  const elements = useElements();
-
-  const handleFormSubmit = async ev => {
-    ev.preventDefault();
-
-    const billingDetails = {
-      name: ev.target.name.value,
-      email: ev.target.email.value,
-      address: {
-        city: ev.target.city.value,
-        line1: ev.target.address.value,
-        state: ev.target.state.value,
-        postal_code: ev.target.zip.value,
-      },
-    };
-
-    setProcessingTo(true);
-
-    const { data: clientSecret } = await axios.post('/api/payment_intents', {
-      amount: price * 100,
-    });
-
-    // it is best practice to disable your submit button when you're making payment requests.
-    console.log(clientSecret);
-
-    // a client_secret is returned from the payment intent, which we need
-
-    // ref to cardElement
-    const cardElement = elements?.getElement(CardElement);
-
-    if (cardElement) {
-      const paymentMethodReq = await stripe?.createPaymentMethod({
-        type: 'card',
-        card: cardElement,
-        billing_details: billingDetails,
-      });
-      console.log(paymentMethodReq);
-      // confirm the card payments
-      const confirmedCardPayment = await stripe?.confirmCardPayment(
-        clientSecret,
-        {
-          payment_method: paymentMethodReq?.paymentMethod?.id,
-        },
-      );
-
-      //on success
-      onSuccessfulCheckout();
-    }
-  };
-
-  const cardElementOptions = {
-    // a way to inject styles into that 'iframe' html element
-    style: {
-      base: {
-        fontSize: '16px',
-        color: '#fff',
-        '::placeholder': {
-          // pseudo selector
-          color: '#87bbfd',
-        },
-      },
-      invalid: {
-        color: '#FFC7EE',
-        iconColor: '#FFC7EE',
-      },
-      complete: {},
-    },
-    hidePostalCode: true,
-  };
-
-  return (
-    <form onSubmit={handleFormSubmit}>
-      <Row>
-        <BillingDetailsField />
-      </Row>
-      <Row>
-        <CardElementContainer>
-          <CardElement options={cardElementOptions} />
-        </CardElementContainer>
-      </Row>
-      {checkoutError && <CheckoutError>{checkoutError}</CheckoutError>}
-      <Row>
-        <SubmitButton disabled={isProcessing}>
-          {isProcessing ? 'Processing...' : `Pay $${price}`}
-        </SubmitButton>
-      </Row>
-    </form>
-  );
-}
