@@ -5,6 +5,7 @@
  */
 import React from 'react';
 import styled from 'styled-components/macro';
+import { Button } from '../Button';
 
 export const Search = () => {
   return (
@@ -12,27 +13,42 @@ export const Search = () => {
       <p>
         <Input name="Charity" id="charity" placeholder="Search Charity Name" />
       </p>
-      <Select name="Categories" id="categories">
-        <option value="" hidden>
-          Search By category
-        </option>
-        <option value="1">Animal & Nature</option>
-        <option value="2">Arts & Education </option>
-        <option value="3">Communities & Religion</option>
-        <option value="4">Human Outreach</option>
-      </Select>
-      <Button>Find Charity</Button>
+      <Wrapper>
+        <Select name="Categories" id="categories">
+          <option value="" hidden>
+            Search By category
+          </option>
+          <option value="1">Animal & Nature</option>
+          <option value="2">Arts & Education </option>
+          <option value="3">Communities & Religion</option>
+          <option value="4">Human Outreach</option>
+        </Select>
+        <Button btnStyle={'primary'}>Find Charity</Button>
+      </Wrapper>
     </Div>
   );
 };
 
 const Div = styled.div`
-  background-color: #c0c2c4;
-  height: 100px;
+  width: 70%;
+  @media only screen and (max-width: 475px) {
+    width: 100%;
+  }
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  @media only screen and (max-width: 475px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 const Input = styled.input`
-  width: 500px;
-  height: 44px;
+  color: ${p => p.theme.textSecondary};
+  width: 100%;
+  height: 3rem;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #ffffff;
   border-radius: 50px;
@@ -57,8 +73,8 @@ const Input = styled.input`
   }
 `;
 const Select = styled.select`
-  width: 255px;
-  height: 44px;
+  width: 53%;
+  height: 3rem;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #ffffff;
   border-radius: 25px;
@@ -71,27 +87,9 @@ const Select = styled.select`
     border: 1px solid #0a559e;
     border-radius: 25px;
   }
-`;
-const Button = styled.button`
-  width: 170px;
-  height: 44px;
-  background: transparent
-    linear-gradient(0deg, #11569b 0%, #54aecc 100%, #6ccddd 100%, #7ae0e8 100%)
-    0% 0% no-repeat padding-box;
-  box-shadow: 0px 2px 6px #0000005a;
-  border-radius: 50px;
-  opacity: 1;
-  margin-left: 80px;
-  text-align: center;
-  font: normal normal 900 16px/22px;
-  color: #ffffff;
-  &:hover {
-    opacity: 0.8;
-  }
-  &:active {
-    opacity: 0.4;
-  }
-  .icon {
-    margin-right: 0.25rem;
+
+  @media only screen and (max-width: 475px) {
+    margin: 1rem 0;
+    width: 100%;
   }
 `;
