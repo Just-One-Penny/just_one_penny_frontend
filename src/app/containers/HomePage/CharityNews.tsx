@@ -95,7 +95,7 @@ const H2 = styled.h2`
   font-size 1.75rem;
   margin-bottom: 2rem;
 
-   @media only screen and (max-width: 375px) {
+   @media only screen and (max-width: 475px) {
     font-size: 1.3rem;
     font-weight: 900;
   }
