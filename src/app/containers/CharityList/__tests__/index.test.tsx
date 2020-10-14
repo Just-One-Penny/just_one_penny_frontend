@@ -2,18 +2,21 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Store } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
+import { HelmetProvider } from 'react-helmet-async';
 
 import { configureAppStore } from 'store/configureStore';
-import { Authentication } from '..';
+import { CharityList } from '..';
 
 const renderComponent = (store: Store) =>
   render(
     <Provider store={store}>
-      <Authentication />
+      <HelmetProvider>
+        <CharityList />
+      </HelmetProvider>
     </Provider>,
   );
 
-describe('<Authentication />', () => {
+describe('<CharityList />', () => {
   let store: ReturnType<typeof configureAppStore>;
 
   beforeEach(() => {

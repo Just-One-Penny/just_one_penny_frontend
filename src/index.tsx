@@ -59,8 +59,8 @@ if (module.hot) {
   });
 }
 
-if (process.env.LOGROCKET_KEY) {
-  LogRocket.init(process.env.LOGROCKET_KEY);
+if (process.env.REACT_APP_LOGROCKET_KEY) {
+  LogRocket.init(process.env.REACT_APP_LOGROCKET_KEY);
   setupLogRocketReact(LogRocket);
 }
 

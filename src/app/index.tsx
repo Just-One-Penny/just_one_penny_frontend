@@ -15,8 +15,11 @@ import 'styles/styles.css';
 
 import { HomePage } from './containers/HomePage/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
+import { CharityList } from './containers/CharityList/Loadable';
+import { About } from './containers/About/Loadable';
 
 export function App() {
+  console.log('process.env', process.env);
   return (
     <BrowserRouter>
       <Helmet
@@ -28,7 +31,10 @@ export function App() {
 
       <Switch>
         <Route exact path="/" component={HomePage} />
+
+        <Route exact path="/about" component={About} />
         <Route component={NotFoundPage} />
+        <Route exact path="/charities" component={CharityList} />
       </Switch>
       <GlobalStyle />
     </BrowserRouter>
