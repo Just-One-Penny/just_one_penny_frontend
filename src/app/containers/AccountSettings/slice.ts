@@ -15,14 +15,7 @@ export const initialState: ContainerState = {
   role: '',
   isEditing: false,
   loading: false,
-  address: '',
-  city: '',
-  state: '',
-  zip: '',
-  cardType: '',
-  cardNumber: '',
-  expiry: '',
-  cvc: '',
+  billing: {},
 };
 
 const accountSettingsSlice = createSlice({
@@ -63,28 +56,28 @@ const accountSettingsSlice = createSlice({
       state.email = action.payload.email;
     },
     changeAddress(state, action: PayloadAction<string>) {
-      state.address = action.payload;
+      state.billing.address = action.payload;
     },
     changeCity(state, action: PayloadAction<string>) {
-      state.city = action.payload;
+      state.billing.city = action.payload;
     },
     changeState(state, action: PayloadAction<string>) {
-      state.state = action.payload;
+      state.billing.state = action.payload;
     },
     changeZip(state, action: PayloadAction<string>) {
-      state.zip = action.payload;
+      state.billing.zip = action.payload;
     },
     changeCardType(state, action: PayloadAction<string>) {
-      state.cardType = action.payload;
+      state.billing.cardType = action.payload;
     },
     changeCardNumber(state, action: PayloadAction<string>) {
-      state.cardNumber = action.payload;
+      state.billing.cardNumber = action.payload;
     },
     changeExpiry(state, action: PayloadAction<string>) {
-      state.expiry = action.payload;
+      state.billing.expiry = action.payload;
     },
     changeCvc(state, action: PayloadAction<string>) {
-      state.cvc = action.payload;
+      state.billing.cvc = action.payload;
     },
     changeIsEditingPayment(
       state,
@@ -96,10 +89,14 @@ const accountSettingsSlice = createSlice({
         state.id = action.payload.id!;
         state.fullName = action.payload.fullName!;
         state.email = action.payload.email!;
-        state.address = action.payload.address!;
-        state.city = action.payload.city!;
-        state.state = action.payload.state!;
-        state.zip = action.payload.zip!;
+        state.billing.address = action.payload.address!;
+        state.billing.city = action.payload.city!;
+        state.billing.state = action.payload.state!;
+        state.billing.zip = action.payload.zip!;
+        state.billing.cardType = action.payload.cardType!;
+        state.billing.cardNumber = action.payload.cardNumber!;
+        state.billing.expiry = action.payload.expiry!;
+        state.billing.cvc = action.payload.cvc!;
         state.isEditing = !state.isEditing;
       }
     },
@@ -114,14 +111,14 @@ const accountSettingsSlice = createSlice({
       state.loading = false;
       state.fullName = action.payload.fullName;
       state.email = action.payload.email;
-      state.address = action.payload.address;
-      state.city = action.payload.city;
-      state.state = action.payload.state;
-      state.zip = action.payload.zip;
-      state.cardType = action.payload.cardType;
-      state.cardNumber = action.payload.cardNumber;
-      state.expiry = action.payload.expiry;
-      state.cvc = action.payload.cvc;
+      state.billing.address = action.payload.address;
+      state.billing.city = action.payload.city;
+      state.billing.state = action.payload.state;
+      state.billing.zip = action.payload.zip;
+      state.billing.cardType = action.payload.cardType;
+      state.billing.cardNumber = action.payload.cardNumber;
+      state.billing.expiry = action.payload.expiry;
+      state.billing.cvc = action.payload.cvc;
     },
   },
 });

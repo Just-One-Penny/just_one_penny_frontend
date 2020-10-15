@@ -6,14 +6,7 @@ export interface AccountSettingsState {
   role: string;
   isEditing: boolean;
   loading: boolean;
-  address: string;
-  city: string;
-  state: string;
-  zip: string;
-  cardType: string;
-  cardNumber: string;
-  expiry: string;
-  cvc: string;
+  billing: BillingInfo;
 }
 
 export interface UpdatedUser {

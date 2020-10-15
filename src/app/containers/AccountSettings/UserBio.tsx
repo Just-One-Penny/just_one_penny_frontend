@@ -35,12 +35,6 @@ export function UserBio() {
     email: user.email!,
   };
 
-  // const currentUser: UpdatedUser = {
-  //   id: '1',
-  //   fullName: 'Gary',
-  //   email: 'Gary@gmail.com',
-  // };
-
   const dispatch = useDispatch();
 
   const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {

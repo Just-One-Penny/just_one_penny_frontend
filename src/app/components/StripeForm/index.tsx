@@ -3,27 +3,82 @@
  * StripeForm
  *
  */
-import React from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
+import { Button } from '@welcome-ui/button';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { BillingDetailsField } from '../BillingDetailsField';
 
 interface Props {
-  fullName?: string;
-  email?: string;
-  address?: string;
-  city?: string;
-  state?: string;
-  zip?: string;
-  onChange: Function;
+  currentName?: string;
+  currentEmail?: string;
+  currentAddress?: string;
+  currentCity?: string;
+  currentState?: string;
+  currentZip?: string;
+  handleChange: Function;
+  submitForm: Function;
+  cancelForm: Function;
 }
 
 export function StripeForm(props: Props) {
-  const { fullName, email, address, city, state, zip } = props;
+  const {
+    currentName,
+    currentEmail,
+    currentAddress,
+    currentCity,
+    currentState,
+    currentZip,
+    submitForm,
+    cancelForm,
+    handleChange,
+  } = props;
 
   const stripe = useStripe();
   const elements = useElements();
+
+  // const [fullName, setFullName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [address, setAddress] = useState('');
+  // const [city, setCity] = useState('');
+  // const [state, setState] = useState('');
+  // const [zip, setZip] = useState('');
+
+  const [fullName, setFullName] = useState(currentName);
+  const [email, setEmail] = useState(currentEmail);
+  const [address, setAddress] = useState(currentAddress);
+  const [city, setCity] = useState(currentCity);
+  const [state, setState] = useState(currentState);
+  const [zip, setZip] = useState(currentZip);
+  console.log('StripeForm props >>> ', props);
+  console.log('StripeForm city >>> ', city);
+
+  const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    evt.preventDefault();
+    switch (evt.currentTarget.name) {
+      case 'email':
+        setEmail(evt.currentTarget.value);
+        break;
+      case 'fullName':
+        setFullName(evt.currentTarget.value);
+        break;
+      case 'address':
+        setAddress(evt.currentTarget.value);
+        break;
+      case 'city':
+        setCity(evt.currentTarget.value);
+        break;
+      case 'state':
+        setState(evt.currentTarget.value);
+        break;
+      case 'zip':
+        setZip(evt.currentTarget.value);
+        break;
+      default:
+        break;
+    }
+  };
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -46,6 +101,8 @@ export function StripeForm(props: Props) {
       if (res?.paymentMethod) {
         console.log('res.paymentMethod >>> ', res.paymentMethod);
         console.log('payment_Method >>> ', res.paymentMethod.billing_details);
+        // submit form
+        submitForm();
       }
     }
   };
@@ -61,7 +118,10 @@ export function StripeForm(props: Props) {
             city={city}
             state={state}
             zip={zip}
-            onChange={evt => props.onChange(evt)}
+            onChange={evt => {
+              onChange(evt);
+              handleChange(evt);
+            }}
           />
 
           <CardElementContainer>
@@ -73,6 +133,9 @@ export function StripeForm(props: Props) {
           <SubmitButton>SAVE</SubmitButton>
         </Row>
       </form>
+      <Button name="cancel" onClick={() => cancelForm()}>
+        CANCEL
+      </Button>
     </div>
   );
 }

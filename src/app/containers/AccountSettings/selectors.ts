@@ -34,42 +34,42 @@ export const selectIsEditing = createSelector(
 // BillingInfo selectors start here
 export const selectAddress = createSelector(
   [selectDomain],
-  accountSettingsState => accountSettingsState.address,
+  accountSettingsState => accountSettingsState.billing.address,
 );
 
 export const selectCity = createSelector(
   [selectDomain],
-  accountSettingsState => accountSettingsState.city,
+  accountSettingsState => accountSettingsState.billing.city,
 );
 
 export const selectState = createSelector(
   [selectDomain],
-  accountSettingsState => accountSettingsState.state,
+  accountSettingsState => accountSettingsState.billing.state,
 );
 
 export const selectZip = createSelector(
   [selectDomain],
-  accountSettingsState => accountSettingsState.zip,
+  accountSettingsState => accountSettingsState.billing.zip,
 );
 
 export const selectCardType = createSelector(
   [selectDomain],
-  accountSettingsState => accountSettingsState.cardType,
+  accountSettingsState => accountSettingsState.billing.cardType,
 );
 
 export const selectCardNumber = createSelector(
   [selectDomain],
-  accountSettingsState => accountSettingsState.cardNumber,
+  accountSettingsState => accountSettingsState.billing.cardNumber,
 );
 
 export const selectExpiry = createSelector(
   [selectDomain],
-  accountSettingsState => accountSettingsState.expiry,
+  accountSettingsState => accountSettingsState.billing.expiry,
 );
 
 export const selectCvc = createSelector(
   [selectDomain],
-  accountSettingsState => accountSettingsState.cvc,
+  accountSettingsState => accountSettingsState.billing.cvc,
 );
 
 export const selectAccountSettings = createSelector(

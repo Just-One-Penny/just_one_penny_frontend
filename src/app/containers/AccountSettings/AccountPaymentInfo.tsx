@@ -4,8 +4,31 @@
  *
  */
 import React, { useState } from 'react';
-
+import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
+import { useAuth } from 'context/auth-context';
+import { reducer, sliceKey, actions } from './slice';
+import {
+  selectIsEditing,
+  selectEmail,
+  selectFullName,
+  selectRole,
+  selectAddress,
+  selectCity,
+  selectState,
+  selectZip,
+  selectCardType,
+  selectCardNumber,
+  selectExpiry,
+  selectCvc,
+} from './selectors';
+import { accountSettingsSaga } from './saga';
+import { UpdatedBillingInfoSuccess } from './types';
+import { useSelector, useDispatch } from 'react-redux';
 import { loadStripe } from '@stripe/stripe-js';
+import { ReactComponent as EditIcon } from './assets/edit-regular.svg';
+import { PageWrapper } from '../../components/PageWrapper';
+import { Box } from '@welcome-ui/box';
+import { Button } from '@welcome-ui/button';
 
 import { PaymentInfo } from '../../components/PaymentInfo';
 import { StripeForm } from '../../components/StripeForm';
@@ -15,38 +38,104 @@ const stripePromise = loadStripe(
 );
 
 export function AccountPaymentInfo() {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [zip, setZip] = useState('');
+  useInjectReducer({ key: sliceKey, reducer: reducer });
+  useInjectSaga({ key: sliceKey, saga: accountSettingsSaga });
 
+  // const { user } = useAuth();
+  const user = {
+    id: '7',
+    fullName: 'John Smith',
+    email: 'JSmitty@gmail.com',
+    address: 'user.address',
+    city: 'user.city',
+    state: 'user.state',
+    zip: 'user.zip',
+    cardType: 'user.cardType',
+    cardNumber: 'user.cardNumber',
+    expiry: 'user.expiry',
+    cvc: 'user.cvc',
+  };
+  const currentBilling: UpdatedBillingInfoSuccess = {
+    id: user.id!,
+    fullName: user.fullName!,
+    email: user.email!,
+    address: user.address!,
+    city: user.city!,
+    state: user.state!,
+    zip: user.zip!,
+    cardType: user.cardType!,
+    cardNumber: user.cardNumber!,
+    expiry: user.expiry!,
+    cvc: user.cvc!,
+  };
+
+  const dispatch = useDispatch();
+
+  // This onChange doesn't really seem necessary to me if we're dispatching the updatedBilling object on submit
   const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    evt.preventDefault();
     switch (evt.currentTarget.name) {
       case 'email':
-        console.log('evt.currentTarget >>> ', evt.currentTarget);
-        setEmail(evt.currentTarget.value);
+        dispatch(actions.changeEmail(evt.currentTarget.value));
         break;
       case 'fullName':
-        setFullName(evt.currentTarget.value);
+        dispatch(actions.changeName(evt.currentTarget.value));
         break;
       case 'address':
-        setAddress(evt.currentTarget.value);
+        dispatch(actions.changeAddress(evt.currentTarget.value));
         break;
       case 'city':
-        setCity(evt.currentTarget.value);
+        dispatch(actions.changeCity(evt.currentTarget.value));
         break;
       case 'state':
-        setState(evt.currentTarget.value);
+        dispatch(actions.changeState(evt.currentTarget.value));
         break;
       case 'zip':
-        setZip(evt.currentTarget.value);
+        dispatch(actions.changeZip(evt.currentTarget.value));
+        break;
+      case 'cardType':
+        dispatch(actions.changeCardType(evt.currentTarget.value));
+        break;
+      case 'cardNumber':
+        dispatch(actions.changeCardNumber(evt.currentTarget.value));
+        break;
+      case 'expiry':
+        dispatch(actions.changeExpiry(evt.currentTarget.value));
+        break;
+      case 'cvc':
+        dispatch(actions.changeCvc(evt.currentTarget.value));
         break;
       default:
         break;
     }
+  };
+
+  const selectedEmail = useSelector(selectEmail);
+  const selectedFullName = useSelector(selectFullName);
+  const selectedRole = useSelector(selectRole);
+  const isEditing = useSelector(selectIsEditing);
+
+  const handleClick = (evt: React.MouseEvent<HTMLButtonElement>) => {
+    evt.preventDefault();
+    switch (evt.currentTarget.name) {
+      case 'edit':
+        dispatch(actions.changeIsEditing(currentBilling));
+        break;
+      default:
+        break;
+    }
+  };
+
+  const submitForm = (evt?: React.FormEvent<HTMLFormElement>) => {
+    /* istanbul ignore next  */
+    if (evt !== undefined && evt.preventDefault) {
+      evt.preventDefault();
+    }
+    dispatch(actions.updatePayment());
+  };
+
+  const cancelForm = (evt?: React.FormEvent<HTMLFormElement>) => {
+    /* istanbul ignore next  */
+    dispatch(actions.changeIsEditing(false));
   };
 
   /**
@@ -64,16 +153,85 @@ Build a UI to display the last 4 numbers of a card and card logo
    */
 
   return (
-    <PaymentInfo title="Just One Penny" stripePromise={stripePromise}>
-      <StripeForm
-        fullName={fullName}
-        email={email}
-        address={address}
-        city={city}
-        state={state}
-        zip={zip}
-        onChange={onChange}
-      />
-    </PaymentInfo>
+    <PageWrapper>
+      {user ? (
+        <div>
+          {!isEditing ? (
+            <div>
+              <div>
+                <Box>Name: {user?.fullName}</Box>
+                <Box>Email: {user?.email}</Box>
+                <Box>Address: {user.address}</Box>
+                <Box>City: {user.city}</Box>
+                <Box>State: {user.state}</Box>
+                <Box>Zip: {user.zip}</Box>
+              </div>
+              <div>
+                <Button onClick={handleClick} name="edit">
+                  <EditIcon title="edit" />
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <PaymentInfo
+              title="Just One Penny"
+              stripePromise={stripePromise}
+              submitForm={submitForm}
+              cancelForm={cancelForm}
+              handleChange={onChange}
+            >
+              <StripeForm
+                currentName={user.fullName}
+                currentEmail={user.email}
+                currentAddress={user.address}
+                currentCity={user.city}
+                currentState={user.state}
+                currentZip={user.zip}
+                handleChange={onChange}
+                submitForm={submitForm}
+                cancelForm={cancelForm}
+              />
+              {/* <Button name="cancel" onClick={() => cancelForm()}>
+                CANCEL
+              </Button> */}
+            </PaymentInfo>
+            // <Form
+            //   onSubmit={submitForm}
+            //   initialValues={{
+            //     fullName: selectedFullName,
+            //     email: selectedEmail,
+            //     role: selectedRole,
+            //   }}
+            // >
+            //   <Field
+            //     name="fullName"
+            //     component={InputText}
+            //     onChange={onChange}
+            //   />
+            //   <Field name="email" component={InputText} onChange={onChange} />
+            //   <Field name="role" component={InputText} onChange={onChange} />
+            //   <Button onClick={() => submitForm()}>SAVE</Button>
+            // <Button name="cancel" onClick={() => cancelForm()}>
+            //   CANCEL
+            // </Button>
+            // </Form>
+          )}
+        </div>
+      ) : (
+        <div></div>
+      )}
+    </PageWrapper>
+    // <PaymentInfo title="Just One Penny" stripePromise={stripePromise}>
+    //   <StripeForm
+
+    //     // fullName={fullName}
+    //     // email={email}
+    //     // address={address}
+    //     // city={city}
+    //     // state={state}
+    //     // zip={zip}
+    //     // onChange={onChange}
+    //   />
+    // </PaymentInfo>
   );
 }

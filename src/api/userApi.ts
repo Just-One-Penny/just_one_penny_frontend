@@ -89,7 +89,7 @@ export class UserApi extends Api {
       UpdatedBillingInfo,
       UpdatingBillingInfo,
       AxiosResponse<UpdatedBillingInfo>
-    >(`/users/${paymentObj.id}/`, paymentObj).then(this.success);
+    >(`/users/${paymentObj.id}/payment/billing`, paymentObj).then(this.success);
   };
 }
 
