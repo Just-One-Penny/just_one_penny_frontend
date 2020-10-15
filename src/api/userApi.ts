@@ -8,6 +8,7 @@ import {
   UpdatingUser,
 } from 'types/User';
 import { apiConfig } from './api.config';
+import { Charity } from 'types/Charity';
 
 export const authStorageKey = 'jop_auth_token';
 
@@ -62,10 +63,16 @@ export class UserApi extends Api {
 
   //MINE
 
-  public getDonatedCharities = (id: number): Promise<User> => {
-    return this.get<User, AxiosResponse<User>>(`/users/${id}/charities`).then(
-      this.success,
-    );
+  public getCharities = async (id: number): Promise<Charity[]> => {
+    try {
+      const res: AxiosResponse<Charity[]> = await this.get<
+        Charity,
+        AxiosResponse<Charity[]>
+      >(`/${id}/charities`);
+      return this.success(res);
+    } catch (error) {
+      throw error;
+    }
   };
 
   public getProfile = (): Promise<User> => {

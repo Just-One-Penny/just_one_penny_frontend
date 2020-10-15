@@ -9,25 +9,27 @@ import { Card } from '@welcome-ui/card';
 import { Stack } from '@welcome-ui/stack';
 
 interface Props {
-  // list: [Type];
+  list: [Type];
 }
 
-// interface Type {
-//   id: number;
-//   name: string;
-// }
+interface Type {
+  id: number;
+  logo: string;
+  name: string;
+}
 
-export const ListContainer = (props: Props) => {
+export const ListContainer = ({ list }: Props) => {
   return (
     <>
       <Div>
-        {/* {list.map(charity => (
+        {list.map(charity => (
           <Card key={charity.id}>
             <Stack direction="row">
+              <div>{charity.logo}</div>
               <div>{charity.name}</div>
             </Stack>
           </Card>
-        ))} */}
+        ))}
       </Div>
     </>
   );

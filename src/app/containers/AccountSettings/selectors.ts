@@ -31,6 +31,12 @@ export const selectIsEditing = createSelector(
   accountSettingsState => accountSettingsState.isEditing,
 );
 
+//VK//
+export const selectGetCharities = createSelector(
+  [selectDomain],
+  accountSettingsState => accountSettingsState.charities,
+);
+
 export const selectAccountSettings = createSelector(
   [selectDomain],
   accountSettingsState => accountSettingsState,
