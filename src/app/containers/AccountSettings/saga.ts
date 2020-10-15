@@ -20,10 +20,6 @@ export function* updateUser() {
   yield put(actions.updateSuccess(response));
 }
 
-export function* accountSettingsSaga() {
-  yield takeEvery(actions.updateUser.type, updateUser);
-}
-
 //VK//
 export function* getCharities() {
   const id = yield select(selectId);
@@ -35,4 +31,9 @@ export function* getCharities() {
   }
 
   return charities;
+}
+
+// This is the saga that you use with the useInjectSaga function
+export function* accountSettingsSaga() {
+  yield takeEvery(actions.updateUser.type, updateUser);
 }

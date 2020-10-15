@@ -1,5 +1,4 @@
 import { ThemeState } from 'styles/theme/types';
-import { AuthenticationState } from 'app/containers/Authentication/types';
 import { CharityListState } from 'app/containers/CharityList/types';
 import { AccountSettingsState } from 'app/containers/AccountSettings/types';
 import { AuthenticationModalState } from 'app/containers/AuthenticationModal/types';

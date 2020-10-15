@@ -9,11 +9,11 @@ import { Card } from '@welcome-ui/card';
 import { Stack } from '@welcome-ui/stack';
 
 interface Props {
-  list: [Type];
+  list: Type[];
 }
 
 interface Type {
-  id: number;
+  id: string;
   logo: string;
   name: string;
 }

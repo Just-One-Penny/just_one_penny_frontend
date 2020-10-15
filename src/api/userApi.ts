@@ -24,15 +24,15 @@ export class UserApi extends Api {
     return localStorage.getItem(authStorageKey);
   };
 
-  public userLogin = (credentials: Credentials): Promise<string | Token> => {
-    return this.post<string, Credentials, AxiosResponse<string>>(
+  public userLogin = (credentials: Credentials): Promise<User> => {
+    return this.post<string, Credentials, AxiosResponse<User>>(
       '/auth/login',
       credentials,
     ).then(this.success);
   };
 
-  public userRegister = (credentials: Credentials): Promise<number> => {
-    return this.post<number, Credentials, AxiosResponse<number>>(
+  public userRegister = (credentials: Credentials): Promise<User> => {
+    return this.post<User, Credentials, AxiosResponse<User>>(
       '/auth/register',
       credentials,
     )

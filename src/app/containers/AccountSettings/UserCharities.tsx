@@ -7,23 +7,18 @@ import { useAuth } from 'context/auth-context';
 import { ListContainer } from '../../components/ListContainer';
 // import { selectGetCharities } from './selectors';
 // import { useSelector, useDispatch } from 'react-redux';
-import { accountSettingsSaga, getCharities } from './saga';
 
-import { AccountSettingsState } from './types';
+import { accountSettingsSaga } from './saga';
+import { Auth } from 'types/User';
 
 export function UserCharities() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
 
-  useInjectSaga({ key: sliceKey, saga: getCharities });
+  useInjectSaga({ key: sliceKey, saga: accountSettingsSaga });
 
-  const { user } = useAuth();
-  const currentUser: AccountSettingsState = {
-    id: user.id!,
-    fullName: user.fullName!,
-    charities: user.charities,
-  };
+  const { user }: Auth = useAuth();
 
-  const charityList = currentUser.charities.map(charity => ({
+  const charityList = user.charities.map(charity => ({
     id: charity.id,
     logo: charity.logo,
     name: charity.name,
