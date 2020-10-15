@@ -14,8 +14,8 @@ export function CharitySignup(props: Props) {
   return (
     <>
       <Helmet>
-        <title>CharitySignup</title>
-        <meta name="description" content="Description of CharitySignup" />
+        <title>Charity Signup</title>
+        <meta name="description" content="Just One Penny Charity Signup" />
       </Helmet>
       <Div>
         <div className="typeform-widget" data-url="https://form.typeform.com/to/gnnBzRDl" style={{width: "100%", height: "500px"}}></div>

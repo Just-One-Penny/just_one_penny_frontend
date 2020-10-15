@@ -13,7 +13,6 @@ export function HomePage() {
           content="Charitable giving one penny at a time"
         />
       </Helmet>
-      <NavBar />
     </>
   );
 }
