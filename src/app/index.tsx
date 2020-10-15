@@ -35,6 +35,7 @@ export function App() {
         <Route exact path="/about" component={About} />
         <Route component={NotFoundPage} />
         <Route exact path="/charities" component={CharityList} />
+        <Route exact path="/charities/new" component={CharityList} />
       </Switch>
       <GlobalStyle />
     </BrowserRouter>
