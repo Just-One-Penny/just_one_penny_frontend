@@ -38,13 +38,6 @@ export function StripeForm(props: Props) {
   const stripe = useStripe();
   const elements = useElements();
 
-  // const [fullName, setFullName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [address, setAddress] = useState('');
-  // const [city, setCity] = useState('');
-  // const [state, setState] = useState('');
-  // const [zip, setZip] = useState('');
-
   const [fullName, setFullName] = useState(currentName);
   const [email, setEmail] = useState(currentEmail);
   const [address, setAddress] = useState(currentAddress);
@@ -99,8 +92,6 @@ export function StripeForm(props: Props) {
         },
       });
       if (res?.paymentMethod) {
-        console.log('res.paymentMethod >>> ', res.paymentMethod);
-        console.log('payment_Method >>> ', res.paymentMethod.billing_details);
         // submit form
         submitForm();
       }
@@ -128,7 +119,6 @@ export function StripeForm(props: Props) {
             <CardElement options={cardElementOptions} />
           </CardElementContainer>
         </Row>
-        {/* <button type="submit">SUBMIT</button> */}
         <Row>
           <SubmitButton>SAVE</SubmitButton>
         </Row>
@@ -181,7 +171,6 @@ const Row = styled.div`
   position: relative;
 `;
 
-// might not use
 const SubmitButton = styled.button`
   display: block;
   height: 40px;

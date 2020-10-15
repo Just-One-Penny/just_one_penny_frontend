@@ -17,7 +17,6 @@ export function HomePage() {
       </Helmet>
       <NavBar />
       <div>
-        {/* <UserBio /> */}
         <AccountPaymentInfo />
       </div>
     </>

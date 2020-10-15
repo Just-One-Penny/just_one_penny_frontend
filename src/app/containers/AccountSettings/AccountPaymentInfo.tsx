@@ -3,24 +3,11 @@
  * AccountPaymentInfo
  *
  */
-import React, { useState } from 'react';
+import React from 'react';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { useAuth } from 'context/auth-context';
 import { reducer, sliceKey, actions } from './slice';
-import {
-  selectIsEditing,
-  selectEmail,
-  selectFullName,
-  selectRole,
-  selectAddress,
-  selectCity,
-  selectState,
-  selectZip,
-  selectCardType,
-  selectCardNumber,
-  selectExpiry,
-  selectCvc,
-} from './selectors';
+import { selectIsEditing } from './selectors';
 import { accountSettingsSaga } from './saga';
 import { UpdatedBillingInfoSuccess } from './types';
 import { useSelector, useDispatch } from 'react-redux';
@@ -109,9 +96,6 @@ export function AccountPaymentInfo() {
     }
   };
 
-  const selectedEmail = useSelector(selectEmail);
-  const selectedFullName = useSelector(selectFullName);
-  const selectedRole = useSelector(selectRole);
   const isEditing = useSelector(selectIsEditing);
 
   const handleClick = (evt: React.MouseEvent<HTMLButtonElement>) => {
@@ -137,20 +121,6 @@ export function AccountPaymentInfo() {
     /* istanbul ignore next  */
     dispatch(actions.changeIsEditing(false));
   };
-
-  /**
-   * TODO:
-
-Add an endpoint to the API /v1/users/:userID/payment
-
-This API will take advantage of the userLoad function
-
-Use the useAuth hook to get access to the user object
-
-We need access to the paymentMethods field on the user
-
-Build a UI to display the last 4 numbers of a card and card logo
-   */
 
   return (
     <PageWrapper>
@@ -191,47 +161,12 @@ Build a UI to display the last 4 numbers of a card and card logo
                 submitForm={submitForm}
                 cancelForm={cancelForm}
               />
-              {/* <Button name="cancel" onClick={() => cancelForm()}>
-                CANCEL
-              </Button> */}
             </PaymentInfo>
-            // <Form
-            //   onSubmit={submitForm}
-            //   initialValues={{
-            //     fullName: selectedFullName,
-            //     email: selectedEmail,
-            //     role: selectedRole,
-            //   }}
-            // >
-            //   <Field
-            //     name="fullName"
-            //     component={InputText}
-            //     onChange={onChange}
-            //   />
-            //   <Field name="email" component={InputText} onChange={onChange} />
-            //   <Field name="role" component={InputText} onChange={onChange} />
-            //   <Button onClick={() => submitForm()}>SAVE</Button>
-            // <Button name="cancel" onClick={() => cancelForm()}>
-            //   CANCEL
-            // </Button>
-            // </Form>
           )}
         </div>
       ) : (
         <div></div>
       )}
     </PageWrapper>
-    // <PaymentInfo title="Just One Penny" stripePromise={stripePromise}>
-    //   <StripeForm
-
-    //     // fullName={fullName}
-    //     // email={email}
-    //     // address={address}
-    //     // city={city}
-    //     // state={state}
-    //     // zip={zip}
-    //     // onChange={onChange}
-    //   />
-    // </PaymentInfo>
   );
 }

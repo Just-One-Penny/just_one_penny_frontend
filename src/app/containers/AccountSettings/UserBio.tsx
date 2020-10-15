@@ -23,12 +23,8 @@ export function UserBio() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: accountSettingsSaga });
 
-  // const { user } = useAuth();
-  const user = {
-    id: '7',
-    fullName: 'John Smith',
-    email: 'JSmitty@gmail.com',
-  };
+  const { user } = useAuth();
+
   const currentUser: UpdatedUser = {
     id: user.id!,
     fullName: user.fullName!,

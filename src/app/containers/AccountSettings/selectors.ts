@@ -2,7 +2,6 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from 'types';
 import { initialState } from './slice';
-// import { accountSettingsSaga } from './saga';
 
 const selectDomain = (state: RootState) =>
   state.accountSettings || initialState;
