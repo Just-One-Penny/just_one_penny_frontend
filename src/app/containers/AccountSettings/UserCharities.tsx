@@ -26,6 +26,11 @@ export function UserCharities() {
 
   return (
     <Wrapper>
+      <Div>
+        <p>Charity</p>
+        <p>Amount</p>
+        <p>Next Donation</p>
+      </Div>
       <ListContainer list={charityList} />
     </Wrapper>
   );
@@ -33,4 +38,10 @@ export function UserCharities() {
 
 const Wrapper = styled.div`
   margin: 0 auto;
+`;
+
+const Div = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
 `;

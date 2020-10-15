@@ -36,7 +36,9 @@ export const ListContainer = ({ list }: Props) => {
 };
 
 const Div = styled.div`
-  width: 500px;
+  width: 90%;
   margin: 0 auto;
   margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
 `;

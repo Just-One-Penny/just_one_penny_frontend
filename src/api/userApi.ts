@@ -61,8 +61,6 @@ export class UserApi extends Api {
     );
   };
 
-  //MINE
-
   public getCharities = async (id: number): Promise<Charity[]> => {
     try {
       const res: AxiosResponse<Charity[]> = await this.get<

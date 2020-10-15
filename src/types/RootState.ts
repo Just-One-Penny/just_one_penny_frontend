@@ -2,6 +2,7 @@ import { ThemeState } from 'styles/theme/types';
 import { CharityListState } from 'app/containers/CharityList/types';
 import { AccountSettingsState } from 'app/containers/AccountSettings/types';
 import { AuthenticationModalState } from 'app/containers/AuthenticationModal/types';
+
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
