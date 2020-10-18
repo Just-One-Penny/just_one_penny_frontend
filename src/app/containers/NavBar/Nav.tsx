@@ -1,15 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 
 import { AuthenticationModal } from '../AuthenticationModal';
 import { Modal } from 'app/components/Modal';
 import { useAuth } from 'context/auth-context';
 
+import items from './sampleLinks';
+
+import icon from './assets/dropdown-icon.png';
+
 export function Nav() {
   const { user } = useAuth();
+  const [show, toggle] = useState(false);
+
+  function _toggleMenu() {
+    toggle(!show);
+  }
+
   return (
     <Wrapper>
-      <a href="/">Charities</a>
+      <div>
+        <a onClick={_toggleMenu} href="#">
+          Charities
+          <img className="icon" alt="V" src={icon} />
+        </a>
+        {show && (
+          <Dropdown>
+            {items.map((item, i) => (
+              <a href={item.link} key={item.text}>
+                {item.text}
+              </a>
+            ))}
+          </Dropdown>
+        )}
+      </div>
       <a href="/">About</a>
       {user ? (
         <a className="button-border" href="/">
@@ -22,7 +46,7 @@ export function Nav() {
             modalBody={<AuthenticationModal />}
           />
           <Modal
-            buttonElement={<button className="button-border">Signup</button>}
+            buttonElement={<button className="button-border">Sign Up</button>}
             modalBody={<AuthenticationModal isSignup />}
           />
         </>
@@ -33,11 +57,12 @@ export function Nav() {
 
 const Wrapper = styled.nav`
   display: none;
-  a:hover,
+  > a:hover,
+  > div > a:hover,
   button:hover {
     opacity: 0.6;
   }
-  a:active,
+  > a:active,
   button:active {
     opacity: 0.4;
   }
@@ -61,5 +86,25 @@ const Wrapper = styled.nav`
     justify-content: space-evenly;
     width: 40vw;
     max-width: 400px;
+    .icon {
+      display: inline;
+    }
+  }
+`;
+
+const Dropdown = styled.ul`
+  margin-top: 0.5rem;
+  background-color: darkgray;
+  position: absolute;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  a {
+    padding: 0.25rem 0.5rem;
+    opacity: 0.8;
+    :hover {
+      opacity: 1;
+      background-color: grey;
+    }
   }
 `;

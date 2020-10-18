@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { Logo } from './Logo';
-import { Hamburger } from './Hamburger';
+import { MobileMenu } from './MobileMenu';
 import { StyleConstants } from 'styles/StyleConstants';
 import { Nav } from './Nav';
 import { PageWrapper } from '../../components/PageWrapper';
@@ -10,7 +10,7 @@ export function NavBar() {
   return (
     <Wrapper>
       <NavWrapper>
-        <Hamburger />
+        <MobileMenu />
         <Logo />
         <Nav />
         <Box>&nbsp;</Box>

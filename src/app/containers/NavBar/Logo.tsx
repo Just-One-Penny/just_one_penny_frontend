@@ -9,7 +9,6 @@ export function Logo() {
       <Title>
         <img src={logo} alt="Just One Penny" />
       </Title>
-      {/* <Description>Charitable giving, a penny at a time</Description> */}
     </Wrapper>
   );
 }

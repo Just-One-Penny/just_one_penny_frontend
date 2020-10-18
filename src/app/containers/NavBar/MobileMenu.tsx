@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 
+import items from './sampleLinks';
+
 import icon from './assets/hamburger-icon.png';
 
-export function Hamburger() {
+export function MobileMenu() {
   const [show, toggle] = useState(false);
 
   function _toggleMenu() {
@@ -16,7 +18,11 @@ export function Hamburger() {
         <Menu>
           <p onClick={_toggleMenu}>X</p>
           <ul>
-            <a href="/">dummy link</a>
+            {items.map((item, i) => (
+              <li key={item.text}>
+                <a href={item.link}>{item.text}</a>
+              </li>
+            ))}
           </ul>
         </Menu>
       )}
@@ -61,5 +67,9 @@ const Menu = styled.div`
   }
   ul {
     padding-top: 2rem;
+
+    a:hover {
+      opacity: 0.6;
+    }
   }
 `;
