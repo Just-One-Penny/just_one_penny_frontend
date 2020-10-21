@@ -91,6 +91,10 @@ const Container = styled.div`
   padding: 3rem 0;
   background: #f2f2f2 0% 0% no-repeat padding-box;
   margin-bottom: 3rem;
+
+  @media only screen and (max-width: 475px) {
+    margin-bottom: 2rem;
+  }
 `;
 
 const H2 = styled.h2`
