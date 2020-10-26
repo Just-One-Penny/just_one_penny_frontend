@@ -6,7 +6,7 @@ import {
   UpdatedUser,
   UpdateSuccess,
   UpdatedBillingInfoSuccess,
-    GetCharitiesErrorType,
+  GetCharitiesErrorType,
 } from './types';
 
 import { Charity } from 'types/Charity';
@@ -125,7 +125,7 @@ const accountSettingsSlice = createSlice({
       state.billing.cardNumber = action.payload.cardNumber;
       state.billing.expiry = action.payload.expiry;
       state.billing.cvc = action.payload.cvc;
-      },
+    },
     getCharitiesRequest(state, action: PayloadAction<String>) {
       state.loading = true;
       state.error = null;

@@ -69,6 +69,7 @@ export const selectExpiry = createSelector(
 export const selectCvc = createSelector(
   [selectDomain],
   accountSettingsState => accountSettingsState.billing.cvc,
+);
 
 export const selectGetCharities = createSelector(
   [selectDomain],

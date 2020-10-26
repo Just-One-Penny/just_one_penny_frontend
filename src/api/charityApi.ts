@@ -27,7 +27,10 @@ export class CharityApi extends Api {
     );
   };
 
-  public connectCharityStripe = async (code: string, email: string): Promise<string> => {
+  public connectCharityStripe = async (
+    code: string,
+    email: string,
+  ): Promise<string> => {
     try {
       const res: AxiosResponse<string> = await this.put<
         string,
@@ -42,7 +45,7 @@ export class CharityApi extends Api {
     } catch (error) {
       throw error;
     }
-  }
+  };
 }
 
 export const charityApi = new CharityApi(apiConfig);

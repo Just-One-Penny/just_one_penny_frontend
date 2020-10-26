@@ -28,10 +28,10 @@ const getQueryVariable = variable => {
     }
   }
   console.log('Query variable %s not found', variable);
-}
+};
 
 export function HomePage() {
-  const [loaded, setLoaded] = useState(false)
+  const [loaded, setLoaded] = useState(false);
   const loc = useLocation();
 
   const saveStripe = (code, state) => {

@@ -15,7 +15,11 @@ import {
   selectExpiry,
   selectCvc,
 } from './selectors';
-import { UpdateSuccess, GetCharitiesErrorType, UpdatedBillingInfoSuccess } from './types';
+import {
+  UpdateSuccess,
+  GetCharitiesErrorType,
+  UpdatedBillingInfoSuccess,
+} from './types';
 
 export function* updateUser() {
   const id: string = yield select(selectId);
@@ -66,12 +70,6 @@ export function* updatePayment() {
   yield put(actions.updatePaymentSuccess(response));
 }
 
-export function* accountSettingsSaga() {
-  yield takeEvery(actions.updateUser.type, updateUser);
-  yield takeEvery(actions.updatePayment.type, updatePayment);
-}
-
-
 export function* getCharities() {
   const id = yield select(selectId);
   const charities = yield call(userApi.getCharities, id);
@@ -86,7 +84,7 @@ export function* getCharities() {
 
 // This is the saga that you use with the useInjectSaga function
 export function* accountSettingsSaga() {
-  yield takeEvery(actions.getCharities.type, getCharities);
+  yield takeEvery(actions.getCharitiesRequest.type, getCharities);
   yield takeEvery(actions.updateUser.type, updateUser);
+  yield takeEvery(actions.updatePayment.type, updatePayment);
 }
-

@@ -1,11 +1,12 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { ListContainer } from '..';
+import { ListContainer } from '../Loadable';
 
 describe('<ListContainer  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<ListContainer />);
+    const list = [];
+    const loadingIndicator = render(<ListContainer list={list} />);
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });
