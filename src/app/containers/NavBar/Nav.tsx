@@ -1,35 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
-import { ReactComponent as DocumentationIcon } from './assets/documentation-icon.svg';
-// import { ReactComponent as GithubIcon } from './assets/github-icon.svg';
+
 import { AuthenticationModal } from '../AuthenticationModal';
 import { Modal } from 'app/components/Modal';
 import { useAuth } from 'context/auth-context';
 
+import items from './sampleLinks';
+
+import icon from './assets/dropdown-icon.png';
+
 export function Nav() {
   const { user } = useAuth();
+  const [show, toggle] = useState(false);
+
+  function _toggleMenu() {
+    toggle(!show);
+  }
+
   return (
     <Wrapper>
+      <div>
+        <a onClick={_toggleMenu} href="#">
+          Charities
+          <img className="icon" alt="V" src={icon} />
+        </a>
+        {show && (
+          <Dropdown>
+            {items.map((item, i) => (
+              <a href={item.link} key={item.text}>
+                {item.text}
+              </a>
+            ))}
+          </Dropdown>
+        )}
+      </div>
+      <a href="/">About</a>
       {user ? (
-        user?.email
+        <a className="button-border" href="/">
+          Logout
+        </a>
       ) : (
         <>
           <Modal
-            buttonElement={
-              <Button>
-                <DocumentationIcon />
-                Login
-              </Button>
-            }
+            buttonElement={<button>Login</button>}
             modalBody={<AuthenticationModal />}
           />
           <Modal
-            buttonElement={
-              <Button>
-                <DocumentationIcon />
-                Sign Up
-              </Button>
-            }
+            buttonElement={<button className="button-border">Sign Up</button>}
             modalBody={<AuthenticationModal isSignup />}
           />
         </>
@@ -39,26 +56,55 @@ export function Nav() {
 }
 
 const Wrapper = styled.nav`
-  display: flex;
-  margin-right: -1rem;
-`;
-
-const Button = styled.button`
-  background-color: ${p => p.theme.primary};
-  cursor: pointer;
-  text-decoration: none;
-  display: flex;
-  padding: 0.25rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  align-items: center;
-  &:hover {
-    opacity: 0.8;
+  display: none;
+  > a:hover,
+  > div > a:hover,
+  button:hover {
+    opacity: 0.6;
   }
-  &:active {
+  > a:active,
+  button:active {
     opacity: 0.4;
   }
-  .icon {
-    margin-right: 0.25rem;
+
+  & > button {
+    all: unset;
+  }
+  & > button:hover {
+    all: unset;
+  }
+  .button-border {
+    color: #0a559e;
+    border: 2px solid;
+    border-radius: 20px;
+    padding: 5px 15px;
+  }
+
+  @media (min-width: 640px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 40vw;
+    max-width: 400px;
+    .icon {
+      display: inline;
+    }
+  }
+`;
+
+const Dropdown = styled.ul`
+  margin-top: 0.5rem;
+  background-color: darkgray;
+  position: absolute;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  a {
+    padding: 0.25rem 0.5rem;
+    opacity: 0.8;
+    :hover {
+      opacity: 1;
+      background-color: grey;
+    }
   }
 `;
