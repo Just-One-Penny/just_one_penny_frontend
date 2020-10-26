@@ -17,6 +17,7 @@ import { HomePage } from './containers/HomePage/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { CharityList } from './containers/CharityList/Loadable';
 import { About } from './containers/About/Loadable';
+import { Footer } from './components/Footer';
 
 export function App() {
   console.log('process.env', process.env);
@@ -36,6 +37,7 @@ export function App() {
         <Route component={NotFoundPage} />
         <Route exact path="/charities" component={CharityList} />
       </Switch>
+      <Footer />
       <GlobalStyle />
     </BrowserRouter>
   );

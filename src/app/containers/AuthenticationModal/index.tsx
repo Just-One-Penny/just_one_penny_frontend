@@ -1,34 +1,40 @@
 /**
  *
- * Authentication
+ * AuthenticationModal
  *
  */
 
-import React, { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { reducer, sliceKey, actions } from './slice';
-import { selectEmail, selectPassword, selectFullName } from './selectors';
-import { authenticationSaga } from './saga';
-
-import { ReactComponent as GithubIcon } from './assets/github.svg';
-import { ReactComponent as GoogleIcon } from './assets/google.svg';
+import {
+  selectEmail,
+  selectFirstName,
+  selectLastName,
+  selectPassword,
+} from './selectors';
+import { authenticationModalSaga } from './saga';
 
 interface Props {
-  newAccount?: boolean;
+  isSignup: boolean;
 }
 
-export const Authentication = memo((props: Props) => {
-  const [newAccount, setNewAccount] = useState(props.newAccount);
+AuthenticationModal.defaultProps = {
+  isSignup: false,
+};
+
+export function AuthenticationModal(props: Props) {
+  const [isSignup, setIsSignup] = useState(props.isSignup);
   useInjectReducer({ key: sliceKey, reducer: reducer });
-  useInjectSaga({ key: sliceKey, saga: authenticationSaga });
+  useInjectSaga({ key: sliceKey, saga: authenticationModalSaga });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const email = useSelector(selectEmail);
   const password = useSelector(selectPassword);
-  const fullName = useSelector(selectFullName);
+  const firstName = useSelector(selectFirstName);
+  const lastName = useSelector(selectLastName);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
 
@@ -37,8 +43,11 @@ export const Authentication = memo((props: Props) => {
       case 'email':
         dispatch(actions.changeEmail(evt.currentTarget.value));
         break;
-      case 'fullName':
-        dispatch(actions.changeFullName(evt.currentTarget.value));
+      case 'firstName':
+        dispatch(actions.changeFirstName(evt.currentTarget.value));
+        break;
+      case 'lastName':
+        dispatch(actions.changeLastName(evt.currentTarget.value));
         break;
       case 'password':
         dispatch(actions.changePassword(evt.currentTarget.value));
@@ -49,21 +58,15 @@ export const Authentication = memo((props: Props) => {
   };
 
   const submitForm = (evt?: React.FormEvent<HTMLFormElement>) => {
-    /* istanbul ignore next  */
     if (evt !== undefined && evt.preventDefault) {
       evt.preventDefault();
     }
-    console.log('submitForm -> newAccount', newAccount);
-    if (newAccount) {
+    if (isSignup) {
       dispatch(actions.registerUser());
     } else {
-      console.log('submitForm -> newAccount', newAccount);
       dispatch(actions.loginUser());
     }
   };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { t, i18n } = useTranslation();
 
   return (
     <div className="container mx-auto px-4 h-full">
@@ -73,7 +76,7 @@ export const Authentication = memo((props: Props) => {
             <div className="rounded-t mb-0 px-6 py-6">
               <div className="text-center mb-3">
                 <h6 className="text-gray-600 text-sm font-bold">
-                  Sign {newAccount ? 'up' : 'in'} with
+                  Sign {isSignup ? 'up' : 'in'} with
                 </h6>
               </div>
               <div className="btn-wrapper text-center">
@@ -82,15 +85,7 @@ export const Authentication = memo((props: Props) => {
                   type="button"
                   style={{ transition: 'all .15s ease' }}
                 >
-                  <GithubIcon />
-                  Github
-                </button>
-                <button
-                  className="bg-white active:bg-gray-100 text-gray-800 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
-                  type="button"
-                  style={{ transition: 'all .15s ease' }}
-                >
-                  <GoogleIcon />
+                  {/* INSERT SOCIAL AUTH BUTTON */}
                   Google
                 </button>
               </div>
@@ -98,25 +93,38 @@ export const Authentication = memo((props: Props) => {
             </div>
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
               <div className="text-gray-500 text-center mb-3 font-bold">
-                <small>
-                  Or sign {newAccount ? 'up' : 'in'} with credentials
-                </small>
+                <small>Or sign {isSignup ? 'up' : 'in'} with credentials</small>
               </div>
               <form>
-                {newAccount ? (
+                {isSignup ? (
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-gray-700 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Full Name
+                      First Name
                     </label>
                     <input
                       type="text"
-                      name="fullName"
+                      name="firstName"
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-                      placeholder="Full Name"
-                      value={fullName}
+                      placeholder="First Name"
+                      value={firstName}
+                      onChange={onChange}
+                      style={{ transition: 'all .15s ease' }}
+                    />
+                    <label
+                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Last Name
+                    </label>
+                    <input
+                      type="text"
+                      name="lastName"
+                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                      placeholder="Last Name"
+                      value={lastName}
                       onChange={onChange}
                       style={{ transition: 'all .15s ease' }}
                     />
@@ -178,7 +186,7 @@ export const Authentication = memo((props: Props) => {
                     type="button"
                     style={{ transition: 'all .15s ease' }}
                   >
-                    Sign {newAccount ? 'Up' : 'In'}
+                    Sign {isSignup ? 'Up' : 'In'}
                   </button>
                 </div>
               </form>
@@ -194,16 +202,16 @@ export const Authentication = memo((props: Props) => {
               </span>
             </div>
             <div className="w-1/2 text-right">
-              {newAccount ? (
+              {isSignup ? (
                 <span
-                  onClick={() => setNewAccount(false)}
+                  onClick={() => setIsSignup(false)}
                   className="text-gray-300 cursor-pointer"
                 >
                   <small>Already have an account?</small>
                 </span>
               ) : (
                 <span
-                  onClick={() => setNewAccount(true)}
+                  onClick={() => setIsSignup(true)}
                   className="text-gray-300 cursor-pointer"
                 >
                   <small>Create new account</small>
@@ -215,4 +223,4 @@ export const Authentication = memo((props: Props) => {
       </div>
     </div>
   );
-});
+}
