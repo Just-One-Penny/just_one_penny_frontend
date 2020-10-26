@@ -16,3 +16,8 @@ export interface lastYearRevenue {
   revenue: number;
   otherInfo: string[];
 }
+
+export interface StripeCode {
+  code: string;
+  email: string;
+}

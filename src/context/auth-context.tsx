@@ -78,7 +78,7 @@ function AuthProvider(props) {
     return <div />;
   }
 
-  if (isError && error.response.status === 401) {
+  if (isError && error && error.response && error.response.status === 401) {
     return <>{props.children}</>;
   }
 
