@@ -12,6 +12,7 @@ import { NewsFeedState } from 'app/containers/NewsFeed/types';
 */
 export interface RootState {
   theme?: ThemeState;
+  authentication?: AuthenticationState;
   charityList?: CharityListState;
   accountSettings?: AccountSettingsState;
   charityDisplay?: CharityDisplayState;

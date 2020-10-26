@@ -1,11 +1,18 @@
+import { Charity } from 'types/Charity';
 /* --- STATE --- */
 export interface AccountSettingsState {
   id: string;
   fullName: string;
   email: string;
   role: string;
+  charities: Charity[];
   isEditing: boolean;
   loading: boolean;
+  error?: GetCharitiesErrorType | null;
+}
+
+export enum GetCharitiesErrorType {
+  GENERAL_ERROR = 1,
 }
 
 export interface UpdatedUser {

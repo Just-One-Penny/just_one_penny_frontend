@@ -17,9 +17,10 @@ async function bootstrapAppData() {
 
 const AuthContext = React.createContext({
   user: {
-    id: null,
-    email: null,
-    fullName: null,
+    id: '',
+    email: '',
+    fullName: '',
+    charities: [],
   },
 });
 AuthContext.displayName = 'AuthContext';
@@ -45,18 +46,18 @@ function AuthProvider(props) {
 
   const login = React.useCallback(
     form =>
-      userApi.loginUser(form).then(user => {
+      userApi.userLogin(form).then(user => {
         // This is an example script - don't forget to change it!
-        LogRocket.identify('THE_USER_ID_IN_YOUR_APP', user);
+        LogRocket.identify(user.id);
         setData(user);
       }),
     [setData],
   );
   const register = React.useCallback(
     form =>
-      userApi.registerUser(form).then(user => {
+      userApi.userRegister(form).then(user => {
         // This is an example script - don't forget to change it!
-        LogRocket.identify('THE_USER_ID_IN_YOUR_APP', user);
+        LogRocket.identify(user.id);
         setData(user);
       }),
     [setData],

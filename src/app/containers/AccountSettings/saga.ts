@@ -1,8 +1,8 @@
-import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { all, call, put, select, takeEvery } from 'redux-saga/effects';
 import { actions } from './slice';
 import { userApi } from 'api/userApi';
 import { selectEmail, selectFullName, selectRole, selectId } from './selectors';
-import { UpdateSuccess } from './types';
+import { UpdateSuccess, GetCharitiesErrorType } from './types';
 
 export function* updateUser() {
   const id: string = yield select(selectId);
@@ -20,6 +20,20 @@ export function* updateUser() {
   yield put(actions.updateSuccess(response));
 }
 
+//VK//
+export function* getCharities() {
+  const id = yield select(selectId);
+  const charities = yield call(userApi.getCharities, id);
+  if (charities != null) {
+    yield put(actions.getCharitiesSuccess(charities));
+  } else {
+    yield put(actions.getCharitiesError(GetCharitiesErrorType.GENERAL_ERROR));
+  }
+
+  return charities;
+}
+
+// This is the saga that you use with the useInjectSaga function
 export function* accountSettingsSaga() {
   yield takeEvery(actions.updateUser.type, updateUser);
 }

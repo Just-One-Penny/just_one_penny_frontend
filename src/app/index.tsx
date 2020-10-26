@@ -22,7 +22,6 @@ import { CharitySignup } from './containers/CharitySignup';
 import { NavBar } from './containers/NavBar';
 import { Footer } from './components/Footer';
 
-
 export function App() {
   return (
     <BrowserRouter>

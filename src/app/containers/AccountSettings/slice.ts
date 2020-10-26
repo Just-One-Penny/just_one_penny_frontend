@@ -1,14 +1,23 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
-import { ContainerState, UpdatedUser, UpdateSuccess } from './types';
+import {
+  ContainerState,
+  UpdatedUser,
+  UpdateSuccess,
+  GetCharitiesErrorType,
+} from './types';
+import { Charity } from 'types/Charity';
+
 // The initial state of the AccountSettings container
 export const initialState: ContainerState = {
   id: '',
   fullName: '',
   email: '',
   role: '',
+  charities: [],
   isEditing: false,
   loading: false,
+  error: null,
 };
 
 const accountSettingsSlice = createSlice({
@@ -47,6 +56,20 @@ const accountSettingsSlice = createSlice({
       state.fullName = action.payload.name;
       state.role = action.payload.role;
       state.email = action.payload.email;
+    },
+    //VK//
+    getCharitiesRequest(state, action: PayloadAction<String>) {
+      state.loading = true;
+      state.error = null;
+    },
+    getCharitiesSuccess(state, action: PayloadAction<Charity[]>) {
+      state.loading = false;
+      state.error = null;
+      state.charities = action.payload;
+    },
+    getCharitiesError(state, action: PayloadAction<GetCharitiesErrorType>) {
+      state.error = action.payload;
+      state.loading = false;
     },
   },
 });

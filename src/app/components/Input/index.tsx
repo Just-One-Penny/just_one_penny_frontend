@@ -28,9 +28,9 @@ export const Input = styled.input`
     border-color: ${p => p.theme.primary};
     /* box-shadow: 0 0 0 3px
       ${p =>
-        p.theme.primary.replace(
-          /rgba?(\(\s*\d+\s*,\s*\d+\s*,\s*\d+)(?:\s*,.+?)?\)/,
-          'rgba$1,0.2)',
-        )}; */
+      p.theme.primary.replace(
+        /rgba?(\(\s*\d+\s*,\s*\d+\s*,\s*\d+)(?:\s*,.+?)?\)/,
+        'rgba$1,0.2)',
+      )}; */
   }
 `;
