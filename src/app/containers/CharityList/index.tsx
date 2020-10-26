@@ -7,7 +7,7 @@
 import React, { memo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
@@ -24,8 +24,6 @@ export const CharityList = memo((props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const charityList = useSelector(selectCharityList);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
-  //const dispatch = useDispatch();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
@@ -64,7 +62,6 @@ export const CharityList = memo((props: Props) => {
           })}
         </tbody>
       </table>
-      {/*<Div>{t('')}</Div>*/}
     </>
   );
 });

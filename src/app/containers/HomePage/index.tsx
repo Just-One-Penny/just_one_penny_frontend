@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 import { Helmet } from 'react-helmet-async';
 import { NavBar } from '../NavBar';
+import { CharityDisplay } from '../CharityDisplay';
 import { CharityList } from '../CharityList';
 import { charityApi } from 'api/charityApi';
 
@@ -32,7 +33,6 @@ export function HomePage() {
   const loc = useLocation();
 
   const saveStripe = (code, state) => {
-    console.log("saveStripe -> code, state", code, state)
     charityApi.connectCharityStripe(code, state);
   };
 
@@ -43,7 +43,6 @@ export function HomePage() {
     }
     setLoaded(true);
   }
-  console.log("HomePage -> location", loc)
 
   return (
     <>
@@ -54,6 +53,7 @@ export function HomePage() {
           content="Charitable giving one penny at a time"
         />
       </Helmet>
+      <CharityDisplay />
     </>
   );
 }

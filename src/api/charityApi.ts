@@ -21,6 +21,12 @@ export class CharityApi extends Api {
     }
   };
 
+  public getCharityById = (id: string): Promise<Charity> => {
+    return this.get<Charity, AxiosResponse<Charity>>(`/charities/${id}`).then(
+      this.success,
+    );
+  };
+
   public connectCharityStripe = async (code: string, email: string): Promise<string> => {
     try {
       const res: AxiosResponse<string> = await this.put<
