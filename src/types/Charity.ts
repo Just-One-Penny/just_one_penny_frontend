@@ -1,4 +1,5 @@
 export interface Charity {
+  id: string;
   name: string;
   logo: string;
   mission: string;
@@ -15,4 +16,9 @@ export interface Charity {
 export interface lastYearRevenue {
   revenue: number;
   otherInfo: string[];
+}
+
+export interface StripeCode {
+  code: string;
+  email: string;
 }

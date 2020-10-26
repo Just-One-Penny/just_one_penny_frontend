@@ -6,16 +6,22 @@ import {
   UpdatedUser,
   UpdateSuccess,
   UpdatedBillingInfoSuccess,
+    GetCharitiesErrorType,
 } from './types';
+
+import { Charity } from 'types/Charity';
+
 // The initial state of the AccountSettings container
 export const initialState: ContainerState = {
   id: '',
   fullName: '',
   email: '',
   role: '',
+  charities: [],
   isEditing: false,
   loading: false,
   billing: {},
+  error: null,
 };
 
 const accountSettingsSlice = createSlice({
@@ -119,6 +125,19 @@ const accountSettingsSlice = createSlice({
       state.billing.cardNumber = action.payload.cardNumber;
       state.billing.expiry = action.payload.expiry;
       state.billing.cvc = action.payload.cvc;
+      },
+    getCharitiesRequest(state, action: PayloadAction<String>) {
+      state.loading = true;
+      state.error = null;
+    },
+    getCharitiesSuccess(state, action: PayloadAction<Charity[]>) {
+      state.loading = false;
+      state.error = null;
+      state.charities = action.payload;
+    },
+    getCharitiesError(state, action: PayloadAction<GetCharitiesErrorType>) {
+      state.error = action.payload;
+      state.loading = false;
     },
   },
 });

@@ -13,6 +13,7 @@ import {
   UpdatedBillingInfo,
 } from 'types/Stripe';
 import { apiConfig } from './api.config';
+import { Charity } from 'types/Charity';
 
 export const authStorageKey = 'jop_auth_token';
 
@@ -28,15 +29,15 @@ export class UserApi extends Api {
     return localStorage.getItem(authStorageKey);
   };
 
-  public userLogin = (credentials: Credentials): Promise<string | Token> => {
-    return this.post<string, Credentials, AxiosResponse<string>>(
+  public userLogin = (credentials: Credentials): Promise<User> => {
+    return this.post<string, Credentials, AxiosResponse<User>>(
       '/auth/login',
       credentials,
     ).then(this.success);
   };
 
-  public userRegister = (credentials: Credentials): Promise<number> => {
-    return this.post<number, Credentials, AxiosResponse<number>>(
+  public userRegister = (credentials: Credentials): Promise<User> => {
+    return this.post<User, Credentials, AxiosResponse<User>>(
       '/auth/register',
       credentials,
     )
@@ -63,6 +64,18 @@ export class UserApi extends Api {
     return this.get<User, AxiosResponse<User>>(`/users/${id}`).then(
       this.success,
     );
+  };
+
+  public getCharities = async (id: number): Promise<Charity[]> => {
+    try {
+      const res: AxiosResponse<Charity[]> = await this.get<
+        Charity,
+        AxiosResponse<Charity[]>
+      >(`/${id}/charities`);
+      return this.success(res);
+    } catch (error) {
+      throw error;
+    }
   };
 
   public getProfile = (): Promise<User> => {
