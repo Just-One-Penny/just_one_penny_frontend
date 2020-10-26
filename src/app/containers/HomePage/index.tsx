@@ -1,7 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { NavBar } from '../NavBar';
+// eslint-disable-next-line
 import { CharityList } from '../CharityList';
+import { HeroBox } from './HeroBox';
+import { CharityNews } from './CharityNews';
+import { Footer } from '../../components/Footer';
 
 export function HomePage() {
   return (
@@ -14,6 +18,9 @@ export function HomePage() {
         />
       </Helmet>
       <NavBar />
+      <HeroBox />
+      <CharityNews />
+      <Footer />
     </>
   );
 }

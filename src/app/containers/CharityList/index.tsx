@@ -7,6 +7,7 @@
 import React, { memo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
+// eslint-disable-next-line
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/macro';
 
@@ -69,4 +70,5 @@ export const CharityList = memo((props: Props) => {
   );
 });
 
+// eslint-disable-next-line
 const Div = styled.div``;
