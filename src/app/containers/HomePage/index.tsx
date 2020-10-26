@@ -5,6 +5,8 @@ import { Helmet } from 'react-helmet-async';
 import { NavBar } from '../NavBar';
 import { CharityDisplay } from '../CharityDisplay';
 import { CharityList } from '../CharityList';
+import { AccountPaymentInfo } from '../AccountSettings/AccountPaymentInfo';
+import { UserBio } from '../AccountSettings/UserBio';
 import { charityApi } from 'api/charityApi';
 
 interface LocationParams {
@@ -53,6 +55,9 @@ export function HomePage() {
           content="Charitable giving one penny at a time"
         />
       </Helmet>
+      <div>
+        <AccountPaymentInfo />
+      </div>
       <CharityDisplay />
     </>
   );

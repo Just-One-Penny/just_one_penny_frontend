@@ -14,6 +14,8 @@ import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { reducer, sliceKey } from './slice';
 import { selectAccountSettings } from './selectors';
 import { accountSettingsSaga } from './saga';
+import { UserBio } from './UserBio';
+import { AccountPaymentInfo } from './AccountPaymentInfo';
 
 interface Props {}
 
@@ -35,6 +37,8 @@ export const AccountSettings = memo((props: Props) => {
         <title>Account Settings</title>
         <meta name="description" content="Just One Penny Account" />
       </Helmet>
+      <UserBio />
+      <AccountPaymentInfo />
       <Div>{t('')}</Div>
     </>
   );
