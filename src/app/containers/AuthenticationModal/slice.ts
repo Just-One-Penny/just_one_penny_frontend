@@ -2,31 +2,35 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import {
   ContainerState,
-  AuthenticationErrorType,
-  AuthenticationSuccess,
+  AuthenticationModalErrorType,
+  AuthenticationModalSuccess,
 } from './types';
 
-// The initial state of the Authentication container
+// The initial state of the AuthenticationModal container
 export const initialState: ContainerState = {
   email: '',
+  firstName: '',
+  lastName: '',
   password: '',
-  fullName: '',
   loading: false,
   error: null,
 };
 
-const authenticationSlice = createSlice({
-  name: 'authentication',
+const authenticationModalSlice = createSlice({
+  name: 'authenticationModal',
   initialState,
   reducers: {
     changeEmail(state, action: PayloadAction<string>) {
       state.email = action.payload;
     },
+    changeFirstName(state, action: PayloadAction<string>) {
+      state.firstName = action.payload;
+    },
+    changeLastName(state, action: PayloadAction<string>) {
+      state.lastName = action.payload;
+    },
     changePassword(state, action: PayloadAction<string>) {
       state.password = action.payload;
-    },
-    changeFullName(state, action: PayloadAction<string>) {
-      state.fullName = action.payload;
     },
     registerUser(state) {
       state.loading = true;
@@ -36,15 +40,21 @@ const authenticationSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    authenticationSuccess(state, action: PayloadAction<AuthenticationSuccess>) {
+    authenticationModalSuccess(
+      state,
+      action: PayloadAction<AuthenticationModalSuccess>,
+    ) {
       // const token = action.payload;
       state.loading = false;
     },
-    authenticationError(state, action: PayloadAction<AuthenticationErrorType>) {
+    authenticationModalError(
+      state,
+      action: PayloadAction<AuthenticationModalErrorType>,
+    ) {
       state.error = action.payload;
       state.loading = false;
     },
   },
 });
 
-export const { actions, reducer, name: sliceKey } = authenticationSlice;
+export const { actions, reducer, name: sliceKey } = authenticationModalSlice;

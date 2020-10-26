@@ -1,8 +1,15 @@
-// import { take, call, put, select, takeLatest } from 'redux-saga/effects';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
-import { selectEmail, selectPassword, selectFullName } from './selectors';
+import {
+  selectEmail,
+  selectPassword,
+  selectFirstName,
+  selectLastName,
+} from './selectors';
+import {
+  AuthenticationModalErrorType,
+  AuthenticationModalSuccess,
+} from './types';
 import { actions } from './slice';
-import { AuthenticationErrorType, AuthenticationSuccess } from './types';
 import { userApi, authStorageKey } from 'api/userApi';
 
 /**
@@ -11,24 +18,32 @@ import { userApi, authStorageKey } from 'api/userApi';
 export function* registerUser() {
   const email: string = yield select(selectEmail);
   if (email.length === 0) {
-    yield put(actions.authenticationError(AuthenticationErrorType.EMAIL_EMPTY));
+    yield put(
+      actions.authenticationModalError(
+        AuthenticationModalErrorType.EMAIL_EMPTY,
+      ),
+    );
     return;
   }
   const password: string = yield select(selectPassword);
   if (password.length === 0) {
     yield put(
-      actions.authenticationError(AuthenticationErrorType.PASSWORD_EMPTY),
+      actions.authenticationModalError(
+        AuthenticationModalErrorType.PASSWORD_EMPTY,
+      ),
     );
     return;
   }
 
-  const fullName: string = yield select(selectFullName);
+  const firstName: string = yield select(selectFirstName);
+  const lastName: string = yield select(selectLastName);
   const credentials = {
     email,
     password,
-    fullName,
+    firstName,
+    lastName,
   };
-  const response: AuthenticationSuccess = yield call(
+  const response: AuthenticationModalSuccess = yield call(
     userApi.userRegister,
     credentials,
   );
@@ -41,13 +56,19 @@ export function* registerUser() {
 export function* loginUser() {
   const email: string = yield select(selectEmail);
   if (email.length === 0) {
-    yield put(actions.authenticationError(AuthenticationErrorType.EMAIL_EMPTY));
+    yield put(
+      actions.authenticationModalError(
+        AuthenticationModalErrorType.EMAIL_EMPTY,
+      ),
+    );
     return;
   }
   const password: string = yield select(selectPassword);
   if (password.length === 0) {
     yield put(
-      actions.authenticationError(AuthenticationErrorType.PASSWORD_EMPTY),
+      actions.authenticationModalError(
+        AuthenticationModalErrorType.PASSWORD_EMPTY,
+      ),
     );
     return;
   }
@@ -56,7 +77,7 @@ export function* loginUser() {
     email,
     password,
   };
-  const response: AuthenticationSuccess = yield call(
+  const response: AuthenticationModalSuccess = yield call(
     userApi.userLogin,
     credentials,
   );
@@ -64,7 +85,7 @@ export function* loginUser() {
   localStorage.setItem(authStorageKey, response.token.accessToken);
 }
 
-export function* authenticationSaga() {
+export function* authenticationModalSaga() {
   yield takeEvery(actions.registerUser.type, registerUser);
   yield takeEvery(actions.loginUser.type, loginUser);
 }

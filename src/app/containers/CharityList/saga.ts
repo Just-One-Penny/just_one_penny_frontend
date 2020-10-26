@@ -1,10 +1,7 @@
-// import { take, call, put, select, takeLatest } from 'redux-saga/effects';
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { actions } from './slice';
-// import { Charity } from '/types/Charity';
 import { charityApi } from 'api/charityApi';
 import { GetCharitiesErrorType } from './types';
-// import { call } from "redux-saga/effects";
 
 export function* getCharities() {
   const charities = yield call(charityApi.getCharities);

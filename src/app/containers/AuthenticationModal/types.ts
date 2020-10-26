@@ -1,12 +1,17 @@
 import { User } from 'types/User';
 
 /* --- STATE --- */
-export interface AuthenticationState {
+export interface AuthenticationModalState {
   email: string;
   password: string;
-  fullName: string;
+  firstName: string;
+  lastName: string;
   loading: boolean;
-  error?: AuthenticationErrorType | null;
+  error?: AuthenticationModalErrorType | null;
+}
+
+export interface Donations {
+  amount: number;
 }
 
 interface Token {
@@ -16,16 +21,16 @@ interface Token {
   tokenType: string;
 }
 
-export interface AuthenticationSuccess {
+export interface AuthenticationModalSuccess {
   token: Token;
   user: User;
 }
 
-export enum AuthenticationErrorType {
+export enum AuthenticationModalErrorType {
   INCORRECT_CREDENTIALS = 1,
   EMAIL_EMPTY = 2,
   PASSWORD_EMPTY = 3,
   EMAIL_TAKEN = 4,
 }
 
-export type ContainerState = AuthenticationState;
+export type ContainerState = AuthenticationModalState;

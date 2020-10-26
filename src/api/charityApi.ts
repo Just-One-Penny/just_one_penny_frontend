@@ -1,7 +1,7 @@
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Api } from './api';
 import { apiConfig } from './api.config';
-import { Charity } from 'types/Charity';
+import { Charity, StripeCode } from 'types/Charity';
 
 export class CharityApi extends Api {
   public constructor(config?: AxiosRequestConfig) {
@@ -14,6 +14,32 @@ export class CharityApi extends Api {
         Charity,
         AxiosResponse<Charity[]>
       >('/charities');
+
+      return this.success(res);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  public getCharityById = (id: string): Promise<Charity> => {
+    return this.get<Charity, AxiosResponse<Charity>>(`/charities/${id}`).then(
+      this.success,
+    );
+  };
+
+  public connectCharityStripe = async (
+    code: string,
+    email: string,
+  ): Promise<string> => {
+    try {
+      const res: AxiosResponse<string> = await this.put<
+        string,
+        StripeCode,
+        AxiosResponse<string>
+      >('/charities/stripe', {
+        code,
+        email,
+      });
 
       return this.success(res);
     } catch (error) {
