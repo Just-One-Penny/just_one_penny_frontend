@@ -4,6 +4,7 @@ import { AccountSettingsState } from 'app/containers/AccountSettings/types';
 import { CharityDisplayState } from 'app/containers/CharityDisplay/types';
 import { AuthenticationModalState } from 'app/containers/AuthenticationModal/types';
 import { NewsFeedState } from 'app/containers/NewsFeed/types';
+import { StripeSuccessState } from 'app/containers/StripeSuccess/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -17,5 +18,6 @@ export interface RootState {
   charityDisplay?: CharityDisplayState;
   authenticationModal?: AuthenticationModalState;
   newsFeed?: NewsFeedState;
+  stripeSuccess?: StripeSuccessState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }
