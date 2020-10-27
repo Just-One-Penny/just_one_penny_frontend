@@ -21,7 +21,7 @@ export function StripeSuccess() {
     rendered: false,
     loading: false,
     success: false,
-    error: true,
+    error: false,
   });
 
   const loc = useLocation();
