@@ -5,6 +5,7 @@ import { charityApi } from 'api/charityApi';
 import { LoadingSpinner } from 'app/components/LoadingSpinner';
 import { Checkmark } from 'app/components/Checkmark/Loadable';
 import styled from 'styled-components';
+import { AnimatedError } from 'app/components/AnimatedError/Loadable';
 
 interface LocationParams {
   search: SearchParams;
@@ -20,6 +21,7 @@ export function StripeSuccess() {
     rendered: false,
     loading: false,
     success: false,
+    error: true,
   });
 
   const loc = useLocation();
@@ -30,11 +32,17 @@ export function StripeSuccess() {
       .then(() =>
         setState({ ...state, rendered: true, loading: false, success: true }),
       )
-      .catch(() => setState({ ...state, rendered: true, loading: false }));
+      .catch(error =>
+        setState({
+          ...state,
+          rendered: true,
+          error: error.message,
+          loading: false,
+        }),
+      );
   };
 
   useEffect(() => {
-    console.log(state);
     if (loc.search && !state.rendered) {
       setState({
         ...state,
@@ -52,16 +60,24 @@ export function StripeSuccess() {
       });
     }
   });
-
+  console.log(state);
   return (
     <Center>
       {/* <LoadingSpinner /> */}
       {state.loading && <LoadingSpinner />}
-      {true ? (
+      {state.success ? (
         <>
           <h4>Your Stripe account has been successfully connected</h4>
           <CheckmarkContainer>
             <Checkmark />
+          </CheckmarkContainer>
+        </>
+      ) : null}
+      {state.error ? (
+        <>
+          <h4>{state.error}</h4>
+          <CheckmarkContainer>
+            <AnimatedError />
           </CheckmarkContainer>
         </>
       ) : null}
