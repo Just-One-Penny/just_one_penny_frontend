@@ -49,5 +49,5 @@ export const About = memo((props: Props) => {
     </>
   );
 });
-
+// eslint-disable-next-line
 const Div = styled.div``;

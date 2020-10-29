@@ -1,10 +1,11 @@
 import { ThemeState } from 'styles/theme/types';
 import { CharityListState } from 'app/containers/CharityList/types';
 import { AccountSettingsState } from 'app/containers/AccountSettings/types';
-import { CharityDisplayState } from 'app/containers/CharityDisplay/types';
+import { DonationModalState } from 'app/containers/DonationModal/types';
 import { AuthenticationModalState } from 'app/containers/AuthenticationModal/types';
 import { NewsFeedState } from 'app/containers/NewsFeed/types';
 import { StripeSuccessState } from 'app/containers/StripeSuccess/types';
+
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -12,10 +13,11 @@ import { StripeSuccessState } from 'app/containers/StripeSuccess/types';
   You have to declare them here manually
 */
 export interface RootState {
+  charityDisplay: import('/Users/mattbicknese/JOP/just_one_penny_frontend/src/app/containers/CharityDisplay/types').CharityDisplayState;
   theme?: ThemeState;
   charityList?: CharityListState;
   accountSettings?: AccountSettingsState;
-  charityDisplay?: CharityDisplayState;
+  donationModal?: DonationModalState;
   authenticationModal?: AuthenticationModalState;
   newsFeed?: NewsFeedState;
   stripeSuccess?: StripeSuccessState;
