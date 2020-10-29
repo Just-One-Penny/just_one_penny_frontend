@@ -18,29 +18,44 @@ import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { CharityList } from './containers/CharityList/Loadable';
 import { About } from './containers/About/Loadable';
 import { ContactUs } from './containers/ContactUs/Loadable';
-import { Footer } from './components/Footer';
+import { CharityDisplay } from './containers/CharityDisplay';
+import { CharitySignup } from './containers/CharitySignup';
 import { NavBar } from './containers/NavBar';
+import { Footer } from './components/Footer';
+import { StripeSuccess } from './containers/StripeSuccess/Loadable';
+import { PageWrapper } from './components/PageWrapper';
 
 export function App() {
-  console.log('process.env', process.env);
   return (
     <BrowserRouter>
-      <Helmet
-        titleTemplate="%s - React Boilerplate"
-        defaultTitle="React Boilerplate"
-      >
-        <meta name="description" content="A React Boilerplate application" />
+      <Helmet titleTemplate="%s - Just One Penny" defaultTitle="Just One Penny">
+        <meta
+          name="description"
+          content="A revolutionary micro-giving platform."
+        />
       </Helmet>
+
       <NavBar />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/contactUs" component={ContactUs} />
-        <Route exact path="/about" component={About} />
-        <Route component={NotFoundPage} />
-        <Route exact path="/charities" component={CharityList} />
-      </Switch>
-      <GlobalStyle />
+      <PageWrapper>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/contactUs" component={ContactUs} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/stripe" component={StripeSuccess} />
+          <Route exact path="/charities" component={CharityList} />
+          <Route
+            exact
+            path="/charities/:charityId"
+            component={CharityDisplay}
+          />
+          <Route exact path="/charities/new" component={CharitySignup} />
+
+          {/* Make sure you add new routes above the not found page */}
+          <Route component={NotFoundPage} />
+        </Switch>
+      </PageWrapper>
       <Footer />
+      <GlobalStyle />
     </BrowserRouter>
   );
 }

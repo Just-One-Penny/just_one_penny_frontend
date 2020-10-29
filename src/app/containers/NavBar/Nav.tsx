@@ -16,19 +16,19 @@ export function Nav() {
         <>
           <Modal
             buttonElement={
-              <Button>
+              <>
                 <DocumentationIcon />
                 Login
-              </Button>
+              </>
             }
             modalBody={<AuthenticationModal />}
           />
           <Modal
             buttonElement={
-              <Button>
+              <>
                 <DocumentationIcon />
                 Sign Up
-              </Button>
+              </>
             }
             modalBody={<AuthenticationModal isSignup />}
           />
