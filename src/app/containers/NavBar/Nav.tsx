@@ -8,9 +8,10 @@ import { useAuth } from 'context/auth-context';
 
 export function Nav() {
   const { user } = useAuth();
+
   return (
     <Wrapper>
-      {user ? (
+      {user?.email ? (
         user?.email
       ) : (
         <>

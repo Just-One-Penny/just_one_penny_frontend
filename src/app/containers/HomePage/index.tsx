@@ -55,10 +55,6 @@ export function HomePage() {
           content="Charitable giving one penny at a time"
         />
       </Helmet>
-      <div>
-        <AccountPaymentInfo />
-      </div>
-      <CharityDisplay />
     </>
   );
 }

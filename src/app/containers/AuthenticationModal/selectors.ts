@@ -23,6 +23,16 @@ export const selectPassword = createSelector(
   authenticationModalState => authenticationModalState.password,
 );
 
+export const selectAccessToken = createSelector(
+  [selectDomain],
+  authenticationModalState => authenticationModalState.accessToken,
+);
+
+export const selectProvider = createSelector(
+  [selectDomain],
+  authenticationModalState => authenticationModalState.provider,
+);
+
 export const selectLoading = createSelector(
   [selectDomain],
   authenticationModalState => authenticationModalState.loading,

@@ -6,12 +6,19 @@ export interface AuthenticationModalState {
   password: string;
   firstName: string;
   lastName: string;
+  accessToken: string;
+  provider: string;
   loading: boolean;
   error?: AuthenticationModalErrorType | null;
 }
 
 export interface Donations {
   amount: number;
+}
+
+export interface SocialAuthSuccess {
+  accessToken: string;
+  provider: string;
 }
 
 interface Token {

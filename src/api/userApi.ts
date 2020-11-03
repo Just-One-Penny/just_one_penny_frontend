@@ -3,6 +3,7 @@ import { Api } from './api';
 import {
   Credentials,
   Token,
+  SocialAuth,
   User,
   UpdatedUser,
   UpdatingUser,
@@ -33,6 +34,19 @@ export class UserApi extends Api {
     return this.post<string, Credentials, AxiosResponse<User>>(
       '/auth/login',
       credentials,
+    ).then(this.success);
+  };
+
+  public userAuthFacebook = (access_token: SocialAuth): Promise<User> => {
+    return this.post<string, SocialAuth, AxiosResponse<User>>(
+      '/auth/facebook',
+      access_token,
+    ).then(this.success);
+  };
+  public userAuthGoogle = (access_token: SocialAuth): Promise<User> => {
+    return this.post<string, SocialAuth, AxiosResponse<User>>(
+      '/auth/google',
+      access_token,
     ).then(this.success);
   };
 
@@ -79,9 +93,11 @@ export class UserApi extends Api {
   };
 
   public getProfile = (): Promise<User> => {
-    return this.get<User, AxiosResponse<User>>(`/users/profile`).then(
-      this.success,
-    );
+    return this.get<User, AxiosResponse<User>>(`/users/profile`)
+      .then(this.success)
+      .catch(error => {
+        throw error;
+      });
   };
 
   public updateUser = (userObject: UpdatingUser): Promise<UpdatedUser> => {

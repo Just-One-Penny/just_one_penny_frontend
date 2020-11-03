@@ -2,8 +2,7 @@ import * as qs from 'qs';
 import { PathLike } from 'fs';
 
 export const API_BASE_URL =
-  process.env.REACT_APP_API_BASE ||
-  'https://jop-production-api.herokuapp.com/v1';
+  process.env.REACT_APP_API_BASE || 'http://localhost:3000/v1';
 export const apiConfig = {
   returnRejectedPromiseOnError: true,
   timeout: 30000,

@@ -38,3 +38,7 @@ export interface Credentials {
   password: string;
   fullName?: string;
 }
+
+export interface SocialAuth {
+  access_token: string;
+}
