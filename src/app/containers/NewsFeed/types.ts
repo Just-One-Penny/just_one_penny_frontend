@@ -1,13 +1,13 @@
-import { NewsFeed } from 'types/newsFeed';
+import { Article, NewsFeed } from 'types/newsFeed';
 /* --- STATE --- */
 export interface NewsFeedState {
-  articles: [];
+  articles: Article[];
   loading: boolean;
   error?: number | null;
 }
 
 export interface NewsFeedSuccess {
-  newsFeed: NewsFeed;
+  articles: Article[];
 }
 
 export enum NewsFeedErrorType {

@@ -10,42 +10,66 @@ import styled from 'styled-components/macro';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { reducer, sliceKey } from './slice';
-import { selectNewsFeed } from './selectors';
+import { selectArticles } from './selectors';
 import { newsFeedSaga } from './saga';
 import { actions } from './slice';
-import Microlink from '@microlink/react';
+import { Text } from '@welcome-ui/text';
 import { Card } from '@welcome-ui/card';
+import { Article } from 'types/newsFeed';
 
 interface Props {}
 
 export function NewsFeed(props: Props) {
+  const dispatch = useDispatch();
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: newsFeedSaga });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const newsFeed = useSelector(selectNewsFeed);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const dispatch = useDispatch();
-  dispatch(actions.loadingFeed());
+  const newsFeed: Article[] = useSelector(selectArticles);
+  if (!newsFeed.length) {
+    dispatch(actions.loadingFeed());
+  }
+
   return (
     <>
       <Div>
-        <Card maxWidth={400} lineHeight="2">
-          <Card.Body>
-            A card doesn't have padding by default. To add padding to a card,
-            you should wrap your content in a <strong>Card.Body</strong> which
-            has default <strong>padding</strong> of <strong>lg</strong>.
-          </Card.Body>
-        </Card>
-        <Microlink
-          url="https://instagram.com/p/Bu1-PpyHmCn/"
-          style={{
-            fontFamily: 'Nitti, "Microsoft YaHei", 微软雅黑, monospace',
-          }}
-        />
+        {newsFeed.map(article => (
+          <CardContainer maxWidth={400} lineHeight="2">
+            <Card.Cover width={1} src={article.urlToImage} />
+            <Card.Body>
+              <Text as="h4" fontWeight="bold" mt={0} mb="lg" color="dark.900">
+                {article.title}
+              </Text>
+              <Description>
+                <LineClamp>{article.description}</LineClamp>
+              </Description>
+            </Card.Body>
+          </CardContainer>
+        ))}
       </Div>
     </>
   );
 }
 
-const Div = styled.div``;
+const CardContainer = styled(Card)`
+  margin-bottom: 2rem;
+`;
+
+const Div = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-around;
+`;
+
+const Description = styled.div`
+  margin: 0 0 1em 0;
+  overflow: hidden;
+`;
+
+const LineClamp = styled.p`
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+`;

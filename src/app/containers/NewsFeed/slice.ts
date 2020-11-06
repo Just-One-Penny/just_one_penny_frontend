@@ -18,7 +18,7 @@ const newsFeedSlice = createSlice({
     },
     feedLoaded(state, action: PayloadAction<NewsFeedSuccess>) {
       state.loading = false;
-      state.articles = action.payload.newsFeed.articles;
+      state.articles = action.payload.articles;
     },
     feedError(state, action: PayloadAction<NewsFeedErrorType>) {
       state.loading = false;

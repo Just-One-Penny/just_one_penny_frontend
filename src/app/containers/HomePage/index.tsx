@@ -8,6 +8,7 @@ import { CharityList } from '../CharityList';
 import { AccountPaymentInfo } from '../AccountSettings/AccountPaymentInfo';
 import { UserBio } from '../AccountSettings/UserBio';
 import { charityApi } from 'api/charityApi';
+import { NewsFeed } from '../NewsFeed';
 
 interface LocationParams {
   search: SearchParams;
@@ -55,6 +56,7 @@ export function HomePage() {
           content="Charitable giving one penny at a time"
         />
       </Helmet>
+      <NewsFeed />
     </>
   );
 }
