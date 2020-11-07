@@ -30,6 +30,7 @@ const Title = styled.div`
   height: 3rem;
 `;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Description = styled.div`
   font-size: 0.875rem;
   color: ${p => p.theme.textSecondary};
