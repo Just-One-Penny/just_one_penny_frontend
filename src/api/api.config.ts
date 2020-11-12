@@ -11,6 +11,7 @@ export const apiConfig = {
     common: {
       'Cache-Control': 'no-cache, no-store, must-revalidate',
       Pragma: 'no-cache',
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
       Accept: 'application/json',
     },

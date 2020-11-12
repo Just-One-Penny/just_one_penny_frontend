@@ -26,8 +26,6 @@ export const CharityList = memo((props: Props) => {
   const charityList = useSelector(selectCharityList);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
-  //const dispatch = useDispatch();
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
 
@@ -65,7 +63,6 @@ export const CharityList = memo((props: Props) => {
           })}
         </tbody>
       </table>
-      {/*<Div>{t('')}</Div>*/}
     </>
   );
 });

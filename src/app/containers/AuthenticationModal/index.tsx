@@ -16,6 +16,8 @@ import {
   selectPassword,
 } from './selectors';
 import { authenticationModalSaga } from './saga';
+import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 
 interface Props {
   isSignup: boolean;
@@ -68,11 +70,33 @@ export function AuthenticationModal(props: Props) {
     }
   };
 
+  const onSignIn = response => {
+    console.log('onSignIn -> response', response);
+    dispatch(
+      actions.setAccessToken({
+        accessToken: response.accessToken,
+        provider: 'google',
+      }),
+    );
+  };
+
+  const responseFacebook = response => {
+    console.log('responseFacebook -> response', response);
+    dispatch(
+      actions.setAccessToken({
+        accessToken: response.accessToken,
+        provider: 'facebook',
+      }),
+    );
+  };
+
+  const onFailure = error => console.error('Im a bug', error);
+
   return (
-    <div className="container mx-auto px-4 h-full">
+    <div className="container mx-auto px-4 w-full h-full">
       <div className="flex content-center items-center justify-center h-full">
-        <div className="w-full lg:w-4/12 px-4">
-          <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
+        <div className="w-full px-4">
+          <div className="relative flex flex-col min-w-0 break-words w-full mb-2 border-0">
             <div className="rounded-t mb-0 px-6 py-6">
               <div className="text-center mb-3">
                 <h6 className="text-gray-600 text-sm font-bold">
@@ -80,14 +104,19 @@ export function AuthenticationModal(props: Props) {
                 </h6>
               </div>
               <div className="btn-wrapper text-center">
-                <button
-                  className="bg-white active:bg-gray-100 text-gray-800 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
-                  type="button"
-                  style={{ transition: 'all .15s ease' }}
-                >
-                  {/* INSERT SOCIAL AUTH BUTTON */}
-                  Google
-                </button>
+                <GoogleLogin
+                  clientId="470508940865-gh5b3bovpu7g2efbc896e7ahd3vi0etn.apps.googleusercontent.com"
+                  buttonText="Login"
+                  onSuccess={onSignIn}
+                  onFailure={onFailure}
+                  cookiePolicy={'single_host_origin'}
+                />
+                <FacebookLogin
+                  appId="767504717314327"
+                  autoLoad={true}
+                  fields="name,email,picture"
+                  callback={responseFacebook}
+                />
               </div>
               <hr className="mt-4 border-b-1 border-gray-400" />
             </div>
@@ -97,37 +126,41 @@ export function AuthenticationModal(props: Props) {
               </div>
               <form>
                 {isSignup ? (
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      First Name
-                    </label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-                      placeholder="First Name"
-                      value={firstName}
-                      onChange={onChange}
-                      style={{ transition: 'all .15s ease' }}
-                    />
-                    <label
-                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Last Name
-                    </label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-                      placeholder="Last Name"
-                      value={lastName}
-                      onChange={onChange}
-                      style={{ transition: 'all .15s ease' }}
-                    />
+                  <div>
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        First Name
+                      </label>
+                      <input
+                        type="text"
+                        name="firstName"
+                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                        placeholder="First Name"
+                        value={firstName}
+                        onChange={onChange}
+                        style={{ transition: 'all .15s ease' }}
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Last Name
+                      </label>
+                      <input
+                        type="text"
+                        name="lastName"
+                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                        placeholder="Last Name"
+                        value={lastName}
+                        onChange={onChange}
+                        style={{ transition: 'all .15s ease' }}
+                      />
+                    </div>
                   </div>
                 ) : null}
                 <div className="relative w-full mb-3">
@@ -196,7 +229,7 @@ export function AuthenticationModal(props: Props) {
             <div className="w-1/2">
               <span
                 onClick={e => e.preventDefault()}
-                className="text-gray-300 cursor-pointer"
+                className="text-black cursor-pointer"
               >
                 <small>Forgot password?</small>
               </span>
@@ -205,14 +238,14 @@ export function AuthenticationModal(props: Props) {
               {isSignup ? (
                 <span
                   onClick={() => setIsSignup(false)}
-                  className="text-gray-300 cursor-pointer"
+                  className="text-black cursor-pointer"
                 >
                   <small>Already have an account?</small>
                 </span>
               ) : (
                 <span
                   onClick={() => setIsSignup(true)}
-                  className="text-gray-300 cursor-pointer"
+                  className="text-black cursor-pointer"
                 >
                   <small>Create new account</small>
                 </span>
@@ -221,6 +254,11 @@ export function AuthenticationModal(props: Props) {
           </div>
         </div>
       </div>
+      <script
+        src="https://apis.google.com/js/platform.js?onload=renderButton"
+        async
+        defer
+      ></script>
     </div>
   );
 }

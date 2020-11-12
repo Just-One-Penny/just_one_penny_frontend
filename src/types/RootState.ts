@@ -5,6 +5,9 @@ import { AccountSettingsState } from 'app/containers/AccountSettings/types';
 import { DonationModalState } from 'app/containers/DonationModal/types';
 import { AuthenticationModalState } from 'app/containers/AuthenticationModal/types';
 
+import { CharityDisplayState } from 'app/containers/CharityDisplay/types';
+import { NewsFeedState } from 'app/containers/NewsFeed/types';
+import { StripeSuccessState } from 'app/containers/StripeSuccess/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /*
@@ -14,9 +17,12 @@ import { AuthenticationModalState } from 'app/containers/AuthenticationModal/typ
 export interface RootState {
   theme?: ThemeState;
   // authentication?: AuthenticationState;
-  charityList?: CharityListState;
   accountSettings?: AccountSettingsState;
   donationModal?: DonationModalState;
+  charityList?: CharityListState;
+  charityDisplay?: CharityDisplayState;
   authenticationModal?: AuthenticationModalState;
+  newsFeed?: NewsFeedState;
+  stripeSuccess?: StripeSuccessState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

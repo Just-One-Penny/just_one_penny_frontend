@@ -4,6 +4,7 @@ import {
   ContainerState,
   AuthenticationModalErrorType,
   AuthenticationModalSuccess,
+  SocialAuthSuccess,
 } from './types';
 
 // The initial state of the AuthenticationModal container
@@ -12,6 +13,8 @@ export const initialState: ContainerState = {
   firstName: '',
   lastName: '',
   password: '',
+  accessToken: '',
+  provider: '',
   loading: false,
   error: null,
 };
@@ -37,6 +40,12 @@ const authenticationModalSlice = createSlice({
       state.error = null;
     },
     loginUser(state) {
+      state.loading = true;
+      state.error = null;
+    },
+    setAccessToken(state, action: PayloadAction<SocialAuthSuccess>) {
+      state.accessToken = action.payload.accessToken;
+      state.provider = action.payload.provider;
       state.loading = true;
       state.error = null;
     },

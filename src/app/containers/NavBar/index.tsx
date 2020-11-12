@@ -4,7 +4,6 @@ import { Logo } from './Logo';
 import { MobileMenu } from './MobileMenu';
 import { StyleConstants } from 'styles/StyleConstants';
 import { Nav } from './Nav';
-import { PageWrapper } from '../../components/PageWrapper';
 
 export function NavBar() {
   return (
@@ -49,7 +48,7 @@ const Wrapper = styled.header`
         'rgba$1,0.75)',
       )};
   }
-  ${PageWrapper} {
+  ${NavWrapper} {
     display: flex;
     align-items: center;
     justify-content: space-between;

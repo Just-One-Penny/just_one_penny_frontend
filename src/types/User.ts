@@ -1,10 +1,17 @@
+import { Charity } from './Charity';
+
+export interface Auth {
+  user: User;
+}
+
 export interface User {
   id: string;
   email: string;
   fullName: string;
-  services: string;
-  role: string;
-  picture: string;
+  services?: string;
+  role?: string;
+  charities: Charity[];
+  picture?: string;
 }
 
 export interface UpdatingUser {
@@ -30,4 +37,8 @@ export interface Credentials {
   email: string;
   password: string;
   fullName?: string;
+}
+
+export interface SocialAuth {
+  access_token: string;
 }
