@@ -26,9 +26,7 @@ export const Modal = memo((props: Props) => {
   const modal = useModalState();
   return (
     <>
-      <UIModal.Trigger as={Button} {...modal}>
-        {props.buttonElement}
-      </UIModal.Trigger>
+      <UIModal.Trigger {...modal}>{props.buttonElement}</UIModal.Trigger>
       <UIModal {...modal} size={props.size}>
         <UIModal.Content>{props.modalBody}</UIModal.Content>
       </UIModal>

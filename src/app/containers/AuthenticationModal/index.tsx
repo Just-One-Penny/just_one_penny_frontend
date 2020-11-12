@@ -81,7 +81,6 @@ export function AuthenticationModal(props: Props) {
   };
 
   const responseFacebook = response => {
-    console.log('responseFacebook -> response', response);
     dispatch(
       actions.setAccessToken({
         accessToken: response.accessToken,
