@@ -62,4 +62,5 @@ const Item = styled.li`
 const Link = styled.a`
   color: #333333;
   opacity: 1;
+  font-weight: 900;
 `;
