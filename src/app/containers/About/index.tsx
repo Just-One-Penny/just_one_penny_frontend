@@ -159,8 +159,8 @@ const HeroSection = styled.header`
   background-size: cover;
   background-position: center;
 
-  @media only screen and (min-resolution: 192dpi) and (min-width: 325px),
-    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 325px) {
+  @media only screen and (min-resolution: 192dpi) and (min-width: 320px),
+    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 320px) {
     background-image: url(${MobileAboutHeroImage2x});
   }
 
