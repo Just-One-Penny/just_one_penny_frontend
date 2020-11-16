@@ -14393,6 +14393,7 @@ video {
     transform: scale(1);
     opacity: 1;
   }
+}
 
   75%, 100% {
     transform: scale(2);
@@ -14404,6 +14405,7 @@ video {
   0%, 100% {
     opacity: 1;
   }
+}
 
   50% {
     opacity: .5;
@@ -14415,6 +14417,7 @@ video {
     transform: translateY(-25%);
     animation-timing-function: cubic-bezier(0.8,0,1,1);
   }
+}
 
   50% {
     transform: translateY(0);
@@ -60684,18 +60687,6 @@ video {
     border-radius: 0.5rem;
   }
 
-  .xl\:rounded-xl {
-    border-radius: 0.75rem;
-  }
-
-  .xl\:rounded-2xl {
-    border-radius: 1rem;
-  }
-
-  .xl\:rounded-3xl {
-    border-radius: 1.5rem;
-  }
-
   .xl\:rounded-full {
     border-radius: 9999px;
   }
@@ -60800,66 +60791,6 @@ video {
     border-bottom-left-radius: 0.5rem;
   }
 
-  .xl\:rounded-t-xl {
-    border-top-left-radius: 0.75rem;
-    border-top-right-radius: 0.75rem;
-  }
-
-  .xl\:rounded-r-xl {
-    border-top-right-radius: 0.75rem;
-    border-bottom-right-radius: 0.75rem;
-  }
-
-  .xl\:rounded-b-xl {
-    border-bottom-right-radius: 0.75rem;
-    border-bottom-left-radius: 0.75rem;
-  }
-
-  .xl\:rounded-l-xl {
-    border-top-left-radius: 0.75rem;
-    border-bottom-left-radius: 0.75rem;
-  }
-
-  .xl\:rounded-t-2xl {
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-  }
-
-  .xl\:rounded-r-2xl {
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-  }
-
-  .xl\:rounded-b-2xl {
-    border-bottom-right-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-  }
-
-  .xl\:rounded-l-2xl {
-    border-top-left-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-  }
-
-  .xl\:rounded-t-3xl {
-    border-top-left-radius: 1.5rem;
-    border-top-right-radius: 1.5rem;
-  }
-
-  .xl\:rounded-r-3xl {
-    border-top-right-radius: 1.5rem;
-    border-bottom-right-radius: 1.5rem;
-  }
-
-  .xl\:rounded-b-3xl {
-    border-bottom-right-radius: 1.5rem;
-    border-bottom-left-radius: 1.5rem;
-  }
-
-  .xl\:rounded-l-3xl {
-    border-top-left-radius: 1.5rem;
-    border-bottom-left-radius: 1.5rem;
-  }
-
   .xl\:rounded-t-full {
     border-top-left-radius: 9999px;
     border-top-right-radius: 9999px;
@@ -60958,54 +60889,6 @@ video {
 
   .xl\:rounded-bl-lg {
     border-bottom-left-radius: 0.5rem;
-  }
-
-  .xl\:rounded-tl-xl {
-    border-top-left-radius: 0.75rem;
-  }
-
-  .xl\:rounded-tr-xl {
-    border-top-right-radius: 0.75rem;
-  }
-
-  .xl\:rounded-br-xl {
-    border-bottom-right-radius: 0.75rem;
-  }
-
-  .xl\:rounded-bl-xl {
-    border-bottom-left-radius: 0.75rem;
-  }
-
-  .xl\:rounded-tl-2xl {
-    border-top-left-radius: 1rem;
-  }
-
-  .xl\:rounded-tr-2xl {
-    border-top-right-radius: 1rem;
-  }
-
-  .xl\:rounded-br-2xl {
-    border-bottom-right-radius: 1rem;
-  }
-
-  .xl\:rounded-bl-2xl {
-    border-bottom-left-radius: 1rem;
-  }
-
-  .xl\:rounded-tl-3xl {
-    border-top-left-radius: 1.5rem;
-  }
-
-  .xl\:rounded-tr-3xl {
-    border-top-right-radius: 1.5rem;
-  }
-
-  .xl\:rounded-br-3xl {
-    border-bottom-right-radius: 1.5rem;
-  }
-
-  .xl\:rounded-bl-3xl {
-    border-bottom-left-radius: 1.5rem;
   }
 
   .xl\:rounded-tl-full {
@@ -61280,74 +61163,6 @@ video {
     flex-wrap: nowrap;
   }
 
-  .xl\:place-items-auto {
-    place-items: auto;
-  }
-
-  .xl\:place-items-start {
-    place-items: start;
-  }
-
-  .xl\:place-items-end {
-    place-items: end;
-  }
-
-  .xl\:place-items-center {
-    place-items: center;
-  }
-
-  .xl\:place-items-stretch {
-    place-items: stretch;
-  }
-
-  .xl\:place-content-center {
-    place-content: center;
-  }
-
-  .xl\:place-content-start {
-    place-content: start;
-  }
-
-  .xl\:place-content-end {
-    place-content: end;
-  }
-
-  .xl\:place-content-between {
-    place-content: space-between;
-  }
-
-  .xl\:place-content-around {
-    place-content: space-around;
-  }
-
-  .xl\:place-content-evenly {
-    place-content: space-evenly;
-  }
-
-  .xl\:place-content-stretch {
-    place-content: stretch;
-  }
-
-  .xl\:place-self-auto {
-    place-self: auto;
-  }
-
-  .xl\:place-self-start {
-    place-self: start;
-  }
-
-  .xl\:place-self-end {
-    place-self: end;
-  }
-
-  .xl\:place-self-center {
-    place-self: center;
-  }
-
-  .xl\:place-self-stretch {
-    place-self: stretch;
-  }
-
   .xl\:items-start {
     align-items: flex-start;
   }
@@ -61368,30 +61183,6 @@ video {
     align-items: stretch;
   }
 
-  .xl\:content-center {
-    align-content: center;
-  }
-
-  .xl\:content-start {
-    align-content: flex-start;
-  }
-
-  .xl\:content-end {
-    align-content: flex-end;
-  }
-
-  .xl\:content-between {
-    align-content: space-between;
-  }
-
-  .xl\:content-around {
-    align-content: space-around;
-  }
-
-  .xl\:content-evenly {
-    align-content: space-evenly;
-  }
-
   .xl\:self-auto {
     align-self: auto;
   }
@@ -61410,26 +61201,6 @@ video {
 
   .xl\:self-stretch {
     align-self: stretch;
-  }
-
-  .xl\:justify-items-auto {
-    justify-items: auto;
-  }
-
-  .xl\:justify-items-start {
-    justify-items: start;
-  }
-
-  .xl\:justify-items-end {
-    justify-items: end;
-  }
-
-  .xl\:justify-items-center {
-    justify-items: center;
-  }
-
-  .xl\:justify-items-stretch {
-    justify-items: stretch;
   }
 
   .xl\:justify-start {
@@ -61456,24 +61227,24 @@ video {
     justify-content: space-evenly;
   }
 
-  .xl\:justify-self-auto {
-    justify-self: auto;
+  .xl\:content-center {
+    align-content: center;
   }
 
-  .xl\:justify-self-start {
-    justify-self: start;
+  .xl\:content-start {
+    align-content: flex-start;
   }
 
-  .xl\:justify-self-end {
-    justify-self: end;
+  .xl\:content-end {
+    align-content: flex-end;
   }
 
-  .xl\:justify-self-center {
-    justify-self: center;
+  .xl\:content-between {
+    align-content: space-between;
   }
 
-  .xl\:justify-self-stretch {
-    justify-self: stretch;
+  .xl\:content-around {
+    align-content: space-around;
   }
 
   .xl\:flex-1 {
@@ -63275,33 +63046,11 @@ video {
   }
 
   .xl\:outline-none {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
-
-  .xl\:outline-white {
-    outline: 2px dotted white;
-    outline-offset: 2px;
-  }
-
-  .xl\:outline-black {
-    outline: 2px dotted black;
-    outline-offset: 2px;
+    outline: 0;
   }
 
   .xl\:focus\:outline-none:focus {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
-
-  .xl\:focus\:outline-white:focus {
-    outline: 2px dotted white;
-    outline-offset: 2px;
-  }
-
-  .xl\:focus\:outline-black:focus {
-    outline: 2px dotted black;
-    outline-offset: 2px;
+    outline: 0;
   }
 
   .xl\:overflow-auto {
@@ -67210,51 +66959,6 @@ video {
     -moz-osx-font-smoothing: auto;
   }
 
-  .xl\:ordinal, .xl\:slashed-zero, .xl\:lining-nums, .xl\:oldstyle-nums, .xl\:proportional-nums, .xl\:tabular-nums, .xl\:diagonal-fractions, .xl\:stacked-fractions {
-    --font-variant-numeric-ordinal: var(--tailwind-empty,/*!*/ /*!*/);
-    --font-variant-numeric-slashed-zero: var(--tailwind-empty,/*!*/ /*!*/);
-    --font-variant-numeric-figure: var(--tailwind-empty,/*!*/ /*!*/);
-    --font-variant-numeric-spacing: var(--tailwind-empty,/*!*/ /*!*/);
-    --font-variant-numeric-fraction: var(--tailwind-empty,/*!*/ /*!*/);
-    font-variant-numeric: var(--font-variant-numeric-ordinal) var(--font-variant-numeric-slashed-zero) var(--font-variant-numeric-figure) var(--font-variant-numeric-spacing) var(--font-variant-numeric-fraction);
-  }
-
-  .xl\:normal-nums {
-    font-variant-numeric: normal;
-  }
-
-  .xl\:ordinal {
-    --font-variant-numeric-ordinal: ordinal;
-  }
-
-  .xl\:slashed-zero {
-    --font-variant-numeric-slashed-zero: slashed-zero;
-  }
-
-  .xl\:lining-nums {
-    --font-variant-numeric-figure: lining-nums;
-  }
-
-  .xl\:oldstyle-nums {
-    --font-variant-numeric-figure: oldstyle-nums;
-  }
-
-  .xl\:proportional-nums {
-    --font-variant-numeric-spacing: proportional-nums;
-  }
-
-  .xl\:tabular-nums {
-    --font-variant-numeric-spacing: tabular-nums;
-  }
-
-  .xl\:diagonal-fractions {
-    --font-variant-numeric-fraction: diagonal-fractions;
-  }
-
-  .xl\:stacked-fractions {
-    --font-variant-numeric-fraction: stacked-fractions;
-  }
-
   .xl\:tracking-tighter {
     letter-spacing: -0.05em;
   }
@@ -67352,13 +67056,11 @@ video {
   }
 
   .xl\:break-normal {
-    word-wrap: normal;
     overflow-wrap: normal;
     word-break: normal;
   }
 
   .xl\:break-words {
-    word-wrap: break-word;
     overflow-wrap: break-word;
   }
 
@@ -67945,22 +67647,6 @@ video {
     grid-template-columns: none;
   }
 
-  .xl\:auto-cols-auto {
-    grid-auto-columns: auto;
-  }
-
-  .xl\:auto-cols-min {
-    grid-auto-columns: min-content;
-  }
-
-  .xl\:auto-cols-max {
-    grid-auto-columns: max-content;
-  }
-
-  .xl\:auto-cols-fr {
-    grid-auto-columns: minmax(0, 1fr);
-  }
-
   .xl\:col-auto {
     grid-column: auto;
   }
@@ -68011,10 +67697,6 @@ video {
 
   .xl\:col-span-12 {
     grid-column: span 12 / span 12;
-  }
-
-  .xl\:col-span-full {
-    grid-column: 1 / -1;
   }
 
   .xl\:col-start-1 {
@@ -68157,22 +67839,6 @@ video {
     grid-template-rows: none;
   }
 
-  .xl\:auto-rows-auto {
-    grid-auto-rows: auto;
-  }
-
-  .xl\:auto-rows-min {
-    grid-auto-rows: min-content;
-  }
-
-  .xl\:auto-rows-max {
-    grid-auto-rows: max-content;
-  }
-
-  .xl\:auto-rows-fr {
-    grid-auto-rows: minmax(0, 1fr);
-  }
-
   .xl\:row-auto {
     grid-row: auto;
   }
@@ -68199,10 +67865,6 @@ video {
 
   .xl\:row-span-6 {
     grid-row: span 6 / span 6;
-  }
-
-  .xl\:row-span-full {
-    grid-row: 1 / -1;
   }
 
   .xl\:row-start-1 {
@@ -68714,26 +68376,6 @@ video {
     --transform-rotate: 0;
   }
 
-  .xl\:rotate-1 {
-    --transform-rotate: 1deg;
-  }
-
-  .xl\:rotate-2 {
-    --transform-rotate: 2deg;
-  }
-
-  .xl\:rotate-3 {
-    --transform-rotate: 3deg;
-  }
-
-  .xl\:rotate-6 {
-    --transform-rotate: 6deg;
-  }
-
-  .xl\:rotate-12 {
-    --transform-rotate: 12deg;
-  }
-
   .xl\:rotate-45 {
     --transform-rotate: 45deg;
   }
@@ -68758,48 +68400,8 @@ video {
     --transform-rotate: -45deg;
   }
 
-  .xl\:-rotate-12 {
-    --transform-rotate: -12deg;
-  }
-
-  .xl\:-rotate-6 {
-    --transform-rotate: -6deg;
-  }
-
-  .xl\:-rotate-3 {
-    --transform-rotate: -3deg;
-  }
-
-  .xl\:-rotate-2 {
-    --transform-rotate: -2deg;
-  }
-
-  .xl\:-rotate-1 {
-    --transform-rotate: -1deg;
-  }
-
   .xl\:hover\:rotate-0:hover {
     --transform-rotate: 0;
-  }
-
-  .xl\:hover\:rotate-1:hover {
-    --transform-rotate: 1deg;
-  }
-
-  .xl\:hover\:rotate-2:hover {
-    --transform-rotate: 2deg;
-  }
-
-  .xl\:hover\:rotate-3:hover {
-    --transform-rotate: 3deg;
-  }
-
-  .xl\:hover\:rotate-6:hover {
-    --transform-rotate: 6deg;
-  }
-
-  .xl\:hover\:rotate-12:hover {
-    --transform-rotate: 12deg;
   }
 
   .xl\:hover\:rotate-45:hover {
@@ -68826,48 +68428,8 @@ video {
     --transform-rotate: -45deg;
   }
 
-  .xl\:hover\:-rotate-12:hover {
-    --transform-rotate: -12deg;
-  }
-
-  .xl\:hover\:-rotate-6:hover {
-    --transform-rotate: -6deg;
-  }
-
-  .xl\:hover\:-rotate-3:hover {
-    --transform-rotate: -3deg;
-  }
-
-  .xl\:hover\:-rotate-2:hover {
-    --transform-rotate: -2deg;
-  }
-
-  .xl\:hover\:-rotate-1:hover {
-    --transform-rotate: -1deg;
-  }
-
   .xl\:focus\:rotate-0:focus {
     --transform-rotate: 0;
-  }
-
-  .xl\:focus\:rotate-1:focus {
-    --transform-rotate: 1deg;
-  }
-
-  .xl\:focus\:rotate-2:focus {
-    --transform-rotate: 2deg;
-  }
-
-  .xl\:focus\:rotate-3:focus {
-    --transform-rotate: 3deg;
-  }
-
-  .xl\:focus\:rotate-6:focus {
-    --transform-rotate: 6deg;
-  }
-
-  .xl\:focus\:rotate-12:focus {
-    --transform-rotate: 12deg;
   }
 
   .xl\:focus\:rotate-45:focus {
@@ -68892,26 +68454,6 @@ video {
 
   .xl\:focus\:-rotate-45:focus {
     --transform-rotate: -45deg;
-  }
-
-  .xl\:focus\:-rotate-12:focus {
-    --transform-rotate: -12deg;
-  }
-
-  .xl\:focus\:-rotate-6:focus {
-    --transform-rotate: -6deg;
-  }
-
-  .xl\:focus\:-rotate-3:focus {
-    --transform-rotate: -3deg;
-  }
-
-  .xl\:focus\:-rotate-2:focus {
-    --transform-rotate: -2deg;
-  }
-
-  .xl\:focus\:-rotate-1:focus {
-    --transform-rotate: -1deg;
   }
 
   .xl\:translate-x-0 {
@@ -69902,14 +69444,6 @@ video {
     --transform-skew-x: 0;
   }
 
-  .xl\:skew-x-1 {
-    --transform-skew-x: 1deg;
-  }
-
-  .xl\:skew-x-2 {
-    --transform-skew-x: 2deg;
-  }
-
   .xl\:skew-x-3 {
     --transform-skew-x: 3deg;
   }
@@ -69934,24 +69468,8 @@ video {
     --transform-skew-x: -3deg;
   }
 
-  .xl\:-skew-x-2 {
-    --transform-skew-x: -2deg;
-  }
-
-  .xl\:-skew-x-1 {
-    --transform-skew-x: -1deg;
-  }
-
   .xl\:skew-y-0 {
     --transform-skew-y: 0;
-  }
-
-  .xl\:skew-y-1 {
-    --transform-skew-y: 1deg;
-  }
-
-  .xl\:skew-y-2 {
-    --transform-skew-y: 2deg;
   }
 
   .xl\:skew-y-3 {
@@ -69978,24 +69496,8 @@ video {
     --transform-skew-y: -3deg;
   }
 
-  .xl\:-skew-y-2 {
-    --transform-skew-y: -2deg;
-  }
-
-  .xl\:-skew-y-1 {
-    --transform-skew-y: -1deg;
-  }
-
   .xl\:hover\:skew-x-0:hover {
     --transform-skew-x: 0;
-  }
-
-  .xl\:hover\:skew-x-1:hover {
-    --transform-skew-x: 1deg;
-  }
-
-  .xl\:hover\:skew-x-2:hover {
-    --transform-skew-x: 2deg;
   }
 
   .xl\:hover\:skew-x-3:hover {
@@ -70022,24 +69524,8 @@ video {
     --transform-skew-x: -3deg;
   }
 
-  .xl\:hover\:-skew-x-2:hover {
-    --transform-skew-x: -2deg;
-  }
-
-  .xl\:hover\:-skew-x-1:hover {
-    --transform-skew-x: -1deg;
-  }
-
   .xl\:hover\:skew-y-0:hover {
     --transform-skew-y: 0;
-  }
-
-  .xl\:hover\:skew-y-1:hover {
-    --transform-skew-y: 1deg;
-  }
-
-  .xl\:hover\:skew-y-2:hover {
-    --transform-skew-y: 2deg;
   }
 
   .xl\:hover\:skew-y-3:hover {
@@ -70066,24 +69552,8 @@ video {
     --transform-skew-y: -3deg;
   }
 
-  .xl\:hover\:-skew-y-2:hover {
-    --transform-skew-y: -2deg;
-  }
-
-  .xl\:hover\:-skew-y-1:hover {
-    --transform-skew-y: -1deg;
-  }
-
   .xl\:focus\:skew-x-0:focus {
     --transform-skew-x: 0;
-  }
-
-  .xl\:focus\:skew-x-1:focus {
-    --transform-skew-x: 1deg;
-  }
-
-  .xl\:focus\:skew-x-2:focus {
-    --transform-skew-x: 2deg;
   }
 
   .xl\:focus\:skew-x-3:focus {
@@ -70110,24 +69580,8 @@ video {
     --transform-skew-x: -3deg;
   }
 
-  .xl\:focus\:-skew-x-2:focus {
-    --transform-skew-x: -2deg;
-  }
-
-  .xl\:focus\:-skew-x-1:focus {
-    --transform-skew-x: -1deg;
-  }
-
   .xl\:focus\:skew-y-0:focus {
     --transform-skew-y: 0;
-  }
-
-  .xl\:focus\:skew-y-1:focus {
-    --transform-skew-y: 1deg;
-  }
-
-  .xl\:focus\:skew-y-2:focus {
-    --transform-skew-y: 2deg;
   }
 
   .xl\:focus\:skew-y-3:focus {
@@ -70152,14 +69606,6 @@ video {
 
   .xl\:focus\:-skew-y-3:focus {
     --transform-skew-y: -3deg;
-  }
-
-  .xl\:focus\:-skew-y-2:focus {
-    --transform-skew-y: -2deg;
-  }
-
-  .xl\:focus\:-skew-y-1:focus {
-    --transform-skew-y: -1deg;
   }
 
   .xl\:transition-none {

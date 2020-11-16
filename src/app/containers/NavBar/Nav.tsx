@@ -20,7 +20,7 @@ export function Nav() {
   return (
     <Wrapper>
       <div>
-        <a onClick={_toggleMenu} href="#">
+        <a onClick={_toggleMenu} href="www.google.com">
           Charities
           <img className="icon" alt="V" src={icon} />
         </a>

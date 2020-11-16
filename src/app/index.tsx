@@ -20,8 +20,8 @@ import { About } from './containers/About/Loadable';
 import { ContactUs } from './containers/ContactUs/Loadable';
 import { CharityDisplay } from './containers/CharityDisplay';
 import { CharitySignup } from './containers/CharitySignup';
-import { NavBar } from './containers/NavBar';
 import { Footer } from './components/Footer';
+import { NavBar } from './containers/NavBar';
 import { StripeSuccess } from './containers/StripeSuccess/Loadable';
 import { PageWrapper } from './components/PageWrapper';
 
@@ -34,6 +34,7 @@ export function App() {
           content="A revolutionary micro-giving platform."
         />
       </Helmet>
+      <NavBar />
 
       <NavBar />
       <PageWrapper>

@@ -4,6 +4,8 @@ import {
   selectPassword,
   selectFirstName,
   selectLastName,
+  selectAccessToken,
+  selectProvider,
 } from './selectors';
 import {
   AuthenticationModalErrorType,
@@ -81,11 +83,31 @@ export function* loginUser() {
     userApi.userLogin,
     credentials,
   );
-  console.log('function*loginUser -> response', response);
+
   localStorage.setItem(authStorageKey, response.token.accessToken);
+}
+
+/**
+ * Facebook Auth
+ */
+export function* socialAuth() {
+  const access_token: string = yield select(selectAccessToken);
+  const provider: string = yield select(selectProvider);
+  const func =
+    provider === 'facebook' ? userApi.userAuthFacebook : userApi.userAuthGoogle;
+
+  try {
+    const response: AuthenticationModalSuccess = yield call(func, {
+      access_token,
+    });
+    localStorage.setItem(authStorageKey, response.token.accessToken);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export function* authenticationModalSaga() {
   yield takeEvery(actions.registerUser.type, registerUser);
   yield takeEvery(actions.loginUser.type, loginUser);
+  yield takeEvery(actions.setAccessToken.type, socialAuth);
 }

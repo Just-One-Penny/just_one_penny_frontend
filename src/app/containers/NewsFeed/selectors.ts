@@ -5,7 +5,7 @@ import { initialState } from './slice';
 
 const selectDomain = (state: RootState) => state.newsFeed || initialState;
 
-export const selectNewsFeed = createSelector(
+export const selectArticles = createSelector(
   [selectDomain],
-  newsFeedState => newsFeedState,
+  newsFeedState => newsFeedState.articles,
 );

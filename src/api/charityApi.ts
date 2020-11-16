@@ -1,5 +1,4 @@
-// eslint-disable-next-line
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Api } from './api';
 import { apiConfig } from './api.config';
 import { Charity, StripeCode } from 'types/Charity';
