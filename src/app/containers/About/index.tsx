@@ -8,13 +8,7 @@ import React, { memo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components/macro';
-import { StyleConstants } from 'styles/StyleConstants';
-
-import { Search } from '../../components/Search';
-import AboutHeroImage1x from './assets/AboutHeroImage1x.png';
-import AboutHeroImage2x from './assets/AboutHeroImage2x.png';
-import MobileAboutHeroImage1x from './assets/MobileAboutHeroImage1x.png';
-import MobileAboutHeroImage2x from './assets/MobileAboutHeroImage2x.png';
+import { HeroSection } from '../../components/HeroSection';
 
 interface Props {}
 
@@ -29,9 +23,7 @@ export const About = memo((props: Props) => {
         <meta name="description" content="About Just One Penny" />
       </Helmet>
 
-      <HeroSection>
-        <Search />
-      </HeroSection>
+      <HeroSection />
 
       <AboutSection>
         <AboutContent>
@@ -152,30 +144,6 @@ export const About = memo((props: Props) => {
   );
 });
 
-const HeroSection = styled.header`
-  width: 100%;
-  height: 152px;
-  background-image: url(${MobileAboutHeroImage1x});
-  background-size: cover;
-  background-position: center;
-
-  @media only screen and (min-resolution: 192dpi) and (min-width: 320px),
-    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 320px) {
-    background-image: url(${MobileAboutHeroImage2x});
-  }
-
-  @media only screen and (min-width: 476px) {
-    margin-top: -${StyleConstants.NAV_BAR_HEIGHT};
-    background-image: url(${AboutHeroImage1x});
-  }
-
-  @media only screen and (min-resolution: 192dpi) and (min-width: 476px),
-    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 476px),
-    only screen and (min-width: 1920px) {
-    background-image: url(${AboutHeroImage2x});
-  }
-`;
-
 const AboutSection = styled.section`
   background-color: #f2f2f2;
   display: flex;
@@ -184,7 +152,7 @@ const AboutSection = styled.section`
 `;
 
 const AboutContent = styled.div`
-  flex: 0 0 50%;
+  flex: 0 0 80%;
   margin-top: 4rem;
   margin-bottom: 6rem;
   padding: 1.75rem 6rem;

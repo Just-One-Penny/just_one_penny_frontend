@@ -1,19 +1,24 @@
 /**
  *
- * Search
+ * HeroSection
  *
  */
 import React from 'react';
-import styled, { css } from 'styled-components/macro';
+import styled from 'styled-components/macro';
+import { StyleConstants } from 'styles/StyleConstants';
 import { Button } from '../Button';
+import AboutHeroImage1x from './assets/AboutHeroImage1x.png';
+import AboutHeroImage2x from './assets/AboutHeroImage2x.png';
+import MobileAboutHeroImage1x from './assets/MobileAboutHeroImage1x.png';
+import MobileAboutHeroImage2x from './assets/MobileAboutHeroImage2x.png';
 
-export const Search = props => {
+interface Props {}
+
+export function HeroSection(props: Props) {
   return (
-    <Div {...props}>
-      <p>
+    <HeroDiv>
+      <SearchWrapper>
         <Input name="Charity" id="charity" placeholder="Search Charity Name" />
-      </p>
-      <Wrapper>
         <Select name="Categories" id="categories">
           <option value="" hidden>
             Search By category
@@ -24,31 +29,54 @@ export const Search = props => {
           <option value="4">Human Outreach</option>
         </Select>
         <Button btnStyle={'primary'}>Find Charity</Button>
-      </Wrapper>
-    </Div>
+      </SearchWrapper>
+    </HeroDiv>
   );
-};
+}
 
-const Div = styled.div`
+const HeroDiv = styled.div`
+  width: 100%;
+  height: 150px;
+  background-image: url(${MobileAboutHeroImage1x});
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media only screen and (min-resolution: 192dpi) and (min-width: 320px),
+    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 320px) {
+    background-image: url(${MobileAboutHeroImage2x});
+  }
+
+  @media only screen and (min-width: 476px) {
+    margin-top: -${StyleConstants.NAV_BAR_HEIGHT};
+    background-image: url(${AboutHeroImage1x});
+  }
+
+  @media only screen and (min-resolution: 192dpi) and (min-width: 476px),
+    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 476px),
+    only screen and (min-width: 1920px) {
+    background-image: url(${AboutHeroImage2x});
+  }
+`;
+
+const SearchWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
   width: 70%;
+  margin-top: 4rem;
   @media only screen and (max-width: 475px) {
     width: 100%;
   }
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  @media only screen and (max-width: 475px) {
-    flex-direction: column;
-    align-items: center;
-  }
-`;
 const Input = styled.input`
   color: ${p => p.theme.textSecondary};
-  width: 100%;
+  flex: 3;
   height: 3rem;
+  margin-right: 2rem;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #ffffff;
   border-radius: 50px;
@@ -73,8 +101,9 @@ const Input = styled.input`
   }
 `;
 const Select = styled.select`
-  width: 53%;
+  flex: 1;
   height: 3rem;
+  margin-right: 2rem;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #ffffff;
   border-radius: 25px;
