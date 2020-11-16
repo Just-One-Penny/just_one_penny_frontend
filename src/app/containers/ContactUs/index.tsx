@@ -14,10 +14,13 @@ interface Props {}
 export const ContactUs = memo((props: Props) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [organization, setOrganization] = useState('');
   const [message, setMessage] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = evt => {
     evt.preventDefault();
+    setSubmitted(true);
     return 1;
   };
   return (
@@ -34,43 +37,60 @@ export const ContactUs = memo((props: Props) => {
             past transaction, or for any other help, please fill out the
             following contact form and we’ll get back to you as soon as we can.
           </B1>
-          <FormBox>
-            <form id="contact-us" method="POST" onSubmit={handleSubmit}>
-              <FormFieldContainer>
-                <Label htmlFor="name">Full Name</Label>
-                <Input
-                  name="name"
-                  type="text"
-                  value={name}
-                  placeholder="First and Last Name"
-                  onChange={e => setName(e.target.value)}
-                  required
-                />
-              </FormFieldContainer>
-              <FormFieldContainer>
-                <Label htmlFor="inputEmail">Email</Label>
-                <Input
-                  name="inputEmail"
-                  type="email"
-                  value={email}
-                  placeholder="email@example.com"
-                  onChange={e => setEmail(e.target.value)}
-                  required
-                />
-              </FormFieldContainer>
-              <FormFieldContainer>
-                <Label htmlFor="messageBody">Message</Label>
-                <Textarea
-                  name="messageBody"
-                  value={message}
-                  placeholder="How can we help?"
-                  onChange={e => setMessage(e.target.value)}
-                  required
-                />
-              </FormFieldContainer>
-              <Button btnStyle={'primary'}>Submit</Button>
-            </form>
-          </FormBox>
+          {!submitted ? (
+            <FormBox>
+              <form id="contact-us" method="POST" onSubmit={handleSubmit}>
+                <FormFieldContainer>
+                  <Label htmlFor="name">Full Name</Label>
+                  <Input
+                    name="name"
+                    type="text"
+                    value={name}
+                    placeholder="First and Last Name"
+                    onChange={e => setName(e.target.value)}
+                    required
+                  />
+                </FormFieldContainer>
+                <FormFieldContainer>
+                  <Label htmlFor="inputEmail">Email</Label>
+                  <Input
+                    name="inputEmail"
+                    type="email"
+                    value={email}
+                    placeholder="email@example.com"
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                  />
+                </FormFieldContainer>
+                <FormFieldContainer>
+                  <Label htmlFor="organization">Organization (optional)</Label>
+                  <Input
+                    name="organization"
+                    type="name"
+                    value={organization}
+                    placeholder="Organization Name"
+                    onChange={e => setOrganization(e.target.value)}
+                    required
+                  />
+                </FormFieldContainer>
+                <FormFieldContainer>
+                  <Label htmlFor="messageBody">Message</Label>
+                  <Textarea
+                    name="messageBody"
+                    value={message}
+                    placeholder="How can we help?"
+                    onChange={e => setMessage(e.target.value)}
+                    required
+                  />
+                </FormFieldContainer>
+                <Button btnStyle={'primary'}>Submit</Button>
+              </form>
+            </FormBox>
+          ) : (
+            <SubmitContainer>
+              Message Sent. We'll get back to you soon.
+            </SubmitContainer>
+          )}
         </MainBox>
       </Container>
     </>
@@ -79,19 +99,32 @@ export const ContactUs = memo((props: Props) => {
 
 const Container = styled.div`
   display: flex;
-  width: 100%;
-  height: 100%;
   align-items: center;
-  background: var(---f2f2f2-light) 0% 0% no-repeat padding-box;
-  background: #f2f2f2 0% 0% no-repeat padding-box;
   flex-flow: column;
+  padding-bottom: 10px;
+`;
+
+const MainBox = styled.div`
+  display: flex;
+  flex-flow: column;
+  max-width: 704px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 5px;
+  opacity: 1;
+
+  @media (min-width: 476px) {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  @media (max-width: 475px) {
+    padding: 1rem;
+    margin: 1rem;
+  }
 `;
 
 const PageHeading = styled.div`
   flex-direction: row;
-  margin-left: 2.8rem;
-  margin-top: 1.3rem;
-  margin-bottom: 1.3rem;
   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
     var(--unnamed-font-size-28) / var(--unnamed-line-spacing-42)
     var(--unnamed-font-family-avenir);
@@ -102,36 +135,34 @@ const PageHeading = styled.div`
   letter-spacing: 0px;
   color: #333333;
   opacity: 1;
+  padding: 0.3rem 0;
+
+  @media (max-width: 475px) {
+  }
+
+  @media (min-width: 476px) {
+  }
 `;
 
 const B1 = styled.b`
-  margin-left: 2.6rem;
-  margin-right: 2.2rem;
   font: var(--unnamed-font-style-normal) normal
     var(--unnamed-font-weight-normal) var(--unnamed-font-size-16) /
     var(--unnamed-line-spacing-24) var(--unnamed-font-family-avenir);
   letter-spacing: var(--unnamed-character-spacing-0);
   color: var(---333333-dark);
-  text-align: left;
   font: normal normal normal 16px/24px Avenir;
   letter-spacing: 0px;
   color: #333333;
   opacity: 1;
   padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-`;
 
-const MainBox = styled.div`
-  display: flex;
-  flex-flow: column;
-  width: 75%;
-  padding-bottom: 1rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 5px;
-  opacity: 1;
+  @media (min-width: 476px) {
+    text-align: left;
+  }
+
+  @media (max-width: 475px) {
+    text-align: left;
+  }
 `;
 
 const FormBox = styled.div`
@@ -140,8 +171,10 @@ const FormBox = styled.div`
   justify-content: center;
   text-align: center;
   align-items: stretch;
-  margin-left: 3rem;
-  margin-right: 3rem;
+  @media (min-width: 476px) {
+    margin-left: 8rem;
+    margin-right: 8rem;
+  }
 `;
 
 // const Button = styled.button`
@@ -172,12 +205,16 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  padding: 0.3rem;
   border: 1px solid var(---9fa2a8-mid);
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #9fa2a8;
-  border-radius: 5px;
+  padding: 0.3rem;
+
   opacity: 1;
+
+  @media (min-width: 476px) {
+    border-radius: 5px;
+  }
 `;
 
 const Textarea = styled.textarea`
@@ -187,5 +224,12 @@ const Textarea = styled.textarea`
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #9fa2a8;
   border-radius: 5px;
+  opacity: 1;
+`;
+
+const SubmitContainer = styled.div`
+  background: transparent linear-gradient(90deg, #005799 0%, #6996fd 100%) 0% 0%
+    no-repeat padding-box;
+  border-radius: 8px;
   opacity: 1;
 `;

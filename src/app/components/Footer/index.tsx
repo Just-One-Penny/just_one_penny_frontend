@@ -48,7 +48,7 @@ const FooterSection = styled.footer`
     flex-direction: column;
     align-items: flex-start;
     height: 100%;
-    padding: 0 0 0 1rem;
+    padding: 0.5rem 0 0 1rem;
   }
 `;
 
