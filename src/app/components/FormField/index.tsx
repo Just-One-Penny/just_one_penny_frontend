@@ -6,71 +6,100 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import {
+  CardNumberElementComponent,
+  CardCvcElementComponent,
+  CardExpiryElementComponent,
+} from '@stripe/react-stripe-js';
+import { Field } from 'react-final-form';
 
 interface Props {
   name?: string;
   label?: string;
   type?: string;
+  component?:
+    | string
+    | CardNumberElementComponent
+    | CardCvcElementComponent
+    | CardExpiryElementComponent;
   placeholder?: string;
-  value?: string;
   required?: boolean;
-  onChange: Function;
+  format?: Function;
+  options?: any[];
+  formatOnBlur?: boolean;
 }
 
 export function FormField(props: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
-  const { label, type, name, placeholder, value, onChange } = props;
+  const {
+    label,
+    type = 'text',
+    component = 'input',
+    name,
+    placeholder,
+    required,
+    format,
+    formatOnBlur,
+    options,
+  } = props;
 
   return (
-    <FormFieldContainer>
-      <Label htmlFor={name}>{label}</Label>
-      <Input
-        name={name}
-        type={type}
-        value={value}
-        placeholder={placeholder}
-        onChange={evt => onChange(evt)}
-        required
-      />
-    </FormFieldContainer>
+    <>
+      <InputLabel>{label}</InputLabel>
+      {options?.length ? (
+        <Input
+          name={name}
+          component={component}
+          type={type}
+          placeholder={placeholder}
+          required={required}
+          format={format}
+          formatOnBlur={formatOnBlur}
+        >
+          {options.map(o => o)}
+        </Input>
+      ) : (
+        <Input
+          name={name}
+          component={component}
+          type={type}
+          placeholder={placeholder}
+          required={required}
+          format={format}
+          formatOnBlur={formatOnBlur}
+        />
+      )}
+    </>
   );
 }
 
-const FormFieldContainer = styled.div`
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-left: 15px;
-  border-top: 1px solid #819efc;
-
-  &:first-of-type {
-    border-top: none;
-  }
+const InputLabel = styled.div`
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-medium) var(--unnamed-font-size-14) /
+    var(--unnamed-line-spacing-21) var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(---333333-dark);
+  text-align: left;
+  font: normal normal medium 14px/21px Avenir;
+  letter-spacing: 0px;
+  color: #333333;
+  opacity: 1;
+  margin-top: 1rem;
 `;
 
-const Label = styled.label`
-  width: 20%;
-  min-width: 70px;
-  padding: 11px 0;
-  color: #c4f0ff;
-  overflow: hidden;
-  font-size: 16px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  border-right: 1px solid #819efc;
-`;
-
-const Input = styled.input`
-  font-size: 16px;
+const Input = styled(Field)`
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) var(--unnamed-font-size-16) /
+    var(--unnamed-line-spacing-24) var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(---333333-dark);
+  text-align: left;
+  font: normal normal normal 16px/24px Avenir;
+  letter-spacing: 0px;
+  color: #333333;
+  border: 1px solid #9fa2a8;
+  padding: 0.25rem;
+  border-radius: 5px;
   width: 100%;
-  padding: 11px 15px 11px 8px;
-  color: #fff;
-  background-color: transparent;
-  animation: 1ms void-animation-out;
-
-  &::placeholder {
-    color: #87bbfd;
-  }
 `;

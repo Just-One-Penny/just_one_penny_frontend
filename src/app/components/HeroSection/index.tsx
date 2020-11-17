@@ -73,7 +73,7 @@ const SearchWrapper = styled.div`
 `;
 
 const Input = styled.input`
-  color: ${p => p.theme.textSecondary};
+  color: ${p => p.theme.colors.info[200]};
   flex: 3;
   height: 3rem;
   margin-right: 2rem;
@@ -89,7 +89,7 @@ const Input = styled.input`
   font-style: normal normal normal 16px/22px Avenir;
   &::placeholder {
     font-weight: 300;
-    color: ${p => p.theme.textSecondary};
+    color: ${p => p.theme.colors.info[200]};
   }
   &:hover {
     border: 1px solid #0a559e;

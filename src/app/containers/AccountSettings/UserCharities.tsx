@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { reducer, sliceKey, actions } from './slice';
+import { reducer, sliceKey } from './slice';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { useAuth } from 'context/auth-context';
 
