@@ -1,4 +1,4 @@
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Api } from './api';
 import { NewsFeed } from 'types/newsFeed';
 import { apiConfig } from './api.config';

@@ -12,10 +12,15 @@ import { Tab, useTabState } from '@welcome-ui/tabs';
 import numeral from 'numeral';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { reducer, sliceKey, actions } from './slice';
+import { actions, reducer, sliceKey } from './slice';
 import { donationModalSaga } from './saga';
 
 import { useAuth } from 'context/auth-context';
+import { Divider } from 'app/components/Divider';
+import { PaymentInfo } from 'app/components/PaymentInfo';
+import { FormField } from 'app/components/FormField';
+import { Button } from 'app/components/Button';
+import { DonationSubmission } from './types';
 
 interface Props {
   charityId: string;
@@ -26,44 +31,13 @@ export function DonationModal(props: Props) {
   const { user } = useAuth();
   const tab = useTabState({ selectedId: 'tab1' });
   const [state, setState] = useState({
-    amount: null,
-    fullName: '',
+    submitting: false,
   });
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: donationModalSaga });
 
-  const ids = {
-    userId: user.id!,
-    charityId: props.charityId,
-  };
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
-
-  const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const name = evt.currentTarget.name;
-    console.log('onChange -> name', name);
-    const value = evt.currentTarget.value;
-    console.log('onChange -> value', value);
-    setState({ ...state, [name]: value });
-  };
-
-  const submitPayment = (evt?: React.FormEvent<HTMLFormElement>) => {
-    /* istanbul ignore next  */
-    if (evt !== undefined && evt.preventDefault) {
-      evt.preventDefault();
-    }
-    dispatch(actions.changeIds(ids));
-    dispatch(actions.submitDonation());
-  };
-
-  const cancelPayment = (evt?: React.FormEvent<HTMLFormElement>) => {
-    /* istanbul ignore next  */
-    if (evt !== undefined && evt.preventDefault) {
-      evt.preventDefault();
-    }
-    dispatch(actions.cancelDonation());
-  };
 
   const formatPrice = value =>
     value === undefined
@@ -71,85 +45,129 @@ export function DonationModal(props: Props) {
       : numeral(value).format('$0,0.00');
 
   const onSubmit = async values => {
-    console.log('DonationModal -> values', values);
-    // window.alert(JSON.stringify(values, 0, 2));
+    setState({ ...state, submitting: true });
   };
+
+  const handleSubmit = (values: DonationSubmission) => {
+    dispatch(actions.submitDonation(values));
+  };
+
+  const donationForm = (values, formType) => (
+    <>
+      {formType === 'standard' ? (
+        <FormField
+          name="donationAmount"
+          label="Donation Amount"
+          type="text"
+          placeholder="$0.00"
+          format={formatPrice}
+          formatOnBlur
+        />
+      ) : null}
+      {formType === 'micro' ? (
+        <>
+          <InputLabel>Daily Amount</InputLabel>
+          <Input
+            name="frequency"
+            component="select"
+            placeholder="Select Daily Amount"
+          >
+            <option />
+            <option value="0.01">$0.01 Per Day</option>
+            <option value="0.05">$0.05 Per Day</option>
+            <option value="0.10">$0.10 Per Day</option>
+            <option value="0.25">$0.25 Per Day</option>
+            <option value="0.50">$0.50 Per Day</option>
+          </Input>
+        </>
+      ) : (
+        <>
+          <InputLabel>Recurring</InputLabel>
+          <Input name="frequency" component="select">
+            <option />
+            <option value="once">Only Donate Once</option>
+            <option value="yearly">Every Year</option>
+          </Input>
+        </>
+      )}
+      <Field
+        name="coverCost"
+        component="input"
+        type="checkbox"
+        value="coverCost"
+        className="mr-3 mt-3"
+      />
+      Yes, I’d like to cover the cost of the transaction fee
+      <br />
+      <Field
+        name="support"
+        component="input"
+        type="checkbox"
+        value="support"
+        className="mr-3 mt-3"
+      />
+      Donate $2 to support Just One Penny
+      <Divider />
+      <PaymentInfo
+        values={values}
+        submitting={state.submitting}
+        submitForm={handleSubmit}
+      />
+    </>
+  );
 
   return (
     <Wrapper>
-      <Header>$0</Header>
-      <ModalContent>
-        <Form
-          onSubmit={onSubmit}
-          initialValues={{ stooge: 'larry', employed: false }}
-          render={({ handleSubmit, form, submitting, pristine, values }) => (
-            <form onSubmit={handleSubmit}>
-              <div>
-                <InputLabel>Full Name</InputLabel>
-                <Input
-                  name="fullName"
-                  component="input"
-                  type="text"
-                  placeholder="First and Last Name"
-                />
-                <InputLabel>Email</InputLabel>
-                <Input
-                  name="email"
-                  component="input"
-                  type="text"
-                  placeholder="email@example.com"
-                />
-              </div>
-              <StyledTabList aria-label="Tabs" {...tab}>
-                <StyledTab {...tab} id="tab1">
-                  Micro-Donation
-                </StyledTab>
-                <StyledTab {...tab} id="tab2">
-                  Standard
-                </StyledTab>
-              </StyledTabList>
-              <Tab.Panel {...tab} tabId="tab1">
-                <InputLabel>Donation Amount</InputLabel>
-                <Input
-                  name="donationAmount"
-                  component="input"
-                  type="text"
-                  placeholder="$0.00"
-                  format={formatPrice}
-                  formatOnBlur
-                />
-
-                <InputLabel>Recurring</InputLabel>
-                <Input name="favoriteColor" component="select">
-                  <option />
-                  <option value="#ff0000">❤️ Red</option>
-                  <option value="#00ff00">💚 Green</option>
-                  <option value="#0000ff">💙 Blue</option>
-                </Input>
-                <Field
-                  name="coverCost"
-                  component="input"
-                  type="checkbox"
-                  value="coverCost"
-                  className="mr-3 mt-3"
-                />Yes, I’d like to cover the cost of the transaction fee
-                <br />
-                <Field
-                  name="support"
-                  component="input"
-                  type="checkbox"
-                  value="support"
-                  className="mr-3 mt-3"
-                />Donate $2 to support Just One Penny
-                {/* <Divider /> */}
-              </Tab.Panel>
-              <Tab.Panel {...tab} tabId="tab2">
-                Tab.Panel 2
-              </Tab.Panel>
-            </form>
-          )}
-        />
-      </ModalContent>
+      <Form
+        onSubmit={onSubmit}
+        render={({ handleSubmit, values }) => (
+          <>
+            <Header>
+              {values.donationAmount ? values.donationAmount : '$0'}
+            </Header>
+            <ModalContent>
+              <form onSubmit={handleSubmit}>
+                <div>
+                  <FormField
+                    name="fullName"
+                    label="Full Name"
+                    type="text"
+                    placeholder="First and Last Name"
+                    required
+                  />
+                  <FormField
+                    name="email"
+                    label="Email"
+                    type="text"
+                    placeholder="email@example.com"
+                    required
+                  />
+                </div>
+                <StyledTabList aria-label="Tabs" {...tab}>
+                  <StyledTab {...tab} id="tab1">
+                    Micro-Donation
+                  </StyledTab>
+                  <StyledTab {...tab} id="tab2">
+                    Standard
+                  </StyledTab>
+                </StyledTabList>
+                <Tab.Panel {...tab} tabId="tab1">
+                  {donationForm(values, 'micro')}
+                </Tab.Panel>
+                <Tab.Panel {...tab} tabId="tab2">
+                  {donationForm(values, 'standard')}
+                </Tab.Panel>
+                <Divider />
+                <div className="flex w-full justify-center">
+                  <Button type="submit" btnStyle="primary">
+                    Make Donation
+                  </Button>
+                </div>
+              </form>
+            </ModalContent>
+          </>
+        )}
+      />
     </Wrapper>
   );
 }
@@ -222,46 +240,6 @@ const StyledTab = styled(Tab)`
   font: normal normal 900 20px/27px Avenir;
   letter-spacing: 0px;
   opacity: 1;
-`;
-
-const DonateButton = styled.button`
-  background-color: ${p => p.theme.colors.primary[800]};
-  cursor: pointer;
-  text-decoration: none;
-  display: flex;
-  padding: 0.25rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  align-items: center;
-  &:hover {
-    opacity: 0.8;
-  }
-  &:active {
-    opacity: 0.4;
-  }
-  .icon {
-    margin-right: 0.25rem;
-  }
-`;
-
-const CancelButton = styled.button`
-  background-color: #c14200;
-  cursor: pointer;
-  text-decoration: none;
-  display: flex;
-  padding: 0.25rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  align-items: center;
-  &:hover {
-    opacity: 0.8;
-  }
-  &:active {
-    opacity: 0.4;
-  }
-  .icon {
-    margin-right: 0.25rem;
-  }
 `;
 
 const Wrapper = styled.div`

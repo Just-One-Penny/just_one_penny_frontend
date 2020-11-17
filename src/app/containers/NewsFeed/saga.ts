@@ -1,4 +1,4 @@
-import { take, call, put, select, takeLeading } from 'redux-saga/effects';
+import { put, takeLeading } from 'redux-saga/effects';
 import { actions } from './slice';
 import { feedApi } from '../../../api/feedApi';
 import { NewsFeedSuccess } from './types';

@@ -5,7 +5,7 @@
  */
 import { DonationModal } from 'app/containers/DonationModal';
 import React, { memo } from 'react';
-import styled from 'styled-components/macro';
+// import styled from 'styled-components/macro';
 import { Button } from '../Button';
 import { Modal } from '../Modal';
 
