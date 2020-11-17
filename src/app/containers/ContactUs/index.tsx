@@ -8,6 +8,7 @@ import React, { memo, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components/macro';
 import { Button } from '../../components/Button';
+import { contactUsApi } from '../../../api/contactUsApi';
 
 interface Props {}
 
@@ -21,6 +22,12 @@ export const ContactUs = memo((props: Props) => {
   const handleSubmit = evt => {
     evt.preventDefault();
     setSubmitted(true);
+    contactUsApi.postEmail({
+      name: name,
+      email: email,
+      organization: organization,
+      messageBody: message,
+    });
     return 1;
   };
   return (
@@ -232,4 +239,14 @@ const SubmitContainer = styled.div`
     no-repeat padding-box;
   border-radius: 8px;
   opacity: 1;
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
+    var(--unnamed-font-size-20) / var(--unnamed-line-spacing-30)
+    var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal 900 20px/30px Avenir;
+  letter-spacing: 0px;
+  color: #ffffff;
+  opacity: 1;
+  padding: 0.5rem;
 `;
