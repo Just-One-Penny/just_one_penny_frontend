@@ -46,7 +46,7 @@ const Wrapper = styled.div`
   }
 `;
 const Input = styled.input`
-  color: ${p => p.theme.textSecondary};
+  color: ${p => p.theme.colors.light[200]};
   width: 100%;
   height: 3rem;
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -61,7 +61,7 @@ const Input = styled.input`
   font-style: normal normal normal 16px/22px Avenir;
   &::placeholder {
     font-weight: 300;
-    color: ${p => p.theme.textSecondary};
+    color: ${p => p.theme.colors.light[200]};
   }
   &:hover {
     border: 1px solid #0a559e;

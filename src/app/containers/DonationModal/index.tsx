@@ -7,14 +7,15 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components/macro';
-import { Input } from 'app/components/Input';
+import { Form, Field } from 'react-final-form';
+import { Tab, useTabState } from '@welcome-ui/tabs';
+import numeral from 'numeral';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { reducer, sliceKey, actions } from './slice';
 import { donationModalSaga } from './saga';
 
 import { useAuth } from 'context/auth-context';
-import { FormField } from 'app/components/FormField';
 
 interface Props {
   charityId: string;
@@ -23,6 +24,7 @@ interface Props {
 
 export function DonationModal(props: Props) {
   const { user } = useAuth();
+  const tab = useTabState({ selectedId: 'tab1' });
   const [state, setState] = useState({
     amount: null,
     fullName: '',
@@ -63,27 +65,90 @@ export function DonationModal(props: Props) {
     dispatch(actions.cancelDonation());
   };
 
+  const formatPrice = value =>
+    value === undefined
+      ? '' // make controlled
+      : numeral(value).format('$0,0.00');
+
+  const onSubmit = async values => {
+    console.log('DonationModal -> values', values);
+    // window.alert(JSON.stringify(values, 0, 2));
+  };
+
   return (
     <Wrapper>
       <Header>$0</Header>
       <ModalContent>
-        <FormField
-          label="Full Name"
-          value={state.fullName}
-          onChange={onChange}
+        <Form
+          onSubmit={onSubmit}
+          initialValues={{ stooge: 'larry', employed: false }}
+          render={({ handleSubmit, form, submitting, pristine, values }) => (
+            <form onSubmit={handleSubmit}>
+              <div>
+                <InputLabel>Full Name</InputLabel>
+                <Input
+                  name="fullName"
+                  component="input"
+                  type="text"
+                  placeholder="First and Last Name"
+                />
+                <InputLabel>Email</InputLabel>
+                <Input
+                  name="email"
+                  component="input"
+                  type="text"
+                  placeholder="email@example.com"
+                />
+              </div>
+              <StyledTabList aria-label="Tabs" {...tab}>
+                <StyledTab {...tab} id="tab1">
+                  Micro-Donation
+                </StyledTab>
+                <StyledTab {...tab} id="tab2">
+                  Standard
+                </StyledTab>
+              </StyledTabList>
+              <Tab.Panel {...tab} tabId="tab1">
+                <InputLabel>Donation Amount</InputLabel>
+                <Input
+                  name="donationAmount"
+                  component="input"
+                  type="text"
+                  placeholder="$0.00"
+                  format={formatPrice}
+                  formatOnBlur
+                />
+
+                <InputLabel>Recurring</InputLabel>
+                <Input name="favoriteColor" component="select">
+                  <option />
+                  <option value="#ff0000">❤️ Red</option>
+                  <option value="#00ff00">💚 Green</option>
+                  <option value="#0000ff">💙 Blue</option>
+                </Input>
+                <Field
+                  name="coverCost"
+                  component="input"
+                  type="checkbox"
+                  value="coverCost"
+                  className="mr-3 mt-3"
+                />Yes, I’d like to cover the cost of the transaction fee
+                <br />
+                <Field
+                  name="support"
+                  component="input"
+                  type="checkbox"
+                  value="support"
+                  className="mr-3 mt-3"
+                />Donate $2 to support Just One Penny
+                {/* <Divider /> */}
+              </Tab.Panel>
+              <Tab.Panel {...tab} tabId="tab2">
+                Tab.Panel 2
+              </Tab.Panel>
+            </form>
+          )}
         />
-        $
-        <Input
-          name="amount"
-          type="number"
-          onChange={onChange}
-          min="0.01"
-          step="0.01"
-          placeholder="0.01"
-          required
-        />
-        <DonateButton onClick={() => submitPayment()}>Donate</DonateButton>
-        <CancelButton onClick={() => cancelPayment()}>Cancel</CancelButton>
       </ModalContent>
     </Wrapper>
   );
@@ -110,18 +175,57 @@ const Header = styled.div`
 
 const ModalContent = styled.div`
   padding: 2rem;
+  width: 100%;
 `;
 
-const Text = styled.p`
+const InputLabel = styled.div`
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-medium) var(--unnamed-font-size-14) /
+    var(--unnamed-line-spacing-21) var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(---333333-dark);
   text-align: left;
-  font: normal normal normal 16px/22px Avenir;
+  font: normal normal medium 14px/21px Avenir;
   letter-spacing: 0px;
   color: #333333;
+  opacity: 1;
+  margin-top: 1rem;
+`;
+
+const Input = styled(Field)`
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) var(--unnamed-font-size-16) /
+    var(--unnamed-line-spacing-24) var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(---333333-dark);
+  text-align: left;
+  font: normal normal normal 16px/24px Avenir;
+  letter-spacing: 0px;
+  color: #333333;
+  border: 1px solid #9fa2a8;
+  padding: 0.25rem;
+  border-radius: 5px;
+  width: 100%;
+`;
+
+const StyledTabList = styled(Tab.List)`
+  display: flex;
+  justify-content: center;
+`;
+
+const StyledTab = styled(Tab)`
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
+    var(--unnamed-font-size-20) / 27px var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(---0a559e-primary);
+  text-align: center;
+  font: normal normal 900 20px/27px Avenir;
+  letter-spacing: 0px;
   opacity: 1;
 `;
 
 const DonateButton = styled.button`
-  background-color: ${p => p.theme.primary};
+  background-color: ${p => p.theme.colors.primary[800]};
   cursor: pointer;
   text-decoration: none;
   display: flex;

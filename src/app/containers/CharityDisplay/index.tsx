@@ -51,7 +51,7 @@ export const CharityDisplay = memo((props: Props) => {
     <>
       <Helmet>
         <title>Charity Details</title>
-        <meta name="description" content="Details of charity {}" />
+        <meta name="description" content="" />
       </Helmet>
       <HeroSection />
 
