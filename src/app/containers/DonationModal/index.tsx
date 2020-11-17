@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components/macro';
 import { Input } from 'app/components/Input';
@@ -14,6 +14,7 @@ import { reducer, sliceKey, actions } from './slice';
 import { donationModalSaga } from './saga';
 
 import { useAuth } from 'context/auth-context';
+import { FormField } from 'app/components/FormField';
 
 interface Props {
   charityId: string;
@@ -22,6 +23,10 @@ interface Props {
 
 export function DonationModal(props: Props) {
   const { user } = useAuth();
+  const [state, setState] = useState({
+    amount: null,
+    fullName: '',
+  });
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: donationModalSaga });
 
@@ -34,13 +39,11 @@ export function DonationModal(props: Props) {
   const dispatch = useDispatch();
 
   const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    switch (evt.currentTarget.name) {
-      case 'amount':
-        dispatch(actions.changeAmount(parseInt(evt.currentTarget.value)));
-        break;
-      default:
-        break;
-    }
+    const name = evt.currentTarget.name;
+    console.log('onChange -> name', name);
+    const value = evt.currentTarget.value;
+    console.log('onChange -> value', value);
+    setState({ ...state, [name]: value });
   };
 
   const submitPayment = (evt?: React.FormEvent<HTMLFormElement>) => {
@@ -62,37 +65,51 @@ export function DonationModal(props: Props) {
 
   return (
     <Wrapper>
-      <Header>Donate to {props.charityName}</Header>
-      <Text>
-        Sunt ad commodo ex magna laboris id sint exercitation cupidatat. Enim
-        anim dolore nostrud ad nulla incididunt magna qui do qui proident
-        cupidatat quis. Sit ad tempor veniam veniam cupidatat anim ullamco
-        voluptate commodo exercitation. Veniam culpa occaecat nulla dolore
-        mollit nostrud aliquip ullamco est ex deserunt. Proident labore est
-        dolor consectetur minim anim incididunt eu ad mollit ipsum elit.
-      </Text>
-      $
-      <Input
-        name="amount"
-        type="number"
-        onChange={onChange}
-        min="0.01"
-        step="0.01"
-        placeholder="0.01"
-        required
-      />
-      <DonateButton onClick={() => submitPayment()}>Donate</DonateButton>
-      <CancelButton onClick={() => cancelPayment()}>Cancel</CancelButton>
+      <Header>$0</Header>
+      <ModalContent>
+        <FormField
+          label="Full Name"
+          value={state.fullName}
+          onChange={onChange}
+        />
+        $
+        <Input
+          name="amount"
+          type="number"
+          onChange={onChange}
+          min="0.01"
+          step="0.01"
+          placeholder="0.01"
+          required
+        />
+        <DonateButton onClick={() => submitPayment()}>Donate</DonateButton>
+        <CancelButton onClick={() => cancelPayment()}>Cancel</CancelButton>
+      </ModalContent>
     </Wrapper>
   );
 }
 
-const Header = styled.h2`
+const Header = styled.div`
+  display: flex;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  justify-content: center;
+  align-items: center;
+  background-color: #11569b;
+  height: 5rem;
+  width: 100%;
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
+    70px/96px var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
   text-align: center;
   font: normal normal 900 70px/96px Avenir;
   letter-spacing: 0px;
-  color: ${p => p.theme.text};
+  color: #ffffff;
   opacity: 1;
+`;
+
+const ModalContent = styled.div`
+  padding: 2rem;
 `;
 
 const Text = styled.p`
@@ -144,14 +161,7 @@ const CancelButton = styled.button`
 `;
 
 const Wrapper = styled.div`
-  top: 50px;
-  left: 415px;
-  width: 450px;
-  height: 700px;
   background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 0px 3px 6px #00000029;
-  border-radius: 5px;
-  opacity: 1;
   display: flex;
   flex-direction: column;
   align-items: center;

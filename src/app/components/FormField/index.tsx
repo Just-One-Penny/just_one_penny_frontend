@@ -12,7 +12,7 @@ interface Props {
   label?: string;
   type?: string;
   placeholder?: string;
-  value?: string;
+  value?: string | undefined;
   required?: boolean;
   onChange: Function;
 }
