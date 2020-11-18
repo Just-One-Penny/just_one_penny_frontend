@@ -35,7 +35,7 @@ export function Nav() {
         )}
       </div>
       <NavLink href="/about">About</NavLink>
-      {user.id ? (
+      {user && user.id ? (
         <NavLink className="button-border" href="/" onClick={logout}>
           Logout
         </NavLink>

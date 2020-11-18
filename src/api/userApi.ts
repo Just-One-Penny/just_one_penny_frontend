@@ -91,6 +91,7 @@ export class UserApi extends Api {
     return this.get<User, AxiosResponse<User>>(`/users/profile`)
       .then(this.success)
       .catch(error => {
+        this.logout()
         throw error;
       });
   };
