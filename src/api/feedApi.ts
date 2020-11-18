@@ -23,4 +23,4 @@ export class FeedApi extends Api {
   };
 }
 
-export const feedApi = new FeedApi(apiConfig);
+export const feedApi = new FeedApi(apiConfig());
