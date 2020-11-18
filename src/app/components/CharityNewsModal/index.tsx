@@ -7,9 +7,10 @@ import React, { memo } from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { Modal } from '../Modal';
-import { Button } from '../Button';
 
-interface Props {}
+interface Props {
+  button: React.ReactNode;
+}
 
 export const CharityNewsModal = memo((props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -17,11 +18,7 @@ export const CharityNewsModal = memo((props: Props) => {
 
   return (
     <Modal
-      buttonElement={
-        <Button btnStyle="primary" className="mt-2">
-          News
-        </Button>
-      }
+      buttonElement={props.button}
       modalBody={
         <Container>
           <Header>

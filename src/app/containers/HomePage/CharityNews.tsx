@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { NewsFeed } from '../NewsFeed';
-import { CharityNewsModal } from '../../components/CharityNewsModal';
 
 export const CharityNews = () => {
   return (
@@ -9,7 +8,6 @@ export const CharityNews = () => {
       <H2>Charity News</H2>
       <CharitiesContainer>
         <NewsFeed />
-        <CharityNewsModal />
       </CharitiesContainer>
     </Container>
   );
