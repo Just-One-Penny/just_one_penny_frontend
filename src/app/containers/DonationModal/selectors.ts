@@ -15,7 +15,7 @@ export const selectCharityId = createSelector(
   donationModalState => donationModalState.charityId,
 );
 
-export const selectAmount = createSelector(
+export const selectPaymentInfo = createSelector(
   [selectDomain],
-  donationModalState => donationModalState.amount,
+  donationModalState => donationModalState.paymentInfo,
 );

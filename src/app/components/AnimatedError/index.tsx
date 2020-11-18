@@ -6,7 +6,7 @@
 import React from 'react';
 import Lottie from 'react-lottie';
 import animationData from './animated.json';
-import styled from 'styled-components/macro';
+// import styled from 'styled-components/macro';
 
 interface Props {}
 

@@ -1,11 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { PaymentInfo } from '..';
+import { DonationButton } from '..';
 
-describe('<PaymentInfo  />', () => {
+describe('<DonationButton  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<PaymentInfo submitForm={() => {}} />);
+    const loadingIndicator = render(
+      <DonationButton charityId="" charityName="" />,
+    );
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });

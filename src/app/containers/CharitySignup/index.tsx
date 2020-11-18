@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 /**
  *
  * CharitySignup
@@ -25,9 +26,11 @@ export function CharitySignup(props: Props) {
         ></div>
         <script>
           {(function () {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             var qs,
               js,
               q,
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
               s,
               d = document,
               gi = d.getElementById,

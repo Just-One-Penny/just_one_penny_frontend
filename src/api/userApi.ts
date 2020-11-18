@@ -2,17 +2,12 @@ import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Api } from './api';
 import {
   Credentials,
-  Token,
   SocialAuth,
   User,
   UpdatedUser,
   UpdatingUser,
 } from 'types/User';
-import {
-  BillingInfo,
-  UpdatingBillingInfo,
-  UpdatedBillingInfo,
-} from 'types/Stripe';
+import { UpdatingBillingInfo, UpdatedBillingInfo } from 'types/Stripe';
 import { apiConfig } from './api.config';
 import { Charity } from 'types/Charity';
 
@@ -96,6 +91,7 @@ export class UserApi extends Api {
     return this.get<User, AxiosResponse<User>>(`/users/profile`)
       .then(this.success)
       .catch(error => {
+        this.logout()
         throw error;
       });
   };

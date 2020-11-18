@@ -10,7 +10,7 @@ import items from './sampleLinks';
 import icon from './assets/dropdown-icon.png';
 
 export function Nav() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [show, toggle] = useState(false);
 
   function _toggleMenu() {
@@ -20,10 +20,10 @@ export function Nav() {
   return (
     <Wrapper>
       <div>
-        <a onClick={_toggleMenu} href="www.google.com">
+        <NavLink onClick={_toggleMenu}>
           Charities
           <img className="icon" alt="V" src={icon} />
-        </a>
+        </NavLink>
         {show && (
           <Dropdown>
             {items.map((item, i) => (
@@ -34,19 +34,19 @@ export function Nav() {
           </Dropdown>
         )}
       </div>
-      <a href="/">About</a>
-      {user ? (
-        <a className="button-border" href="/">
+      <NavLink href="/about">About</NavLink>
+      {user && user.id ? (
+        <NavLink className="button-border" href="/" onClick={logout}>
           Logout
-        </a>
+        </NavLink>
       ) : (
         <>
           <Modal
-            buttonElement={<button>Login</button>}
+            buttonElement={<NavLink>Login</NavLink>}
             modalBody={<AuthenticationModal />}
           />
           <Modal
-            buttonElement={<button className="button-border">Sign Up</button>}
+            buttonElement={<NavLink className="button-border">Sign Up</NavLink>}
             modalBody={<AuthenticationModal isSignup />}
           />
         </>
@@ -56,6 +56,7 @@ export function Nav() {
 }
 
 const Wrapper = styled.nav`
+  opacity: 0.7;
   display: none;
   > a:hover,
   > div > a:hover,
@@ -107,4 +108,15 @@ const Dropdown = styled.ul`
       background-color: grey;
     }
   }
+`;
+
+const NavLink = styled.a`
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
+    var(--unnamed-font-size-16) / 22px var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(---333333-dark);
+  text-align: left;
+  font: normal normal 900 16px/22px Avenir;
+  letter-spacing: 0px;
+  color: #333333;
 `;

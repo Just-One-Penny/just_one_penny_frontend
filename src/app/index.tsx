@@ -36,7 +36,6 @@ export function App() {
       </Helmet>
       <NavBar />
 
-      <NavBar />
       <PageWrapper>
         <Switch>
           <Route exact path="/" component={HomePage} />

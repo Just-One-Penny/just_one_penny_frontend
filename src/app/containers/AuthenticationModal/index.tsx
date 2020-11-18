@@ -17,7 +17,8 @@ import {
 } from './selectors';
 import { authenticationModalSaga } from './saga';
 import GoogleLogin from 'react-google-login';
-import FacebookLogin from 'react-facebook-login';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 
 interface Props {
   isSignup: boolean;
@@ -103,20 +104,25 @@ export function AuthenticationModal(props: Props) {
                   Sign {isSignup ? 'up' : 'in'} with
                 </h6>
               </div>
-              <div className="btn-wrapper text-center">
-                <GoogleLogin
-                  clientId="470508940865-gh5b3bovpu7g2efbc896e7ahd3vi0etn.apps.googleusercontent.com"
-                  buttonText="Login"
-                  onSuccess={onSignIn}
-                  onFailure={onFailure}
-                  cookiePolicy={'single_host_origin'}
-                />
-                <FacebookLogin
-                  appId="767504717314327"
-                  autoLoad={true}
-                  fields="name,email,picture"
-                  callback={responseFacebook}
-                />
+              <div className="flex flex-row w-full">
+                <div className="w-1/2">
+                  <GoogleLogin
+                    clientId="470508940865-gh5b3bovpu7g2efbc896e7ahd3vi0etn.apps.googleusercontent.com"
+                    buttonText="Login"
+                    onSuccess={onSignIn}
+                    onFailure={onFailure}
+                    render={(renderProps) => <GoogleLoginButton className='h-3' onClick={renderProps.onClick} />}
+                    cookiePolicy={'single_host_origin'}
+                  />
+                </div>
+                <div className="w-1/2">
+                  <FacebookLogin
+                    appId="767504717314327"
+                    fields="name,email,picture"
+                    render={(renderProps) => <FacebookLoginButton className='h-3' onClick={renderProps.onClick} />}
+                    callback={responseFacebook}
+                  />
+                </div>
               </div>
               <hr className="mt-4 border-b-1 border-gray-400" />
             </div>
