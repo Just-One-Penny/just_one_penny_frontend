@@ -107,7 +107,7 @@ export function AuthenticationModal(props: Props) {
               <div className="flex flex-row w-full">
                 <div className="w-1/2">
                   <GoogleLogin
-                    clientId="470508940865-gh5b3bovpu7g2efbc896e7ahd3vi0etn.apps.googleusercontent.com"
+                    clientId="470508940865-tjqisat9qbo4vc5gm953f6fq04ii5u7j.apps.googleusercontent.com"
                     buttonText="Login"
                     onSuccess={onSignIn}
                     onFailure={onFailure}
