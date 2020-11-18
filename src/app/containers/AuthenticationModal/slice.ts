@@ -5,6 +5,8 @@ import {
   AuthenticationModalErrorType,
   AuthenticationModalSuccess,
   SocialAuthSuccess,
+  SignUpForm,
+  LoginForm,
 } from './types';
 
 // The initial state of the AuthenticationModal container
@@ -35,11 +37,17 @@ const authenticationModalSlice = createSlice({
     changePassword(state, action: PayloadAction<string>) {
       state.password = action.payload;
     },
-    registerUser(state) {
+    registerUser(state, action: PayloadAction<SignUpForm>) {
+      state.email = action.payload.email;
+      state.firstName = action.payload.firstName;
+      state.lastName = action.payload.lastName;
+      state.password = action.payload.password;
       state.loading = true;
       state.error = null;
     },
-    loginUser(state) {
+    loginUser(state, action: PayloadAction<LoginForm>) {
+      state.email = action.payload.email;
+      state.password = action.payload.password;
       state.loading = true;
       state.error = null;
     },

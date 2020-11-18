@@ -22,6 +22,7 @@ const AuthContext = React.createContext({
     fullName: '',
     charities: [],
   },
+  logout: () => {},
 });
 AuthContext.displayName = 'AuthContext';
 

@@ -32,9 +32,6 @@ export const Footer = memo((props: Props) => {
 const FooterSection = styled.footer`
   display: flex;
   align-items: center;
-  position: fixed;
-  left: 0;
-  bottom: 0;
   width: 100%;
   height: 50px;
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -62,4 +59,5 @@ const Item = styled.li`
 const Link = styled.a`
   color: #333333;
   opacity: 1;
+  font-weight: 900;
 `;

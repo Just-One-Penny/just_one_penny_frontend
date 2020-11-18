@@ -1,5 +1,4 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { UpdatedBillingInfo } from 'types/Stripe';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import {
   ContainerState,

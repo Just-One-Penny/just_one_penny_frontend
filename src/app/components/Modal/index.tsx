@@ -5,7 +5,7 @@
  */
 import React, { memo } from 'react';
 import { Modal as UIModal, useModalState } from '@welcome-ui/modal';
-import { Button } from '@welcome-ui/button';
+import styled from 'styled-components';
 
 enum Size {
   sm = 'sm',
@@ -27,9 +27,17 @@ export const Modal = memo((props: Props) => {
   return (
     <>
       <UIModal.Trigger {...modal}>{props.buttonElement}</UIModal.Trigger>
-      <UIModal {...modal} size={props.size}>
-        <UIModal.Content>{props.modalBody}</UIModal.Content>
-      </UIModal>
+      <ModalContainer {...modal} size={props.size}>
+        <ModalContent className="p-0">{props.modalBody}</ModalContent>
+      </ModalContainer>
     </>
   );
 });
+
+const ModalContainer = styled(UIModal)`
+  border-width: 0;
+`;
+
+const ModalContent = styled(UIModal.Content)`
+  padding: 0;
+`;

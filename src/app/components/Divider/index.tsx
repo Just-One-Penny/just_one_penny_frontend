@@ -15,6 +15,6 @@ export function Divider(props: Props) {
 const DividerLine = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
-  border-top: 1.5px solid #bbb;
-  border-color: #f2f2f2;
+  height: 1px;
+  box-shadow: inset 0 -1px 0 #e1e1e1;
 `;
