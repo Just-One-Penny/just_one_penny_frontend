@@ -6,8 +6,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components/macro';
 
-import { FaSpinner } from 'react-icons/fa';
-
 interface Props {}
 
 const motion = props => keyframes`

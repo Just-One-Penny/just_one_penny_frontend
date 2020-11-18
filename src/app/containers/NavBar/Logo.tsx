@@ -7,7 +7,9 @@ export function Logo() {
   return (
     <Wrapper>
       <Title>
-        <img src={logo} alt="Just One Penny" />
+        <a href="/">
+          <img src={logo} alt="Just One Penny" />
+        </a>
       </Title>
     </Wrapper>
   );
@@ -24,7 +26,7 @@ const Wrapper = styled.div`
 
 const Title = styled.div`
   font-size: 1.25rem;
-  color: ${p => p.theme.text};
+  color: ${p => p.theme.colors.dark[900]};
   font-weight: bold;
   text-align: center;
   height: 3rem;
@@ -33,6 +35,6 @@ const Title = styled.div`
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Description = styled.div`
   font-size: 0.875rem;
-  color: ${p => p.theme.textSecondary};
+  color: ${p => p.theme.colors.light[200]};
   font-weight: normal;
 `;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { PaymentInfo } from '..';
+import { HeroSection } from '..';
 
-describe('<PaymentInfo  />', () => {
+describe('<HeroSection  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<PaymentInfo submitForm={() => {}} />);
+    const loadingIndicator = render(<HeroSection />);
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });
