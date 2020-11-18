@@ -30,33 +30,40 @@ export function NewsFeed(props: Props) {
   if (!newsFeed.length) {
     dispatch(actions.loadingFeed());
   }
+  console.log('NewsFeed', newsFeed);
 
   return (
     <>
       <Div>
-        {newsFeed.map(article => (
-          <CharityNewsModal
-            button={
-              <CardContainer maxWidth={400} lineHeight="2">
-                <Card.Cover width={1} src={article.urlToImage} />
-                <Card.Body>
-                  <Text
-                    as="h4"
-                    fontWeight="bold"
-                    mt={0}
-                    mb="lg"
-                    color="dark.900"
-                  >
-                    {article.title}
-                  </Text>
-                  <Description>
-                    <LineClamp>{article.description}</LineClamp>
-                  </Description>
-                </Card.Body>
-              </CardContainer>
-            }
-          />
-        ))}
+        {newsFeed.map(article => {
+          console.log(new Date(article.publishedAt).toString().slice(0, 15));
+          return (
+            <CharityNewsModal
+              button={
+                <CardContainer maxWidth={400} lineHeight="2">
+                  <Card.Cover width={1} src={article.urlToImage} />
+                  <Card.Body>
+                    <Text
+                      as="h4"
+                      fontWeight="bold"
+                      mt={0}
+                      mb="lg"
+                      color="dark.900"
+                    >
+                      {article.title}
+                    </Text>
+                    <Description>
+                      <LineClamp>{article.description}</LineClamp>
+                    </Description>
+                  </Card.Body>
+                </CardContainer>
+              }
+              title={article.title}
+              content={article.content}
+              date={new Date(article.publishedAt).toString().slice(0, 15)}
+            />
+          );
+        })}
       </Div>
     </>
   );

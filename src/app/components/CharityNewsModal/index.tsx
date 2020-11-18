@@ -7,23 +7,28 @@ import React, { memo } from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { Modal } from '../Modal';
+import { Modal as UIModal, useModalState } from '@welcome-ui/modal';
 
 interface Props {
   button: React.ReactNode;
+  title: string;
+  content?: string;
+  date?: string;
 }
 
 export const CharityNewsModal = memo((props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
+  const modal = useModalState();
 
   return (
-    <Modal
-      buttonElement={props.button}
-      modalBody={
-        <Container>
+    <>
+      <UIModal.Trigger {...modal}>{props.button}</UIModal.Trigger>
+      <Container {...modal}>
+        <ModalContent>
           <Header>
-            <H3>Article Title</H3>
-            <B2>Publish Date</B2>
+            <H3>{props.title}</H3>
+            <B2>{props.date}</B2>
             <HR />
           </Header>
           <B1>
@@ -61,13 +66,13 @@ export const CharityNewsModal = memo((props: Props) => {
           <DonateContainer>
             <Button2>Donate to This Charity</Button2>
           </DonateContainer>
-        </Container>
-      }
-    />
+        </ModalContent>
+      </Container>
+    </>
   );
 });
 
-const Container = styled.div`
+const Container = styled(UIModal)`
   display: flex;
   flex-direction: column;
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -75,6 +80,11 @@ const Container = styled.div`
 
   padding-left: 1rem;
   padding-right: 1rem;
+  min-height: 80%;
+`;
+
+const ModalContent = styled(UIModal.Content)`
+  padding: 0;
 `;
 
 const Header = styled.div`
@@ -130,6 +140,8 @@ const B1 = styled.p`
   letter-spacing: 0px;
   color: #333333;
   opacity: 1;
+
+  margin-bottom: 140px;
 `;
 
 const DonateContainer = styled.div`
