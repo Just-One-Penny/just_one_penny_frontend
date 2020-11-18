@@ -22,7 +22,8 @@ export const HeroBox = () => {
 };
 
 const HeroSection = styled.header`
-  width: 100%;
+  width: calc(100% + 4rem);
+  margin-left: -2rem;
   height: 450px;
   padding: 3rem 0;
   background-image: url(${HeroImage1x});

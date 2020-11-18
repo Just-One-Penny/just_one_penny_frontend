@@ -35,7 +35,8 @@ export function HeroSection(props: Props) {
 }
 
 const HeroDiv = styled.div`
-  width: 100%;
+  width: calc(100% + 4rem);
+  margin-left: -2rem;
   height: 150px;
   background-image: url(${MobileAboutHeroImage1x});
   background-size: cover;
