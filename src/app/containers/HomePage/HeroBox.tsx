@@ -75,9 +75,13 @@ const HeroText = styled.div`
 `;
 
 const H1 = styled.h1`
-  font-size: 2.25rem;
-  margin-bottom: 0.75rem;
-  color: #fff;
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
+    var(--unnamed-font-size-36) / 49px var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal 900 36px/49px Avenir;
+  letter-spacing: 0px;
+  color: #ffffff;
 
   @media only screen and (max-width: 475px) {
     font-size: 1.75rem;
@@ -85,9 +89,16 @@ const H1 = styled.h1`
 `;
 
 const H3 = styled.h3`
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-medium) var(--unnamed-font-size-20) / 27px
+    var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal medium 20px/27px Avenir;
+  letter-spacing: 0px;
+  color: #ffffff;
   font-size: 20px;
-  margin-bottom: 1.5rem;
-  color: #fff;
+  margin-bottom: 2rem;
 
   @media only screen and (max-width: 475px) {
     font-size: 0.75rem;

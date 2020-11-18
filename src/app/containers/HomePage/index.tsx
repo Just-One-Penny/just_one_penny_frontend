@@ -3,7 +3,8 @@ import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 import { Helmet } from 'react-helmet-async';
 import { charityApi } from 'api/charityApi';
-import { NewsFeed } from '../NewsFeed';
+import { HeroBox } from './HeroBox';
+import { CharityNews } from './CharityNews';
 
 interface LocationParams {
   search: SearchParams;
@@ -39,7 +40,8 @@ export function HomePage() {
           content="Charitable giving one penny at a time"
         />
       </Helmet>
-      <NewsFeed />
+      <HeroBox />
+      <CharityNews />
     </>
   );
 }

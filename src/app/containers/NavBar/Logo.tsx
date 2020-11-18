@@ -7,7 +7,9 @@ export function Logo() {
   return (
     <Wrapper>
       <Title>
-        <img src={logo} alt="Just One Penny" />
+        <a href="/">
+          <img src={logo} alt="Just One Penny" />
+        </a>
       </Title>
     </Wrapper>
   );

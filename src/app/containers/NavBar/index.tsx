@@ -24,7 +24,7 @@ const NavWrapper = styled.div`
   padding: 0 1.5rem;
   width: 100%;
   align-items: center;
-  background-color: #f2f2f2;
+  background-color: rgba(255, 255, 255, 0.9);
   @media (min-width: 640px) {
     display: flex;
     justify-content: space-around;
@@ -38,11 +38,7 @@ const Wrapper = styled.header`
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: ${p => p.theme.colors.primary[500]};
   z-index: 2;
-  @supports (backdrop-filter: blur(10px)) {
-    backdrop-filter: blur(10px);
-    background-color: ${p => p.theme.colors.primary[500]};
   ${NavWrapper} {
     display: flex;
     align-items: center;

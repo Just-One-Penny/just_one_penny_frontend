@@ -5,5 +5,6 @@ export const PageWrapper = styled.div`
   background: var(---f2f2f2-light) 0% 0% no-repeat padding-box;
   background: #f2f2f2 0% 0% no-repeat padding-box;
   box-sizing: content-box;
-  height: calc(100vh - 8rem);
+  height: 100%;
+  min-height: 100vh;
 `;

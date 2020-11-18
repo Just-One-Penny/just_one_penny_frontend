@@ -23,8 +23,7 @@ export function NotFoundPage() {
         <P>
           Try the navigation above or search for a charity to change the world.
         </P>
-
-        <Search />
+        <Search className="mb-3" />
       </Wrapper>
     </>
   );
@@ -35,23 +34,10 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  min-height: 320px;
-  margin-bottom: 28rem;
-  padding: 0 5rem 0 5rem;
-
-  @media only screen and (max-width: 768px) {
-    margin-bottom: 18.875rem;
-    padding: 0 2.5rem 0 2.5rem;
-  }
-
-  @media only screen and (max-width: 475px) {
-    margin-bottom: 18.875rem;
-    padding: 0 1rem 0 1rem;
-  }
 `;
 
 const ImageWrapper = styled.div`
-  margin-top: 6.75rem;
+  margin-top: 3rem;
   margin-bottom: 1.8rem;
   width: 529.852px;
   height: 121.514px;
@@ -84,18 +70,16 @@ const Title = styled.h2`
 
   @media only screen and (max-width: 475px) {
     font-size: 1.75rem;
-    margin-bottom: 0.625rem;
   }
 `;
 
 const P = styled.p`
   font-size: 1.25rem;
   color: #333;
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
   text-align: center;
 
   @media only screen and (max-width: 475px) {
     font-size: 0.875rem;
-    margin-bottom: 3.375rem;
   }
 `;
