@@ -1,17 +1,15 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { NewsFeed } from '../NewsFeed';
+import { CharityNewsModal } from '../../components/CharityNewsModal';
 
 export const CharityNews = () => {
   return (
     <Container>
       <H2>Charity News</H2>
-      {/*
-      Using dummy data to render each card
-      Until organic data is rendered
-    */}
       <CharitiesContainer>
         <NewsFeed />
+        <CharityNewsModal />
       </CharitiesContainer>
     </Container>
   );
