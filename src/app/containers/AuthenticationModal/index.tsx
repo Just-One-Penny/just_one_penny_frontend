@@ -5,16 +5,10 @@
  */
 
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { reducer, sliceKey, actions } from './slice';
-import {
-  selectEmail,
-  selectFirstName,
-  selectLastName,
-  selectPassword,
-} from './selectors';
 import { authenticationModalSaga } from './saga';
 import { Form, Field } from 'react-final-form';
 import GoogleLogin from 'react-google-login';
