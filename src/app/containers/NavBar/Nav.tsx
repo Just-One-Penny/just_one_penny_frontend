@@ -1,44 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/macro';
 
 import { AuthenticationModal } from '../AuthenticationModal';
 import { Modal } from 'app/components/Modal';
 import { useAuth } from 'context/auth-context';
-
-import items from './sampleLinks';
-
-import icon from './assets/dropdown-icon.png';
+import { Link } from 'react-router-dom';
 
 export function Nav() {
   const { user, logout } = useAuth();
-  const [show, toggle] = useState(false);
-
-  function _toggleMenu() {
-    toggle(!show);
-  }
 
   return (
     <Wrapper>
-      <div>
-        <NavLink onClick={_toggleMenu}>
-          Charities
-          <img className="icon" alt="V" src={icon} />
-        </NavLink>
-        {show && (
-          <Dropdown>
-            {items.map((item, i) => (
-              <a href={item.link} key={item.text}>
-                {item.text}
-              </a>
-            ))}
-          </Dropdown>
-        )}
-      </div>
-      <NavLink href="/about">About</NavLink>
+
+      <Link to="/charities">
+        <NavLink>Charities</NavLink>
+      </Link>
+      <Link to="/about">
+        <NavLink>About</NavLink>
+      </Link>
       {user && user.id ? (
-        <NavLink className="button-border" href="/" onClick={logout}>
-          Logout
-        </NavLink>
+        <Link to="/">
+          <NavLink className="button-border" onClick={logout}>
+            Logout
+          </NavLink>
+        </Link>
       ) : (
         <>
           <Modal
@@ -56,7 +41,6 @@ export function Nav() {
 }
 
 const Wrapper = styled.nav`
-  opacity: 0.7;
   display: none;
   > a:hover,
   > div > a:hover,
@@ -93,24 +77,7 @@ const Wrapper = styled.nav`
   }
 `;
 
-const Dropdown = styled.ul`
-  margin-top: 0.5rem;
-  background-color: darkgray;
-  position: absolute;
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-  a {
-    padding: 0.25rem 0.5rem;
-    opacity: 0.8;
-    :hover {
-      opacity: 1;
-      background-color: grey;
-    }
-  }
-`;
-
-const NavLink = styled.a`
+const NavLink = styled.span`
   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
     var(--unnamed-font-size-16) / 22px var(--unnamed-font-family-avenir);
   letter-spacing: var(--unnamed-character-spacing-0);
@@ -119,4 +86,5 @@ const NavLink = styled.a`
   font: normal normal 900 16px/22px Avenir;
   letter-spacing: 0px;
   color: #333333;
+  cursor: pointer;
 `;

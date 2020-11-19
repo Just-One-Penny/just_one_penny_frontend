@@ -35,7 +35,8 @@ export function HeroSection(props: Props) {
 }
 
 const HeroDiv = styled.div`
-  width: 100%;
+  width: calc(100% + 4rem);
+  margin-left: -2rem;
   height: 150px;
   background-image: url(${MobileAboutHeroImage1x});
   background-size: cover;
@@ -73,49 +74,38 @@ const SearchWrapper = styled.div`
 `;
 
 const Input = styled.input`
-  color: ${p => p.theme.colors.info[200]};
   flex: 3;
-  height: 3rem;
   margin-right: 2rem;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #ffffff;
-  border-radius: 50px;
-  line-height: 1.5;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  outline: none;
-  opacity: 1;
+  height: 3rem;
   padding: 10px;
   margin-bottom: 10px;
-  font-style: normal normal normal 16px/22px Avenir;
-  &::placeholder {
-    font-weight: 300;
-    color: ${p => p.theme.colors.info[200]};
-  }
-  &:hover {
-    border: 1px solid #0a559e;
-    opacity: 0.8;
-  }
-  &:active {
-    opacity: 0.4;
-    border: 0px;
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) var(--unnamed-font-size-16) /
+    var(--unnamed-line-spacing-24) var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(---333333-dark);
+  text-align: left;
+  font: normal normal normal 16px/24px Avenir;
+  letter-spacing: 0px;
+  color: #333333;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 50px;
+  ::placeholder {
+    color: #333333;
+    opacity: 1;
   }
 `;
+
 const Select = styled.select`
   flex: 1;
-  height: 3rem;
   margin-right: 2rem;
+  height: 3rem;
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #ffffff;
   border-radius: 25px;
   opacity: 1;
-  padding: 10px;
-  &:hover {
-    border: 1px solid #0a559e;
-  }
-  &:focus {
-    border: 1px solid #0a559e;
-    border-radius: 25px;
-  }
+  padding: 0.5rem;
+  color: #333333;
+  opacity: 1;
 
   @media only screen and (max-width: 475px) {
     margin: 1rem 0;

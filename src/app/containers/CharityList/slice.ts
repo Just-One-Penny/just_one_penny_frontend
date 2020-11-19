@@ -14,7 +14,7 @@ const charityListSlice = createSlice({
   name: 'charityList',
   initialState,
   reducers: {
-    getCharitiesRequest(state, action: PayloadAction<string>) {
+    getCharitiesRequest(state) {
       state.loading = true;
       state.error = null;
     },

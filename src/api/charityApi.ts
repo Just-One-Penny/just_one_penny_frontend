@@ -48,4 +48,4 @@ export class CharityApi extends Api {
   };
 }
 
-export const charityApi = new CharityApi(apiConfig);
+export const charityApi = new CharityApi(apiConfig());
