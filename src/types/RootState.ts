@@ -20,7 +20,7 @@ export interface RootState {
   accountSettings?: AccountSettingsState;
   donationModal?: DonationModalState;
   charityList?: CharityListState;
-  charityDisplayState?: CharityDisplayState;
+  charityDisplay?: CharityDisplayState;
   authenticationModal?: AuthenticationModalState;
   newsFeed?: NewsFeedState;
   stripeSuccess?: StripeSuccessState;
