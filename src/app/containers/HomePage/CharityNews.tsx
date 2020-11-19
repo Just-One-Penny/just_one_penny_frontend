@@ -6,10 +6,6 @@ export const CharityNews = () => {
   return (
     <Container>
       <H2>Charity News</H2>
-      {/*
-      Using dummy data to render each card
-      Until organic data is rendered
-    */}
       <CharitiesContainer>
         <NewsFeed />
       </CharitiesContainer>
