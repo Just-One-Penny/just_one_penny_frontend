@@ -40,7 +40,6 @@ export function Nav() {
 }
 
 const Wrapper = styled.nav`
-  opacity: 0.7;
   display: none;
   > a:hover,
   > div > a:hover,
