@@ -8,6 +8,7 @@ import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { Modal } from '../Modal';
 import { Modal as UIModal, useModalState } from '@welcome-ui/modal';
+import { Link } from 'react-router-dom';
 
 interface Props {
   button: React.ReactNode;
@@ -64,7 +65,9 @@ export const CharityNewsModal = memo((props: Props) => {
             congue a metus.
           </B1>
           <DonateContainer>
-            <Button2>Donate to This Charity</Button2>
+            <Link to="/charities">
+              <Button2>View Charities</Button2>
+            </Link>
           </DonateContainer>
         </ModalContent>
       </Container>
