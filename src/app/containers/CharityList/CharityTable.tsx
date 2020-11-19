@@ -6,6 +6,7 @@ import { Charity } from 'types/Charity';
 import { Link } from 'react-router-dom';
 import { DonationModal } from '../DonationModal';
 import { DonationButton } from 'app/components/DonationButton';
+import { NoCharities } from './NoCharities';
 
 interface Props {
   charities: Charity[];
@@ -25,7 +26,7 @@ export const CharityTable = (props: Props) => {
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
-          {props.charities.map((charity, i) => (
+          {/* {props.charities.map((charity, i) => (
             <Table.Tr>
               <Table.Td>
                 <CharityImage src={charity.logo} />
@@ -46,7 +47,8 @@ export const CharityTable = (props: Props) => {
                 />
               </Table.Td>
             </Table.Tr>
-          ))}
+          ))} */}
+          <NoCharities />
         </Table.Tbody>
       </Table>
     </TableContainer>
