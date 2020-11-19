@@ -9,3 +9,8 @@ export const selectCharityList = createSelector(
   [selectDomain],
   charityListState => charityListState.charities,
 );
+
+export const selectLoading = createSelector(
+  [selectDomain],
+  charityListState => charityListState.loading,
+);

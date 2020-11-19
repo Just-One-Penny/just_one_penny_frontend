@@ -20,7 +20,7 @@ import { Divider } from 'app/components/Divider';
 import { PaymentInfo } from 'app/components/PaymentInfo';
 import { FormField } from 'app/components/FormField';
 import { Button } from 'app/components/Button';
-import { DonationSubmission } from './types';
+import { DonationSubmissionValues, DonationSubmission } from './types';
 
 interface Props {
   charityId: string;
@@ -48,15 +48,20 @@ export function DonationModal(props: Props) {
     setState({ ...state, submitting: true });
   };
 
-  const handleSubmit = (values: DonationSubmission) => {
-    dispatch(actions.submitDonation(values));
+  const handleSubmit = (values: DonationSubmissionValues) => {
+    const submissionValues: DonationSubmission = {
+      ...values,
+      coverCost: Boolean(values.coverCost.length),
+      support: Boolean(values.support.length),
+    };
+    dispatch(actions.submitDonation(submissionValues));
   };
 
   const donationForm = (values, formType) => (
     <>
       {formType === 'standard' ? (
         <FormField
-          name="donationAmount"
+          name="amount"
           label="Donation Amount"
           type="text"
           placeholder="$0.00"

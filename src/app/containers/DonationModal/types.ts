@@ -18,6 +18,17 @@ export interface DonationSubmission {
   token: string;
 }
 
+export interface DonationSubmissionValues {
+  donationAmount: string;
+  frequency: string;
+  coverCost: string[];
+  support: string[];
+  amount: number;
+  fullName: string;
+  email: string;
+  token: string;
+}
+
 export interface DonationSubmitted {
   userId: string;
   charityId: string;

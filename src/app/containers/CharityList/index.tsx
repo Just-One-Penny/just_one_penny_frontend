@@ -18,22 +18,24 @@ import { charityListSaga } from './saga';
 import { HeroSection } from 'app/components/HeroSection';
 import { CharityFilters } from './CharityFilters';
 import { CharityTable } from './CharityTable';
+import { selectLoading } from '../AuthenticationModal/selectors';
 
 interface Props {}
 
 export const CharityList = memo((props: Props) => {
-  const [rendered, setRendered] = useState(false);
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: charityListSaga });
   const dispatch = useDispatch();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const charityList = useSelector(selectCharityList);
+  const loading = useSelector(selectLoading);
   useEffect(() => {
-    if (!rendered) {
+    const getCharities = () => {
       dispatch(actions.getCharitiesRequest());
-      setRendered(true);
-    }
-  }, [rendered]);
+    };
+
+    getCharities();
+  }, []);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -48,7 +50,7 @@ export const CharityList = memo((props: Props) => {
       <HeroSection />
       <Row>
         <CharityFilters />
-        <CharityTable charities={charityList} />
+        <CharityTable charities={charityList} loading={loading} />
       </Row>
     </>
   );
