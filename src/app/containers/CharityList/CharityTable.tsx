@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { Table } from '@welcome-ui/table';
 import { Stack } from '@welcome-ui/stack';
-import { Avatar } from '@welcome-ui/avatar';
-import { DonateButton } from 'app/components/DonateButton';
 import { Charity } from 'types/Charity';
 import { Link } from 'react-router-dom';
+import { DonationModal } from '../DonationModal';
+import { DonationButton } from 'app/components/DonationButton';
 
 interface Props {
   charities: Charity[];
@@ -40,7 +40,10 @@ export const CharityTable = (props: Props) => {
                 </Stack>
               </Table.Td>
               <Table.Td>
-                <DonateButton />
+                <DonationButton
+                  charityId={charity.id}
+                  charityName={charity.name}
+                />
               </Table.Td>
             </Table.Tr>
           ))}
