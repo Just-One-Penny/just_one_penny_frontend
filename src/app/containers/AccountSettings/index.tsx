@@ -16,6 +16,7 @@ import { selectAccountSettings } from './selectors';
 import { accountSettingsSaga } from './saga';
 import { UserBio } from './UserBio';
 import { AccountPaymentInfo } from './AccountPaymentInfo';
+import { AccountDonations } from './AccountDonations';
 import { HeroSection } from 'app/components/HeroSection';
 import { Divider } from 'app/components/Divider';
 
@@ -61,7 +62,7 @@ export const AccountSettings = memo((props: Props) => {
       <PageContainer>
         <TabContainer>{tabs.map(Tab)}</TabContainer>
         <TabContentContainer>
-          {state.tab === 0 ? <>Donations</> : null}
+          {state.tab === 0 ? <AccountDonations/> : null}
           {state.tab === 1 ? <>Billing Information</> : null}
           {state.tab === 2 ? <>Settings</> : null}
         </TabContentContainer>

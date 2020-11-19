@@ -11,7 +11,6 @@ export function Nav() {
 
   return (
     <Wrapper>
-
       <Link to="/charities">
         <NavLink>Charities</NavLink>
       </Link>

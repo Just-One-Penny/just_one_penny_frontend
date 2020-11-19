@@ -26,7 +26,7 @@ export const CharityTable = (props: Props) => {
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
-          {/* {props.charities.map((charity, i) => (
+          {props.charities.map((charity, i) => (
             <Table.Tr>
               <Table.Td>
                 <CharityImage src={charity.logo} />
@@ -47,7 +47,7 @@ export const CharityTable = (props: Props) => {
                 />
               </Table.Td>
             </Table.Tr>
-          ))} */}
+          ))}
           <NoCharities />
         </Table.Tbody>
       </Table>

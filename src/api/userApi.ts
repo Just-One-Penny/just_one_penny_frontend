@@ -13,6 +13,8 @@ import { Charity } from 'types/Charity';
 
 export const authStorageKey = 'jop_auth_token';
 
+//new function that calls the endpoint for getting all donations by user
+
 export class UserApi extends Api {
   public constructor(config?: AxiosRequestConfig) {
     super(config);
@@ -23,6 +25,20 @@ export class UserApi extends Api {
     // to retrieve the user's token. (It's a bit more complicated than that...
     // but you're probably not an auth provider so you don't need to worry about it).
     return localStorage.getItem(authStorageKey);
+  };
+
+//new function that calls the endpoint for getting all donations by user
+  public getDonationsbyUser = (id: number): Promise<User[]> => {
+    try {
+      return this.get<
+        User,
+        AxiosResponse<User[]>
+      >(`/${id}/donations`)
+      .then(this.success);
+
+    } catch (error) {
+      throw error;
+    }
   };
 
   public userLogin = (credentials: Credentials): Promise<User> => {
