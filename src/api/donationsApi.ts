@@ -22,4 +22,4 @@ export class DonationApi extends Api {
   };
 }
 
-export const donationApi = new DonationApi(apiConfig);
+export const donationApi = new DonationApi(apiConfig());

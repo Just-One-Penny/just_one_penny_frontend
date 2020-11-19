@@ -24,7 +24,7 @@ const NavWrapper = styled.div`
   padding: 0 1.5rem;
   width: 100%;
   align-items: center;
-  background-color: #f2f2f2;
+  background-color: rgba(255, 255, 255, 0.9);
   @media (min-width: 640px) {
     display: flex;
     justify-content: space-around;
@@ -32,22 +32,13 @@ const NavWrapper = styled.div`
 `;
 
 const Wrapper = styled.header`
-  box-shadow: 0 1px 0 0 ${p => p.theme.borderLight};
+  box-shadow: 0 1px 0 0 ${p => p.theme.colors.light};
   height: ${StyleConstants.NAV_BAR_HEIGHT};
   display: flex;
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: ${p => p.theme.background};
   z-index: 2;
-  @supports (backdrop-filter: blur(10px)) {
-    backdrop-filter: blur(10px);
-    background-color: ${p =>
-      p.theme.background.replace(
-        /rgba?(\(\s*\d+\s*,\s*\d+\s*,\s*\d+)(?:\s*,.+?)?\)/,
-        'rgba$1,0.75)',
-      )};
-  }
   ${NavWrapper} {
     display: flex;
     align-items: center;

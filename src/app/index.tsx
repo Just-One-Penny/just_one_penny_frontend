@@ -24,6 +24,7 @@ import { Footer } from './components/Footer';
 import { NavBar } from './containers/NavBar';
 import { StripeSuccess } from './containers/StripeSuccess/Loadable';
 import { PageWrapper } from './components/PageWrapper';
+import { AccountSettings } from './containers/AccountSettings/Loadable';
 
 export function App() {
   return (
@@ -36,10 +37,10 @@ export function App() {
       </Helmet>
       <NavBar />
 
-      <NavBar />
       <PageWrapper>
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/settings" component={AccountSettings} />
           <Route exact path="/contactUs" component={ContactUs} />
           <Route exact path="/about" component={About} />
           <Route exact path="/stripe" component={StripeSuccess} />

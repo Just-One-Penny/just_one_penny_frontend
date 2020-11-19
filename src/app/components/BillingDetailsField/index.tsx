@@ -3,78 +3,78 @@
  * BillingDetailsField
  *
  */
+import { STATES, COUNTRIES } from 'app/constants';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormField } from '../FormField';
 
-interface Props {
-  fullName?: string;
-  email?: string;
-  address?: string;
-  city?: string;
-  state?: string;
-  zip?: string;
-  onChange: Function;
-}
-
-export function BillingDetailsField(props: Props) {
+export function BillingDetailsField() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
 
   return (
     <>
+      <div className="flex w-full flex-row">
+        <div className="w-1/2 mr-2">
+          <FormField
+            name="cardFirst"
+            label="Cardholder First Name"
+            type="text"
+            placeholder="First Name"
+            required
+          />
+        </div>
+        <div className="w-1/2">
+          <FormField
+            name="cardLast"
+            label="Cardholder Last Name"
+            type="text"
+            placeholder="Last Name"
+            required
+          />
+        </div>
+      </div>
       <FormField
-        name="fullName"
-        label="Name"
+        name="billingAddress"
+        label="Billing Address"
         type="text"
-        value={props.fullName}
-        placeholder="Jane Doe"
-        onChange={evt => props.onChange(evt)}
+        placeholder="Street Address"
         required
       />
       <FormField
-        name="email"
-        label="Email"
-        type="email"
-        value={props.email}
-        placeholder="jane.doe@example.com"
-        onChange={evt => props.onChange(evt)}
-        required
-      />
-      <FormField
-        name="address"
-        label="Address"
-        type="text"
-        value={props.address}
-        placeholder="185 Berry St. Suite 550"
-        onChange={evt => props.onChange(evt)}
-        required
-      />
-      <FormField
-        name="city"
+        name="billingCity"
         label="City"
         type="text"
-        value={props.city}
-        placeholder="San Francisco"
-        onChange={evt => props.onChange(evt)}
+        placeholder="Billing City"
         required
       />
+      <div className="flex w-full flex-row">
+        <div className="w-1/2 mr-2">
+          <FormField
+            name="state"
+            label="State"
+            component="select"
+            placeholder="Select State"
+            options={STATES}
+            required
+          />
+        </div>
+        <div className="w-1/2 mr-2">
+          <FormField
+            name="zip"
+            label="ZIP"
+            type="text"
+            placeholder="Billing Zip"
+            required
+          />
+        </div>
+      </div>
       <FormField
-        name="state"
-        label="State"
-        type="text"
-        value={props.state}
-        placeholder="California"
-        onChange={evt => props.onChange(evt)}
-        required
-      />
-      <FormField
-        name="zip"
-        label="ZIP"
-        type="text"
-        value={props.zip}
-        placeholder="94103"
-        onChange={evt => props.onChange(evt)}
+        name="country"
+        label="Country"
+        component="select"
+        placeholder="Select Country"
+        options={COUNTRIES}
         required
       />
     </>

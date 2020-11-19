@@ -12,6 +12,18 @@ export interface AuthenticationModalState {
   error?: AuthenticationModalErrorType | null;
 }
 
+export interface LoginForm {
+  email: string;
+  password: string;
+}
+
+export interface SignUpForm {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+}
+
 export interface Donations {
   amount: number;
 }

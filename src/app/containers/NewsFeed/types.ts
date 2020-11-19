@@ -1,4 +1,4 @@
-import { Article, NewsFeed } from 'types/newsFeed';
+import { Article } from 'types/newsFeed';
 /* --- STATE --- */
 export interface NewsFeedState {
   articles: Article[];

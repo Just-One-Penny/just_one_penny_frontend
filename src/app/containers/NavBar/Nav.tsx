@@ -1,52 +1,36 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/macro';
 
 import { AuthenticationModal } from '../AuthenticationModal';
 import { Modal } from 'app/components/Modal';
 import { useAuth } from 'context/auth-context';
-
-import items from './sampleLinks';
-
-import icon from './assets/dropdown-icon.png';
+import { Link } from 'react-router-dom';
 
 export function Nav() {
-  const { user } = useAuth();
-  const [show, toggle] = useState(false);
-
-  function _toggleMenu() {
-    toggle(!show);
-  }
+  const { user, logout } = useAuth();
 
   return (
     <Wrapper>
-      <div>
-        <a onClick={_toggleMenu} href="www.google.com">
-          Charities
-          <img className="icon" alt="V" src={icon} />
-        </a>
-        {show && (
-          <Dropdown>
-            {items.map((item, i) => (
-              <a href={item.link} key={item.text}>
-                {item.text}
-              </a>
-            ))}
-          </Dropdown>
-        )}
-      </div>
-      <a href="/">About</a>
-      {user ? (
-        <a className="button-border" href="/">
-          Logout
-        </a>
+      <Link to="/charities">
+        <NavLink>Charities</NavLink>
+      </Link>
+      <Link to="/about">
+        <NavLink>About</NavLink>
+      </Link>
+      {user && user.id ? (
+        <Link to="/">
+          <NavLink className="button-border" onClick={logout}>
+            Logout
+          </NavLink>
+        </Link>
       ) : (
         <>
           <Modal
-            buttonElement={<button>Login</button>}
+            buttonElement={<NavLink>Login</NavLink>}
             modalBody={<AuthenticationModal />}
           />
           <Modal
-            buttonElement={<button className="button-border">Sign Up</button>}
+            buttonElement={<NavLink className="button-border">Sign Up</NavLink>}
             modalBody={<AuthenticationModal isSignup />}
           />
         </>
@@ -92,19 +76,14 @@ const Wrapper = styled.nav`
   }
 `;
 
-const Dropdown = styled.ul`
-  margin-top: 0.5rem;
-  background-color: darkgray;
-  position: absolute;
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-  a {
-    padding: 0.25rem 0.5rem;
-    opacity: 0.8;
-    :hover {
-      opacity: 1;
-      background-color: grey;
-    }
-  }
+const NavLink = styled.span`
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
+    var(--unnamed-font-size-16) / 22px var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(---333333-dark);
+  text-align: left;
+  font: normal normal 900 16px/22px Avenir;
+  letter-spacing: 0px;
+  color: #333333;
+  cursor: pointer;
 `;

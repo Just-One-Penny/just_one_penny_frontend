@@ -1,16 +1,17 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
-import { selectAmount, selectUserId, selectCharityId } from './selectors';
+import { selectUserId, selectCharityId, selectPaymentInfo } from './selectors';
 import { actions } from './slice';
 import {
   DonationModalSuccess,
   DonationModalError,
   DonationSubmitted,
+  DonationSubmission,
 } from './types';
 import { donationApi } from 'api/donationsApi';
 
 export function* checkDonation() {
-  const amount: number = yield select(selectAmount);
-  if (!amount) {
+  const paymentInfo: DonationSubmission = yield select(selectPaymentInfo);
+  if (!paymentInfo) {
     yield put(actions.donationModalError(DonationModalError.NO_AMOUNT));
     return;
   }
@@ -21,7 +22,7 @@ export function* checkDonation() {
   const donation: DonationSubmitted = {
     userId,
     charityId,
-    amount,
+    ...paymentInfo,
     dateSent: new Date(),
   };
 
