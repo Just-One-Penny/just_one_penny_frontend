@@ -5,6 +5,7 @@ import { Stack } from '@welcome-ui/stack';
 import { Avatar } from '@welcome-ui/avatar';
 import { DonateButton } from 'app/components/DonateButton';
 import { Charity } from 'types/Charity';
+import { Link } from 'react-router-dom';
 
 interface Props {
   charities: Charity[];
@@ -27,16 +28,13 @@ export const CharityTable = (props: Props) => {
           {props.charities.map((charity, i) => (
             <Table.Tr>
               <Table.Td>
-                <Avatar
-                  src={charity.logo}
-                  name={charity.name}
-                  shape="square"
-                  size="xxl"
-                />
+                <CharityImage src={charity.logo} />
               </Table.Td>
               <Table.Td>
                 <Stack>
-                  <Name>{charity.name}</Name>
+                  <Link to={`/charities/${charity.id}`}>
+                    <LinkName>{charity.name}</LinkName>
+                  </Link>
                   <Name>{charity.categories}</Name>
                   <div>{charity.lastYearRevenue.revenue}</div>
                 </Stack>
@@ -54,6 +52,31 @@ export const CharityTable = (props: Props) => {
 
 const Name = styled.div`
   text-transform: capitalize;
+`;
+
+const LinkName = styled.div`
+  text-transform: capitalize;
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) var(--unnamed-font-size-16) /
+    var(--unnamed-line-spacing-24) var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(---0a559e-primary);
+  text-align: left;
+  font: normal normal normal 16px/24px Avenir;
+  letter-spacing: 0px;
+  color: #0a559e;
+`;
+
+interface ImageProps {
+  src: string;
+}
+
+const CharityImage = styled.div`
+  width: 15rem;
+  height: 6rem;
+  background-size: cover;
+  resize: both;
+  background-image: url('${(p: ImageProps) => p.src}');
 `;
 
 const ResultsText = styled.span`
