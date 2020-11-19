@@ -14,3 +14,8 @@ export const selectLoading = createSelector(
   [selectDomain],
   charityListState => charityListState.loading,
 );
+
+export const selectSearch = createSelector(
+  [selectDomain],
+  charityListState => charityListState.search,
+);

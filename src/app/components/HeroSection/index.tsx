@@ -3,7 +3,11 @@
  * HeroSection
  *
  */
+import { CATEGORIES } from 'app/constants';
 import React from 'react';
+import { Form, Field } from 'react-final-form';
+import { useHistory } from 'react-router-dom';
+import Select from 'react-select';
 import styled from 'styled-components/macro';
 import { StyleConstants } from 'styles/StyleConstants';
 import { Button } from '../Button';
@@ -12,24 +16,68 @@ import AboutHeroImage2x from './assets/AboutHeroImage2x.png';
 import MobileAboutHeroImage1x from './assets/MobileAboutHeroImage1x.png';
 import MobileAboutHeroImage2x from './assets/MobileAboutHeroImage2x.png';
 
+const categoryOptions = CATEGORIES.map(category => ({
+  value: category.toLowerCase(),
+  label: category,
+}));
+
 interface Props {}
 
 export function HeroSection(props: Props) {
+  const history = useHistory();
+
+  const handleSearch = values => {
+    const searchValues = { ...values };
+    if (searchValues.categories) {
+      searchValues.categories = searchValues.categories.map(
+        category => category.value,
+      );
+    }
+    const search = new URLSearchParams(searchValues);
+    history.push(`/charities?${search}`);
+  };
+
+  const selectStyles = {
+    control: (_, { selectProps: { width } }) => ({
+      display: 'flex',
+      height: '100%',
+      width: '100%',
+      background: '#ffffff 0% 0% no-repeat padding-box',
+      borderRadius: '25px',
+      opacity: 1,
+      color: '#333333',
+      textAlign: 'left',
+      font: 'normal normal normal 16px/24px Avenir',
+      letterSpacing: '0px',
+    }),
+  };
+
+  const ReactSelectAdapter = ({ input, ...rest }) => (
+    <Select {...input} {...rest} isMulti styles={selectStyles} searchable />
+  );
+
   return (
     <HeroDiv>
-      <SearchWrapper>
-        <Input name="Charity" id="charity" placeholder="Search Charity Name" />
-        <Select name="Categories" id="categories">
-          <option value="" hidden>
-            Search By category
-          </option>
-          <option value="1">Animal & Nature</option>
-          <option value="2">Arts & Education </option>
-          <option value="3">Communities & Religion</option>
-          <option value="4">Human Outreach</option>
-        </Select>
-        <Button btnStyle={'primary'}>Find Charity</Button>
-      </SearchWrapper>
+      <Form
+        onSubmit={handleSearch}
+        render={({ handleSubmit }) => (
+          <SearchWrapper onSubmit={handleSubmit}>
+            <Input
+              component="input"
+              name="name"
+              id="charity"
+              placeholder="Search Charity Name"
+            />
+            <StyledSelect
+              name="categories"
+              component={ReactSelectAdapter}
+              placeholder="Search By category"
+              options={categoryOptions}
+            />
+            <Button btnStyle={'primary'}>Find Charity</Button>
+          </SearchWrapper>
+        )}
+      />
     </HeroDiv>
   );
 }
@@ -62,7 +110,7 @@ const HeroDiv = styled.div`
   }
 `;
 
-const SearchWrapper = styled.div`
+const SearchWrapper = styled.form`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -73,7 +121,7 @@ const SearchWrapper = styled.div`
   }
 `;
 
-const Input = styled.input`
+const Input = styled(Field)`
   flex: 3;
   margin-right: 2rem;
   height: 3rem;
@@ -96,8 +144,8 @@ const Input = styled.input`
   }
 `;
 
-const Select = styled.select`
-  flex: 1;
+const StyledSelect = styled(Field)`
+  flex: 2;
   margin-right: 2rem;
   height: 3rem;
   background: #ffffff 0% 0% no-repeat padding-box;

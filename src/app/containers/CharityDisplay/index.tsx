@@ -42,7 +42,6 @@ export const CharityDisplay = memo((props: Props) => {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const charityDisplay = useSelector(selectCharityDisplay);
-  console.log('charityDisplay', charityDisplay);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
