@@ -55,6 +55,25 @@ export function DonationModal(props: Props) {
       ? '' // make controlled
       : numeral(value).format('$0,0.00');
 
+  const calculateTotal = values => {
+    let amount = values.amount
+      ? Number(values.amount.replace(/[^0-9.-]+/g, ''))
+      : 0;
+    const coverCost = values.coverCost
+      ? Boolean(values.coverCost.length)
+      : false;
+    const support = values.support ? Boolean(values.support.length) : false;
+
+    if (support) {
+      amount += 2;
+    }
+
+    if (coverCost) {
+      amount += amount * 0.029 + 0.3;
+    }
+    return amount;
+  };
+
   const onSubmit = async values => {
     setState({ ...state, submitting: true });
   };
@@ -78,13 +97,7 @@ export function DonationModal(props: Props) {
       submissionValues['frequency'] = submissionValues['amount'].toString();
     }
 
-    let total = submissionValues.amount;
-    if (coverCost) {
-      total += 2;
-    }
-    if (support) {
-      total += 2;
-    }
+    const total = calculateTotal(values);
 
     dispatch(actions.submitDonation(submissionValues));
     setState({ ...state, ...values, total });
@@ -164,7 +177,7 @@ export function DonationModal(props: Props) {
         onSubmit={onSubmit}
         render={({ handleSubmit, values }) => (
           <>
-            <Header>{values.amount ? values.amount : '$0'}</Header>
+            <Header>{formatPrice(calculateTotal(values))}</Header>
             <ModalContent>
               <form onSubmit={handleSubmit}>
                 <div>
