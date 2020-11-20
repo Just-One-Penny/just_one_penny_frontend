@@ -1,9 +1,9 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
+import { User } from 'types/User';
 import {
   ContainerState,
   AuthenticationModalErrorType,
-  AuthenticationModalSuccess,
   SocialAuthSuccess,
   SignUpForm,
   LoginForm,
@@ -19,6 +19,8 @@ export const initialState: ContainerState = {
   provider: '',
   loading: false,
   error: null,
+  success: false,
+  user: null,
 };
 
 const authenticationModalSlice = createSlice({
@@ -57,12 +59,11 @@ const authenticationModalSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    authenticationModalSuccess(
-      state,
-      action: PayloadAction<AuthenticationModalSuccess>,
-    ) {
+    authenticationModalSuccess(state, action: PayloadAction<User>) {
       // const token = action.payload;
+      state.user = action.payload;
       state.loading = false;
+      state.success = true;
     },
     authenticationModalError(
       state,

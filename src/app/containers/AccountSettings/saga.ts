@@ -36,7 +36,7 @@ export function* updateUser() {
     fullName,
     role,
   };
-  const response: UpdateSuccess = yield call(userApi.updateUser, userObject); //
+  const response: UpdateSuccess = yield call(userApi.updateUser, userObject);
   yield put(actions.updateSuccess(response));
 }
 
@@ -99,10 +99,35 @@ export function* getCharities() {
   return charities;
 }
 
+export function* getUserDonations() {
+  const id = yield select(selectId);
+  const donations = yield call(userApi.getDonationsbyUser, id);
+  if (donations != null) {
+    yield put(actions.getUserDonationsSuccess(donations));
+  } else {
+    yield put(actions.getCharitiesError(GetCharitiesErrorType.GENERAL_ERROR));
+  }
+}
+
+export function* getUserDonationSchedules() {
+  const id = yield select(selectId);
+  const donations = yield call(userApi.getDonationSchedulesByUser, id);
+  if (donations != null) {
+    yield put(actions.getUserDonationSchedulesSuccess(donations));
+  } else {
+    yield put(actions.getCharitiesError(GetCharitiesErrorType.GENERAL_ERROR));
+  }
+}
+
 // This is the saga that you use with the useInjectSaga function
 export function* accountSettingsSaga() {
   yield takeEvery(actions.getCharitiesRequest.type, getCharities);
   yield takeEvery(actions.updateUser.type, updateUser);
   yield takeEvery(actions.changePassword.type, changePassword);
   yield takeEvery(actions.updatePayment.type, updatePayment);
+  yield takeEvery(actions.getUserDonations.type, getUserDonations);
+  yield takeEvery(
+    actions.getUserDonationSchedules.type,
+    getUserDonationSchedules,
+  );
 }

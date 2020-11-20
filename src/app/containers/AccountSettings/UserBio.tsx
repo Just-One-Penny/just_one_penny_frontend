@@ -147,7 +147,7 @@ export function UserBio() {
               <div>
                 <FieldGrid>
                   <TitleContainer>Name:</TitleContainer>
-                  <FieldContent>{selectedFullName}</FieldContent>
+                  <FieldContent>{user?.fullName}</FieldContent>
                   <Modal
                     buttonElement={<EditButton>Edit</EditButton>}
                     modalBody={

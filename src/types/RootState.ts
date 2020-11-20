@@ -15,13 +15,12 @@ import { StripeSuccessState } from 'app/containers/StripeSuccess/types';
   You have to declare them here manually
 */
 export interface RootState {
-  charityDisplay: import('/Users/mattbicknese/JOP/just_one_penny_frontend/src/app/containers/CharityDisplay/types').CharityDisplayState;
   theme?: ThemeState;
   // authentication?: AuthenticationState;
   accountSettings?: AccountSettingsState;
   donationModal?: DonationModalState;
   charityList?: CharityListState;
-  charityDisplayState?: CharityDisplayState;
+  charityDisplay?: CharityDisplayState;
   authenticationModal?: AuthenticationModalState;
   newsFeed?: NewsFeedState;
   stripeSuccess?: StripeSuccessState;

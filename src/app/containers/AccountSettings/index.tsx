@@ -4,24 +4,27 @@
  *
  */
 
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/macro';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { reducer, sliceKey } from './slice';
+import { actions, reducer, sliceKey } from './slice';
 import { selectAccountSettings } from './selectors';
 import { accountSettingsSaga } from './saga';
 import { UserBio } from './UserBio';
 import { AccountPaymentInfo } from './AccountPaymentInfo';
+import { AccountDonations } from './AccountDonations';
 import { HeroSection } from 'app/components/HeroSection';
 import { Divider } from 'app/components/Divider';
+import { useAuth } from 'context/auth-context';
 
 interface Props {}
 
 export const AccountSettings = memo((props: Props) => {
+  const { user } = useAuth();
   const [state, setState] = useState({ tab: 0 });
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: accountSettingsSaga });
@@ -30,6 +33,9 @@ export const AccountSettings = memo((props: Props) => {
   const accountSettings = useSelector(selectAccountSettings);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(actions.setId(user.id));
+  }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
@@ -61,7 +67,7 @@ export const AccountSettings = memo((props: Props) => {
       <PageContainer>
         <TabContainer>{tabs.map(Tab)}</TabContainer>
         <TabContentContainer>
-          {state.tab === 0 ? <>Donations</> : null}
+          {state.tab === 0 ? <AccountDonations /> : null}
           {state.tab === 1 ? <>Billing Information</> : null}
           {state.tab === 2 ? <UserBio /> : null}
         </TabContentContainer>

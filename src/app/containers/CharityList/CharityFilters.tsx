@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 import { Form, Field } from 'react-final-form';
 import { FormField } from 'app/components/FormField';
-import { STATES } from 'app/constants';
+import { CATEGORIES, STATES } from 'app/constants';
 import { Divider } from 'app/components/Divider';
+import { useHistory } from 'react-router-dom';
+import { Button } from 'app/components/Button';
+import { CategorySelect } from 'app/components/CategorySelect';
 
 export const CharityFilters = () => {
+  const history = useHistory();
+  const [allCategories, setAllCategories] = useState(false);
+
+  const toggle = () => setAllCategories(!allCategories);
+
+  const handleSearch = values => {
+    const search = new URLSearchParams(values);
+    history.push(`/charities?${search}`);
+  };
+
   return (
     <FilterContainer>
       <Form
-        onSubmit={() => {}}
+        onSubmit={handleSearch}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit}>
             <SecondaryHeader>Filter By:</SecondaryHeader>
@@ -26,43 +39,30 @@ export const CharityFilters = () => {
 
             {/* CATEGORY */}
             <InputLabel className="mt-4">Category</InputLabel>
-            <Field
-              name="categories"
-              component="input"
-              type="checkbox"
-              value="animals"
-              className="mr-3 mt-3"
-            />
-            <FilterText>Animal & Nature</FilterText>
-            <br />
-            <Field
-              name="categories"
-              component="input"
-              type="checkbox"
-              value="arts"
-              className="mr-3 mt-3"
-            />
-            <FilterText>Arts & Education</FilterText>
-            <br />
-            <Field
-              name="categories"
-              component="input"
-              type="checkbox"
-              value="communities"
-              className="mr-3 mt-3"
-            />
-            <FilterText>Communities & Religion</FilterText>
-            <br />
-            <Field
-              name="categories"
-              component="input"
-              type="checkbox"
-              value="outreach"
-              className="mr-3 mt-3"
-            />
-            <FilterText>Human Outreach</FilterText>
-            <br />
-
+            {/* <div className="w-full">
+              <CategorySelect />
+            </div> */}
+            {/* These are the categories checkbox */}
+            {CATEGORIES.slice(0, allCategories ? CATEGORIES.length : 10).map(
+              category => (
+                <>
+                  <Field
+                    name="categories"
+                    component="input"
+                    type="checkbox"
+                    value={category}
+                    className="mr-3 mt-3"
+                  />
+                  <FilterText>{category}</FilterText>
+                  <br />
+                </>
+              ),
+            )}
+            <div className="w-full flex justify-center align-center">
+              <LinkText onClick={toggle}>
+                Show {allCategories ? 'less' : 'more'}
+              </LinkText>
+            </div>
             {/* REVENUE SIZE */}
             <InputLabel className="mt-4">Revenue Size</InputLabel>
             <Field
@@ -92,6 +92,16 @@ export const CharityFilters = () => {
             />
             <FilterText>Size Range 3</FilterText>
             <br />
+            <div className="w-full flex justify-center align-center mt-3">
+              <div className="w-1/2 mr-2">
+                <Button type="submit">Search</Button>
+              </div>
+              <div className="w-1/2">
+                <Button type="submit" btnStyle="secondary">
+                  Reset Filters
+                </Button>
+              </div>
+            </div>
           </form>
         )}
       />
@@ -144,4 +154,17 @@ const InputLabel = styled.div`
   font: normal normal medium 14px/21px Avenir;
   letter-spacing: 0px;
   color: #333333;
+`;
+
+const LinkText = styled.span`
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) var(--unnamed-font-size-16) /
+    var(--unnamed-line-spacing-24) var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(---0a559e-primary);
+  text-align: left;
+  font: normal normal normal 16px/24px Avenir;
+  letter-spacing: 0px;
+  color: #0a559e;
+  cursor: pointer;
 `;

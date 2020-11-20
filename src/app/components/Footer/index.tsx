@@ -4,6 +4,7 @@
  *
  */
 import React, { memo } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
 interface Props {}
@@ -14,17 +15,23 @@ export const Footer = memo((props: Props) => {
       <Column>
         <List>
           <Item>
-            <Link href="#">Contact us</Link>
+            <Link to="/contactUs">
+              <StyledLink>Contact Us</StyledLink>
+            </Link>
           </Item>
           <Item>
-            <Link href="#">FAQ</Link>
+            <Link to="/faq">
+              <StyledLink>FAQ</StyledLink>
+            </Link>
           </Item>
           <Item>
-            <Link href="#">About</Link>
+            <Link to="/about">
+              <StyledLink>About</StyledLink>
+            </Link>
           </Item>
         </List>
       </Column>
-      <Link href="#">Copyright Information</Link>
+      <StyledLink>Copyright Information</StyledLink>
     </FooterSection>
   );
 });
@@ -56,7 +63,7 @@ const Item = styled.li`
   list-style-type: none;
 `;
 
-const Link = styled.a`
+const StyledLink = styled.a`
   color: #333333;
   opacity: 1;
   font-weight: 900;

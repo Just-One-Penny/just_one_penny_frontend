@@ -9,6 +9,8 @@ export interface AuthenticationModalState {
   accessToken: string;
   provider: string;
   loading: boolean;
+  success: boolean;
+  user: User | null;
   error?: AuthenticationModalErrorType | null;
 }
 
