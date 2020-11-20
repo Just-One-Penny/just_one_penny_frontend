@@ -18,6 +18,7 @@ import { Card } from '@welcome-ui/card';
 import { Article } from 'types/newsFeed';
 
 import { CharityNewsModal } from '../../components/CharityNewsModal';
+import { Modal } from 'app/components/Modal';
 
 interface Props {}
 
@@ -35,9 +36,9 @@ export function NewsFeed(props: Props) {
     <>
       <Div>
         {newsFeed.map(article => (
-          <CharityNewsModal
-            button={
-              <CardContainer maxWidth={400} lineHeight="2">
+          <Modal
+            buttonElement={
+              <CardContainer maxWidth="15rem" height="20rem" lineHeight="2">
                 <Card.Cover width={1} src={article.urlToImage} />
                 <Card.Body>
                   <Text
@@ -55,9 +56,7 @@ export function NewsFeed(props: Props) {
                 </Card.Body>
               </CardContainer>
             }
-            title={article.title}
-            content={article.content}
-            date={new Date(article.publishedAt).toString().slice(0, 15)}
+            modalBody={<CharityNewsModal {...article} />}
           />
         ))}
       </Div>
@@ -67,6 +66,7 @@ export function NewsFeed(props: Props) {
 
 const CardContainer = styled(Card)`
   margin-bottom: 2rem;
+  cursor: pointer;
 `;
 
 const Div = styled.div`

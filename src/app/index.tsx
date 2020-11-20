@@ -45,12 +45,12 @@ export function App() {
           <Route exact path="/about" component={About} />
           <Route exact path="/stripe" component={StripeSuccess} />
           <Route exact path="/charities" component={CharityList} />
+          <Route exact path="/charities/new" component={CharitySignup} />
           <Route
             exact
             path="/charities/:charityId"
             component={CharityDisplay}
           />
-          <Route exact path="/charities/new" component={CharitySignup} />
 
           {/* Make sure you add new routes above the not found page */}
           <Route component={NotFoundPage} />

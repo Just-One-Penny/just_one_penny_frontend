@@ -4,12 +4,13 @@ import { Table } from '@welcome-ui/table';
 import { Stack } from '@welcome-ui/stack';
 import { Charity } from 'types/Charity';
 import { Link } from 'react-router-dom';
-import { DonationModal } from '../DonationModal';
 import { DonationButton } from 'app/components/DonationButton';
 import { NoCharities } from './NoCharities';
+import { LoadingSpinner } from 'app/components/LoadingSpinner';
 
 interface Props {
   charities: Charity[];
+  loading: boolean;
 }
 
 export const CharityTable = (props: Props) => {
@@ -26,29 +27,35 @@ export const CharityTable = (props: Props) => {
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
-          {props.charities.map((charity, i) => (
-            <Table.Tr>
-              <Table.Td>
-                <CharityImage src={charity.logo} />
-              </Table.Td>
-              <Table.Td>
-                <Stack>
+          {props.loading && <LoadingSpinner />}
+          {!props.loading && props.charities.length > 0 ? (
+            props.charities.map((charity, i) => (
+              <Table.Tr>
+                <Table.Td>
                   <Link to={`/charities/${charity.id}`}>
-                    <LinkName>{charity.name}</LinkName>
+                    <CharityImage src={charity.logo} />
                   </Link>
-                  <Name>{charity.categories}</Name>
-                  <div>{charity.lastYearRevenue.revenue}</div>
-                </Stack>
-              </Table.Td>
-              <Table.Td>
-                <DonationButton
-                  charityId={charity.id}
-                  charityName={charity.name}
-                />
-              </Table.Td>
-            </Table.Tr>
-          ))}
-          <NoCharities />
+                </Table.Td>
+                <Table.Td>
+                  <Stack>
+                    <Link to={`/charities/${charity.id}`}>
+                      <LinkName>{charity.name}</LinkName>
+                    </Link>
+                    <Name>{charity.categories}</Name>
+                    <div>{charity.lastYearRevenue.revenue}</div>
+                  </Stack>
+                </Table.Td>
+                <Table.Td>
+                  <DonationButton
+                    charityId={charity.id}
+                    charityName={charity.name}
+                  />
+                </Table.Td>
+              </Table.Tr>
+            ))
+          ) : (
+            <NoCharities />
+          )}
         </Table.Tbody>
       </Table>
     </TableContainer>
