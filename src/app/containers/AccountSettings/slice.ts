@@ -9,6 +9,7 @@ import {
 } from './types';
 
 import { Charity } from 'types/Charity';
+import { DonationSubmitted } from 'types/Donation';
 
 // The initial state of the AccountSettings container
 export const initialState: ContainerState = {
@@ -21,6 +22,7 @@ export const initialState: ContainerState = {
   loading: false,
   billing: {},
   error: null,
+  userDonations: [],
 };
 
 const accountSettingsSlice = createSlice({
@@ -135,6 +137,19 @@ const accountSettingsSlice = createSlice({
       state.charities = action.payload;
     },
     getCharitiesError(state, action: PayloadAction<GetCharitiesErrorType>) {
+      state.error = action.payload;
+      state.loading = false;
+    },
+    getUserDonations(state) {
+      state.loading = true;
+      state.error = null;     
+    },
+    getUserDonationsSuccess(state, action: PayloadAction<DonationSubmitted[]>) {
+      state.loading = false;
+      state.error = null;      
+      state.userDonations = action.payload;
+    },
+    getUserDonationsError(state, action: PayloadAction<GetCharitiesErrorType>) {
       state.error = action.payload;
       state.loading = false;
     },

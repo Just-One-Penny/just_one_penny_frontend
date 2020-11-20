@@ -3,4 +3,6 @@ export interface DonationSubmitted {
   charityId: string;
   amount: number;
   dateSent: Date;
+  charityName: string;
 }
+

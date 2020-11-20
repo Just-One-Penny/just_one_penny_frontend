@@ -16,6 +16,7 @@ export interface DonationSubmission {
   fullName: string;
   email: string;
   token: string;
+  charityName: string
 }
 
 export interface DonationSubmitted {
@@ -30,6 +31,7 @@ export interface DonationSubmitted {
   fullName: string;
   email: string;
   token: string;
+  charityName: string
 }
 
 export interface DonationModalSuccess {

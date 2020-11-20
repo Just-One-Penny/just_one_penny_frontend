@@ -10,6 +10,7 @@ import {
 import { UpdatingBillingInfo, UpdatedBillingInfo } from 'types/Stripe';
 import { apiConfig } from './api.config';
 import { Charity } from 'types/Charity';
+import { DonationSubmitted } from 'app/containers/DonationModal/types';
 
 export const authStorageKey = 'jop_auth_token';
 
@@ -28,14 +29,13 @@ export class UserApi extends Api {
   };
 
 //new function that calls the endpoint for getting all donations by user
-  public getDonationsbyUser = (id: number): Promise<User[]> => {
+  public getDonationsbyUser = (id: string): Promise<DonationSubmitted[]> => {
     try {
       return this.get<
         User,
-        AxiosResponse<User[]>
-      >(`/${id}/donations`)
+        AxiosResponse<DonationSubmitted[]>
+      >(`/users/${id}/donations`)
       .then(this.success);
-
     } catch (error) {
       throw error;
     }

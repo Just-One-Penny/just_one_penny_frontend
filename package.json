@@ -118,6 +118,7 @@
     "@xstyled/system": "1.20.0-alpha.0",
     "axios": "0.19.2",
     "babel-plugin-add-react-displayname": "0.0.5",
+    "date-fns": "2.16.1",
     "final-form": "4.20.1",
     "fontfaceobserver": "2.1.0",
     "formik": "2.2.3",
