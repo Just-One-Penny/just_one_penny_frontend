@@ -48,10 +48,13 @@ export interface DonationModalSuccess {
   userId: string;
   charityId: string;
   amount: number;
+  totalDonated: number;
   dateSent: Date;
-  stripeChargeId?: string;
-  refunded: boolean;
-  anonymous: boolean;
+  charityName: string;
+  charityLogo: string;
+  type: string;
+  active: boolean;
+  nextDonation: Date;
 }
 
 export enum DonationModalError {

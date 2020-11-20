@@ -5,6 +5,7 @@ import {
   DonationModalError,
   IDs,
   DonationSubmission,
+  DonationModalSuccess,
 } from './types';
 
 // The initial state of the DonationModal container
@@ -30,7 +31,7 @@ const donationModalSlice = createSlice({
       state.error = null;
       state.paymentInfo = action.payload;
     },
-    donationSuccess(state) {
+    donationSuccess(state, action: PayloadAction<DonationModalSuccess>) {
       state.userId = '';
       state.charityId = '';
       state.success = true;

@@ -7,7 +7,7 @@ import React, { memo } from 'react';
 import { Modal as UIModal, useModalState } from '@welcome-ui/modal';
 import styled from 'styled-components';
 
-enum Size {
+export enum Size {
   sm = 'sm',
   md = 'md',
   lg = 'lg',

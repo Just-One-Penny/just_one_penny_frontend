@@ -26,7 +26,7 @@ export function* checkDonation() {
     donation,
   );
 
-  yield put(actions.donationSuccess());
+  yield put(actions.donationSuccess(response));
 }
 export function* donationModalSaga() {
   yield takeEvery(actions.submitDonation.type, checkDonation);

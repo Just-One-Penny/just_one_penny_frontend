@@ -22,6 +22,7 @@ import { FormField } from 'app/components/FormField';
 import { Button } from 'app/components/Button';
 import { DonationSubmissionValues, DonationSubmission } from './types';
 import { selectSuccess } from '../AuthenticationModal/selectors';
+import { Success } from './Success';
 
 interface Props {
   charityId: string;
@@ -35,6 +36,7 @@ export function DonationModal(props: Props) {
   const tab = useTabState({ selectedId: 'micro' });
   const [state, setState] = useState({
     submitting: false,
+    total: 0,
   });
 
   useInjectReducer({ key: sliceKey, reducer: reducer });
@@ -58,21 +60,34 @@ export function DonationModal(props: Props) {
   };
 
   const handleSubmit = (values: DonationSubmissionValues) => {
+    const coverCost = values.coverCost
+      ? Boolean(values.coverCost.length)
+      : false;
+    const support = values.support ? Boolean(values.support.length) : false;
     const submissionValues: DonationSubmission = {
       ...values,
       amount: Number(values.amount.replace(/[^0-9.-]+/g, '')),
       type: tab.currentId,
       userId: user.id,
       charityId: props.charityId,
-      coverCost: values.coverCost ? Boolean(values.coverCost.length) : false,
-      support: values.support ? Boolean(values.support.length) : false,
+      coverCost,
+      support,
     };
 
     if (tab.currentId === 'micro') {
       submissionValues['frequency'] = submissionValues['amount'].toString();
     }
 
+    let total = submissionValues.amount;
+    if (coverCost) {
+      total += 2;
+    }
+    if (support) {
+      total += 2;
+    }
+
     dispatch(actions.submitDonation(submissionValues));
+    setState({ ...state, ...values, total });
   };
 
   const donationForm = (values, formType) => (
@@ -138,6 +153,10 @@ export function DonationModal(props: Props) {
       />
     </>
   );
+
+  if (success) {
+    return <Success {...state} hide={props.hide} />;
+  }
 
   return (
     <Wrapper>
