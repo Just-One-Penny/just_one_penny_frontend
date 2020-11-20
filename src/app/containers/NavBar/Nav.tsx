@@ -11,14 +11,14 @@ export function Nav() {
 
   return (
     <Wrapper>
-      <Link to="/charities">
-        <NavLink>Charities</NavLink>
+      <Link to="/charities/new">
+        <NavLink className="mr-4">For Charities</NavLink>
       </Link>
       <Link to="/about">
-        <NavLink>About</NavLink>
+        <NavLink className="mr-4">About</NavLink>
       </Link>
       <Link to="/settings">
-        <NavLink>My Account</NavLink>
+        <NavLink className="mr-4">My Account</NavLink>
       </Link>
       {user && user.id ? (
         <Link to="/">
@@ -29,7 +29,7 @@ export function Nav() {
       ) : (
         <>
           <Modal
-            buttonElement={<NavLink>Login</NavLink>}
+            buttonElement={<NavLink className="mr-4">Login</NavLink>}
             modalBody={<AuthenticationModal />}
           />
           <Modal

@@ -8,6 +8,13 @@ export const NoCharities = () => {
       <OneSvg />
       <Header className="my-2">Sorry, no charities match your search.</Header>
       <div>
+        <Text className="mb-2">
+          Was there a charity you were hoping to find in these results? We’re
+          constantly expanding our offering of charities, but if there is a
+          specific organization that you’d like to see on our platform please
+          let them know that they should sign-up by sending them this link.
+        </Text>
+        <br />
         <Text className="mb-2">Search Selections:</Text>
         <br />
         <Text>

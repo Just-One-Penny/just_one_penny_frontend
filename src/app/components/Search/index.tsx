@@ -3,7 +3,6 @@
  * Search
  *
  */
-import { CATEGORIES } from 'app/constants';
 import React from 'react';
 import { Form, Field } from 'react-final-form';
 import { useHistory } from 'react-router-dom';
@@ -11,11 +10,7 @@ import Select from 'react-select';
 import styled from 'styled-components/macro';
 import { StyleConstants } from 'styles/StyleConstants';
 import { Button } from '../Button';
-
-const categoryOptions = CATEGORIES.map(category => ({
-  value: category.toLowerCase(),
-  label: category,
-}));
+import { CategorySelect } from '../CategorySelect';
 
 export const Search = props => {
   const history = useHistory();
@@ -31,24 +26,6 @@ export const Search = props => {
     history.push(`/charities?${search}`);
   };
 
-  const selectStyles = {
-    control: (_, { selectProps: { width } }) => ({
-      display: 'flex',
-      height: '100%',
-      width: '100%',
-      background: '#ffffff 0% 0% no-repeat padding-box',
-      borderRadius: '25px',
-      opacity: 1,
-      color: '#333333',
-      textAlign: 'left',
-      font: 'normal normal normal 16px/24px Avenir',
-      letterSpacing: '0px',
-    }),
-  };
-
-  const ReactSelectAdapter = ({ input, ...rest }) => (
-    <Select {...input} {...rest} isMulti styles={selectStyles} searchable />
-  );
   return (
     <Form
       onSubmit={handleSearch}
@@ -58,12 +35,9 @@ export const Search = props => {
             <Input name="Charity" placeholder="Search Charity Name" />
           </p>
           <Wrapper>
-            <StyledSelect
-              name="categories"
-              component={ReactSelectAdapter}
-              placeholder="Search By category"
-              options={categoryOptions}
-            />
+            <SelectContainer>
+              <CategorySelect />
+            </SelectContainer>
             <Button btnStyle={'primary'}>Find Charities</Button>
           </Wrapper>
         </FormContainer>
@@ -88,6 +62,11 @@ const Wrapper = styled.div`
     align-items: center;
   }
 `;
+
+const SelectContainer = styled.div`
+  width: 53%;
+`;
+
 const Input = styled.input`
   width: 100%;
   height: 3rem;
@@ -108,27 +87,5 @@ const Input = styled.input`
   ::placeholder {
     color: #333333;
     opacity: 1;
-  }
-`;
-const StyledSelect = styled(Field)`
-  width: 53%;
-  height: 3rem;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 25px;
-  opacity: 1;
-  padding: 0.5rem;
-  color: #333333;
-  opacity: 1;
-  &:hover {
-    border: 1px solid #0a559e;
-  }
-  &:focus {
-    border: 1px solid #0a559e;
-    border-radius: 25px;
-  }
-
-  @media only screen and (max-width: 475px) {
-    margin: 1rem 0;
-    width: 100%;
   }
 `;

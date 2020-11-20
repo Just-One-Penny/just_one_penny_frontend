@@ -91,7 +91,7 @@ export function DonationModal(props: Props) {
           <Input name="frequency" component="select">
             <option />
             <option value="once">Only Donate Once</option>
-            <option value="yearly">Every Year</option>
+            <option value="monthly">Every Month</option>
           </Input>
         </>
       )}

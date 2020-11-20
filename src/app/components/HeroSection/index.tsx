@@ -11,6 +11,7 @@ import Select from 'react-select';
 import styled from 'styled-components/macro';
 import { StyleConstants } from 'styles/StyleConstants';
 import { Button } from '../Button';
+import { CategorySelect } from '../CategorySelect';
 import AboutHeroImage1x from './assets/AboutHeroImage1x.png';
 import AboutHeroImage2x from './assets/AboutHeroImage2x.png';
 import MobileAboutHeroImage1x from './assets/MobileAboutHeroImage1x.png';
@@ -37,25 +38,6 @@ export function HeroSection(props: Props) {
     history.push(`/charities?${search}`);
   };
 
-  const selectStyles = {
-    control: (_, { selectProps: { width } }) => ({
-      display: 'flex',
-      height: '100%',
-      width: '100%',
-      background: '#ffffff 0% 0% no-repeat padding-box',
-      borderRadius: '25px',
-      opacity: 1,
-      color: '#333333',
-      textAlign: 'left',
-      font: 'normal normal normal 16px/24px Avenir',
-      letterSpacing: '0px',
-    }),
-  };
-
-  const ReactSelectAdapter = ({ input, ...rest }) => (
-    <Select {...input} {...rest} isMulti styles={selectStyles} searchable />
-  );
-
   return (
     <HeroDiv>
       <Form
@@ -68,12 +50,9 @@ export function HeroSection(props: Props) {
               id="charity"
               placeholder="Search Charity Name"
             />
-            <StyledSelect
-              name="categories"
-              component={ReactSelectAdapter}
-              placeholder="Search By category"
-              options={categoryOptions}
-            />
+            <SelectContainer>
+              <CategorySelect />
+            </SelectContainer>
             <Button btnStyle={'primary'}>Find Charities</Button>
           </SearchWrapper>
         )}
@@ -108,6 +87,10 @@ const HeroDiv = styled.div`
     only screen and (min-width: 1920px) {
     background-image: url(${AboutHeroImage2x});
   }
+`;
+
+const SelectContainer = styled.div`
+  width: 25%;
 `;
 
 const SearchWrapper = styled.form`

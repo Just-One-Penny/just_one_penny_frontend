@@ -6,6 +6,7 @@ import { CATEGORIES, STATES } from 'app/constants';
 import { Divider } from 'app/components/Divider';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'app/components/Button';
+import { CategorySelect } from 'app/components/CategorySelect';
 
 export const CharityFilters = () => {
   const history = useHistory();
@@ -38,6 +39,10 @@ export const CharityFilters = () => {
 
             {/* CATEGORY */}
             <InputLabel className="mt-4">Category</InputLabel>
+            {/* <div className="w-full">
+              <CategorySelect />
+            </div> */}
+            {/* These are the categories checkbox */}
             {CATEGORIES.slice(0, allCategories ? CATEGORIES.length : 10).map(
               category => (
                 <>
