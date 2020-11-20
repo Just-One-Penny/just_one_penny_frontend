@@ -30,13 +30,11 @@ export function NewsFeed(props: Props) {
   if (!newsFeed.length) {
     dispatch(actions.loadingFeed());
   }
-  console.log('NewsFeed', newsFeed);
 
   return (
     <>
       <Div>
         {newsFeed.map(article => {
-          console.log(new Date(article.publishedAt).toString().slice(0, 15));
           return (
             <CharityNewsModal
               button={

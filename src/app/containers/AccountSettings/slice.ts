@@ -2,10 +2,12 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import {
   ContainerState,
+  UpdateUser,
   UpdatedUser,
   UpdateSuccess,
   UpdatedBillingInfoSuccess,
   GetCharitiesErrorType,
+  UpdatePassword,
 } from './types';
 
 import { Charity } from 'types/Charity';
@@ -16,6 +18,8 @@ export const initialState: ContainerState = {
   fullName: '',
   email: '',
   role: '',
+  password: '',
+  oldPassword: '',
   charities: [],
   isEditing: false,
   loading: false,
@@ -39,6 +43,14 @@ const accountSettingsSlice = createSlice({
     changeRole(state, action: PayloadAction<string>) {
       state.role = action.payload;
     },
+    changePassword(state, action: PayloadAction<UpdatePassword>) {
+      state.password = action.payload.password;
+      state.oldPassword = action.payload.oldPassword;
+      state.id = action.payload.userId;
+    },
+    changeOldPassword(state, action: PayloadAction<string>) {
+      state.oldPassword = action.payload;
+    },
     changeIsEditing(state, action: PayloadAction<UpdatedUser | boolean>) {
       if (typeof action.payload == 'boolean') {
         state.isEditing = action.payload;
@@ -49,7 +61,11 @@ const accountSettingsSlice = createSlice({
         state.isEditing = !state.isEditing;
       }
     },
-    updateUser(state) {
+    updateUser(state, action: PayloadAction<UpdateUser>) {
+      state.id = action.payload.id;
+      state.fullName = action.payload.fullName;
+      state.email = action.payload.email;
+      state.role = action.payload.role;
       state.loading = true;
     },
     updateSuccess(state, action: PayloadAction<UpdateSuccess>) {
@@ -57,7 +73,6 @@ const accountSettingsSlice = createSlice({
       state.loading = false;
       state.id = action.payload.id;
       state.fullName = action.payload.name;
-      state.role = action.payload.role;
       state.email = action.payload.email;
     },
     changeAddress(state, action: PayloadAction<string>) {

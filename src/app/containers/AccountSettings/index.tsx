@@ -63,7 +63,7 @@ export const AccountSettings = memo((props: Props) => {
         <TabContentContainer>
           {state.tab === 0 ? <>Donations</> : null}
           {state.tab === 1 ? <>Billing Information</> : null}
-          {state.tab === 2 ? <>Settings</> : null}
+          {state.tab === 2 ? <UserBio /> : null}
         </TabContentContainer>
       </PageContainer>
     </>

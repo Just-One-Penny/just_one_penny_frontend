@@ -5,6 +5,7 @@ import {
   selectEmail,
   selectFullName,
   selectRole,
+  selectPassword,
   selectId,
   selectAddress,
   selectCity,
@@ -14,11 +15,13 @@ import {
   selectCardNumber,
   selectExpiry,
   selectCvc,
+  selectOldPassword,
 } from './selectors';
 import {
   UpdateSuccess,
   GetCharitiesErrorType,
   UpdatedBillingInfoSuccess,
+  UpdatePassword,
 } from './types';
 
 export function* updateUser() {
@@ -35,6 +38,20 @@ export function* updateUser() {
   };
   const response: UpdateSuccess = yield call(userApi.updateUser, userObject); //
   yield put(actions.updateSuccess(response));
+}
+
+export function* changePassword() {
+  const userId: string = yield select(selectId);
+  const password: string = yield select(selectPassword);
+  const oldPassword: string = yield select(selectOldPassword);
+
+  const passwordObj = {
+    userId,
+    password,
+    oldPassword,
+  };
+
+  yield call(userApi.updatePassword, passwordObj);
 }
 
 export function* updatePayment() {
@@ -86,5 +103,6 @@ export function* getCharities() {
 export function* accountSettingsSaga() {
   yield takeEvery(actions.getCharitiesRequest.type, getCharities);
   yield takeEvery(actions.updateUser.type, updateUser);
+  yield takeEvery(actions.changePassword.type, changePassword);
   yield takeEvery(actions.updatePayment.type, updatePayment);
 }
