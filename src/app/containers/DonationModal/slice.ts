@@ -14,6 +14,7 @@ export const initialState: ContainerState = {
   loading: false,
   error: null,
   paymentInfo: null,
+  success: false,
 };
 
 const donationModalSlice = createSlice({
@@ -32,6 +33,7 @@ const donationModalSlice = createSlice({
     donationSuccess(state) {
       state.userId = '';
       state.charityId = '';
+      state.success = true;
       state.loading = false;
       state.error = null;
     },

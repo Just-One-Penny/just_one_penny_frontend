@@ -80,3 +80,13 @@ export const selectAccountSettings = createSelector(
   [selectDomain],
   accountSettingsState => accountSettingsState,
 );
+
+export const selectUserDonations = createSelector(
+  [selectDomain],
+  accountSettingsState => accountSettingsState.userDonations,
+);
+
+export const selectUserDonationSchedules = createSelector(
+  [selectDomain],
+  accountSettingsState => accountSettingsState.userDonationSchedules,
+);
