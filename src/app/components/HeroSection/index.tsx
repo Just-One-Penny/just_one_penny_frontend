@@ -74,7 +74,7 @@ export function HeroSection(props: Props) {
               placeholder="Search By category"
               options={categoryOptions}
             />
-            <Button btnStyle={'primary'}>Find Charity</Button>
+            <Button btnStyle={'primary'}>Find Charities</Button>
           </SearchWrapper>
         )}
       />

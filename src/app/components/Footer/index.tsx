@@ -16,7 +16,7 @@ export const Footer = memo((props: Props) => {
         <List>
           <Item>
             <Link to="/contactUs">
-              <StyledLink>Contact us</StyledLink>
+              <StyledLink>Contact Us</StyledLink>
             </Link>
           </Item>
           <Item>

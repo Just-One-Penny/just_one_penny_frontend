@@ -11,12 +11,14 @@ export function Nav() {
 
   return (
     <Wrapper>
-
       <Link to="/charities">
         <NavLink>Charities</NavLink>
       </Link>
       <Link to="/about">
         <NavLink>About</NavLink>
+      </Link>
+      <Link to="/settings">
+        <NavLink>My Account</NavLink>
       </Link>
       {user && user.id ? (
         <Link to="/">

@@ -138,7 +138,7 @@ exports[`<Search  /> should match snapshot 1`] = `
   <button
     class="c3"
   >
-    Find Charity
+    Find Charities
   </button>
 </div>
 `;

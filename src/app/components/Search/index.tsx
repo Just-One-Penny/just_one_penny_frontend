@@ -64,7 +64,7 @@ export const Search = props => {
               placeholder="Search By category"
               options={categoryOptions}
             />
-            <Button btnStyle={'primary'}>Find Charity</Button>
+            <Button btnStyle={'primary'}>Find Charities</Button>
           </Wrapper>
         </FormContainer>
       )}
