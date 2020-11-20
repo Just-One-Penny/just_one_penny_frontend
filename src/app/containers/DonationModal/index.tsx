@@ -4,8 +4,8 @@
  *
  */
 
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 import { Form, Field } from 'react-final-form';
 import { Tab, useTabState } from '@welcome-ui/tabs';
@@ -21,23 +21,32 @@ import { PaymentInfo } from 'app/components/PaymentInfo';
 import { FormField } from 'app/components/FormField';
 import { Button } from 'app/components/Button';
 import { DonationSubmissionValues, DonationSubmission } from './types';
+import { selectSuccess } from '../AuthenticationModal/selectors';
 
 interface Props {
   charityId: string;
   charityName: string;
+  hide?: Function;
 }
 
 export function DonationModal(props: Props) {
+  const dispatch = useDispatch();
   const { user } = useAuth();
-  const tab = useTabState({ selectedId: 'tab1' });
+  const tab = useTabState({ selectedId: 'micro' });
   const [state, setState] = useState({
     submitting: false,
   });
+
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: donationModalSaga });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const dispatch = useDispatch();
+  const success = useSelector(selectSuccess);
+
+  useEffect(() => {
+    if (success && props.hide) {
+      props.hide();
+    }
+  }, [success]);
 
   const formatPrice = value =>
     value === undefined
@@ -51,10 +60,18 @@ export function DonationModal(props: Props) {
   const handleSubmit = (values: DonationSubmissionValues) => {
     const submissionValues: DonationSubmission = {
       ...values,
-      charityName: '',
-      coverCost: Boolean(values.coverCost.length),
-      support: Boolean(values.support.length),
+      amount: Number(values.amount.replace(/[^0-9.-]+/g, '')),
+      type: tab.currentId,
+      userId: user.id,
+      charityId: props.charityId,
+      coverCost: values.coverCost ? Boolean(values.coverCost.length) : false,
+      support: values.support ? Boolean(values.support.length) : false,
     };
+
+    if (tab.currentId === 'micro') {
+      submissionValues['frequency'] = submissionValues['amount'].toString();
+    }
+
     dispatch(actions.submitDonation(submissionValues));
   };
 
@@ -74,16 +91,16 @@ export function DonationModal(props: Props) {
         <>
           <InputLabel>Daily Amount</InputLabel>
           <Input
-            name="frequency"
+            name="amount"
             component="select"
             placeholder="Select Daily Amount"
           >
             <option />
-            <option value="0.01">$0.01 Per Day</option>
-            <option value="0.05">$0.05 Per Day</option>
-            <option value="0.10">$0.10 Per Day</option>
-            <option value="0.25">$0.25 Per Day</option>
-            <option value="0.50">$0.50 Per Day</option>
+            <option value="$0.01">$0.01 Per Day</option>
+            <option value="$0.05">$0.05 Per Day</option>
+            <option value="$0.10">$0.10 Per Day</option>
+            <option value="$0.25">$0.25 Per Day</option>
+            <option value="$0.50">$0.50 Per Day</option>
           </Input>
         </>
       ) : (
@@ -128,9 +145,7 @@ export function DonationModal(props: Props) {
         onSubmit={onSubmit}
         render={({ handleSubmit, values }) => (
           <>
-            <Header>
-              {values.donationAmount ? values.donationAmount : '$0'}
-            </Header>
+            <Header>{values.amount ? values.amount : '$0'}</Header>
             <ModalContent>
               <form onSubmit={handleSubmit}>
                 <div>
@@ -150,17 +165,17 @@ export function DonationModal(props: Props) {
                   />
                 </div>
                 <StyledTabList aria-label="Tabs" {...tab}>
-                  <StyledTab {...tab} id="tab1">
+                  <StyledTab {...tab} id="micro">
                     Micro-Donation
                   </StyledTab>
-                  <StyledTab {...tab} id="tab2">
+                  <StyledTab {...tab} id="standard">
                     Standard
                   </StyledTab>
                 </StyledTabList>
-                <Tab.Panel {...tab} tabId="tab1">
+                <Tab.Panel {...tab} tabId="micro">
                   {donationForm(values, 'micro')}
                 </Tab.Panel>
-                <Tab.Panel {...tab} tabId="tab2">
+                <Tab.Panel {...tab} tabId="standard">
                   {donationForm(values, 'standard')}
                 </Tab.Panel>
                 <Divider />

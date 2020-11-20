@@ -28,14 +28,26 @@ export class UserApi extends Api {
     return localStorage.getItem(authStorageKey);
   };
 
-//new function that calls the endpoint for getting all donations by user
-  public getDonationsbyUser = (id: string): Promise<DonationSubmitted[]> => {
+  //new function that calls the endpoint for getting all donations by user
+  public getDonationsbyUser = (
+    userId: string,
+  ): Promise<DonationSubmitted[]> => {
     try {
-      return this.get<
-        User,
-        AxiosResponse<DonationSubmitted[]>
-      >(`/users/${id}/donations`)
-      .then(this.success);
+      return this.get<User, AxiosResponse<DonationSubmitted[]>>(
+        `/users/${userId}/donations`,
+      ).then(this.success);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  public getDonationSchedulesByUser = (
+    userId: string,
+  ): Promise<DonationSubmitted[]> => {
+    try {
+      return this.get<User, AxiosResponse<DonationSubmitted[]>>(
+        `/users/${userId}/donationSchedules`,
+      ).then(this.success);
     } catch (error) {
       throw error;
     }

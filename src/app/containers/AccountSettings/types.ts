@@ -12,6 +12,7 @@ export interface AccountSettingsState {
   billing: BillingInfo;
   error?: GetCharitiesErrorType | null;
   userDonations: DonationSubmitted[];
+  userDonationSchedules: DonationSubmitted[];
 }
 
 export enum GetCharitiesErrorType {

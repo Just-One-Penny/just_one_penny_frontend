@@ -23,6 +23,7 @@ export const initialState: ContainerState = {
   billing: {},
   error: null,
   userDonations: [],
+  userDonationSchedules: [],
 };
 
 const accountSettingsSlice = createSlice({
@@ -142,14 +143,33 @@ const accountSettingsSlice = createSlice({
     },
     getUserDonations(state) {
       state.loading = true;
-      state.error = null;     
+      state.error = null;
     },
     getUserDonationsSuccess(state, action: PayloadAction<DonationSubmitted[]>) {
       state.loading = false;
-      state.error = null;      
+      state.error = null;
       state.userDonations = action.payload;
     },
     getUserDonationsError(state, action: PayloadAction<GetCharitiesErrorType>) {
+      state.error = action.payload;
+      state.loading = false;
+    },
+    getUserDonationSchedules(state) {
+      state.loading = true;
+      state.error = null;
+    },
+    getUserDonationSchedulesSuccess(
+      state,
+      action: PayloadAction<DonationSubmitted[]>,
+    ) {
+      state.loading = false;
+      state.error = null;
+      state.userDonationSchedules = action.payload;
+    },
+    getUserDonationSchedulesError(
+      state,
+      action: PayloadAction<GetCharitiesErrorType>,
+    ) {
       state.error = action.payload;
       state.loading = false;
     },

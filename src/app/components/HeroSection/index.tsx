@@ -91,6 +91,7 @@ const HeroDiv = styled.div`
 
 const SelectContainer = styled.div`
   width: 25%;
+  margin-right: 2rem;
 `;
 
 const SearchWrapper = styled.form`

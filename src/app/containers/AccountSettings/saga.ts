@@ -86,7 +86,17 @@ export function* getUserDonations() {
   const id = yield select(selectId);
   const donations = yield call(userApi.getDonationsbyUser, id);
   if (donations != null) {
-    yield put(actions.getUserDonationsSuccess(donations))
+    yield put(actions.getUserDonationsSuccess(donations));
+  } else {
+    yield put(actions.getCharitiesError(GetCharitiesErrorType.GENERAL_ERROR));
+  }
+}
+
+export function* getUserDonationSchedules() {
+  const id = yield select(selectId);
+  const donations = yield call(userApi.getDonationSchedulesByUser, id);
+  if (donations != null) {
+    yield put(actions.getUserDonationSchedulesSuccess(donations));
   } else {
     yield put(actions.getCharitiesError(GetCharitiesErrorType.GENERAL_ERROR));
   }
@@ -97,5 +107,9 @@ export function* accountSettingsSaga() {
   yield takeEvery(actions.getCharitiesRequest.type, getCharities);
   yield takeEvery(actions.updateUser.type, updateUser);
   yield takeEvery(actions.updatePayment.type, updatePayment);
-  yield takeEvery(actions.getUserDonations.type, getUserDonations)
+  yield takeEvery(actions.getUserDonations.type, getUserDonations);
+  yield takeEvery(
+    actions.getUserDonationSchedules.type,
+    getUserDonationSchedules,
+  );
 }

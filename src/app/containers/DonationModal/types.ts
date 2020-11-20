@@ -3,12 +3,13 @@ export interface DonationModalState {
   userId: string;
   charityId: string;
   loading: boolean;
+  success: boolean;
   error: DonationModalError | null;
   paymentInfo: DonationSubmission | null;
 }
 
 export interface DonationSubmission {
-  donationAmount: string;
+  type: string;
   frequency: string;
   coverCost: boolean;
   support: boolean;
@@ -16,15 +17,15 @@ export interface DonationSubmission {
   fullName: string;
   email: string;
   token: string;
-  charityName: string;
+  charityId: string;
+  userId: string;
 }
 
 export interface DonationSubmissionValues {
-  donationAmount: string;
+  amount: string;
   frequency: string;
   coverCost: string[];
   support: string[];
-  amount: number;
   fullName: string;
   email: string;
   token: string;
@@ -35,14 +36,12 @@ export interface DonationSubmitted {
   charityId: string;
   amount: number;
   dateSent: Date;
-  donationAmount: string;
   frequency: string;
   coverCost: boolean;
   support: boolean;
   fullName: string;
   email: string;
   token: string;
-  charityName: string;
 }
 
 export interface DonationModalSuccess {
