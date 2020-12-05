@@ -1,61 +1,71 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Modal } from '../../components/Modal';
+import { TermsOfService } from '../../components/TermsOfService';
+import { Button } from '../../components/Button';
 
 export const InfoForCharities = () => {
   return (
-    <div>
+    <Wrapper>
       <Header>Info for Charities</Header>
+
+      <SubHeading className="mt-4 mb-1">Questions</SubHeading>
+
       <Text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-        scelerisque mollis sapien, eget semper tortor condimentum imperdiet.
-        Maecenas cursus, neque quis venenatis faucibus, eros lacus accumsan
-        tellus, et suscipit leo neque vel magna. Curabitur bibendum ut velit
-        vitae dignissim. Phasellus in ex at lacus vestibulum fermentum. Morbi
-        vitae molestie eros. Sed faucibus metus eu magna molestie, aliquam
-        iaculis leo auctor. Curabitur consectetur mi nec metus luctus, eget
-        elementum quam consectetur. Mauris facilisis vestibulum pharetra.
-        Vivamus sit amet lacus dignissim, finibus mauris et, accumsan ipsum.
-        Vivamus accumsan, odio sit amet finibus congue, risus arcu malesuada
-        tortor, vel posuere eros purus.
+        With the help of our nonprofit partners, we’re making it easier than
+        ever for people of all generational backgrounds to give to the charities
+        that make the world a better place. Use the following{' '}
+        <Modal
+          buttonElement={<TextLink>contact form</TextLink>}
+          modalBody={<TermsOfService />}
+        />{' '}
+        for any questions you have regarding Just One Penny’s charity
+        partnerships.
       </Text>
-      <SubHeading className="mt-4 mb-1">Subheading</SubHeading>
+
+      <SubHeading className="mt-4 mb-1">Sign-up</SubHeading>
+
       <Text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-        scelerisque mollis sapien, eget semper tortor condimentum imperdiet.
-        Maecenas cursus, neque quis venenatis faucibus, eros lacus accumsan
-        tellus, et suscipit leo neque vel magna. Curabitur bibendum ut velit
-        vitae dignissim. Phasellus in ex at lacus vestibulum fermentum. Morbi
-        vitae molestie eros. Sed faucibus metus eu magna molestie, aliquam
-        iaculis leo auctor. Curabitur consectetur mi nec metus luctus, eget
-        elementum quam consectetur. Mauris facilisis vestibulum pharetra.
-        Vivamus sit amet lacus dignissim, finibus mauris et, accumsan ipsum.
+        We welcome all charities to utilize our platform and begin their
+        micro-donation journey. Signing up takes less than 5 minutes, and any
+        501(c)(3) nonprofit organization is qualified to join.*
+        <br />
+        <br />
+        Once you sign up, we’ll take your information and create a custom
+        profile that will allow donors to learn more about you and establish
+        single-time and recurring donations to your charity. Your organization
+        will then show up in search results on our platform, and donors from
+        across the country will be able to support you.
+        <br />
+        <br />
+        *Pursuant to our{' '}
+        <Modal
+          buttonElement={<TextLink>Terms and Conditions</TextLink>}
+          modalBody={<TermsOfService />}
+        />
+        .
       </Text>
-    </div>
+
+      <ButtonContainer>
+        <Button btnStyle="primary">Sign-up Today</Button>
+      </ButtonContainer>
+    </Wrapper>
   );
 };
 
+const Wrapper = styled.div`
+  font-family: Avenir;
+  color: #333;
+`;
+
 const Header = styled.h2`
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
-    var(--unnamed-font-size-28) / var(--unnamed-line-spacing-42)
-    var(--unnamed-font-family-avenir);
-  letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(---333333-dark);
-  text-align: left;
-  font: normal normal 900 28px/42px Avenir;
-  letter-spacing: 0px;
-  color: #333333;
+  font-size: 1.75rem;
+  font-weight: 900;
 `;
 
 const SubHeading = styled.h3`
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
-    var(--unnamed-font-size-20) / var(--unnamed-line-spacing-30)
-    var(--unnamed-font-family-avenir);
-  letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(---333333-dark);
-  text-align: left;
-  font: normal normal 900 20px/30px Avenir;
-  letter-spacing: 0px;
-  color: #333333;
+  font-size: 1.25rem;
+  font-weight: 900;
 `;
 
 const Text = styled.span`
@@ -69,3 +79,17 @@ const Text = styled.span`
   letter-spacing: 0px;
   color: #333333;
 `;
+
+const TextLink = styled.span`
+  color: #0a559e;
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: #0c4379;
+    text-decoration: underline;
+  }
+`;
+
+const ButtonContainer = styled.div``;
