@@ -12,16 +12,13 @@ export function Nav() {
   return (
     <Wrapper>
       <Link to="/charities/new">
-        <NavLink className="mr-4">For Charities</NavLink>
-      </Link>
-      <Link to="/about">
-        <NavLink className="mr-4">About</NavLink>
-      </Link>
-      <Link to="/settings">
-        <NavLink className="mr-4">My Account</NavLink>
+        <NavLink className="mr-4">Info for Charities</NavLink>
       </Link>
       {user && user.id ? (
         <Link to="/">
+          <Link to="/settings">
+            <NavLink className="mr-4">My Account</NavLink>
+          </Link>
           <NavLink className="button-border" onClick={logout}>
             Logout
           </NavLink>
@@ -71,8 +68,7 @@ const Wrapper = styled.nav`
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 40vw;
-    max-width: 400px;
+    max-width: 500px;
     .icon {
       display: inline;
     }
