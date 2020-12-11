@@ -1,10 +1,12 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
+import { User } from 'types/User';
 import {
   ContainerState,
   AuthenticationModalErrorType,
-  AuthenticationModalSuccess,
   SocialAuthSuccess,
+  SignUpForm,
+  LoginForm,
 } from './types';
 
 // The initial state of the AuthenticationModal container
@@ -17,6 +19,8 @@ export const initialState: ContainerState = {
   provider: '',
   loading: false,
   error: null,
+  success: false,
+  user: null,
 };
 
 const authenticationModalSlice = createSlice({
@@ -35,11 +39,17 @@ const authenticationModalSlice = createSlice({
     changePassword(state, action: PayloadAction<string>) {
       state.password = action.payload;
     },
-    registerUser(state) {
+    registerUser(state, action: PayloadAction<SignUpForm>) {
+      state.email = action.payload.email;
+      state.firstName = action.payload.firstName;
+      state.lastName = action.payload.lastName;
+      state.password = action.payload.password;
       state.loading = true;
       state.error = null;
     },
-    loginUser(state) {
+    loginUser(state, action: PayloadAction<LoginForm>) {
+      state.email = action.payload.email;
+      state.password = action.payload.password;
       state.loading = true;
       state.error = null;
     },
@@ -49,12 +59,11 @@ const authenticationModalSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    authenticationModalSuccess(
-      state,
-      action: PayloadAction<AuthenticationModalSuccess>,
-    ) {
+    authenticationModalSuccess(state, action: PayloadAction<User>) {
       // const token = action.payload;
+      state.user = action.payload;
       state.loading = false;
+      state.success = true;
     },
     authenticationModalError(
       state,

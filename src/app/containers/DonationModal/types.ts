@@ -3,16 +3,29 @@ export interface DonationModalState {
   userId: string;
   charityId: string;
   loading: boolean;
+  success: boolean;
   error: DonationModalError | null;
   paymentInfo: DonationSubmission | null;
 }
 
 export interface DonationSubmission {
-  donationAmount: string;
+  type: string;
   frequency: string;
   coverCost: boolean;
   support: boolean;
   amount: number;
+  fullName: string;
+  email: string;
+  token: string;
+  charityId: string;
+  userId: string;
+}
+
+export interface DonationSubmissionValues {
+  amount: string;
+  frequency: string;
+  coverCost: string[];
+  support: string[];
   fullName: string;
   email: string;
   token: string;
@@ -23,7 +36,6 @@ export interface DonationSubmitted {
   charityId: string;
   amount: number;
   dateSent: Date;
-  donationAmount: string;
   frequency: string;
   coverCost: boolean;
   support: boolean;
@@ -36,10 +48,13 @@ export interface DonationModalSuccess {
   userId: string;
   charityId: string;
   amount: number;
+  totalDonated: number;
   dateSent: Date;
-  stripeChargeId?: string;
-  refunded: boolean;
-  anonymous: boolean;
+  charityName: string;
+  charityLogo: string;
+  type: string;
+  active: boolean;
+  nextDonation: Date;
 }
 
 export enum DonationModalError {

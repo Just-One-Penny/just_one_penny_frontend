@@ -4,24 +4,28 @@
  *
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { reducer, sliceKey, actions } from './slice';
-import {
-  selectEmail,
-  selectFirstName,
-  selectLastName,
-  selectPassword,
-} from './selectors';
 import { authenticationModalSaga } from './saga';
+import { Form, Field } from 'react-final-form';
 import GoogleLogin from 'react-google-login';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import {
+  FacebookLoginButton,
+  GoogleLoginButton,
+} from 'react-social-login-buttons';
+import { Button } from 'app/components/Button';
+import { FormField } from 'app/components/FormField';
+import { selectSuccess, selectUser } from './selectors';
+import { useAuth } from 'context/auth-context';
 
 interface Props {
   isSignup: boolean;
+  hide?: Function;
 }
 
 AuthenticationModal.defaultProps = {
@@ -29,50 +33,31 @@ AuthenticationModal.defaultProps = {
 };
 
 export function AuthenticationModal(props: Props) {
-  const [isSignup, setIsSignup] = useState(props.isSignup);
+  const { setUser } = useAuth();
+  const dispatch = useDispatch();
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: authenticationModalSaga });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const email = useSelector(selectEmail);
-  const password = useSelector(selectPassword);
-  const firstName = useSelector(selectFirstName);
-  const lastName = useSelector(selectLastName);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const dispatch = useDispatch();
+  const [isSignup, setIsSignup] = useState(props.isSignup);
+  const success = useSelector(selectSuccess);
+  const user = useSelector(selectUser);
 
-  const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    switch (evt.currentTarget.name) {
-      case 'email':
-        dispatch(actions.changeEmail(evt.currentTarget.value));
-        break;
-      case 'firstName':
-        dispatch(actions.changeFirstName(evt.currentTarget.value));
-        break;
-      case 'lastName':
-        dispatch(actions.changeLastName(evt.currentTarget.value));
-        break;
-      case 'password':
-        dispatch(actions.changePassword(evt.currentTarget.value));
-        break;
-      default:
-        break;
+  useEffect(() => {
+    if (success && props.hide) {
+      props.hide();
+      setUser(user);
     }
-  };
+  }, [success]);
 
-  const submitForm = (evt?: React.FormEvent<HTMLFormElement>) => {
-    if (evt !== undefined && evt.preventDefault) {
-      evt.preventDefault();
-    }
+  const submitForm = values => {
     if (isSignup) {
-      dispatch(actions.registerUser());
+      dispatch(actions.registerUser(values));
     } else {
-      dispatch(actions.loginUser());
+      dispatch(actions.loginUser(values));
     }
   };
 
   const onSignIn = response => {
-    console.log('onSignIn -> response', response);
     dispatch(
       actions.setAccessToken({
         accessToken: response.accessToken,
@@ -82,7 +67,6 @@ export function AuthenticationModal(props: Props) {
   };
 
   const responseFacebook = response => {
-    console.log('responseFacebook -> response', response);
     dispatch(
       actions.setAccessToken({
         accessToken: response.accessToken,
@@ -100,18 +84,23 @@ export function AuthenticationModal(props: Props) {
           <div className="relative flex flex-col min-w-0 break-words w-full mb-2 border-0">
             <div className="rounded-t mb-0 px-6 py-6">
               <div className="text-center mb-3">
-                <h6 className="text-gray-600 text-sm font-bold">
+                <H3 className="flex justify-center">
                   Sign {isSignup ? 'up' : 'in'} with
-                </h6>
+                </H3>
               </div>
               <div className="flex flex-row w-full">
                 <div className="w-1/2">
                   <GoogleLogin
-                    clientId="470508940865-gh5b3bovpu7g2efbc896e7ahd3vi0etn.apps.googleusercontent.com"
+                    clientId="470508940865-tjqisat9qbo4vc5gm953f6fq04ii5u7j.apps.googleusercontent.com"
                     buttonText="Login"
                     onSuccess={onSignIn}
                     onFailure={onFailure}
-                    render={(renderProps) => <GoogleLoginButton className='h-3' onClick={renderProps.onClick} />}
+                    render={renderProps => (
+                      <GoogleLoginButton
+                        className="h-3"
+                        onClick={renderProps.onClick}
+                      />
+                    )}
                     cookiePolicy={'single_host_origin'}
                   />
                 </div>
@@ -119,7 +108,12 @@ export function AuthenticationModal(props: Props) {
                   <FacebookLogin
                     appId="767504717314327"
                     fields="name,email,picture"
-                    render={(renderProps) => <FacebookLoginButton className='h-3' onClick={renderProps.onClick} />}
+                    render={renderProps => (
+                      <FacebookLoginButton
+                        className="h-3"
+                        onClick={renderProps.onClick}
+                      />
+                    )}
                     callback={responseFacebook}
                   />
                 </div>
@@ -127,117 +121,70 @@ export function AuthenticationModal(props: Props) {
               <hr className="mt-4 border-b-1 border-gray-400" />
             </div>
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-              <div className="text-gray-500 text-center mb-3 font-bold">
-                <small>Or sign {isSignup ? 'up' : 'in'} with credentials</small>
-              </div>
-              <form>
-                {isSignup ? (
-                  <div>
-                    <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                        htmlFor="grid-password"
-                      >
-                        First Name
-                      </label>
-                      <input
-                        type="text"
-                        name="firstName"
-                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-                        placeholder="First Name"
-                        value={firstName}
-                        onChange={onChange}
-                        style={{ transition: 'all .15s ease' }}
-                      />
-                    </div>
-                    <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                        htmlFor="grid-password"
-                      >
-                        Last Name
-                      </label>
-                      <input
-                        type="text"
-                        name="lastName"
-                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-                        placeholder="Last Name"
-                        value={lastName}
-                        onChange={onChange}
-                        style={{ transition: 'all .15s ease' }}
-                      />
-                    </div>
-                  </div>
-                ) : null}
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-                    placeholder="Email"
-                    value={email}
-                    onChange={onChange}
-                    style={{ transition: 'all .15s ease' }}
-                  />
-                </div>
-
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-                    placeholder="Password"
-                    value={password}
-                    onChange={onChange}
-                    style={{ transition: 'all .15s ease' }}
-                  />
-                </div>
-                <div>
-                  <label className="inline-flex items-center cursor-pointer">
-                    <input
-                      id="customCheckLogin"
-                      type="checkbox"
-                      className="form-checkbox text-gray-800 ml-1 w-5 h-5"
-                      style={{ transition: 'all .15s ease' }}
+              <H3 className="flex justify-center">
+                Or sign {isSignup ? 'up' : 'in'} with credentials
+              </H3>
+              <Form
+                onSubmit={submitForm}
+                render={({ handleSubmit, values }) => (
+                  <form onSubmit={handleSubmit}>
+                    {isSignup ? (
+                      <div>
+                        <FormField
+                          name="firstName"
+                          label="First Name"
+                          type="text"
+                          placeholder="First Name"
+                          required
+                        />
+                        <FormField
+                          name="lastName"
+                          label="Last Name"
+                          type="text"
+                          placeholder="Last Name"
+                          required
+                        />
+                      </div>
+                    ) : null}
+                    <FormField
+                      name="email"
+                      label="Email"
+                      type="text"
+                      placeholder="Email"
+                      required
                     />
-                    <span className="ml-2 text-sm font-semibold text-gray-700">
-                      Remember me
-                    </span>
-                  </label>
-                </div>
-
-                <div className="text-center mt-6">
-                  <button
-                    onClick={() => submitForm()}
-                    className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-                    type="button"
-                    style={{ transition: 'all .15s ease' }}
-                  >
-                    Sign {isSignup ? 'Up' : 'In'}
-                  </button>
-                </div>
-              </form>
+                    <FormField
+                      name="password"
+                      label="Password"
+                      type="password"
+                      placeholder="Password"
+                      required
+                    />
+                    <Field
+                      name="remember"
+                      component="input"
+                      type="checkbox"
+                      value="remember"
+                      className="mr-3 mt-3"
+                    />
+                    Remember me
+                    <div className="text-center mt-6">
+                      <Button btnStyle="primary">
+                        Sign {isSignup ? 'Up' : 'In'}
+                      </Button>
+                    </div>
+                  </form>
+                )}
+              />
             </div>
           </div>
-          <div className="flex flex-wrap mt-6">
+          <div className="flex flex-wrap mb-3">
             <div className="w-1/2">
               <span
                 onClick={e => e.preventDefault()}
                 className="text-black cursor-pointer"
               >
-                <small>Forgot password?</small>
+                <Text>Forgot password?</Text>
               </span>
             </div>
             <div className="w-1/2 text-right">
@@ -246,14 +193,14 @@ export function AuthenticationModal(props: Props) {
                   onClick={() => setIsSignup(false)}
                   className="text-black cursor-pointer"
                 >
-                  <small>Already have an account?</small>
+                  <Text>Already have an account?</Text>
                 </span>
               ) : (
                 <span
                   onClick={() => setIsSignup(true)}
                   className="text-black cursor-pointer"
                 >
-                  <small>Create new account</small>
+                  <Text className="text-right">Create new account</Text>
                 </span>
               )}
             </div>
@@ -268,3 +215,35 @@ export function AuthenticationModal(props: Props) {
     </div>
   );
 }
+
+const H3 = styled.h3`
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-medium) var(--unnamed-font-size-20) / 27px
+    var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal 700 20px/27px Avenir;
+  letter-spacing: 0px;
+  font-size: 20px;
+  margin-bottom: 2rem;
+
+  @media only screen and (max-width: 475px) {
+    font-size: 0.75rem;
+  }
+`;
+
+const Text = styled.span`
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-medium) var(--unnamed-font-size-20) / 27px
+    var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font: normal normal medium 12px/18px Avenir;
+  letter-spacing: 0px;
+  font-size: 12px;
+  margin-bottom: 2rem;
+
+  @media only screen and (max-width: 475px) {
+    font-size: 0.75rem;
+  }
+`;
