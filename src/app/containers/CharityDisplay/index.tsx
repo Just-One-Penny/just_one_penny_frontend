@@ -53,7 +53,7 @@ export const CharityDisplay = memo((props: Props) => {
           <Title>{charityDisplay?.name}</Title>
           <meta name="description" content={charityDisplay?.summary} />
         </Helmet>
-      ) : null} */}
+      ) : null}*/}
       <HeroSection />
 
       <Wrapper>
@@ -70,8 +70,15 @@ export const CharityDisplay = memo((props: Props) => {
                 : ''}
             </CategoryText>
             <br className="mt-10" />
+            <br />
             <Category>Mission:{t(' ')}</Category>
+            {charityDisplay?.mission}
+            <br />
+            <br />
+            <Category>Summary:{t(' ')}</Category>
             {charityDisplay?.summary}
+            <br />
+            <br />
           </CharitySummary>
         </MainDiv>
         <SubDiv>
@@ -81,7 +88,13 @@ export const CharityDisplay = memo((props: Props) => {
           {charityDisplay?.city}, {charityDisplay?.state}
           <br />
           Phone?
-          <br /> */}
+              <br /> */}
+          <>
+            Annual Revenue: ${charityDisplay?.lastYearRevenue.revenue}.00
+            <br />
+            EIN: {charityDisplay?.ein}
+            <br />
+          </>
           {charityDisplay?.website ? (
             <>
               Visit Website:
@@ -118,7 +131,10 @@ const CharityImage = styled.div`
   left: 2rem;
   width: 15rem;
   height: 6rem;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #ffffff;
   resize: both;
   background-image: url('${(p: ImageProps) => p.src}');
 `;
