@@ -41,11 +41,12 @@ export function CharitySignup(props: Props) {
       </Helmet>
       <HeroSection />
       <PageContainer>
-        <TabContainer>{tabs.map(Tab)}</TabContainer>
+        {/* <TabContainer>{tabs.map(Tab)}</TabContainer>
         <TabContentContainer>
           {state.tab === 0 ? <InfoForCharities /> : null}
           {state.tab === 1 ? <Typeform /> : null}
-        </TabContentContainer>
+        </TabContentContainer> */}
+        <InfoForCharities />
       </PageContainer>
     </>
   );
@@ -53,9 +54,13 @@ export function CharitySignup(props: Props) {
 
 const PageContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   margin-top: 3rem;
-  padding-bottom: 3rem;
+
+  @media only screen and (max-width: 475px) {
+    margin-top: 2rem;
+  }
 `;
 
 const TabContainer = styled.div`
