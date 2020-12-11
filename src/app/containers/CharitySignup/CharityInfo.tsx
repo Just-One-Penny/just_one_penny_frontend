@@ -10,7 +10,7 @@ export const InfoForCharities = () => {
     <Wrapper>
       <Header>Charities</Header>
 
-      <SubHeading>Questions</SubHeading>
+      <SubHeading>Background Info</SubHeading>
 
       <Text>
         With the help of our nonprofit partners, we’re making it easier than
