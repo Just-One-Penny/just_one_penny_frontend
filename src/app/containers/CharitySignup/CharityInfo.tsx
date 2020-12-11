@@ -63,6 +63,18 @@ const Wrapper = styled.div`
   width: 40.8333%;
   margin-bottom: 3rem;
 
+  @media only screen and (max-width: 1024px) {
+    width: 55%;
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 65%;
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 75%;
+  }
+
   @media only screen and (max-width: 475px) {
     width: 91.4666%;
     padding: 2rem 1rem;
