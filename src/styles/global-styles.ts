@@ -10,15 +10,15 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     padding-top: ${StyleConstants.NAV_BAR_HEIGHT};
     background-color: ${p => p.theme.colors.light[200]};
   }
 
   body.fontLoaded {
-    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Avenir, 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
-  
+
   p,
   label {
     line-height: 1.5em;
