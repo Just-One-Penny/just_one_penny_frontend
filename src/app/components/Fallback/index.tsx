@@ -4,10 +4,6 @@
  *
  */
 import React from 'react';
-<<<<<<< HEAD
-// import { theme } from 'tailwind.config';
-=======
->>>>>>> e37f9572269d1b48569768006558a24df969f921
 
 interface Props {}
 
