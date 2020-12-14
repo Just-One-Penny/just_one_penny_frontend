@@ -1,36 +1,37 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { ReactComponent as DocumentationIcon } from './assets/documentation-icon.svg';
-// import { ReactComponent as GithubIcon } from './assets/github-icon.svg';
-import { Authentication } from '../Authentication';
+
+import { AuthenticationModal } from '../AuthenticationModal';
 import { Modal } from 'app/components/Modal';
 import { useAuth } from 'context/auth-context';
+import { Link } from 'react-router-dom';
 
 export function Nav() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+
   return (
     <Wrapper>
-      {user ? (
-        user?.email
+      <Link to="/charities/new">
+        <NavLink className="mr-4">Info for Charities</NavLink>
+      </Link>
+      {user && user.id ? (
+        <Link to="/">
+          <Link to="/settings">
+            <NavLink className="mr-4">My Account</NavLink>
+          </Link>
+          <NavLink className="button-border" onClick={logout}>
+            Logout
+          </NavLink>
+        </Link>
       ) : (
         <>
           <Modal
-            buttonElement={
-              <Button>
-                <DocumentationIcon />
-                Login
-              </Button>
-            }
-            modalBody={<Authentication />}
+            buttonElement={<NavLink className="mr-4">Login</NavLink>}
+            modalBody={<AuthenticationModal />}
           />
           <Modal
-            buttonElement={
-              <Button>
-                <DocumentationIcon />
-                Sign Up
-              </Button>
-            }
-            modalBody={<Authentication newAccount />}
+            buttonElement={<NavLink className="button-border">Sign Up</NavLink>}
+            modalBody={<AuthenticationModal isSignup />}
           />
         </>
       )}
@@ -39,26 +40,49 @@ export function Nav() {
 }
 
 const Wrapper = styled.nav`
-  display: flex;
-  margin-right: -1rem;
-`;
-
-const Button = styled.button`
-  background-color: ${p => p.theme.primary};
-  cursor: pointer;
-  text-decoration: none;
-  display: flex;
-  padding: 0.25rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  align-items: center;
-  &:hover {
-    opacity: 0.8;
+  display: none;
+  > a:hover,
+  > div > a:hover,
+  button:hover {
+    opacity: 0.6;
   }
-  &:active {
+  > a:active,
+  button:active {
     opacity: 0.4;
   }
-  .icon {
-    margin-right: 0.25rem;
+
+  & > button {
+    all: unset;
   }
+  & > button:hover {
+    all: unset;
+  }
+  .button-border {
+    color: #0a559e;
+    border: 2px solid;
+    border-radius: 20px;
+    padding: 5px 15px;
+  }
+
+  @media (min-width: 640px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    max-width: 500px;
+    .icon {
+      display: inline;
+    }
+  }
+`;
+
+const NavLink = styled.span`
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
+    var(--unnamed-font-size-16) / 22px var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(---333333-dark);
+  text-align: left;
+  font: normal normal 900 16px/22px Avenir;
+  letter-spacing: 0px;
+  color: #333333;
+  cursor: pointer;
 `;

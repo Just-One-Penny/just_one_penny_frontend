@@ -1,9 +1,20 @@
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Api } from './api';
-import { Credentials, Token, User } from 'types/User';
+import {
+  Credentials,
+  SocialAuth,
+  User,
+  UpdatedUser,
+  UpdatingUser,
+} from 'types/User';
+import { UpdatingBillingInfo, UpdatedBillingInfo } from 'types/Stripe';
 import { apiConfig } from './api.config';
+import { Charity } from 'types/Charity';
+import { DonationSubmitted } from 'app/containers/DonationModal/types';
 
 export const authStorageKey = 'jop_auth_token';
+
+//new function that calls the endpoint for getting all donations by user
 
 export class UserApi extends Api {
   public constructor(config?: AxiosRequestConfig) {
@@ -17,15 +28,53 @@ export class UserApi extends Api {
     return localStorage.getItem(authStorageKey);
   };
 
-  public userLogin = (credentials: Credentials): Promise<string | Token> => {
-    return this.post<string, Credentials, AxiosResponse<string>>(
+  //new function that calls the endpoint for getting all donations by user
+  public getDonationsbyUser = (
+    userId: string,
+  ): Promise<DonationSubmitted[]> => {
+    try {
+      return this.get<User, AxiosResponse<DonationSubmitted[]>>(
+        `/users/${userId}/donations`,
+      ).then(this.success);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  public getDonationSchedulesByUser = (
+    userId: string,
+  ): Promise<DonationSubmitted[]> => {
+    try {
+      return this.get<User, AxiosResponse<DonationSubmitted[]>>(
+        `/users/${userId}/donationSchedules`,
+      ).then(this.success);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  public userLogin = (credentials: Credentials): Promise<User> => {
+    return this.post<string, Credentials, AxiosResponse<User>>(
       '/auth/login',
       credentials,
     ).then(this.success);
   };
 
-  public userRegister = (credentials: Credentials): Promise<number> => {
-    return this.post<number, Credentials, AxiosResponse<number>>(
+  public userAuthFacebook = (access_token: SocialAuth): Promise<User> => {
+    return this.post<string, SocialAuth, AxiosResponse<User>>(
+      '/auth/facebook',
+      access_token,
+    ).then(this.success);
+  };
+  public userAuthGoogle = (access_token: SocialAuth): Promise<User> => {
+    return this.post<string, SocialAuth, AxiosResponse<User>>(
+      '/auth/google',
+      access_token,
+    ).then(this.success);
+  };
+
+  public userRegister = (credentials: Credentials): Promise<User> => {
+    return this.post<User, Credentials, AxiosResponse<User>>(
       '/auth/register',
       credentials,
     )
@@ -54,15 +103,47 @@ export class UserApi extends Api {
     );
   };
 
+  public getCharities = async (id: number): Promise<Charity[]> => {
+    try {
+      const res: AxiosResponse<Charity[]> = await this.get<
+        Charity,
+        AxiosResponse<Charity[]>
+      >(`/${id}/charities`);
+      return this.success(res);
+    } catch (error) {
+      throw error;
+    }
+  };
+
   public getProfile = (): Promise<User> => {
-    return this.get<User, AxiosResponse<User>>(`/users/profile`).then(
-      this.success,
-    );
+    return this.get<User, AxiosResponse<User>>(`/users/profile`)
+      .then(this.success)
+      .catch(error => {
+        this.logout();
+        throw error;
+      });
+  };
+
+  public updateUser = (userObject: UpdatingUser): Promise<UpdatedUser> => {
+    return this.put<UpdatedUser, UpdatingUser, AxiosResponse<UpdatedUser>>(
+      `/users/${userObject.id}`,
+      userObject,
+    ).then(this.success);
   };
 
   public logout = () => {
     localStorage.removeItem(authStorageKey);
   };
+
+  public updatePayment = (
+    paymentObj: UpdatingBillingInfo,
+  ): Promise<UpdatedBillingInfo> => {
+    return this.put<
+      UpdatedBillingInfo,
+      UpdatingBillingInfo,
+      AxiosResponse<UpdatedBillingInfo>
+    >(`/users/${paymentObj.id}/payment/billing`, paymentObj).then(this.success);
+  };
 }
 
-export const userApi = new UserApi(apiConfig);
+export const userApi = new UserApi(apiConfig());
