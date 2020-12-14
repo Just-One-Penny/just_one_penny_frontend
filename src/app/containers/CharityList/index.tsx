@@ -4,17 +4,23 @@
  *
  */
 
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
+import queryString from 'query-string';
 // eslint-disable-next-line
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/macro';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { reducer, sliceKey } from './slice';
+import { reducer, sliceKey, actions } from './slice';
 import { selectCharityList } from './selectors';
 import { charityListSaga } from './saga';
+import { HeroSection } from 'app/components/HeroSection';
+import { CharityFilters } from './CharityFilters';
+import { CharityTable } from './CharityTable';
+import { selectLoading } from '../AuthenticationModal/selectors';
+import { useLocation } from 'react-router-dom';
 
 interface Props {}
 
@@ -22,8 +28,21 @@ export const CharityList = memo((props: Props) => {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: charityListSaga });
 
+  const dispatch = useDispatch();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const charityList = useSelector(selectCharityList);
+  const loading = useSelector(selectLoading);
+
+  const location = useLocation();
+  const search = queryString.parse(location.search);
+  const searchString = search ? JSON.stringify(search) : null;
+
+  useEffect(() => {
+    const getCharities = () => {
+      dispatch(actions.getCharitiesRequest(searchString));
+    };
+    getCharities();
+  }, [searchString]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -35,37 +54,18 @@ export const CharityList = memo((props: Props) => {
         <title>Charities</title>
         <meta name="description" content="List of Charities" />
       </Helmet>
-      <header>Charities</header>
-      <table>
-        <thead>
-          <th>Search Results</th>
-          <th>Keywords</th>
-        </thead>
-        <tbody>
-          {charityList.map((charity, i) => {
-            return (
-              <tr>
-                <td>{charity.logo}</td>
-                <td>
-                  {charity.name} ({charity.city}/{charity.state})
-                </td>
-                <td>
-                  {charity.lastYearRevenue.revenue}
-                  {/*Lower two subcategories for implementation when API is running*/}
-                  {charity.categories}
-                </td>
-                <td>
-                  {/* Donate button functionality needed after implementation of donation api and such*/}
-                  <button>Donate</button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <HeroSection />
+      <Row>
+        <CharityFilters />
+        <CharityTable charities={charityList} loading={loading} />
+      </Row>
     </>
   );
 });
 
-// eslint-disable-next-line
-const Div = styled.div``;
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 3rem;
+  padding-bottom: 3rem;
+`;

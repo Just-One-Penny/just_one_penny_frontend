@@ -17,6 +17,9 @@ import { Text } from '@welcome-ui/text';
 import { Card } from '@welcome-ui/card';
 import { Article } from 'types/newsFeed';
 
+import { CharityNewsModal } from '../../components/CharityNewsModal';
+import { Modal } from 'app/components/Modal';
+
 interface Props {}
 
 export function NewsFeed(props: Props) {
@@ -33,17 +36,28 @@ export function NewsFeed(props: Props) {
     <>
       <Div>
         {newsFeed.map(article => (
-          <CardContainer maxWidth={400} lineHeight="2">
-            <Card.Cover width={1} src={article.urlToImage} />
-            <Card.Body>
-              <Text as="h4" fontWeight="bold" mt={0} mb="lg" color="dark.900">
-                {article.title}
-              </Text>
-              <Description>
-                <LineClamp>{article.description}</LineClamp>
-              </Description>
-            </Card.Body>
-          </CardContainer>
+          <Modal
+            buttonElement={
+              <CardContainer maxWidth="15rem" height="20rem" lineHeight="2">
+                <Card.Cover width={1} src={article.urlToImage} />
+                <Card.Body>
+                  <Text
+                    as="h4"
+                    fontWeight="bold"
+                    mt={0}
+                    mb="lg"
+                    color="dark.900"
+                  >
+                    {article.title}
+                  </Text>
+                  <Description>
+                    <LineClamp>{article.description}</LineClamp>
+                  </Description>
+                </Card.Body>
+              </CardContainer>
+            }
+            modalBody={<CharityNewsModal {...article} />}
+          />
         ))}
       </Div>
     </>
@@ -52,6 +66,7 @@ export function NewsFeed(props: Props) {
 
 const CardContainer = styled(Card)`
   margin-bottom: 2rem;
+  cursor: pointer;
 `;
 
 const Div = styled.div`

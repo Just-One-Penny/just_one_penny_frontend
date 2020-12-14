@@ -10,8 +10,11 @@ import {
 import { UpdatingBillingInfo, UpdatedBillingInfo } from 'types/Stripe';
 import { apiConfig } from './api.config';
 import { Charity } from 'types/Charity';
+import { DonationSubmitted } from 'app/containers/DonationModal/types';
 
 export const authStorageKey = 'jop_auth_token';
+
+//new function that calls the endpoint for getting all donations by user
 
 export class UserApi extends Api {
   public constructor(config?: AxiosRequestConfig) {
@@ -23,6 +26,31 @@ export class UserApi extends Api {
     // to retrieve the user's token. (It's a bit more complicated than that...
     // but you're probably not an auth provider so you don't need to worry about it).
     return localStorage.getItem(authStorageKey);
+  };
+
+  //new function that calls the endpoint for getting all donations by user
+  public getDonationsbyUser = (
+    userId: string,
+  ): Promise<DonationSubmitted[]> => {
+    try {
+      return this.get<User, AxiosResponse<DonationSubmitted[]>>(
+        `/users/${userId}/donations`,
+      ).then(this.success);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  public getDonationSchedulesByUser = (
+    userId: string,
+  ): Promise<DonationSubmitted[]> => {
+    try {
+      return this.get<User, AxiosResponse<DonationSubmitted[]>>(
+        `/users/${userId}/donationSchedules`,
+      ).then(this.success);
+    } catch (error) {
+      throw error;
+    }
   };
 
   public userLogin = (credentials: Credentials): Promise<User> => {
@@ -91,7 +119,7 @@ export class UserApi extends Api {
     return this.get<User, AxiosResponse<User>>(`/users/profile`)
       .then(this.success)
       .catch(error => {
-        this.logout()
+        this.logout();
         throw error;
       });
   };
@@ -118,4 +146,4 @@ export class UserApi extends Api {
   };
 }
 
-export const userApi = new UserApi(apiConfig);
+export const userApi = new UserApi(apiConfig());
