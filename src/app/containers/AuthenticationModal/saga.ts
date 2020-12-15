@@ -50,7 +50,6 @@ export function* registerUser() {
     credentials,
   );
   localStorage.setItem(authStorageKey, response.token.accessToken);
-  yield put(actions.authenticationModalSuccess(response.user));
 }
 
 /**
@@ -86,7 +85,6 @@ export function* loginUser() {
   );
 
   localStorage.setItem(authStorageKey, response.token.accessToken);
-  yield put(actions.authenticationModalSuccess(response.user));
 }
 
 /**
@@ -103,7 +101,6 @@ export function* socialAuth() {
       access_token,
     });
     localStorage.setItem(authStorageKey, response.token.accessToken);
-    yield put(actions.authenticationModalSuccess(response.user));
   } catch (error) {
     console.log(error);
   }

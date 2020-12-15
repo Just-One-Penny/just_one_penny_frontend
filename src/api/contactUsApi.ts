@@ -23,4 +23,4 @@ export class ContactUsApi extends Api {
   };
 }
 
-export const contactUsApi = new ContactUsApi(apiConfig());
+export const contactUsApi = new ContactUsApi(apiConfig);

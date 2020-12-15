@@ -43,7 +43,7 @@ export function StripeSuccess() {
   };
 
   useEffect(() => {
-    if (loc.search) {
+    if (loc.search && !state.rendered) {
       setState({
         ...state,
         loading: true,
@@ -53,8 +53,14 @@ export function StripeSuccess() {
         saveStripe(code, st);
       }
     }
-  }, []);
-
+    if (!state.rendered) {
+      setState({
+        ...state,
+        rendered: true,
+      });
+    }
+  });
+  console.log(state);
   return (
     <Center>
       {/* <LoadingSpinner /> */}

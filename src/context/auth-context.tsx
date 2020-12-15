@@ -23,7 +23,6 @@ const AuthContext = React.createContext({
     charities: [],
   },
   logout: () => {},
-  setUser: user => {},
 });
 AuthContext.displayName = 'AuthContext';
 
@@ -46,25 +45,15 @@ function AuthProvider(props) {
     run(appDataPromise);
   }, [run]);
 
-  const setUser = React.useCallback(
-    user => {
-      LogRocket.identify(user.id);
-      setData(user);
-    },
+  const login = React.useCallback(
+    form =>
+      userApi.userLogin(form).then(user => {
+        // This is an example script - don't forget to change it!
+        LogRocket.identify(user.id);
+        setData(user);
+      }),
     [setData],
   );
-
-  const login = React.useCallback(() => {
-    // console.log("AuthProvider -> login", bootstrapAppData())
-    // bootstrapAppData().then((user) =>{
-    //   console.log("AuthProvider -> user", user)
-    //   if (user) {
-    //     LogRocket.identify(user.id);
-    //     setData(user);
-    //   }
-    // })
-  }, [setData]);
-
   const register = React.useCallback(
     form =>
       userApi.userRegister(form).then(user => {
@@ -80,10 +69,12 @@ function AuthProvider(props) {
     setData(null);
   }, [setData]);
 
-  const value = React.useMemo(
-    () => ({ user, setUser, login, logout, register }),
-    [login, setUser, logout, register, user],
-  );
+  const value = React.useMemo(() => ({ user, login, logout, register }), [
+    login,
+    logout,
+    register,
+    user,
+  ]);
 
   if (isLoading || isIdle) {
     return <div />;

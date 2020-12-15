@@ -7,7 +7,7 @@ import React, { memo } from 'react';
 import { Modal as UIModal, useModalState } from '@welcome-ui/modal';
 import styled from 'styled-components';
 
-export enum Size {
+enum Size {
   sm = 'sm',
   md = 'md',
   lg = 'lg',
@@ -16,7 +16,7 @@ export enum Size {
 
 interface Props {
   buttonElement: React.ReactNode;
-  modalBody: React.ReactElement;
+  modalBody: React.ReactNode;
   modalTitle?: string;
   dialog?: boolean;
   size?: Size;
@@ -24,14 +24,11 @@ interface Props {
 
 export const Modal = memo((props: Props) => {
   const modal = useModalState();
-
   return (
     <>
       <UIModal.Trigger {...modal}>{props.buttonElement}</UIModal.Trigger>
       <ModalContainer {...modal} size={props.size}>
-        <ModalContent className="p-0">
-          {props.modalBody ? React.cloneElement(props.modalBody, modal) : null}
-        </ModalContent>
+        <ModalContent className="p-0">{props.modalBody}</ModalContent>
       </ModalContainer>
     </>
   );

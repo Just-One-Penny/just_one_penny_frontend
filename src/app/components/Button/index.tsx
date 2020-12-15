@@ -14,7 +14,7 @@ export function Button(props) {
   return <StyleButton {...props}></StyleButton>;
 }
 
-const handleButtonType = (btnStyle = 'primary') => {
+const handleButtonType = btnStyle => {
   switch (btnStyle) {
     case 'primary':
       return `

@@ -16,7 +16,12 @@ export function* checkDonation() {
     return;
   }
 
+  const userId: string = yield select(selectUserId);
+  const charityId: string = yield select(selectCharityId);
+
   const donation: DonationSubmitted = {
+    userId,
+    charityId,
     ...paymentInfo,
     dateSent: new Date(),
   };
@@ -26,7 +31,7 @@ export function* checkDonation() {
     donation,
   );
 
-  yield put(actions.donationSuccess(response));
+  yield put(actions.donationSuccess());
 }
 export function* donationModalSaga() {
   yield takeEvery(actions.submitDonation.type, checkDonation);

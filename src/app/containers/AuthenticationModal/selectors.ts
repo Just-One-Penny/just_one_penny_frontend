@@ -33,19 +33,9 @@ export const selectProvider = createSelector(
   authenticationModalState => authenticationModalState.provider,
 );
 
-export const selectUser = createSelector(
-  [selectDomain],
-  authenticationModalState => authenticationModalState.user,
-);
-
 export const selectLoading = createSelector(
   [selectDomain],
   authenticationModalState => authenticationModalState.loading,
-);
-
-export const selectSuccess = createSelector(
-  [selectDomain],
-  authenticationModalState => authenticationModalState.success,
 );
 
 export const selectError = createSelector(

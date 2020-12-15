@@ -1,12 +1,10 @@
-import { takeEvery, put, call, select } from 'redux-saga/effects';
+import { takeEvery, put, call } from 'redux-saga/effects';
 import { actions } from './slice';
 import { charityApi } from 'api/charityApi';
 import { GetCharitiesErrorType } from './types';
-import { selectSearch } from './selectors';
 
 export function* getCharities() {
-  const search = yield select(selectSearch);
-  const charities = yield call(charityApi.getCharities, search);
+  const charities = yield call(charityApi.getCharities);
   if (charities != null) {
     yield put(actions.getCharitiesSuccess(charities));
   } else {
