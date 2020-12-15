@@ -20,12 +20,10 @@ import { About } from './containers/About/Loadable';
 import { ContactUs } from './containers/ContactUs/Loadable';
 import { CharityDisplay } from './containers/CharityDisplay';
 import { CharitySignup } from './containers/CharitySignup';
-import { Typeform } from './containers/CharitySignup/Typeform';
 import { Footer } from './components/Footer';
 import { NavBar } from './containers/NavBar';
 import { StripeSuccess } from './containers/StripeSuccess/Loadable';
 import { PageWrapper } from './components/PageWrapper';
-import { AccountSettings } from './containers/AccountSettings/Loadable';
 
 export function App() {
   return (
@@ -41,19 +39,16 @@ export function App() {
       <PageWrapper>
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/settings" component={AccountSettings} />
           <Route exact path="/contactUs" component={ContactUs} />
           <Route exact path="/about" component={About} />
           <Route exact path="/stripe" component={StripeSuccess} />
           <Route exact path="/charities" component={CharityList} />
-          <Route exact path="/charities/new" component={CharitySignup} />
-          <Route exact path="/charities/new/form" component={Typeform} />
-
           <Route
             exact
             path="/charities/:charityId"
             component={CharityDisplay}
           />
+          <Route exact path="/charities/new" component={CharitySignup} />
 
           {/* Make sure you add new routes above the not found page */}
           <Route component={NotFoundPage} />

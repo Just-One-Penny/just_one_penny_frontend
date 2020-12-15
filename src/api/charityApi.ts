@@ -8,12 +8,12 @@ export class CharityApi extends Api {
     super(config);
   }
 
-  public getCharities = async (search: Object | null): Promise<Charity[]> => {
+  public getCharities = async (): Promise<Charity[]> => {
     try {
       const res: AxiosResponse<Charity[]> = await this.get<
         Charity,
         AxiosResponse<Charity[]>
-      >('/charities', { params: search });
+      >('/charities');
 
       return this.success(res);
     } catch (error) {
@@ -48,4 +48,4 @@ export class CharityApi extends Api {
   };
 }
 
-export const charityApi = new CharityApi(apiConfig());
+export const charityApi = new CharityApi(apiConfig);

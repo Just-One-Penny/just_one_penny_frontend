@@ -4,8 +4,8 @@
  *
  */
 
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components/macro';
 import { Form, Field } from 'react-final-form';
 import { Tab, useTabState } from '@welcome-ui/tabs';
@@ -20,94 +20,43 @@ import { Divider } from 'app/components/Divider';
 import { PaymentInfo } from 'app/components/PaymentInfo';
 import { FormField } from 'app/components/FormField';
 import { Button } from 'app/components/Button';
-import { DonationSubmissionValues, DonationSubmission } from './types';
-import { selectSuccess } from '../AuthenticationModal/selectors';
-import { Success } from './Success';
+import { DonationSubmission } from './types';
 
 interface Props {
   charityId: string;
   charityName: string;
-  hide?: Function;
 }
 
 export function DonationModal(props: Props) {
-  const dispatch = useDispatch();
   const { user } = useAuth();
-  const tab = useTabState({ selectedId: 'micro' });
+  const tab = useTabState({ selectedId: 'tab1' });
   const [state, setState] = useState({
     submitting: false,
-    total: 0,
   });
-
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: donationModalSaga });
 
-  const success = useSelector(selectSuccess);
-
-  useEffect(() => {
-    if (success && props.hide) {
-      props.hide();
-    }
-  }, [success]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const dispatch = useDispatch();
 
   const formatPrice = value =>
     value === undefined
       ? '' // make controlled
       : numeral(value).format('$0,0.00');
 
-  const calculateTotal = values => {
-    let amount = values.amount
-      ? Number(values.amount.replace(/[^0-9.-]+/g, ''))
-      : 0;
-    const coverCost = values.coverCost
-      ? Boolean(values.coverCost.length)
-      : false;
-    const support = values.support ? Boolean(values.support.length) : false;
-
-    if (support) {
-      amount += 2;
-    }
-
-    if (coverCost) {
-      amount += amount * 0.029 + 0.3;
-    }
-    return amount;
-  };
-
   const onSubmit = async values => {
     setState({ ...state, submitting: true });
   };
 
-  const handleSubmit = (values: DonationSubmissionValues) => {
-    const coverCost = values.coverCost
-      ? Boolean(values.coverCost.length)
-      : false;
-    const support = values.support ? Boolean(values.support.length) : false;
-    const submissionValues: DonationSubmission = {
-      ...values,
-      amount: Number(values.amount.replace(/[^0-9.-]+/g, '')),
-      type: tab.currentId,
-      userId: user.id,
-      charityId: props.charityId,
-      coverCost,
-      support,
-    };
-
-    if (tab.currentId === 'micro') {
-      submissionValues['frequency'] = submissionValues['amount'].toString();
-    }
-
-    const total = calculateTotal(values);
-
-    dispatch(actions.submitDonation(submissionValues));
-    setState({ ...state, ...values, total });
+  const handleSubmit = (values: DonationSubmission) => {
+    dispatch(actions.submitDonation(values));
   };
 
   const donationForm = (values, formType) => (
     <>
       {formType === 'standard' ? (
         <FormField
-          name="amount"
+          name="donationAmount"
           label="Donation Amount"
           type="text"
           placeholder="$0.00"
@@ -119,16 +68,16 @@ export function DonationModal(props: Props) {
         <>
           <InputLabel>Daily Amount</InputLabel>
           <Input
-            name="amount"
+            name="frequency"
             component="select"
             placeholder="Select Daily Amount"
           >
             <option />
-            <option value="$0.01">$0.01 Per Day</option>
-            <option value="$0.05">$0.05 Per Day</option>
-            <option value="$0.10">$0.10 Per Day</option>
-            <option value="$0.25">$0.25 Per Day</option>
-            <option value="$0.50">$0.50 Per Day</option>
+            <option value="0.01">$0.01 Per Day</option>
+            <option value="0.05">$0.05 Per Day</option>
+            <option value="0.10">$0.10 Per Day</option>
+            <option value="0.25">$0.25 Per Day</option>
+            <option value="0.50">$0.50 Per Day</option>
           </Input>
         </>
       ) : (
@@ -137,7 +86,7 @@ export function DonationModal(props: Props) {
           <Input name="frequency" component="select">
             <option />
             <option value="once">Only Donate Once</option>
-            <option value="monthly">Every Month</option>
+            <option value="yearly">Every Year</option>
           </Input>
         </>
       )}
@@ -167,17 +116,15 @@ export function DonationModal(props: Props) {
     </>
   );
 
-  if (success) {
-    return <Success {...state} hide={props.hide} />;
-  }
-
   return (
     <Wrapper>
       <Form
         onSubmit={onSubmit}
         render={({ handleSubmit, values }) => (
           <>
-            <Header>{formatPrice(calculateTotal(values))}</Header>
+            <Header>
+              {values.donationAmount ? values.donationAmount : '$0'}
+            </Header>
             <ModalContent>
               <form onSubmit={handleSubmit}>
                 <div>
@@ -197,17 +144,17 @@ export function DonationModal(props: Props) {
                   />
                 </div>
                 <StyledTabList aria-label="Tabs" {...tab}>
-                  <StyledTab {...tab} id="micro">
+                  <StyledTab {...tab} id="tab1">
                     Micro-Donation
                   </StyledTab>
-                  <StyledTab {...tab} id="standard">
+                  <StyledTab {...tab} id="tab2">
                     Standard
                   </StyledTab>
                 </StyledTabList>
-                <Tab.Panel {...tab} tabId="micro">
+                <Tab.Panel {...tab} tabId="tab1">
                   {donationForm(values, 'micro')}
                 </Tab.Panel>
-                <Tab.Panel {...tab} tabId="standard">
+                <Tab.Panel {...tab} tabId="tab2">
                   {donationForm(values, 'standard')}
                 </Tab.Panel>
                 <Divider />

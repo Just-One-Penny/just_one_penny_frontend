@@ -1,5 +1,4 @@
 import { Charity } from 'types/Charity';
-import { DonationSubmitted } from 'types/Donation';
 /* --- STATE --- */
 export interface AccountSettingsState {
   id: string;
@@ -11,8 +10,6 @@ export interface AccountSettingsState {
   loading: boolean;
   billing: BillingInfo;
   error?: GetCharitiesErrorType | null;
-  userDonations: DonationSubmitted[];
-  userDonationSchedules: DonationSubmitted[];
 }
 
 export enum GetCharitiesErrorType {

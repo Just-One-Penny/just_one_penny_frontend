@@ -3,67 +3,39 @@
  * HeroSection
  *
  */
-import { CATEGORIES } from 'app/constants';
 import React from 'react';
-import { Form, Field } from 'react-final-form';
-import { useHistory } from 'react-router-dom';
-import Select from 'react-select';
 import styled from 'styled-components/macro';
 import { StyleConstants } from 'styles/StyleConstants';
 import { Button } from '../Button';
-import { CategorySelect } from '../CategorySelect';
 import AboutHeroImage1x from './assets/AboutHeroImage1x.png';
 import AboutHeroImage2x from './assets/AboutHeroImage2x.png';
 import MobileAboutHeroImage1x from './assets/MobileAboutHeroImage1x.png';
 import MobileAboutHeroImage2x from './assets/MobileAboutHeroImage2x.png';
 
-const categoryOptions = CATEGORIES.map(category => ({
-  value: category.toLowerCase(),
-  label: category,
-}));
-
 interface Props {}
 
 export function HeroSection(props: Props) {
-  const history = useHistory();
-
-  const handleSearch = values => {
-    const searchValues = { ...values };
-    if (searchValues.categories) {
-      searchValues.categories = searchValues.categories.map(
-        category => category.value,
-      );
-    }
-    const search = new URLSearchParams(searchValues);
-    history.push(`/charities?${search}`);
-  };
-
   return (
     <HeroDiv>
-      <Form
-        onSubmit={handleSearch}
-        render={({ handleSubmit }) => (
-          <SearchWrapper onSubmit={handleSubmit}>
-            <Input
-              component="input"
-              name="name"
-              id="charity"
-              placeholder="Search Charity Name"
-            />
-            <SelectContainer>
-              <CategorySelect />
-            </SelectContainer>
-            <Button btnStyle={'primary'}>Find Charities</Button>
-          </SearchWrapper>
-        )}
-      />
+      <SearchWrapper>
+        <Input name="Charity" id="charity" placeholder="Search Charity Name" />
+        <Select name="Categories" id="categories">
+          <option value="" hidden>
+            Search By category
+          </option>
+          <option value="1">Animal & Nature</option>
+          <option value="2">Arts & Education </option>
+          <option value="3">Communities & Religion</option>
+          <option value="4">Human Outreach</option>
+        </Select>
+        <Button btnStyle={'primary'}>Find Charity</Button>
+      </SearchWrapper>
     </HeroDiv>
   );
 }
 
 const HeroDiv = styled.div`
-  width: calc(100% + 4rem);
-  margin-left: -2rem;
+  width: 100%;
   height: 150px;
   background-image: url(${MobileAboutHeroImage1x});
   background-size: cover;
@@ -89,12 +61,7 @@ const HeroDiv = styled.div`
   }
 `;
 
-const SelectContainer = styled.div`
-  width: 25%;
-  margin-right: 2rem;
-`;
-
-const SearchWrapper = styled.form`
+const SearchWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -105,7 +72,7 @@ const SearchWrapper = styled.form`
   }
 `;
 
-const Input = styled(Field)`
+const Input = styled.input`
   flex: 3;
   margin-right: 2rem;
   height: 3rem;
@@ -128,8 +95,8 @@ const Input = styled(Field)`
   }
 `;
 
-const StyledSelect = styled(Field)`
-  flex: 2;
+const Select = styled.select`
+  flex: 1;
   margin-right: 2rem;
   height: 3rem;
   background: #ffffff 0% 0% no-repeat padding-box;

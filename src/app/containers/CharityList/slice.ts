@@ -8,17 +8,15 @@ export const initialState: ContainerState = {
   charities: [],
   loading: false,
   error: null,
-  search: null,
 };
 
 const charityListSlice = createSlice({
   name: 'charityList',
   initialState,
   reducers: {
-    getCharitiesRequest(state, action: PayloadAction<string | null>) {
+    getCharitiesRequest(state, action: PayloadAction<string>) {
       state.loading = true;
       state.error = null;
-      state.search = action.payload ? JSON.parse(action.payload) : null;
     },
     getCharitiesSuccess(state, action: PayloadAction<Charity[]>) {
       state.loading = false;
@@ -28,7 +26,6 @@ const charityListSlice = createSlice({
     getCharitiesError(state, action: PayloadAction<GetCharitiesErrorType>) {
       state.error = action.payload;
       state.loading = false;
-      state.charities = [];
     },
   },
 });

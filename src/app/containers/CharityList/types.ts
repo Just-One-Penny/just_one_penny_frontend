@@ -5,7 +5,6 @@ export interface CharityListState {
   charities: Charity[];
   loading: boolean;
   error?: GetCharitiesErrorType | null;
-  search: Object | null;
 }
 
 export enum GetCharitiesErrorType {

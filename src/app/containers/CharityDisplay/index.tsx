@@ -31,6 +31,7 @@ export const CharityDisplay = memo((props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
   const { charityId }: Params = useParams();
+  console.log('charityId', charityId);
 
   useEffect(() => {
     const fetchData = () => {
@@ -38,7 +39,7 @@ export const CharityDisplay = memo((props: Props) => {
     };
 
     fetchData();
-  }, [charityId]);
+  }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const charityDisplay = useSelector(selectCharityDisplay);
@@ -48,19 +49,15 @@ export const CharityDisplay = memo((props: Props) => {
 
   return (
     <>
-      {/* {charityDisplay ? (
-        <Helmet>
-          <Title>{charityDisplay?.name}</Title>
-          <meta name="description" content={charityDisplay?.summary} />
-        </Helmet>
-      ) : null}*/}
+      <Helmet>
+        <title>Charity Details</title>
+        <meta name="description" content="" />
+      </Helmet>
       <HeroSection />
 
       <Wrapper>
         <MainDiv className="mr-5">
-          <CharityHero>
-            <CharityImage src={charityDisplay?.logo} />
-          </CharityHero>
+          <CharityHero />
           <CharitySummary>
             <H2>{charityDisplay?.name}</H2>
             <Category>Category:</Category>
@@ -70,39 +67,19 @@ export const CharityDisplay = memo((props: Props) => {
                 : ''}
             </CategoryText>
             <br className="mt-10" />
-            <br />
-            <Category>Mission:{t(' ')}</Category>
-            {charityDisplay?.mission}
-            <br />
-            <br />
-            <Category>Summary:{t(' ')}</Category>
+            <Category>Mission:</Category>
             {charityDisplay?.summary}
-            <br />
-            <br />
           </CharitySummary>
         </MainDiv>
         <SubDiv>
-          {/* {t('')}
+          {t('')}
           <H3>Contact Information</H3>
           Address?
           {charityDisplay?.city}, {charityDisplay?.state}
           <br />
           Phone?
-              <br /> */}
-          <>
-            Annual Revenue: ${charityDisplay?.lastYearRevenue.revenue}.00
-            <br />
-            EIN: {charityDisplay?.ein}
-            <br />
-          </>
-          {charityDisplay?.website ? (
-            <>
-              Visit Website:
-              <Link href={charityDisplay?.website}>
-                {charityDisplay?.website}
-              </Link>
-            </>
-          ) : null}
+          <br />
+          <a href={charityDisplay?.website}>{charityDisplay?.website}</a>
           {charityDisplay?.id ? (
             <DonationButton
               charityId={charityDisplay.id}
@@ -117,28 +94,6 @@ export const CharityDisplay = memo((props: Props) => {
 
 export const CharityDisplayWithRouter = withRouter(CharityDisplay);
 
-interface ImageProps {
-  src: string | undefined;
-}
-
-const Title = styled.title`
-  text-transform: capitalize;
-`;
-
-const CharityImage = styled.div`
-  position: relative;
-  top: 55%;
-  left: 2rem;
-  width: 15rem;
-  height: 6rem;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: #ffffff;
-  resize: both;
-  background-image: url('${(p: ImageProps) => p.src}');
-`;
-
 const Wrapper = styled.section`
   padding: 1em;
   background: #f2f2f2;
@@ -146,20 +101,9 @@ const Wrapper = styled.section`
   flex-direction: row;
 `;
 
-const Link = styled.a`
-  font: var(--unnamed-font-style-normal) normal
-    var(--unnamed-font-weight-normal) var(--unnamed-font-size-16) / 22px
-    var(--unnamed-font-family-avenir);
-  letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(---0a559e-primary);
-  text-align: left;
-  font: normal normal normal 16px/22px Avenir;
-  letter-spacing: 0px;
-  color: #0a559e;
-`;
-
 const CharityHero = styled.div`
-  background-color: #11569b;
+  background: var(---9fa2a8-mid) 0% 0% no-repeat padding-box;
+  background: #9fa2a8 0% 0% no-repeat padding-box;
   border-radius: 5px 5px 0px 0px;
   opacity: 1;
   height: 10rem;
@@ -200,7 +144,6 @@ const H2 = styled.h2`
   font-family: avenir;
   margin: 0;
   font-weight: heavier;
-  text-transform: capitalize;
 `;
 
 const H3 = styled.h3`
@@ -217,7 +160,6 @@ const MainDiv = styled.div`
   vertical-align: top;
   border-radius: 5px;
   font-family: avenir;
-  padding-bottom: 2rem;
 `;
 const SubDiv = styled.div`
   padding: 1em;
@@ -228,5 +170,4 @@ const SubDiv = styled.div`
   font-family: avenir;
   display: flex;
   flex-direction: column;
-  height: fit-content;
 `;
