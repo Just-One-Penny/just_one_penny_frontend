@@ -10,6 +10,7 @@ export interface Charity {
   website: string;
   stripeCustomerRef: string;
   categories: string[];
+  ein: string;
   isDeleted: boolean;
 }
 
