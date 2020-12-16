@@ -25,6 +25,7 @@ import { selectSuccess } from '../AuthenticationModal/selectors';
 import { Success } from './Success';
 import { Modal } from '../../components/Modal';
 import { TermsOfService } from '../../components/TermsOfService';
+import { TermsOfRecurringAmounts } from '../../components/TermsOfRecurringAmounts';
 
 interface Props {
   charityId: string;
@@ -113,20 +114,27 @@ export function DonationModal(props: Props) {
           name="amount"
           label="Donation Amount"
           type="text"
-          placeholder="$3.00"
+          placeholder="Minimum $3.00"
           format={formatPrice}
           formatOnBlur
         />
       ) : null}
       {formType === 'micro' ? (
         <>
-          <InputLabel>Daily Amount</InputLabel>
+          <InputLabel>
+            Daily Amount{' '}
+            <Modal
+              buttonElement={<Icon type="button">?</Icon>}
+              modalBody={<TermsOfRecurringAmounts />}
+            />
+          </InputLabel>
+
           <Input
             name="amount"
             component="select"
             placeholder="Select Daily Amount"
           >
-            <option />
+            <option>--- Please Select ---</option>
             <option value="$3.65">$0.01 Per Day</option>
             <option value="$4.57">$0.05 Per Day</option>
             <option value="$9.13">$0.10 Per Day</option>
@@ -328,5 +336,34 @@ const TextLink = styled.span`
   &:active {
     color: #0c4379;
     text-decoration: underline;
+  }
+`;
+
+const Icon = styled.button`
+  margin-bottom: 2px;
+  color: #0a559e;
+  background: transparent;
+  border: 2px solid #0a559e;
+  &:hover,
+  &:active {
+    border-color: #0c4379;
+    color: #0c4379;
+  }
+
+  &:focus,
+  &:active {
+    text-decoration: underline;
+  }
+
+  width: 25px;
+  height: 25px;
+  font-weight: 900;
+  box-shadow: 0px 2px 6px #0000005a;
+  border-radius: 50px;
+  opacity: 1;
+  text-align: center;
+  font: normal normal 900 16px/22px;
+  .icon {
+    margin-right: 0.25rem;
   }
 `;
