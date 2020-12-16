@@ -23,6 +23,8 @@ import { Button } from 'app/components/Button';
 import { DonationSubmissionValues, DonationSubmission } from './types';
 import { selectSuccess } from '../AuthenticationModal/selectors';
 import { Success } from './Success';
+import { Modal } from '../../components/Modal';
+import { TermsOfService } from '../../components/TermsOfService';
 
 interface Props {
   charityId: string;
@@ -50,10 +52,11 @@ export function DonationModal(props: Props) {
     }
   }, [success]);
 
-  const formatPrice = value =>
-    value === undefined
-      ? '' // make controlled
-      : numeral(value).format('$0,0.00');
+  const formatPrice = value => {
+    if (value !== undefined && value >= 3)
+      return numeral(value).format('$0,0.00');
+    return '';
+  };
 
   const calculateTotal = values => {
     let amount = values.amount
@@ -110,7 +113,7 @@ export function DonationModal(props: Props) {
           name="amount"
           label="Donation Amount"
           type="text"
-          placeholder="$0.00"
+          placeholder="$3.00"
           format={formatPrice}
           formatOnBlur
         />
@@ -216,6 +219,20 @@ export function DonationModal(props: Props) {
                     Make Donation
                   </Button>
                 </div>
+                <Field
+                  name="terms"
+                  component="input"
+                  type="checkbox"
+                  value="terms"
+                  className="mr-3 mt-3"
+                  required
+                />
+                I agree to the{' '}
+                <Modal
+                  buttonElement={<TextLink>Terms and Conditions</TextLink>}
+                  modalBody={<TermsOfService />}
+                />
+                <br />
               </form>
             </ModalContent>
           </>
@@ -300,4 +317,16 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const TextLink = styled.span`
+  color: #0a559e;
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: #0c4379;
+    text-decoration: underline;
+  }
 `;
