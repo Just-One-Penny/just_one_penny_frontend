@@ -88,8 +88,11 @@ export const CharityDisplay = memo((props: Props) => {
           {charityDisplay?.city}, {charityDisplay?.state}
           <br />
           Phone?
+
               <br /> */}
           <>
+            Location: {charityDisplay?.city}, {charityDisplay?.state}
+            <br />
             Annual Revenue: ${charityDisplay?.lastYearRevenue.revenue}.00
             <br />
             EIN: {charityDisplay?.ein}
@@ -98,12 +101,12 @@ export const CharityDisplay = memo((props: Props) => {
           {charityDisplay?.website ? (
             <>
               Visit Website:
-              <Link href={charityDisplay?.website}>
+              <Link href={charityDisplay?.website} target="_blank">
                 {charityDisplay?.website}
               </Link>
             </>
           ) : null}
-          {charityDisplay?.id ? (
+          {charityDisplay?.connectedStripeId ? (
             <DonationButton
               charityId={charityDisplay.id}
               charityName={charityDisplay.name}
