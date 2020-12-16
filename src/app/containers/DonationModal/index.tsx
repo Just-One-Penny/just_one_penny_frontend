@@ -124,11 +124,11 @@ export function DonationModal(props: Props) {
             placeholder="Select Daily Amount"
           >
             <option />
-            <option value="$0.01">$0.01 Per Day</option>
-            <option value="$0.05">$0.05 Per Day</option>
-            <option value="$0.10">$0.10 Per Day</option>
-            <option value="$0.25">$0.25 Per Day</option>
-            <option value="$0.50">$0.50 Per Day</option>
+            <option value="$3.65">$0.01 Per Day</option>
+            <option value="$4.57">$0.05 Per Day</option>
+            <option value="$9.13">$0.10 Per Day</option>
+            <option value="$7.61">$0.25 Per Day</option>
+            <option value="$15.21">$0.50 Per Day</option>
           </Input>
         </>
       ) : (
@@ -175,7 +175,7 @@ export function DonationModal(props: Props) {
     <Wrapper>
       <Form
         onSubmit={onSubmit}
-        render={({ handleSubmit, values }) => (
+        render={({ handleSubmit, form, values }) => (
           <>
             <Header>{formatPrice(calculateTotal(values))}</Header>
             <ModalContent>
@@ -197,10 +197,10 @@ export function DonationModal(props: Props) {
                   />
                 </div>
                 <StyledTabList aria-label="Tabs" {...tab}>
-                  <StyledTab {...tab} id="micro">
+                  <StyledTab {...tab} id="micro" onClick={form.reset}>
                     Micro-Donation
                   </StyledTab>
-                  <StyledTab {...tab} id="standard">
+                  <StyledTab {...tab} id="standard" onClick={form.reset}>
                     Standard
                   </StyledTab>
                 </StyledTabList>
