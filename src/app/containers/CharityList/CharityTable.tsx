@@ -14,6 +14,11 @@ interface Props {
 }
 
 export const CharityTable = (props: Props) => {
+  function format(revenue) {
+    return Number.parseFloat(revenue)
+      .toFixed(2)
+      .replace(/\d(?=(\d{3})+\.)/g, '$&,');
+  }
   return (
     <TableContainer>
       <Header>Search Results</Header>
@@ -42,14 +47,21 @@ export const CharityTable = (props: Props) => {
                       <LinkName>{charity.name}</LinkName>
                     </Link>
                     <Name>{charity.categories}</Name>
-                    <div>{charity.lastYearRevenue.revenue}</div>
+                    {charity.lastYearRevenue.revenue ? (
+                      <div>
+                        Annual revenue: ${' '}
+                        {format(charity.lastYearRevenue.revenue)}
+                      </div>
+                    ) : null}
                   </Stack>
                 </Table.Td>
                 <Table.Td>
-                  <DonationButton
-                    charityId={charity.id}
-                    charityName={charity.name}
-                  />
+                  {charity.connectedStripeId ? (
+                    <DonationButton
+                      charityId={charity.id}
+                      charityName={charity.name}
+                    />
+                  ) : null}
                 </Table.Td>
               </Table.Tr>
             ))
@@ -86,7 +98,9 @@ interface ImageProps {
 const CharityImage = styled.div`
   width: 15rem;
   height: 6rem;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   resize: both;
   background-image: url('${(p: ImageProps) => p.src}');
 `;
