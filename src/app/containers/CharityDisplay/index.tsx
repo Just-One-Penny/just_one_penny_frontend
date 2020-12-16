@@ -103,7 +103,7 @@ export const CharityDisplay = memo((props: Props) => {
               </Link>
             </>
           ) : null}
-          {charityDisplay?.id ? (
+          {charityDisplay?.connectedStripeId ? (
             <DonationButton
               charityId={charityDisplay.id}
               charityName={charityDisplay.name}

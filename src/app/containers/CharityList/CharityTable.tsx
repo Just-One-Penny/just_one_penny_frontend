@@ -52,16 +52,16 @@ export const CharityTable = (props: Props) => {
                         Annual revenue: ${' '}
                         {format(charity.lastYearRevenue.revenue)}
                       </div>
-                    ) : (
-                      <div></div>
-                    )}
+                    ) : null}
                   </Stack>
                 </Table.Td>
                 <Table.Td>
-                  <DonationButton
-                    charityId={charity.id}
-                    charityName={charity.name}
-                  />
+                  {charity.connectedStripeId ? (
+                    <DonationButton
+                      charityId={charity.id}
+                      charityName={charity.name}
+                    />
+                  ) : null}
                 </Table.Td>
               </Table.Tr>
             ))

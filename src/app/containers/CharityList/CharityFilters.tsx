@@ -97,7 +97,7 @@ export const CharityFilters = () => {
                 <Button type="submit">Search</Button>
               </div>
               <div className="w-1/2">
-                <Button type="submit" btnStyle="secondary">
+                <Button type="button" btnStyle="secondary" onClick={form.reset}>
                   Reset Filters
                 </Button>
               </div>

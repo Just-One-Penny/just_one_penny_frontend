@@ -12,6 +12,7 @@ export interface Charity {
   categories: string[];
   ein: string;
   isDeleted: boolean;
+  connectedStripeId: string;
 }
 
 export interface lastYearRevenue {
