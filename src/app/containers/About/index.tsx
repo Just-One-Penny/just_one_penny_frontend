@@ -152,7 +152,7 @@ const AboutSection = styled.section`
 `;
 
 const AboutContent = styled.div`
-  flex: 0 0 80%;
+  flex: 0 0 40.83333333%;
   margin-top: 4rem;
   margin-bottom: 6rem;
   padding: 1.75rem 6rem;
