@@ -64,13 +64,7 @@ export function UserBio() {
   const selectedEmail = useSelector(selectEmail);
   const selectedFullName = useSelector(selectFullName);
   const selectedRole = useSelector(selectRole);
-  const selectedPassword = useSelector(selectPassword);
-  const selectedOldPassword = useSelector(selectOldPassword);
-  const acctSettings = useSelector(selectAccountSettings);
   const isEditing = useSelector(selectIsEditing);
-
-  console.log('USER', user);
-  console.log('Seeetings', acctSettings);
 
   const handleClick = (evt: React.MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
@@ -137,7 +131,7 @@ export function UserBio() {
     dispatch(actions.changeName(selectedFullName));
     dispatch(actions.changeRole(selectedRole));
   };
-
+  console.log(user);
   return (
     <PageWrapper>
       {user ? (

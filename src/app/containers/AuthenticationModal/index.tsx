@@ -4,8 +4,9 @@
  *
  */
 
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { reducer, sliceKey, actions } from './slice';
@@ -19,10 +20,12 @@ import {
 } from 'react-social-login-buttons';
 import { Button } from 'app/components/Button';
 import { FormField } from 'app/components/FormField';
-import styled from 'styled-components';
+import { selectSuccess, selectUser } from './selectors';
+import { useAuth } from 'context/auth-context';
 
 interface Props {
   isSignup: boolean;
+  hide?: Function;
 }
 
 AuthenticationModal.defaultProps = {
@@ -30,12 +33,21 @@ AuthenticationModal.defaultProps = {
 };
 
 export function AuthenticationModal(props: Props) {
-  const [isSignup, setIsSignup] = useState(props.isSignup);
+  const { setUser } = useAuth();
+  const dispatch = useDispatch();
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: authenticationModalSaga });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const dispatch = useDispatch();
+  const [isSignup, setIsSignup] = useState(props.isSignup);
+  const success = useSelector(selectSuccess);
+  const user = useSelector(selectUser);
+
+  useEffect(() => {
+    if (success && props.hide) {
+      props.hide();
+      setUser(user);
+    }
+  }, [success]);
 
   const submitForm = values => {
     if (isSignup) {

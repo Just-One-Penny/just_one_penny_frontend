@@ -10,7 +10,6 @@ export class FeedApi extends Api {
 
   public getFeed = async (keywords: string[]): Promise<NewsFeed> => {
     try {
-      console.log("FeedApi -> keywords.join(',')", keywords.join(','));
       const res: AxiosResponse<NewsFeed> = await this.get<
         NewsFeed,
         AxiosResponse<NewsFeed>

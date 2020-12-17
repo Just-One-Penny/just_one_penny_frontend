@@ -19,3 +19,8 @@ export const selectPaymentInfo = createSelector(
   [selectDomain],
   donationModalState => donationModalState.paymentInfo,
 );
+
+export const selectSuccess = createSelector(
+  [selectDomain],
+  donationModalState => donationModalState.success,
+);

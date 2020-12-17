@@ -4,32 +4,49 @@
  *
  */
 import React from 'react';
+import { Form, Field } from 'react-final-form';
+import { useHistory } from 'react-router-dom';
+import Select from 'react-select';
 import styled from 'styled-components/macro';
+import { StyleConstants } from 'styles/StyleConstants';
 import { Button } from '../Button';
+import { CategorySelect } from '../CategorySelect';
 
 export const Search = props => {
+  const history = useHistory();
+
+  const handleSearch = values => {
+    const searchValues = { ...values };
+    if (searchValues.categories) {
+      searchValues.categories = searchValues.categories.map(
+        category => category.value,
+      );
+    }
+    const search = new URLSearchParams(searchValues);
+    history.push(`/charities?${search}`);
+  };
+
   return (
-    <Div {...props}>
-      <p>
-        <Input name="Charity" placeholder="Search Charity Name" />
-      </p>
-      <Wrapper>
-        <Select name="Categories" id="categories">
-          <option value="" hidden>
-            Search By Category
-          </option>
-          <option value="1">Animal & Nature</option>
-          <option value="2">Arts & Education </option>
-          <option value="3">Communities & Religion</option>
-          <option value="4">Human Outreach</option>
-        </Select>
-        <Button btnStyle={'primary'}>Find Charity</Button>
-      </Wrapper>
-    </Div>
+    <Form
+      onSubmit={handleSearch}
+      render={({ handleSubmit }) => (
+        <FormContainer onSubmit={handleSubmit} {...props}>
+          <p>
+            <Input name="Charity" placeholder="Search Charity Name" />
+          </p>
+          <Wrapper>
+            <SelectContainer>
+              <CategorySelect />
+            </SelectContainer>
+            <Button btnStyle={'primary'}>Find Charities</Button>
+          </Wrapper>
+        </FormContainer>
+      )}
+    />
   );
 };
 
-const Div = styled.div`
+const FormContainer = styled.form`
   width: 70%;
   @media only screen and (max-width: 475px) {
     width: 100%;
@@ -45,6 +62,11 @@ const Wrapper = styled.div`
     align-items: center;
   }
 `;
+
+const SelectContainer = styled.div`
+  width: 53%;
+`;
+
 const Input = styled.input`
   width: 100%;
   height: 3rem;
@@ -65,27 +87,5 @@ const Input = styled.input`
   ::placeholder {
     color: #333333;
     opacity: 1;
-  }
-`;
-const Select = styled.select`
-  width: 53%;
-  height: 3rem;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 25px;
-  opacity: 1;
-  padding: 0.5rem;
-  color: #333333;
-  opacity: 1;
-  &:hover {
-    border: 1px solid #0a559e;
-  }
-  &:focus {
-    border: 1px solid #0a559e;
-    border-radius: 25px;
-  }
-
-  @media only screen and (max-width: 475px) {
-    margin: 1rem 0;
-    width: 100%;
   }
 `;

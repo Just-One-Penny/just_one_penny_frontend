@@ -4,7 +4,6 @@ import { PathLike } from 'fs';
 export const API_BASE_URL =
   process.env.REACT_APP_API_BASE || 'http://localhost:3000/v1';
 export const apiConfig = () => {
-  console.log('API_BASE_URL', API_BASE_URL);
   const token = localStorage.getItem('jop_auth_token');
   const config = {
     returnRejectedPromiseOnError: true,
