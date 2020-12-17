@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { StyleConstants } from './StyleConstants';
+// import { StyleConstants } from './StyleConstants';
 /* istanbul ignore next */
 export const GlobalStyle = createGlobalStyle`
   html,
@@ -7,11 +7,11 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
     width: 100%;
     line-height: 1.5;
+    font-size: 100%;
   }
 
   body {
     font-family: Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    // padding-top: ${StyleConstants.NAV_BAR_HEIGHT};
     background-color: ${p => p.theme.colors.light[200]};
   }
 

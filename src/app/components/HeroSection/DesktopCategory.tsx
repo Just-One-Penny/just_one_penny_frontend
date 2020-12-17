@@ -1,8 +1,8 @@
 import React from 'react';
 import { Field } from 'react-final-form';
-import styled, { css } from 'styled-components/macro';
+import styled from 'styled-components/macro';
 import { Button } from '../Button';
-import { StyleConstants } from 'styles/StyleConstants';
+
 import { CategorySelect } from '../CategorySelect';
 
 export const DesktopCategory = ({ _toggleMobile, onSubmit }) => {
@@ -34,8 +34,6 @@ const SearchWrapper = styled.form`
   width: 70%;
   margin-bottom: 1rem;
 
-  // position: relative;
-
   @media only screen and (max-width: 475px) {
     width: 100%;
     flex-direction: column;
@@ -49,7 +47,6 @@ const SelectContainer = styled.div`
   margin-right: 2rem;
 
   @media only screen and (max-width: 475px) {
-    // width: 100%;
     display: none;
   }
 `;
@@ -85,7 +82,8 @@ const Input = styled(Field)`
 
   @media only screen and (max-width: 475px) {
     flex: none;
-    width: 21.4375rem;
+    // width: 21.4375rem;
+    width: 91.46666667%;
     margin-right: 0;
     margin-bottom: 1rem;
   }

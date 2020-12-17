@@ -3,15 +3,11 @@
  * HeroSection
  *
  */
-import { CATEGORIES } from 'app/constants';
 import React, { useState } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { useHistory } from 'react-router-dom';
-import Select from 'react-select';
 import styled, { css } from 'styled-components/macro';
 import { StyleConstants } from 'styles/StyleConstants';
-import { Button } from '../Button';
-import { CategorySelect } from '../CategorySelect';
 import AboutHeroImage1x from './assets/AboutHeroImage1x.png';
 import AboutHeroImage2x from './assets/AboutHeroImage2x.png';
 import MobileAboutHeroImage1x from './assets/MobileAboutHeroImage1x.png';
@@ -19,11 +15,6 @@ import MobileAboutHeroImage2x from './assets/MobileAboutHeroImage2x.png';
 
 import { DesktopCategory } from './DesktopCategory';
 import { MobileCategory } from './MobileCategory';
-
-const categoryOptions = CATEGORIES.map(category => ({
-  value: category.toLowerCase(),
-  label: category,
-}));
 
 interface Props {}
 
@@ -73,7 +64,6 @@ export function HeroSection(props: Props) {
 }
 
 const HeroDiv = styled.div`
-  // height: calc(192px - ${StyleConstants.NAV_BAR_HEIGHT});
   height: 192px;
   background-image: url(${MobileAboutHeroImage1x});
   background-size: cover;
@@ -91,9 +81,7 @@ const HeroDiv = styled.div`
 
   @media only screen and (min-width: 476px) {
     background-image: url(${AboutHeroImage1x});
-    // height: calc(152px - ${StyleConstants.NAV_BAR_HEIGHT});
     height: 152px;
-    // background-position: center;
   }
 
   @media only screen and (min-resolution: 192dpi) and (min-width: 476px),
@@ -107,7 +95,7 @@ const MobileSelectBG = styled.div<{ showMobile: boolean }>`
   width: 0;
   height: 100vh;
   position: fixed;
-  top: ${StyleConstants.NAV_BAR_HEIGHT};
+  top: 0;
   right: 0;
   z-index: 2;
   background-color: #d9d9d9;

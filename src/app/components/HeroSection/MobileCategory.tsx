@@ -33,7 +33,6 @@ const MobileSelectContainer = styled.form<{
   position: absolute;
   height: 100vh;
   width: 100vw;
-  // top: -2rem;
   top: 0;
   right: 0;
   transform: translateX(100%);
@@ -45,34 +44,8 @@ const MobileSelectContainer = styled.form<{
   ${props =>
     props.showMobile &&
     css`
-      // width: 100vw;
       opacity: 1;
       transform: translateX(0);
-    `};
-`;
-
-// ----------------------------------------------------
-
-const MobileSelectBG = styled.div<{ showMobile: boolean }>`
-  width: 0;
-  height: 100vh;
-  position: fixed;
-  top: ${StyleConstants.NAV_BAR_HEIGHT};
-  right: 0;
-  z-index: 2;
-  background-color: #d9d9d9;
-  opacity: 0;
-
-  transition: all 0.4s;
-
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-
-  ${props =>
-    props.showMobile &&
-    css`
-      width: 100vw;
-      opacity: 0.85;
     `};
 `;
 
@@ -81,7 +54,7 @@ const ButtonClearContainer = styled.span`
   justify-content: flex-start;
   align-items: center;
 
-  margin-top: calc(1.046875rem + ${StyleConstants.NAV_BAR_HEIGHT});
+  margin-top: calc(1.046875rem + ${StyleConstants.MOBILE_NAV_BAR_HEIGHT});
   margin-left: 1.296875rem;
 
   margin-bottom: 12.04125rem;

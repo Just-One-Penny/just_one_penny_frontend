@@ -47,7 +47,7 @@ const Wrapper = styled.header`
   }
 
   @media only screen and (max-width: 475px) {
-    height: ${StyleConstants.NAV_BAR_HEIGHT};
+    height: ${StyleConstants.MOBILE_NAV_BAR_HEIGHT};
   }
 `;
 
