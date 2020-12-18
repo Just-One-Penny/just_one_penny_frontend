@@ -44,18 +44,20 @@ export function HeroSection(props: Props) {
         onSubmit={handleSearch}
         render={({ handleSubmit }) => (
           <>
-            <MobileSelectBG showMobile={showMobile} />
+            {/* To be uncommented when MobileSelect goes live */}
+            {/* <MobileSelectBG showMobile={showMobile} /> */}
 
             <DesktopCategory
               onSubmit={handleSubmit}
               _toggleMobile={_toggleMobile}
             />
 
-            <MobileCategory
+            {/* To be uncommented when MobileSelect goes live */}
+            {/* <MobileCategory
               showMobile={showMobile}
               _toggleMobile={_toggleMobile}
               onSubmit={handleSubmit}
-            />
+            /> */}
           </>
         )}
       />
