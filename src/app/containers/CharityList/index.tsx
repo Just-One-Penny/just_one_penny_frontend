@@ -56,7 +56,7 @@ export const CharityList = memo((props: Props) => {
       </Helmet>
       <HeroSection />
       <Row>
-        <CharityFilters />
+        {/* <CharityFilters /> */}
         <CharityTable charities={charityList} loading={loading} />
       </Row>
     </>

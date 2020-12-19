@@ -33,16 +33,21 @@ const NavWrapper = styled.div`
 
 const Wrapper = styled.header`
   box-shadow: 0 1px 0 0 ${p => p.theme.colors.light};
-  height: ${StyleConstants.NAV_BAR_HEIGHT};
+  height: ${StyleConstants.DESKTOP_NAV_BAR_HEIGHT};
   display: flex;
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  z-index: 2;
+  z-index: 5;
   ${NavWrapper} {
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  @media only screen and (max-width: 475px) {
+    height: ${StyleConstants.MOBILE_NAV_BAR_HEIGHT};
   }
 `;
 

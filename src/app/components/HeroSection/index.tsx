@@ -3,28 +3,28 @@
  * HeroSection
  *
  */
-import { CATEGORIES } from 'app/constants';
-import React from 'react';
-import { Form, Field } from 'react-final-form';
+import React, { useState } from 'react';
+import { Form } from 'react-final-form';
 import { useHistory } from 'react-router-dom';
-import Select from 'react-select';
-import styled from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
 import { StyleConstants } from 'styles/StyleConstants';
-import { Button } from '../Button';
-import { CategorySelect } from '../CategorySelect';
 import AboutHeroImage1x from './assets/AboutHeroImage1x.png';
 import AboutHeroImage2x from './assets/AboutHeroImage2x.png';
 import MobileAboutHeroImage1x from './assets/MobileAboutHeroImage1x.png';
 import MobileAboutHeroImage2x from './assets/MobileAboutHeroImage2x.png';
 
-const categoryOptions = CATEGORIES.map(category => ({
-  value: category.toLowerCase(),
-  label: category,
-}));
+import { DesktopCategory } from './DesktopCategory';
+import { MobileCategory } from './MobileCategory';
 
 interface Props {}
 
 export function HeroSection(props: Props) {
+  const [showMobile, toggleMobile] = useState(false);
+
+  const _toggleMobile = () => {
+    toggleMobile(!showMobile);
+  };
+
   const history = useHistory();
 
   const handleSearch = values => {
@@ -43,18 +43,22 @@ export function HeroSection(props: Props) {
       <Form
         onSubmit={handleSearch}
         render={({ handleSubmit }) => (
-          <SearchWrapper onSubmit={handleSubmit}>
-            <Input
-              component="input"
-              name="name"
-              id="charity"
-              placeholder="Search Charity Name"
+          <>
+            {/* To be uncommented when MobileSelect goes live */}
+            <MobileSelectBG showMobile={showMobile} />
+
+            <DesktopCategory
+              onSubmit={handleSubmit}
+              _toggleMobile={_toggleMobile}
             />
-            <SelectContainer>
-              <CategorySelect />
-            </SelectContainer>
-            <Button btnStyle={'primary'}>Find Charities</Button>
-          </SearchWrapper>
+
+            {/* To be uncommented when MobileSelect goes live */}
+            <MobileCategory
+              showMobile={showMobile}
+              _toggleMobile={_toggleMobile}
+              onSubmit={handleSubmit}
+            />
+          </>
         )}
       />
     </HeroDiv>
@@ -62,24 +66,24 @@ export function HeroSection(props: Props) {
 }
 
 const HeroDiv = styled.div`
-  width: calc(100% + 4rem);
-  margin-left: -2rem;
-  height: 150px;
+  height: 192px;
   background-image: url(${MobileAboutHeroImage1x});
   background-size: cover;
-  background-position: center;
+  background-position: center bottom;
+
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+  position: relative;
 
-  @media only screen and (min-resolution: 192dpi) and (min-width: 320px),
-    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 320px) {
+  @media only screen and (min-resolution: 192dpi) and (min-width: 0px),
+    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 0px) {
     background-image: url(${MobileAboutHeroImage2x});
   }
 
   @media only screen and (min-width: 476px) {
-    margin-top: -${StyleConstants.NAV_BAR_HEIGHT};
     background-image: url(${AboutHeroImage1x});
+    height: 152px;
   }
 
   @media only screen and (min-resolution: 192dpi) and (min-width: 476px),
@@ -89,58 +93,25 @@ const HeroDiv = styled.div`
   }
 `;
 
-const SelectContainer = styled.div`
-  width: 25%;
-  margin-right: 2rem;
-`;
+const MobileSelectBG = styled.div<{ showMobile: boolean }>`
+  width: 0;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  background-color: #d9d9d9;
+  opacity: 0;
 
-const SearchWrapper = styled.form`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  width: 70%;
-  margin-top: 4rem;
-  @media only screen and (max-width: 475px) {
-    width: 100%;
-  }
-`;
+  transition: all 0.4s;
 
-const Input = styled(Field)`
-  flex: 3;
-  margin-right: 2rem;
-  height: 3rem;
-  padding: 10px;
-  margin-bottom: 10px;
-  font: var(--unnamed-font-style-normal) normal
-    var(--unnamed-font-weight-normal) var(--unnamed-font-size-16) /
-    var(--unnamed-line-spacing-24) var(--unnamed-font-family-avenir);
-  letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(---333333-dark);
-  text-align: left;
-  font: normal normal normal 16px/24px Avenir;
-  letter-spacing: 0px;
-  color: #333333;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 50px;
-  ::placeholder {
-    color: #333333;
-    opacity: 1;
-  }
-`;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
 
-const StyledSelect = styled(Field)`
-  flex: 2;
-  margin-right: 2rem;
-  height: 3rem;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 25px;
-  opacity: 1;
-  padding: 0.5rem;
-  color: #333333;
-  opacity: 1;
-
-  @media only screen and (max-width: 475px) {
-    margin: 1rem 0;
-    width: 100%;
-  }
+  ${props =>
+    props.showMobile &&
+    css`
+      width: 100vw;
+      opacity: 0.85;
+    `};
 `;
