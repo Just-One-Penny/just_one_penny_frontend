@@ -45,7 +45,7 @@ export function HeroSection(props: Props) {
         render={({ handleSubmit }) => (
           <>
             {/* To be uncommented when MobileSelect goes live */}
-            {/* <MobileSelectBG showMobile={showMobile} /> */}
+            <MobileSelectBG showMobile={showMobile} />
 
             <DesktopCategory
               onSubmit={handleSubmit}
@@ -53,11 +53,11 @@ export function HeroSection(props: Props) {
             />
 
             {/* To be uncommented when MobileSelect goes live */}
-            {/* <MobileCategory
+            <MobileCategory
               showMobile={showMobile}
               _toggleMobile={_toggleMobile}
               onSubmit={handleSubmit}
-            /> */}
+            />
           </>
         )}
       />
@@ -76,8 +76,8 @@ const HeroDiv = styled.div`
   align-items: flex-end;
   position: relative;
 
-  @media only screen and (min-resolution: 192dpi) and (min-width: 320px),
-    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 320px) {
+  @media only screen and (min-resolution: 192dpi) and (min-width: 0px),
+    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 0px) {
     background-image: url(${MobileAboutHeroImage2x});
   }
 

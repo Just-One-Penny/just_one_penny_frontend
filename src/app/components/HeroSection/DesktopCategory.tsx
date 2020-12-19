@@ -9,9 +9,6 @@ export const DesktopCategory = ({ _toggleMobile, onSubmit }) => {
   const [name, setName] = useState('');
 
   const handleChange = ({ target }) => {
-    console.log('nameState', name);
-    console.log('target.value', target.value);
-
     setName(target.value);
   };
 
@@ -24,14 +21,16 @@ export const DesktopCategory = ({ _toggleMobile, onSubmit }) => {
             id="charity"
             placeholder="Search charity name or keyword"
             onChange={handleChange}
+            name="charity"
+            value={name}
           />
         )}
       </Field>
 
       {/* To be uncommented when Category Select goes live */}
-      {/* <SelectContainer>
+      <SelectContainer>
         <CategorySelect />
-      </SelectContainer> */}
+      </SelectContainer>
 
       {/* To be uncommented when Mobile Category Select goes live */}
       {/* <Text onClick={() => _toggleMobile()}>Search by category</Text> */}
@@ -52,6 +51,12 @@ export const DesktopCategory = ({ _toggleMobile, onSubmit }) => {
 //
 // This property to be uncommented when Mobile Category select goes live
 // margin-bottom: 1.125rem;
+////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////
+// ButtonContainer
+// display: none; To be uncommented when Mobile Category select goes lives
+////////////////////////////////////////////////////////////////////
 
 const SearchWrapper = styled.form`
   display: flex;
@@ -82,18 +87,13 @@ const SelectContainer = styled.div`
   }
 `;
 
-////////////////////////////////////////////////////////////////////
-// ButtonContainer
-// display: none; To be uncommented when Mobile Category select goes lives
-////////////////////////////////////////////////////////////////////
-
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 
   @media only screen and (max-width: 475px) {
-    // display: none;
+    display: none;
   }
 `;
 
@@ -111,7 +111,6 @@ const Text = styled.p`
     display: flex;
   }
 `;
-// const Input = styled(Field);
 
 const Input = styled.input`
   flex: 3;

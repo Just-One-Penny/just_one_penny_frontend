@@ -21,58 +21,75 @@ export const HeroBox = () => {
   );
 };
 
+////////////////////////////////////////////////////////////////////
+// HeroText
+// This is for the button but will be commented out when Mobile Category select goes live
+// margin-bottom: 15rem;
+//
+// This property to be uncommented when Mobile Category select goes live
+// margin-bottom: 17.125rem;
+////////////////////////////////////////////////////////////////////
+
 const HeroSection = styled.header`
-  // width: calc(100% + 4rem);
-  // margin-left: -2rem;
   width: 100%;
-  height: 450px;
-  padding: 3rem 0;
-  background-image: url(${HeroImage1x});
+  height: 600px;
+
+  background-image: url(${MobileHeroImage1x});
   background-size: cover;
   background-position: center;
 
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
 
-  @media only screen and (max-width: 475px) {
-    background-image: url(${MobileHeroImage1x});
-  }
+  position: relative;
 
-  @media only screen and (min-resolution: 192dpi) and(max-width: 475px),
-    only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 475px) {
+  @media only screen and (min-resolution: 192dpi) and (min-width: 0px),
+    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 0px) {
     background-image: url(${MobileHeroImage2x});
-    height: 600px;
-    padding: 1rem 0;
   }
 
-  @media only screen and (min-resolution: 192dpi) and (min-width: 769px),
-    (-webkit-min-device-pixel-ratio: 2) and (min-width: 769px) {
+  @media only screen and (min-width: 476px) {
+    background-image: url(${HeroImage1x});
+    height: 600px;
+    // height: 450px;
+  }
+
+  @media only screen and (min-resolution: 192dpi) and (min-width: 476px),
+    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 476px),
+    only screen and (min-width: 1920px) {
     background-image: url(${HeroImage2x});
   }
 
   @media only screen and (max-width: 1024px) {
-    padding: 1.5rem 0;
+    // padding: 1.5rem 0;
   }
 `;
 
 const HeroText = styled.div`
-  padding-left: 10rem;
-
+  padding-left: 20.8333vw;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 12rem;
 
-  @media only screen and (max-width: 1024px) {
-    padding-left: 5rem;
+  @media only screen and (max-width: 1440px) {
+    // padding-left: 18.75rem;
   }
 
   @media only screen and (max-width: 1024px) {
-    padding-left: 2.5rem;
+    padding-left: 10.416665vw;
   }
 
   @media only screen and (max-width: 475px) {
     padding-left: 0;
     padding: 0 1rem;
-    text-align: center;
+    align-items: center;
+
+    // This is original when mobile select text goes lives
+    // margin-bottom: 17.125rem;
+
+    // Temporary for the bottom until select text goes live
+    margin-bottom: 15rem;
   }
 `;
 
@@ -84,9 +101,12 @@ const H1 = styled.h1`
   font: normal normal 900 36px/49px Avenir;
   letter-spacing: 0px;
   color: #ffffff;
+  margin: 0;
 
   @media only screen and (max-width: 475px) {
     font-size: 1.75rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
   }
 `;
 
@@ -104,5 +124,7 @@ const H3 = styled.h3`
 
   @media only screen and (max-width: 475px) {
     font-size: 0.75rem;
+    margin-bottom: 1.0625rem;
+    text-align: center;
   }
 `;
