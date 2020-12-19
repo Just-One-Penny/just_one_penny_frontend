@@ -9,6 +9,7 @@ import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components/macro';
 import { Button } from '../../components/Button';
 import { contactUsApi } from '../../../api/contactUsApi';
+import { HeroSection } from '../../components/HeroSection';
 
 interface Props {}
 
@@ -36,6 +37,8 @@ export const ContactUs = memo((props: Props) => {
         <title>Contact Us</title>
         <meta name="description" content="Description of ContactUs" />
       </Helmet>
+      <HeroSection />
+
       <Container>
         <MainBox>
           <PageHeading>Contact</PageHeading>

@@ -28,9 +28,9 @@ export const DesktopCategory = ({ _toggleMobile, onSubmit }) => {
       </Field>
 
       {/* To be uncommented when Category Select goes live */}
-      <SelectContainer>
+      {/* <SelectContainer>
         <CategorySelect />
-      </SelectContainer>
+      </SelectContainer> */}
 
       {/* To be uncommented when Mobile Category Select goes live */}
       {/* <Text onClick={() => _toggleMobile()}>Search by category</Text> */}
