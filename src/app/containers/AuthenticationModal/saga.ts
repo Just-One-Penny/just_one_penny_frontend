@@ -39,11 +39,11 @@ export function* registerUser() {
 
   const firstName: string = yield select(selectFirstName);
   const lastName: string = yield select(selectLastName);
+  const fullName: string = firstName + ' ' + lastName;
   const credentials = {
     email,
     password,
-    firstName,
-    lastName,
+    fullName,
   };
   const response: AuthenticationModalSuccess = yield call(
     userApi.userRegister,

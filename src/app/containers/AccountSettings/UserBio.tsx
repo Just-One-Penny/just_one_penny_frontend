@@ -90,6 +90,7 @@ export function UserBio() {
           userId: user.id,
         }),
       );
+      window.location.reload();
     }
   };
 
@@ -104,6 +105,7 @@ export function UserBio() {
           role: selectedRole,
         }),
       );
+      window.location.reload();
     }
   };
 
@@ -118,6 +120,7 @@ export function UserBio() {
           role: selectedRole,
         }),
       );
+      window.location.reload();
     }
   };
 
@@ -131,7 +134,7 @@ export function UserBio() {
     dispatch(actions.changeName(selectedFullName));
     dispatch(actions.changeRole(selectedRole));
   };
-  console.log(user);
+  console.log('SELECTED FN', selectedFullName);
   return (
     <PageWrapper>
       {user ? (
@@ -141,7 +144,9 @@ export function UserBio() {
               <div>
                 <FieldGrid>
                   <TitleContainer>Name:</TitleContainer>
-                  <FieldContent>{selectedFullName}</FieldContent>
+                  <FieldContent>
+                    {!selectedFullName ? user?.fullName : selectedFullName}
+                  </FieldContent>
                   <Modal
                     buttonElement={<EditButton>Edit</EditButton>}
                     modalBody={
