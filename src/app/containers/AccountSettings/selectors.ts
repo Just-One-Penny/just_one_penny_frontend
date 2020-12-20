@@ -76,6 +76,16 @@ export const selectGetCharities = createSelector(
   accountSettingsState => accountSettingsState.charities,
 );
 
+export const selectPassword = createSelector(
+  [selectDomain],
+  accountSettingsState => accountSettingsState.password,
+);
+
+export const selectOldPassword = createSelector(
+  [selectDomain],
+  accountSettingsState => accountSettingsState.oldPassword,
+);
+
 export const selectAccountSettings = createSelector(
   [selectDomain],
   accountSettingsState => accountSettingsState,

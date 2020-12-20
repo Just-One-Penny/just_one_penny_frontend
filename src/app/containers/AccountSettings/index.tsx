@@ -24,7 +24,7 @@ import { useAuth } from 'context/auth-context';
 interface Props {}
 
 export const AccountSettings = memo((props: Props) => {
-  const { user } = useAuth()
+  const { user } = useAuth();
   const [state, setState] = useState({ tab: 0 });
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: accountSettingsSaga });
@@ -33,7 +33,9 @@ export const AccountSettings = memo((props: Props) => {
   const accountSettings = useSelector(selectAccountSettings);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
-  useEffect(() => {dispatch(actions.setId(user.id))}, [])
+  useEffect(() => {
+    dispatch(actions.setId(user.id));
+  }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
@@ -65,9 +67,9 @@ export const AccountSettings = memo((props: Props) => {
       <PageContainer>
         <TabContainer>{tabs.map(Tab)}</TabContainer>
         <TabContentContainer>
-          {state.tab === 0 ? <AccountDonations/> : null}
+          {state.tab === 0 ? <AccountDonations /> : null}
           {state.tab === 1 ? <>Billing Information</> : null}
-          {state.tab === 2 ? <>Settings</> : null}
+          {state.tab === 2 ? <UserBio /> : null}
         </TabContentContainer>
       </PageContainer>
     </>

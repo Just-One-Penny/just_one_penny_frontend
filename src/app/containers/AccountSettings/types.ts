@@ -4,6 +4,8 @@ import { DonationSubmitted } from 'types/Donation';
 export interface AccountSettingsState {
   id: string;
   fullName: string;
+  password: string;
+  oldPassword: string;
   email: string;
   role: string;
   charities: Charity[];
@@ -19,6 +21,19 @@ export enum GetCharitiesErrorType {
   GENERAL_ERROR = 1,
 }
 
+export interface UpdatePassword {
+  userId: string;
+  password: string;
+  oldPassword: string;
+}
+
+export interface UpdateUser {
+  id: string;
+  email: string;
+  fullName: string;
+  role: string;
+}
+
 export interface UpdatedUser {
   id: string;
   email: string;
@@ -30,7 +45,6 @@ export interface UpdateSuccess {
   id: string;
   name: string;
   email: string;
-  role: string;
   createdAt?: Date;
 }
 

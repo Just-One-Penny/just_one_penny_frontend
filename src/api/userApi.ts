@@ -6,6 +6,7 @@ import {
   User,
   UpdatedUser,
   UpdatingUser,
+  UpdatePassword,
 } from 'types/User';
 import { UpdatingBillingInfo, UpdatedBillingInfo } from 'types/Stripe';
 import { apiConfig } from './api.config';
@@ -143,6 +144,16 @@ export class UserApi extends Api {
       UpdatingBillingInfo,
       AxiosResponse<UpdatedBillingInfo>
     >(`/users/${paymentObj.id}/payment/billing`, paymentObj).then(this.success);
+  };
+
+  public updatePassword = (
+    passwordObj: UpdatePassword,
+  ): Promise<UpdatedUser> => {
+    console.log('passwordObj', passwordObj);
+    return this.put<UpdatedUser, UpdatePassword, AxiosResponse<UpdatedUser>>(
+      `/users/password-match`,
+      passwordObj,
+    ).then(this.success);
   };
 }
 
