@@ -23,6 +23,9 @@ import { Button } from 'app/components/Button';
 import { DonationSubmissionValues, DonationSubmission } from './types';
 import { selectSuccess } from '../AuthenticationModal/selectors';
 import { Success } from './Success';
+import { Modal } from '../../components/Modal';
+import { TermsOfService } from '../../components/TermsOfService';
+import { TermsOfRecurringAmounts } from '../../components/TermsOfRecurringAmounts';
 
 interface Props {
   charityId: string;
@@ -50,10 +53,11 @@ export function DonationModal(props: Props) {
     }
   }, [success]);
 
-  const formatPrice = value =>
-    value === undefined
-      ? '' // make controlled
-      : numeral(value).format('$0,0.00');
+  const formatPrice = value => {
+    if (value !== undefined && value >= 3)
+      return numeral(value).format('$0,0.00');
+    return '';
+  };
 
   const calculateTotal = values => {
     let amount = values.amount
@@ -110,25 +114,32 @@ export function DonationModal(props: Props) {
           name="amount"
           label="Donation Amount"
           type="text"
-          placeholder="$0.00"
+          placeholder="Minimum $3.00"
           format={formatPrice}
           formatOnBlur
         />
       ) : null}
       {formType === 'micro' ? (
         <>
-          <InputLabel>Daily Amount</InputLabel>
+          <InputLabel>
+            Daily Amount{' '}
+            <Modal
+              buttonElement={<Icon type="button">?</Icon>}
+              modalBody={<TermsOfRecurringAmounts />}
+            />
+          </InputLabel>
+
           <Input
             name="amount"
             component="select"
             placeholder="Select Daily Amount"
           >
-            <option />
-            <option value="$0.01">$0.01 Per Day</option>
-            <option value="$0.05">$0.05 Per Day</option>
-            <option value="$0.10">$0.10 Per Day</option>
-            <option value="$0.25">$0.25 Per Day</option>
-            <option value="$0.50">$0.50 Per Day</option>
+            <option>--- Please Select ---</option>
+            <option value="$3.65">$0.01 Per Day</option>
+            <option value="$4.57">$0.05 Per Day</option>
+            <option value="$9.13">$0.10 Per Day</option>
+            <option value="$7.61">$0.25 Per Day</option>
+            <option value="$15.21">$0.50 Per Day</option>
           </Input>
         </>
       ) : (
@@ -175,7 +186,7 @@ export function DonationModal(props: Props) {
     <Wrapper>
       <Form
         onSubmit={onSubmit}
-        render={({ handleSubmit, values }) => (
+        render={({ handleSubmit, form, values }) => (
           <>
             <Header>{formatPrice(calculateTotal(values))}</Header>
             <ModalContent>
@@ -197,10 +208,10 @@ export function DonationModal(props: Props) {
                   />
                 </div>
                 <StyledTabList aria-label="Tabs" {...tab}>
-                  <StyledTab {...tab} id="micro">
+                  <StyledTab {...tab} id="micro" onClick={form.reset}>
                     Micro-Donation
                   </StyledTab>
-                  <StyledTab {...tab} id="standard">
+                  <StyledTab {...tab} id="standard" onClick={form.reset}>
                     Standard
                   </StyledTab>
                 </StyledTabList>
@@ -216,6 +227,20 @@ export function DonationModal(props: Props) {
                     Make Donation
                   </Button>
                 </div>
+                <Field
+                  name="terms"
+                  component="input"
+                  type="checkbox"
+                  value="terms"
+                  className="mr-3 mt-3"
+                  required
+                />
+                I agree to the{' '}
+                <Modal
+                  buttonElement={<TextLink>Terms and Conditions</TextLink>}
+                  modalBody={<TermsOfService />}
+                />
+                <br />
               </form>
             </ModalContent>
           </>
@@ -300,4 +325,45 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const TextLink = styled.span`
+  color: #0a559e;
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: #0c4379;
+    text-decoration: underline;
+  }
+`;
+
+const Icon = styled.button`
+  margin-bottom: 2px;
+  color: #0a559e;
+  background: transparent;
+  border: 2px solid #0a559e;
+  &:hover,
+  &:active {
+    border-color: #0c4379;
+    color: #0c4379;
+  }
+
+  &:focus,
+  &:active {
+    text-decoration: underline;
+  }
+
+  width: 25px;
+  height: 25px;
+  font-weight: 900;
+  box-shadow: 0px 2px 6px #0000005a;
+  border-radius: 50px;
+  opacity: 1;
+  text-align: center;
+  font: normal normal 900 16px/22px;
+  .icon {
+    margin-right: 0.25rem;
+  }
 `;

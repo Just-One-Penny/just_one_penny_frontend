@@ -8,8 +8,9 @@ export interface Charity {
   summary: string;
   lastYearRevenue: lastYearRevenue;
   website: string;
-  stripeCustomerRef: string;
+  connectedStripeId: string;
   categories: string[];
+  ein: string;
   isDeleted: boolean;
 }
 

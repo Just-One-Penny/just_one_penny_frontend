@@ -9,6 +9,8 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components/macro';
 import { HeroSection } from '../../components/HeroSection';
+import { Modal } from '../../components/Modal';
+import { TermsOfService } from '../../components/TermsOfService';
 
 interface Props {}
 
@@ -28,6 +30,15 @@ export const About = memo((props: Props) => {
       <AboutSection>
         <AboutContent>
           <H2>About</H2>
+
+          <TextBlock>
+            <B1>
+              Just One Penny is the world’s first micro-donation platform that
+              allows donors to establish recurring charitable gifts of as small
+              as one penny per day. Together, we can lead a revolution toward
+              more inclusive giving.
+            </B1>
+          </TextBlock>
 
           <TextBlock>
             <H3>Our Mission</H3>
@@ -125,17 +136,26 @@ export const About = memo((props: Props) => {
               gifts of as small as one penny per day, offering today’s donors
               the ability to find charities they love and begin supporting them
               an ultra-attainable price point. We call these gifts
-              “micro-donations,” and we believe that the combined contribution
+              "micro-donations," and we believe that the combined contribution
               from thousands of modest donations will show the world how
               powerful a penny can be.
             </B1>
             <br />
             <B1>
-              Unlike other charity fundraising sites, we’re a 501(c)(3)
-              nonprofit organization ourselves, and we don’t take a single cent
+              Unlike other charity fundraising sites, we're a 501(c)(3)
+              nonprofit organization ourselves, and we don't take a single cent
               from the donations our partner charities receive through our site.
-              We’ve financed our operation through independent channels, so
-              we’ll never charge a fee or take a cut from our charity partners.
+              We've financed our operation through independent channels, so
+              we'll never charge a fee or take a cut from our charity partners.
+            </B1>
+          </TextBlock>
+          <TextBlock>
+            <B1>
+              *Persuant to our{' '}
+              <Modal
+                buttonElement={<TextLink>Terms and Conditions</TextLink>}
+                modalBody={<TermsOfService />}
+              />
             </B1>
           </TextBlock>
         </AboutContent>
@@ -152,7 +172,7 @@ const AboutSection = styled.section`
 `;
 
 const AboutContent = styled.div`
-  flex: 0 0 80%;
+  flex: 0 0 40.83333333%;
   margin-top: 4rem;
   margin-bottom: 6rem;
   padding: 1.75rem 6rem;
@@ -207,12 +227,24 @@ const B2 = styled.p`
 
 const B1 = styled.p`
   font-size: 1rem;
-  font-color: #333;
+  color: #333;
   font-weight: 300;
 `;
 
 const TextBlock = styled.div`
   margin-bottom: 1.75rem;
+`;
+
+const TextLink = styled.span`
+  color: #0a559e;
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: #0c4379;
+    text-decoration: underline;
+  }
 `;
 
 const BulletText = styled.div`

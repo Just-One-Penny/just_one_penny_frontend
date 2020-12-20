@@ -20,6 +20,7 @@ import { About } from './containers/About/Loadable';
 import { ContactUs } from './containers/ContactUs/Loadable';
 import { CharityDisplay } from './containers/CharityDisplay';
 import { CharitySignup } from './containers/CharitySignup';
+import { Typeform } from './containers/CharitySignup/Typeform';
 import { Footer } from './components/Footer';
 import { NavBar } from './containers/NavBar';
 import { StripeSuccess } from './containers/StripeSuccess/Loadable';
@@ -46,6 +47,8 @@ export function App() {
           <Route exact path="/stripe" component={StripeSuccess} />
           <Route exact path="/charities" component={CharityList} />
           <Route exact path="/charities/new" component={CharitySignup} />
+          <Route exact path="/charities/new/form" component={Typeform} />
+
           <Route
             exact
             path="/charities/:charityId"

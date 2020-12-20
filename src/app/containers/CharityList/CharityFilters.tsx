@@ -72,7 +72,7 @@ export const CharityFilters = () => {
               value="range1"
               className="mr-3 mt-3"
             />
-            <FilterText>Size Range 1</FilterText>
+            <FilterText>0 - 3.5 million</FilterText>
             <br />
             <Field
               name="revenue"
@@ -81,7 +81,7 @@ export const CharityFilters = () => {
               value="range2"
               className="mr-3 mt-3"
             />
-            <FilterText>Size Range 2</FilterText>
+            <FilterText>3.5 - 13.5 million</FilterText>
             <br />
             <Field
               name="revenue"
@@ -90,14 +90,14 @@ export const CharityFilters = () => {
               value="range3"
               className="mr-3 mt-3"
             />
-            <FilterText>Size Range 3</FilterText>
+            <FilterText>13.5 million +</FilterText>
             <br />
             <div className="w-full flex justify-center align-center mt-3">
               <div className="w-1/2 mr-2">
                 <Button type="submit">Search</Button>
               </div>
               <div className="w-1/2">
-                <Button type="submit" btnStyle="secondary">
+                <Button type="button" btnStyle="secondary" onClick={form.reset}>
                   Reset Filters
                 </Button>
               </div>

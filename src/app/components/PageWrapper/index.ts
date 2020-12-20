@@ -7,8 +7,9 @@ export const PageWrapper = styled.div`
   box-sizing: content-box;
   height: 100%;
   min-height: 100vh;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  // padding-left: 2rem;
+  // padding-right: 2rem;
+  overflow: hidden;
 `;
 
 // margin: 0 auto;

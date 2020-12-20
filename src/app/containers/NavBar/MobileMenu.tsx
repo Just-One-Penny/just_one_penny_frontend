@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/macro';
-
-import items from './sampleLinks';
+import { useAuth } from 'context/auth-context';
+import { Modal } from 'app/components/Modal';
+import { AuthenticationModal } from '../AuthenticationModal';
 
 import icon from './assets/hamburger-icon.png';
 
@@ -11,6 +12,7 @@ export function MobileMenu() {
   function _toggleMenu() {
     toggle(!show);
   }
+  const { user, logout } = useAuth();
   return (
     <Div>
       <img src={icon} alt="Menu" onClick={_toggleMenu} />
@@ -18,11 +20,29 @@ export function MobileMenu() {
         <Menu>
           <p onClick={_toggleMenu}>X</p>
           <ul>
-            {items.map((item, i) => (
-              <li key={item.text}>
-                <a href={item.link}>{item.text}</a>
+            <li key="Info for Charities">
+              <a href="/charities/new">Info for Charities</a>
+            </li>
+            {user && user.id ? (
+              <li key="My Account">
+                <a href="/settings">My Account</a>
               </li>
-            ))}
+            ) : (
+              <>
+                <li key="Login">
+                  <Modal
+                    buttonElement="Login"
+                    modalBody={<AuthenticationModal />}
+                  />
+                </li>
+                <li key="Sign Up">
+                  <Modal
+                    buttonElement="Sign Up"
+                    modalBody={<AuthenticationModal isSignup />}
+                  />
+                </li>
+              </>
+            )}
           </ul>
         </Menu>
       )}
