@@ -17,9 +17,6 @@ export function Nav() {
       <Link to="/about">
         <NavLink className="mr-4">About</NavLink>
       </Link>
-      <Link to="/settings">
-        <NavLink className="mr-4">My Account</NavLink>
-      </Link>
       {user && user.id ? (
         <Link to="/">
           <Link to="/settings">
