@@ -31,16 +31,28 @@ export function MobileMenu() {
             <li key="About">
               <a href="/about">About</a>
             </li>
+            <Hr />
             <li key="Charities">
               <a href="/charities">Charities</a>
             </li>
+            <Hr />
             <li key="Info for Charities">
               <a href="/charities/new">Info for Charities</a>
             </li>
+            <Hr />
             {user && user.id ? (
-              <li key="My Account">
-                <a href="/settings">My Account</a>
-              </li>
+              <>
+                <li key="My Account">
+                  <a href="/settings">My Account</a>
+
+                  <Hr />
+                </li>
+                <Li key="Sign Out">
+                  <MyButton btnStyle="secondary" onClick={logout}>
+                    Sign Out
+                  </MyButton>
+                </Li>
+              </>
             ) : (
               <>
                 <Li key="Sign Up">
@@ -66,8 +78,10 @@ const Li = styled.li`
 `;
 
 const Hr = styled.hr`
-  border-top: 1px solid #bbb;
+  margin: 10px 40px 0 0;
+  border-top: 0.5px solid #bbb;
 `;
+
 const MyButton = styled(Button)`
   box-shadow: none;
   border: 3px solid #0a559e;
@@ -106,6 +120,8 @@ const Row = styled.div`
 
   p {
     margin-right: 50px;
+    color: #9fa2a8;
+    font-weight: lighter;
   }
 `;
 
