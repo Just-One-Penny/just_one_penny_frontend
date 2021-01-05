@@ -17,6 +17,7 @@ import { HomePage } from './containers/HomePage/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { CharityList } from './containers/CharityList/Loadable';
 import { About } from './containers/About/Loadable';
+import { Faq } from './containers/Faq/Loadable';
 import { ContactUs } from './containers/ContactUs/Loadable';
 import { CharityDisplay } from './containers/CharityDisplay';
 import { CharitySignup } from './containers/CharitySignup';
@@ -44,6 +45,7 @@ export function App() {
           <Route exact path="/settings" component={AccountSettings} />
           <Route exact path="/contactUs" component={ContactUs} />
           <Route exact path="/about" component={About} />
+          <Route exact path="/faq" component={Faq} />
           <Route exact path="/stripe" component={StripeSuccess} />
           <Route exact path="/charities" component={CharityList} />
           <Route exact path="/charities/new" component={CharitySignup} />
