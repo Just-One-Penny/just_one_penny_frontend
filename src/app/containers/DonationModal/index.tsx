@@ -135,11 +135,19 @@ export function DonationModal(props: Props) {
             placeholder="Select Daily Amount"
           >
             <option>--- Please Select ---</option>
-            <option value="$3.65">$0.01 Per Day</option>
-            <option value="$4.57">$0.05 Per Day</option>
-            <option value="$9.13">$0.10 Per Day</option>
-            <option value="$7.61">$0.25 Per Day</option>
-            <option value="$15.21">$0.50 Per Day</option>
+            <option value="$3.65">
+              $0.01 Per Day ($3.65 charged annually)
+            </option>
+            <option value="$4.57">
+              $0.05 Per Day ($4.57 charged quarterly)
+            </option>
+            <option value="$9.13">
+              $0.10 Per Day ($9.13 charged quarterly)
+            </option>
+            <option value="$7.61">$0.25 Per Day ($7.61 charged monthly)</option>
+            <option value="$15.21">
+              $0.50 Per Day ($15.21 charged monthly)
+            </option>
           </Input>
         </>
       ) : (
