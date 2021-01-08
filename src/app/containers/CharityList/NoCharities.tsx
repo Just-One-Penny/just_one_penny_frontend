@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { OneSvg } from 'app/components/OneSvg/Loadable';
+import { Link } from 'react-router-dom';
 
 export const NoCharities = () => {
   return (
@@ -8,13 +9,18 @@ export const NoCharities = () => {
       <OneSvg />
       <Header className="my-2">Sorry, no charities match your search.</Header>
       <div>
-        <Text className="mb-2">
-          Was there a charity you were hoping to find in these results? We’re
-          constantly expanding our offering of charities, but if there is a
-          specific organization that you’d like to see on our platform please
-          let them know that they should sign-up by sending them this link.
-        </Text>
-        <br />
+        <MainTextContainer>
+          <Text className="mb-2">
+            Was there a charity you were hoping to find in these results? We’re
+            constantly expanding our offering of charities, but if there is a
+            specific organization that you’d like to see on our platform please
+            let them know that they should sign-up by sending them this{' '}
+            <Link to="/charities/new">
+              <TextLink>link.</TextLink>{' '}
+            </Link>
+          </Text>
+        </MainTextContainer>
+        <br></br>
         <Text className="mb-2">Search Selections:</Text>
         <br />
         <Text>
@@ -43,6 +49,10 @@ const Container = styled.div`
   margin-top: 3rem;
 `;
 
+const MainTextContainer = styled.div`
+  text-align: left;
+`;
+
 const Header = styled.span`
   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
     var(--unnamed-font-size-20) / var(--unnamed-line-spacing-30)
@@ -65,5 +75,16 @@ const Text = styled.span`
   font: normal normal normal 16px/24px Avenir;
   letter-spacing: 0px;
   color: #333333;
-  margin-left: 0.5rem;
+`;
+
+const TextLink = styled.span`
+  color: #0a559e;
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: #0c4379;
+    text-decoration: underline;
+  }
 `;

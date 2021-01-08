@@ -240,21 +240,3 @@ const TextLink = styled.span`
     text-decoration: underline;
   }
 `;
-
-const BulletText = styled.div`
-  position: relative;
-  margin-left: 16px;
-  margin-bottom: 8px;
-
-  &::before {
-    position: absolute;
-    // content: '•';
-    content: '';
-    height: 8px;
-    width: 8px;
-    background-color: #333;
-    border-radius: 50%;
-    left: -16px;
-    top: 8px;
-  }
-`;
