@@ -9,6 +9,7 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components/macro';
 import { HeroSection } from '../../components/HeroSection';
+import { Link } from 'react-router-dom';
 
 interface Props {}
 
@@ -104,11 +105,14 @@ export const Faq = memo((props: Props) => {
             <H3>How can charities sign-up?</H3>
             <B1>
               Easily! Any 501(c)(3) nonprofit organization can sign-up to use
-              our platform by visiting our Charity Sign-up [LINK!!!!] page and
-              completing our quick questionnaire. Once a charity signs up, we’ll
-              take their information and create a custom profile that will allow
-              donors to learn more about them and establish single-time and
-              recurring donations. These organizations will then show up in
+              our platform by visiting our{' '}
+              <Link to="/charities/new">
+                <TextLink>Charity Sign-up page </TextLink>{' '}
+              </Link>
+              and completing our quick questionnaire. Once a charity signs up,
+              we’ll take their information and create a custom profile that will
+              allow donors to learn more about them and establish single-time
+              and recurring donations. These organizations will then show up in
               search results on our platform, and donors from across the country
               will be able to support them.
             </B1>
@@ -129,9 +133,12 @@ export const Faq = memo((props: Props) => {
           <TextBlock>
             <H3>I accidentally made a donation. Can I be refunded?</H3>
             <B1>
-              Yes. If you made a donation in error please use the contact page
-              [LINK] of our platform to notify us and we will reach out to you
-              about your refund.
+              Yes. If you made a donation in error please use the{' '}
+              <Link to="/contactUs">
+                <TextLink>contact page </TextLink>
+              </Link>
+              of our platform to notify us and we will reach out to you about
+              your refund.
             </B1>
           </TextBlock>
 
