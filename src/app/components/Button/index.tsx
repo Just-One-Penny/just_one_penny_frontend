@@ -57,7 +57,7 @@ export const StyleButton = styled.button<ButtonProps>`
   ${props => handleButtonType(props.btnStyle)}
 
   width: 170px;
-  height: 44px;
+  height: 48px;
   font-weight: 900;
   box-shadow: 0px 2px 6px #0000005a;
   border-radius: 50px;

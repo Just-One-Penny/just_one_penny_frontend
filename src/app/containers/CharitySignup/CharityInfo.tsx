@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Modal } from '../../components/Modal';
-import { TermsOfService } from '../../components/TermsOfService';
+import { CharityTerms } from '../../components/CharityTerms';
 import { Button } from '../../components/Button';
 import { Link } from 'react-router-dom';
 
@@ -41,7 +41,7 @@ export const InfoForCharities = () => {
         *Pursuant to our{' '}
         <Modal
           buttonElement={<TextLink>Terms and Conditions</TextLink>}
-          modalBody={<TermsOfService />}
+          modalBody={<CharityTerms />}
         />
         .
       </Text>

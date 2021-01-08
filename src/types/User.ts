@@ -14,11 +14,17 @@ export interface User {
   picture?: string;
 }
 
+export interface UpdatePassword {
+  userId: string;
+  password: string;
+  oldPassword: string;
+}
+
 export interface UpdatingUser {
   id: string;
+  role: string;
   email: string;
   fullName: string;
-  role: string;
 }
 
 export interface UpdatedUser {

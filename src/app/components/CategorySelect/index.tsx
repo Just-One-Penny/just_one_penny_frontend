@@ -5,7 +5,7 @@
  */
 import React, { memo } from 'react';
 import { Field } from 'react-final-form';
-import styled from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
 import Select from 'react-select';
 import { CATEGORIES } from 'app/constants';
 
@@ -33,7 +33,14 @@ export const CategorySelect = memo((props: Props) => {
   };
 
   const ReactSelectAdapter = ({ input, ...rest }) => (
-    <Select {...input} {...rest} isMulti styles={selectStyles} searchable />
+    <Select
+      maxMenuHeight={170}
+      {...input}
+      {...rest}
+      isMulti
+      styles={selectStyles}
+      searchable
+    />
   );
 
   return (
@@ -55,6 +62,8 @@ const StyledSelect = styled(Field)`
   padding: 0.5rem;
   color: #333333;
   opacity: 1;
+  border: 1px solid #0a559e;
+
   &:hover {
     border: 1px solid #0a559e;
   }
@@ -65,6 +74,6 @@ const StyledSelect = styled(Field)`
 
   @media only screen and (max-width: 475px) {
     margin: 1rem 0;
-    width: 100%;
+    width: 68%;
   }
 `;

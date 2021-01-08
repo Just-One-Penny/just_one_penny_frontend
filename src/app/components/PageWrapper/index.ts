@@ -9,6 +9,7 @@ export const PageWrapper = styled.div`
   min-height: 100vh;
   // padding-left: 2rem;
   // padding-right: 2rem;
+  overflow: hidden;
 `;
 
 // margin: 0 auto;

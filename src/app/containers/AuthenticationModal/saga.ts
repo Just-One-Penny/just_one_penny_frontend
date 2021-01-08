@@ -42,8 +42,7 @@ export function* registerUser() {
   const credentials = {
     email,
     password,
-    firstName,
-    lastName,
+    fullName: `${firstName} ${lastName}`,
   };
   const response: AuthenticationModalSuccess = yield call(
     userApi.userRegister,

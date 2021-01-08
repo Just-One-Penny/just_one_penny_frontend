@@ -65,10 +65,10 @@ export const CharityDisplay = memo((props: Props) => {
           </CharityHero>
           <CharitySummary>
             <H2>{charityDisplay?.name}</H2>
-            <Category>Category:</Category>
+            <Category>Category:{t(' ')}</Category>
             <CategoryText>
               {charityDisplay?.categories
-                ? charityDisplay?.categories.join(',')
+                ? charityDisplay?.categories.join(', ')
                 : ''}
             </CategoryText>
             <br className="mt-10" />
@@ -90,22 +90,34 @@ export const CharityDisplay = memo((props: Props) => {
           {charityDisplay?.city}, {charityDisplay?.state}
           <br />
           Phone?
+
               <br /> */}
           <>
-            Annual Revenue: ${charityDisplay?.lastYearRevenue.revenue}.00
+            Location: {charityDisplay?.city}, {charityDisplay?.state}
             <br />
+            {charityDisplay?.lastYearRevenue.revenue ? (
+              <>
+                Annual Revenue: $
+                {Number.parseFloat(
+                  String(charityDisplay?.lastYearRevenue.revenue),
+                )
+                  .toFixed(2)
+                  .replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+                <br />
+              </>
+            ) : null}
             EIN: {charityDisplay?.ein}
             <br />
           </>
           {charityDisplay?.website ? (
             <>
               Visit Website:
-              <Link href={charityDisplay?.website}>
+              <Link href={charityDisplay?.website} target="_blank">
                 {charityDisplay?.website}
               </Link>
             </>
           ) : null}
-          {charityDisplay?.id ? (
+          {charityDisplay?.connectedStripeId ? (
             <DonationButton
               charityId={charityDisplay.id}
               charityName={charityDisplay.name}
