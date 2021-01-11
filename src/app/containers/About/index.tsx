@@ -204,14 +204,14 @@ const AboutContent = styled.div`
 const H2 = styled.h2`
   font-size: 1.75rem;
   font-weight: 900;
-  font-color: #333;
+  color: #333;
   margin-bottom: 1rem;
 `;
 
 const H3 = styled.h3`
   font-size: 1.25rem;
   font-weight: 900;
-  font-color: #333;
+  color: #333;
 
   @media only screen and (max-width: 475px) {
     font-size: 1rem;
