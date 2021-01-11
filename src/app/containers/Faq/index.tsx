@@ -148,8 +148,10 @@ export const Faq = memo((props: Props) => {
               Just One Penny never takes a cent from your donations to our
               charity partners. Instead, we’ve raised capital from a number of
               generous philanthropic donors, and as a charity ourselves we
-              encourage those who appreciate our service to consider donating to
-              us as well! [LINK TO JOP PAGE].
+              encourage those who appreciate our service to consider{' '}
+              <Link to="/charities/5fb5a867dd963a001eb36f82">
+                <TextLink>donating to us as well!</TextLink>
+              </Link>
             </B1>
           </TextBlock>
         </FaqContent>
@@ -210,13 +212,6 @@ const H3 = styled.h3`
   @media only screen and (max-width: 475px) {
     font-size: 1rem;
   }
-`;
-
-const B2 = styled.p`
-  font-size: 1rem;
-  font-weight: 400;
-  display: flex;
-  align-items: center;
 `;
 
 const B1 = styled.p`
