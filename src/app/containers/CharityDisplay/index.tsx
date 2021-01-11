@@ -40,8 +40,6 @@ export const CharityDisplay = memo((props: Props) => {
     fetchData();
   }, [charityId]);
 
-  console.log('CHARITYID', charityId);
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const charityDisplay = useSelector(selectCharityDisplay);
 
