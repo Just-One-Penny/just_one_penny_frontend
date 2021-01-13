@@ -42,7 +42,7 @@ export const CharityList = memo((props: Props) => {
       dispatch(actions.getCharitiesRequest(searchString));
     };
     getCharities();
-  }, [searchString]);
+  }, [searchString, dispatch]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
