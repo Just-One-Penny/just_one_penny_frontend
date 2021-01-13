@@ -14,15 +14,10 @@ import { CategorySelect } from '../CategorySelect';
 import { ReactComponent as ButtonClear } from '../HeroSection/assets/ButtonClear.svg';
 
 export const Search = props => {
-  const [charity, setCharity] = useState('');
   const [showMobile, toggleMobile] = useState(false);
 
   const _toggleMobile = () => {
     toggleMobile(!showMobile);
-  };
-
-  const handleChange = ({ target }) => {
-    setCharity(target.value);
   };
 
   const history = useHistory();
@@ -41,21 +36,19 @@ export const Search = props => {
   return (
     <Form
       onSubmit={handleSearch}
-      render={({ handleSubmit }) => (
+      render={({ handleSubmit, values }) => (
         <>
           <FormContainer onSubmit={handleSubmit} {...props}>
-            <Field component="input" name="name">
-              {({ input, meta }) => (
-                <Input
-                  type="text"
-                  id="charity"
-                  placeholder="Search charity name or keyword"
-                  onChange={handleChange}
-                  name="charity"
-                  value={charity}
-                />
-              )}
-            </Field>
+            <FieldInput
+              component="input"
+              name="name"
+              type="text"
+              placeholder="Search charity name or keyword"
+              id="name"
+              render={props => {
+                return <input {...props.input} />;
+              }}
+            />
 
             <Wrapper>
               {/* To be uncommented when Category Select goes live */}
@@ -66,7 +59,8 @@ export const Search = props => {
 
               <ButtonWrapper>
                 <Button btnStyle={'primary'}>
-                  {charity.length > 0 ? 'Find Charities' : 'View All Charities'}
+                  {values &&
+                    (values.charity ? 'Find Charities' : 'View All Charities')}
                 </Button>
               </ButtonWrapper>
             </Wrapper>
@@ -125,7 +119,7 @@ const SelectContainer = styled.div`
   }
 `;
 
-const Input = styled.input`
+const FieldInput = styled(Field)`
   width: 100%;
   height: 3rem;
   padding: 10px;

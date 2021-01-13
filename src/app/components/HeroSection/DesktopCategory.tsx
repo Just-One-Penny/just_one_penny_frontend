@@ -1,31 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Field } from 'react-final-form';
 import styled from 'styled-components/macro';
 import { Button } from '../Button';
 
 import { CategorySelect } from '../CategorySelect';
 
-export const DesktopCategory = ({ _toggleMobile, onSubmit }) => {
-  const [name, setName] = useState('');
-
-  const handleChange = ({ target }) => {
-    setName(target.value);
-  };
-
+export const DesktopCategory = ({ _toggleMobile, onSubmit, values }) => {
   return (
     <SearchWrapper onSubmit={onSubmit}>
-      <Field component="input" name="name">
-        {({ input, meta }) => (
-          <Input
-            type="text"
-            id="charity"
-            placeholder="Search charity name or keyword"
-            onChange={handleChange}
-            name="charity"
-            value={name}
-          />
-        )}
-      </Field>
+      <FieldInput
+        component="input"
+        name="name"
+        type="text"
+        placeholder="Search charity name or keyword"
+        id="name"
+        render={props => {
+          return <input {...props.input} />;
+        }}
+      />
 
       {/* To be uncommented when Category Select goes live */}
       {/* <SelectContainer>
@@ -37,7 +29,7 @@ export const DesktopCategory = ({ _toggleMobile, onSubmit }) => {
 
       <ButtonContainer>
         <Button btnStyle={'primary'}>
-          {name.length > 0 ? 'Find Charities' : 'View All Charities'}
+          {values && (values.charity ? 'Find Charities' : 'View All Charities')}
         </Button>
       </ButtonContainer>
     </SearchWrapper>
@@ -112,7 +104,7 @@ const Text = styled.p`
   }
 `;
 
-const Input = styled.input`
+const FieldInput = styled(Field)`
   flex: 3;
   margin-right: 2rem;
   height: 3rem;
