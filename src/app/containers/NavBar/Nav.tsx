@@ -14,9 +14,9 @@ export function Nav() {
       <Link to="/charities/new">
         <NavLink className="mr-4">For Charities</NavLink>
       </Link>
-      <Link to="/about">
+      {/* <Link to="/about">
         <NavLink className="mr-4">About</NavLink>
-      </Link>
+  </Link> */}
       {user && user.id ? (
         <Link to="/">
           <Link to="/settings">
