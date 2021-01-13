@@ -29,7 +29,7 @@ export const DesktopCategory = ({ _toggleMobile, onSubmit, values }) => {
 
       <ButtonContainer>
         <Button btnStyle={'primary'}>
-          {values && (values.charity ? 'Find Charities' : 'View All Charities')}
+          {values && (values.name ? 'Find Charities' : 'View All Charities')}
         </Button>
       </ButtonContainer>
     </SearchWrapper>

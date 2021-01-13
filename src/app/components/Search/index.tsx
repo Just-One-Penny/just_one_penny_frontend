@@ -60,7 +60,7 @@ export const Search = props => {
               <ButtonWrapper>
                 <Button btnStyle={'primary'}>
                   {values &&
-                    (values.charity ? 'Find Charities' : 'View All Charities')}
+                    (values.name ? 'Find Charities' : 'View All Charities')}
                 </Button>
               </ButtonWrapper>
             </Wrapper>
