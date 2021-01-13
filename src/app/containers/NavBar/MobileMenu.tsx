@@ -28,10 +28,10 @@ export function MobileMenu() {
               <a href="/">Home</a>
             </li>
             <Hr />
-            <li key="About">
+            {/*<li key="About">
               <a href="/about">About</a>
-            </li>
-            <Hr />
+      </li>
+      <Hr /> */}
             <li key="Charities">
               <a href="/charities">Charities</a>
             </li>
