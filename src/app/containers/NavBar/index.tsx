@@ -22,9 +22,8 @@ const NavWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 6fr 1fr;
   padding: 0 1.5rem;
-  width: 100%;
+  width: 62.1875%;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.9);
   @media (min-width: 640px) {
     display: flex;
     justify-content: space-around;
@@ -35,11 +34,14 @@ const Wrapper = styled.header`
   box-shadow: 0 1px 0 0 ${p => p.theme.colors.light};
   height: ${StyleConstants.DESKTOP_NAV_BAR_HEIGHT};
   display: flex;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 5;
+  background-color: rgba(255, 255, 255, 0.9);
+
   ${NavWrapper} {
     display: flex;
     align-items: center;

@@ -94,7 +94,9 @@ export const CharityFilters = () => {
             <br />
             <div className="w-full flex justify-center align-center mt-3">
               <div className="w-1/2 mr-2">
-                <Button type="submit">Search</Button>
+                <Button btnStyle="primary" type="submit">
+                  Search
+                </Button>
               </div>
               <div className="w-1/2">
                 <Button type="button" btnStyle="secondary" onClick={form.reset}>

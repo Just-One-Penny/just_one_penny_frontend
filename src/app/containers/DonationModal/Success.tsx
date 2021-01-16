@@ -22,7 +22,7 @@ export const Success = props => {
         </div>
         <div className="flex flex-col w-full justify-center items-center">
           <LinkText>Print Confirmation</LinkText>
-          <Button className="mt-2" onClick={props.hide}>
+          <Button btnStyle="primary" className="mt-2" onClick={props.hide}>
             Finish
           </Button>
         </div>
