@@ -5,7 +5,7 @@ import { Button } from '..';
 
 describe('<Button  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<Button />);
+    const loadingIndicator = render(<Button btnStyle="primary" />);
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });
