@@ -63,9 +63,20 @@ export const CharityList = memo((props: Props) => {
   );
 });
 
+////////////////////////////////////////////////////////////////////////
+////////////////// Temporary justify content property until filters go live
+
 const Row = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 3rem;
   padding-bottom: 3rem;
+
+  @media only screen and (max-width: 650px) {
+    padding: 0 1rem;
+    margin-top: 2rem;
+  }
+
+  ////Temporary
+  justify-content: center;
 `;

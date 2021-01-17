@@ -13,6 +13,10 @@ interface Props {
   loading: boolean;
 }
 
+interface ImageProps {
+  src: string;
+}
+
 export const CharityTable = (props: Props) => {
   function format(revenue) {
     return Number.parseFloat(revenue)
@@ -35,7 +39,7 @@ export const CharityTable = (props: Props) => {
           {props.loading && <LoadingSpinner />}
           {!props.loading && props.charities.length > 0 ? (
             props.charities.map((charity, i) => (
-              <Table.Tr>
+              <StyledTableRow>
                 <Table.Td>
                   <Link to={`/charities/${charity.id}`}>
                     <CharityImage src={charity.logo} />
@@ -46,7 +50,9 @@ export const CharityTable = (props: Props) => {
                     <Link to={`/charities/${charity.id}`}>
                       <LinkName>{charity.name}</LinkName>
                     </Link>
+
                     <Name>{charity.categories}</Name>
+
                     {charity.lastYearRevenue.revenue ? (
                       <div>
                         Annual revenue: ${' '}
@@ -63,7 +69,7 @@ export const CharityTable = (props: Props) => {
                     />
                   ) : null}
                 </Table.Td>
-              </Table.Tr>
+              </StyledTableRow>
             ))
           ) : (
             <NoCharities />
@@ -73,6 +79,70 @@ export const CharityTable = (props: Props) => {
     </TableContainer>
   );
 };
+
+///////////////////////////////////////////////////////////////////////
+////////////////// Temporary Width property until filters go live
+////////////////// Temporary comment out flex property until filters go Live
+////////////////////////////////////////////////////////////////////////
+
+const TableContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background: white;
+  border-radius: 5px;
+
+  /////////////////
+  //// Temporary
+  // flex: 3;
+  width: 62.1875%;
+
+  @media only screen and (max-width: 1024px) {
+    width: 75%;
+  }
+
+  @media only screen and (max-width: 850px) {
+    width: 100%;
+    padding: 1rem 0.5rem;
+  }
+  /////////////////
+`;
+
+const Header = styled.span`
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
+    var(--unnamed-font-size-20) / var(--unnamed-line-spacing-30)
+    var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(---333333-dark);
+  text-align: left;
+  font: normal normal 900 20px/30px Avenir;
+  letter-spacing: 0px;
+  color: #333333;
+  opacity: 1;
+`;
+
+const ResultsText = styled.span`
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) var(--unnamed-font-size-16) /
+    var(--unnamed-line-spacing-24) var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(---333333-dark);
+  text-align: left;
+  font: normal normal normal 16px/24px Avenir;
+  letter-spacing: 0px;
+  color: #333333;
+`;
+
+const StyledTableRow = styled(Table.Tr)`
+  @media only screen and (max-width: 650px) {
+    display: flex;
+    flex-direction: column;
+
+    > td {
+      padding: 1rem 0 0.625rem 1rem;
+    }
+  }
+`;
 
 const Name = styled.div`
   text-transform: capitalize;
@@ -91,10 +161,6 @@ const LinkName = styled.div`
   color: #0a559e;
 `;
 
-interface ImageProps {
-  src: string;
-}
-
 const CharityImage = styled.div`
   width: 15rem;
   height: 6rem;
@@ -103,38 +169,9 @@ const CharityImage = styled.div`
   background-position: center;
   resize: both;
   background-image: url('${(p: ImageProps) => p.src}');
-`;
 
-const ResultsText = styled.span`
-  font: var(--unnamed-font-style-normal) normal
-    var(--unnamed-font-weight-normal) var(--unnamed-font-size-16) /
-    var(--unnamed-line-spacing-24) var(--unnamed-font-family-avenir);
-  letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(---333333-dark);
-  text-align: left;
-  font: normal normal normal 16px/24px Avenir;
-  letter-spacing: 0px;
-  color: #333333;
-`;
-
-const Header = styled.span`
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
-    var(--unnamed-font-size-20) / var(--unnamed-line-spacing-30)
-    var(--unnamed-font-family-avenir);
-  letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(---333333-dark);
-  text-align: left;
-  font: normal normal 900 20px/30px Avenir;
-  letter-spacing: 0px;
-  color: #333333;
-  opacity: 1;
-`;
-
-const TableContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 3;
-  padding: 2rem;
-  background: white;
-  border-radius: 5px;
+  @media only screen and (max-width: 650px) {
+    height: 4rem;
+    width: 11.5rem;
+  }
 `;

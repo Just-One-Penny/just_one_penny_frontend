@@ -105,7 +105,7 @@ const Div = styled.div`
     font-size: 1.25em;
     font-weight: 600;
   }
-  @media (min-width: 640px) {
+  @media (min-width: 651px) {
     display: none;
   }
 `;

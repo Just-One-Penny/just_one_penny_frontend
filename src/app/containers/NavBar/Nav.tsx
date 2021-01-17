@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components/macro';
 import { AuthenticationModal } from '../AuthenticationModal';
 import { Modal } from 'app/components/Modal';
 import { useAuth } from 'context/auth-context';
-import { Link } from 'react-router-dom';
 import { Button } from '../../components/Button';
 import { NavLink } from 'react-router-dom';
 
@@ -35,7 +34,7 @@ export function Nav() {
         <>
           <StyledLink to="/settings">My Accounts</StyledLink>
 
-          <Button btnStyle="secondary" onClick={logout}>
+          <Button width={138} btnStyle="secondary" onClick={logout}>
             Logout
           </Button>
         </>
@@ -69,7 +68,7 @@ const Wrapper = styled.nav`
     }
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 651px) {
     display: flex;
     align-items: center;
     max-width: 500px;
