@@ -12,20 +12,28 @@ export function NavBar() {
         <MobileMenu />
         <Logo />
         <Nav />
-        <Box>&nbsp;</Box>
       </NavWrapper>
     </Wrapper>
   );
 }
 
 const NavWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 6fr 1fr;
-  padding: 0 1.5rem;
-  width: 62.1875%;
+  display: flex;
   align-items: center;
-  @media (min-width: 640px) {
-    display: flex;
+  justify-content: space-between;
+
+  width: 62.1875%;
+
+  @media only screen and (max-width: 1024px) {
+    width: 75%;
+  }
+
+  @media only screen and (max-width: 850px) {
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  @media only screen and (max-width: 650px) {
     justify-content: space-around;
   }
 `;
@@ -42,19 +50,8 @@ const Wrapper = styled.header`
   z-index: 5;
   background-color: rgba(255, 255, 255, 0.9);
 
-  ${NavWrapper} {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  @media only screen and (max-width: 475px) {
+  @media only screen and (max-width: 600px) {
     height: ${StyleConstants.MOBILE_NAV_BAR_HEIGHT};
-  }
-`;
-
-const Box = styled.div`
-  @media (min-width: 640px) {
-    display: none;
+    justify-content: flex-start;
   }
 `;

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
 
 import { AuthenticationModal } from '../AuthenticationModal';
 import { Modal } from 'app/components/Modal';
@@ -7,6 +7,18 @@ import { useAuth } from 'context/auth-context';
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/Button';
 import { NavLink } from 'react-router-dom';
+
+const sharedCss = css`
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
+    var(--unnamed-font-size-16) / 22px var(--unnamed-font-family-avenir);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(---333333-dark);
+  text-align: left;
+  font: normal normal 900 16px/22px Avenir;
+  letter-spacing: 0px;
+  color: #333333;
+  cursor: pointer;
+`;
 
 export function Nav() {
   const { user, logout } = useAuth();
@@ -20,18 +32,20 @@ export function Nav() {
       </StyledLink> */}
 
       {user && user.id ? (
-        <Link to="/">
+        <>
           <StyledLink to="/settings">My Accounts</StyledLink>
+
           <Button btnStyle="secondary" onClick={logout}>
             Logout
           </Button>
-        </Link>
+        </>
       ) : (
         <>
           <Modal
-            buttonElement={<Navstyle>Login</Navstyle>}
+            buttonElement={<NavTextLink>Login</NavTextLink>}
             modalBody={<AuthenticationModal />}
           />
+
           <Modal
             buttonElement={
               <Button noBoxShadow={true} width={138} btnStyle="secondary">
@@ -50,7 +64,7 @@ const Wrapper = styled.nav`
   display: none;
 
   > * {
-    &:not(last-child) {
+    &:not(:last-child) {
       margin-right: 3.125rem;
     }
   }
@@ -59,6 +73,7 @@ const Wrapper = styled.nav`
     display: flex;
     align-items: center;
     max-width: 500px;
+
     .icon {
       display: inline;
     }
@@ -66,15 +81,7 @@ const Wrapper = styled.nav`
 `;
 
 const StyledLink = styled(NavLink)`
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
-    var(--unnamed-font-size-16) / 22px var(--unnamed-font-family-avenir);
-  letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(---333333-dark);
-  text-align: left;
-  font: normal normal 900 16px/22px Avenir;
-  letter-spacing: 0px;
-  color: #333333;
-  cursor: pointer;
+  ${sharedCss}
 
   &:hover,
   &:active,
@@ -84,16 +91,8 @@ const StyledLink = styled(NavLink)`
   }
 `;
 
-const Navstyle = styled.span`
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
-    var(--unnamed-font-size-16) / 22px var(--unnamed-font-family-avenir);
-  letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(---333333-dark);
-  text-align: left;
-  font: normal normal 900 16px/22px Avenir;
-  letter-spacing: 0px;
-  color: #333333;
-  cursor: pointer;
+const NavTextLink = styled.span`
+  ${sharedCss}
 
   &:hover,
   &:active {
