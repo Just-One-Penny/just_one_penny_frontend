@@ -60,6 +60,7 @@ export const CharityTable = (props: Props) => {
                     <DonationButton
                       charityId={charity.id}
                       charityName={charity.name}
+                      buttonStyle="primary"
                     />
                   ) : null}
                 </Table.Td>
