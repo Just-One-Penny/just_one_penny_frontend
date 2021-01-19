@@ -174,6 +174,12 @@ const FaqContent = styled.div`
   padding: 1.75rem 6rem;
   background-color: #ffffff;
   border-radius: 5px;
+  font-family: Avenir;
+
+  @media only screen and (max-width: 2560px) {
+    padding: 1.75rem 3rem;
+    flex: 0 0 50%;
+  }
 
   @media only screen and (max-width: 1024px) {
     padding: 1.75rem 3rem;

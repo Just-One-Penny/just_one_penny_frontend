@@ -6,7 +6,7 @@ import { DonationButton } from '..';
 describe('<DonationButton  />', () => {
   it('should match snapshot', () => {
     const loadingIndicator = render(
-      <DonationButton charityId="" charityName="" />,
+      <DonationButton charityId="" charityName="" buttonStyle="" />,
     );
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
