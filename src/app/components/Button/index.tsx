@@ -7,12 +7,17 @@ import React from 'react';
 import styled from 'styled-components/macro';
 
 interface ButtonProps {
-  btnStyle: string;
+  btnStyle: 'primary' | 'secondary';
+  type?: 'submit' | 'button';
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  className?: string;
+  width?: number;
+  noBoxShadow?: boolean;
 }
 
-export function Button(props) {
-  return <StyleButton {...props}></StyleButton>;
-}
+export const Button: React.FunctionComponent<ButtonProps> = props => (
+  <StyleButton {...props}></StyleButton>
+);
 
 const handleButtonType = (btnStyle = 'primary') => {
   switch (btnStyle) {
@@ -38,6 +43,7 @@ const handleButtonType = (btnStyle = 'primary') => {
         color: #0A559E;
         background: transparent;
         border: 2px solid #0A559E;
+
         &:hover,
         &:active {
           border-color: #0C4379;
@@ -72,9 +78,11 @@ const handleButtonType = (btnStyle = 'primary') => {
 export const StyleButton = styled.button<ButtonProps>`
   ${props => handleButtonType(props.btnStyle)}
 
+  width: ${props => (props.width ? `${props.width}px` : '170px')};
   height: 48px;
   font-weight: 900;
-  box-shadow: 0px 2px 6px #0000005a;
+  box-shadow: ${props =>
+    props.noBoxShadow ? 'none' : `0px 2px 6px #0000005a`};
   border-radius: 50px;
   opacity: 1;
   text-align: center;

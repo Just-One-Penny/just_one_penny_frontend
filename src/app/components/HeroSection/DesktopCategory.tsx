@@ -9,14 +9,11 @@ export const DesktopCategory = ({ _toggleMobile, onSubmit, values }) => {
   return (
     <SearchWrapper onSubmit={onSubmit}>
       <FieldInput
-        component="input"
         name="name"
+        component="input"
         type="text"
         placeholder="Search charity name or keyword"
         id="name"
-        render={props => {
-          return <input {...props.input} />;
-        }}
       />
 
       {/* To be uncommented when Category Select goes live */}
@@ -78,14 +75,17 @@ const SelectContainer = styled.div`
     display: none;
   }
 `;
-
+////////////////////////////////////////////
+/////////// temporary commented display: none until mobile
+/////////// selection goes live
+////////////////////////////////////////////
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 
   @media only screen and (max-width: 475px) {
-    display: none;
+    // display: none;
   }
 `;
 

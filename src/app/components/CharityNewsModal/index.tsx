@@ -31,7 +31,7 @@ export const CharityNewsModal = memo((props: Props) => {
       <B1>{props.content}</B1>
       <DonateContainer>
         <Link to="/charities">
-          <Button>View Charities</Button>
+          <Button btnStyle="primary">View Charities</Button>
         </Link>
       </DonateContainer>
     </>

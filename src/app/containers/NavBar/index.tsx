@@ -12,21 +12,28 @@ export function NavBar() {
         <MobileMenu />
         <Logo />
         <Nav />
-        <Box>&nbsp;</Box>
       </NavWrapper>
     </Wrapper>
   );
 }
 
 const NavWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 6fr 1fr;
-  padding: 0 1.5rem;
-  width: 100%;
+  display: flex;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.9);
-  @media (min-width: 640px) {
-    display: flex;
+  justify-content: space-between;
+
+  width: 62.1875%;
+
+  @media only screen and (max-width: 1024px) {
+    width: 75%;
+  }
+
+  @media only screen and (max-width: 850px) {
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  @media only screen and (max-width: 650px) {
     justify-content: space-around;
   }
 `;
@@ -35,24 +42,16 @@ const Wrapper = styled.header`
   box-shadow: 0 1px 0 0 ${p => p.theme.colors.light};
   height: ${StyleConstants.DESKTOP_NAV_BAR_HEIGHT};
   display: flex;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 5;
-  ${NavWrapper} {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+  background-color: rgba(255, 255, 255, 0.9);
 
-  @media only screen and (max-width: 475px) {
+  @media only screen and (max-width: 600px) {
     height: ${StyleConstants.MOBILE_NAV_BAR_HEIGHT};
-  }
-`;
-
-const Box = styled.div`
-  @media (min-width: 640px) {
-    display: none;
+    justify-content: flex-start;
   }
 `;
