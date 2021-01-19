@@ -12,6 +12,7 @@ import { Modal, Size } from '../Modal';
 interface Props {
   charityId: string;
   charityName: string;
+  buttonStyle: string;
 }
 
 export const DonationButton = memo((props: Props) => {
@@ -19,7 +20,7 @@ export const DonationButton = memo((props: Props) => {
     <Modal
       size={Size.sm}
       buttonElement={
-        <Button btnStyle="primary" className="mt-2">
+        <Button btnStyle={props.buttonStyle} className="mt-2">
           Donate to This Charity
         </Button>
       }

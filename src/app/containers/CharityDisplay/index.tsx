@@ -119,6 +119,7 @@ export const CharityDisplay = memo((props: Props) => {
             <DonationButton
               charityId={charityDisplay.id}
               charityName={charityDisplay.name}
+              buttonStyle="donation"
             />
           ) : null}
         </SubDiv>
@@ -153,9 +154,37 @@ const CharityImage = styled.div`
 
 const Wrapper = styled.section`
   padding: 1em;
+  color: #333;
   background: #f2f2f2;
   display: flex;
   flex-direction: row;
+  @media only screen and (max-width: 2560px) {
+    padding: 1.75rem 10rem;
+    flex: 0 0 50%;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    padding: 1.75rem 4rem;
+    flex: 0 0 60%;
+  }
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    padding: 1.75rem 4rem;
+    flex: 0 0 70%;
+  }
+
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+    flex: 0 0 80%;
+    padding: 1.75rem 1.5rem;
+  }
+
+  @media only screen and (max-width: 475px) {
+    flex-direction: column;
+    flex: 0 0 90%;
+    padding: 1.75rem 0.75rem 0 0.75rem;
+  }
 `;
 
 const Link = styled.a`
@@ -179,8 +208,8 @@ const CharityHero = styled.div`
 
 const CharitySummary = styled.div`
   padding-top: 2rem;
-  padding-left: 4rem;
-  padding-right: 4rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 `;
 
 const Category = styled.span`
@@ -230,6 +259,8 @@ const MainDiv = styled.div`
   border-radius: 5px;
   font-family: avenir;
   padding-bottom: 2rem;
+  padding-right: 2em;
+  padding-left: 2em;
 `;
 const SubDiv = styled.div`
   padding: 1em;

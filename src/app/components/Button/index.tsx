@@ -23,6 +23,7 @@ const handleButtonType = (btnStyle = 'primary') => {
   switch (btnStyle) {
     case 'primary':
       return `
+        width: 170px;
         color: #fff;
         background: transparent linear-gradient(0deg, #11569B 0%, #54AECC 100%, #6CCDDD 100%, #7AE0E8 100%) 0% 0% no-repeat padding-box;
 
@@ -38,6 +39,7 @@ const handleButtonType = (btnStyle = 'primary') => {
 
     case 'secondary':
       return `
+        width: 170px;
         color: #0A559E;
         background: transparent;
         border: 2px solid #0A559E;
@@ -53,6 +55,20 @@ const handleButtonType = (btnStyle = 'primary') => {
           text-decoration: underline;
         }
         `;
+    case 'donation':
+      return `
+          color: #fff;
+          background: transparent linear-gradient(0deg, #11569B 0%, #54AECC 100%, #6CCDDD 100%, #7AE0E8 100%) 0% 0% no-repeat padding-box;
+          width: 25vh;
+          &:hover,
+          &:active {
+            background: #0A559E 0% 0% no-repeat padding-box;
+          }
+  
+          &:focus {
+            text-decoration: underline;
+          }
+      `;
 
     default:
       return '';
