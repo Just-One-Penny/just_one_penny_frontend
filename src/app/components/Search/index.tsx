@@ -40,14 +40,11 @@ export const Search = props => {
         <>
           <FormContainer onSubmit={handleSubmit} {...props}>
             <FieldInput
-              component="input"
               name="name"
+              component="input"
               type="text"
               placeholder="Search charity name or keyword"
               id="name"
-              render={props => {
-                return <input {...props.input} />;
-              }}
             />
 
             <Wrapper>
