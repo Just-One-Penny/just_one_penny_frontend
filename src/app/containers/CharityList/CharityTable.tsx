@@ -74,6 +74,7 @@ export const CharityTable = (props: Props) => {
               <CharityDonateBtn>
                 {charity.connectedStripeId ? (
                   <DonationButton
+                    buttonStyle="primary"
                     charityId={charity.id}
                     charityName={charity.name}
                   />

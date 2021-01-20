@@ -12,7 +12,7 @@ import { Modal, Size } from '../Modal';
 interface Props {
   charityId: string;
   charityName: string;
-  buttonStyle: string;
+  buttonStyle: 'primary' | 'secondary' | 'donation';
 }
 
 export const DonationButton = memo((props: Props) => {
