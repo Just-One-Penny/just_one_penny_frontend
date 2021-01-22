@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
-import { Logo } from './Logo';
 import { MobileMenu } from './MobileMenu';
 import { StyleConstants } from 'styles/StyleConstants';
-import { Nav } from './Nav';
+import { DesktopMenu } from './Nav';
 
 export function NavBar() {
+  const [show, toggle] = useState<boolean>(false);
+
+  function _toggleMenu() {
+    toggle(!show);
+  }
   return (
     <Wrapper>
       <NavWrapper>
-        <MobileMenu />
-        <Logo />
-        <Nav />
+        <MobileMenu show={show} toggleMenu={_toggleMenu} />
+        <DesktopMenu toggleMenu={_toggleMenu} />
       </NavWrapper>
     </Wrapper>
   );
@@ -53,6 +56,6 @@ const NavWrapper = styled.div`
   }
 
   @media only screen and (max-width: 650px) {
-    justify-content: space-around;
+    justify-content: center;
   }
 `;

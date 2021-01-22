@@ -1,87 +1,84 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components/macro';
 import { useAuth } from 'context/auth-context';
 import { Modal } from 'app/components/Modal';
 import { AuthenticationModal } from '../AuthenticationModal';
 import { Logo } from './Logo';
 import { Button } from 'app/components/Button';
-import { ReactComponent as HamburgerIcon } from './assets/ButtonHamburgerMenu.svg';
 import { ReactComponent as ButtonClear } from './assets/ButtonClear.svg';
 import { NavLink } from 'react-router-dom';
+import NavTabs from './MobileNavTabs';
 
-const sharedSVGStyles = css`
-  position: absolute;
-  // z-index: 6;
+const activeLinkStyle = {
+  color: '#fff',
+  background: '#0a559e 0% 0% no-repeat padding-box',
+};
 
-  // display: flex;
-  // align-items: center:
-  // justify-content: center;
-
-  cursor: pointer;
-`;
-
-export function MobileMenu() {
-  const [show, toggle] = useState(false);
-
-  function _toggleMenu() {
-    toggle(!show);
-  }
+export const MobileMenu = ({ show, toggleMenu }) => {
   const { user, logout } = useAuth();
 
   return (
-    <>
-      <HamburgerButton onClick={_toggleMenu}>
-        <HamburgerIcon title="open menu" />
-      </HamburgerButton>
+    <MobileNavMenu show={show}>
+      <CloseButton onClick={toggleMenu}>
+        <ButtonClear title="close menu" />
+      </CloseButton>
 
-      <MobileNavMenu show={show}>
-        <CloseButton onClick={_toggleMenu}>
-          <ButtonClear title="close menu" />
-        </CloseButton>
+      <Logo />
 
-        <Logo />
+      <NavItems>
+        {NavTabs.map(tab => (
+          <NavItem>
+            <StyledLink
+              onClick={toggleMenu}
+              activeStyle={activeLinkStyle}
+              exact
+              to={tab.link}
+            >
+              {tab.text}
+            </StyledLink>
+          </NavItem>
+        ))}
 
-        <NavItems>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/charities">Charities</NavLink>
-          <NavLink to="/charities/new">Info for Charities</NavLink>
-        </NavItems>
-
-        {user && user.id ? (
-          <AuthNavItems>
-            <NavLink to="/settings">My Account</NavLink>
-            <Button onClick={logout} btnStyle="secondary" width={130}>
-              Sign Out
-            </Button>
-          </AuthNavItems>
-        ) : (
-          <Modal
-            buttonElement={
-              <Button width={130} btnStyle="secondary">
-                Sign In
-              </Button>
-            }
-            modalBody={<AuthenticationModal isSignup />}
-          />
+        {user && user.id && (
+          <NavItem>
+            <StyledLink
+              onClick={toggleMenu}
+              activeStyle={activeLinkStyle}
+              to="/settings"
+            >
+              My Account
+            </StyledLink>
+          </NavItem>
         )}
-      </MobileNavMenu>
-    </>
+      </NavItems>
+
+      {user && user.id ? (
+        <ButtonWrapper>
+          <Button onClick={logout} btnStyle="secondary" width={130}>
+            Sign Out
+          </Button>
+        </ButtonWrapper>
+      ) : (
+        <Modal
+          buttonElement={
+            <Button noBoxShadow={true} width={130} btnStyle="secondary">
+              Sign In
+            </Button>
+          }
+          modalBody={<AuthenticationModal isSignup />}
+        />
+      )}
+    </MobileNavMenu>
   );
-}
-
-const HamburgerButton = styled.span`
-  ${sharedSVGStyles}
-
-  top: 1.5rem;
-  left: 1rem;
-  opacity: 1;
-`;
+};
 
 const MobileNavMenu = styled.div<{ show: boolean }>`
   display: flex;
   flex-direction: column;
+  padding: 0 1rem;
 
   position: absolute;
+  z-index: 6;
   top: 0;
   left: 0;
   height: 100vh;
@@ -101,25 +98,40 @@ const MobileNavMenu = styled.div<{ show: boolean }>`
 `;
 
 const CloseButton = styled.span`
-  ${sharedSVGStyles}
+  position: absolute;
+  cursor: pointer;
 
   top: 1.546875rem;
   left: 1.046875rem;
+`;
+
+const NavItem = styled.div`
+  padding: .5rem 1rem .5rem 1rem;
+  color: #333;
+  border-bottom 1px solid #9fa2a8;
+`;
+
+const StyledLink = styled(NavLink)`
+  font-size: 1.25rem;
+  font-weight: 900;
+  border-radius: 5px;
+  display: inline-block;
+  width: 100%;
+  padding: 0.75rem 0 0.5625rem 1rem;
+
+  &:hover {
+    color: #0a559e;
+  }
 `;
 
 const NavItems = styled.nav`
   display: flex;
   flex-direction: column;
 
-  margin-top: 1.49562rem;
   margin-bottom: 4.8125rem;
 `;
 
-const AuthNavItems = styled.div`
+const ButtonWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-
-  &:first-child {
-    margin-bottom: 3.125rem;
-  }
+  justify-content: center;
 `;
