@@ -9,7 +9,7 @@ export const MobileCategory = ({ showMobile, _toggleMobile, onSubmit }) => {
   return (
     <MobileSelectContainer onSubmit={onSubmit} showMobile={showMobile}>
       <ButtonClearContainer onClick={() => _toggleMobile()}>
-        <ButtonClear />
+        <ButtonClear title="close search" />
       </ButtonClearContainer>
 
       <MobileSelect>

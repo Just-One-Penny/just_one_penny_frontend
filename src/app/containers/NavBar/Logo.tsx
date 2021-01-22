@@ -1,40 +1,29 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
-import logo from './assets/image001.png';
+import BetaLogo from './assets/BetaLogo.png';
+import BetaLogoMobile from './assets/BetaLogoMobile.png';
 
 export function Logo() {
   return (
-    <Wrapper>
-      <Title>
-        <a href="/">
-          <img src={logo} alt="Just One Penny" />
-        </a>
-      </Title>
-    </Wrapper>
+    <JOPLogo>
+      <NavLink to="/">
+        <img
+          srcSet={`${BetaLogoMobile} 128w, ${BetaLogo} 149w`}
+          sizes="(max-width: 650px) 128px, 149px"
+          src={BetaLogo}
+          alt="Just One Penny"
+        />
+      </NavLink>
+    </JOPLogo>
   );
 }
 
-const Wrapper = styled.div`
+const JOPLogo = styled.div`
+  margin-top: 0.75rem;
+  margin-bottom: 1rem;
+
   display: flex;
-  align-items: center;
   justify-content: center;
-  img {
-    height: 100%;
-  }
-`;
-
-const Title = styled.div`
-  font-size: 1.25rem;
-  color: ${p => p.theme.colors.dark[900]};
-  font-weight: bold;
-  text-align: center;
-  height: 3rem;
-`;
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Description = styled.div`
-  font-size: 0.875rem;
-  color: ${p => p.theme.colors.light[200]};
-  font-weight: normal;
 `;

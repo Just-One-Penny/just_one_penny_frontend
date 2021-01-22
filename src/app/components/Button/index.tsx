@@ -7,7 +7,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 
 interface ButtonProps {
-  btnStyle: 'primary' | 'secondary';
+  btnStyle: 'primary' | 'secondary' | 'donation';
   type?: 'submit' | 'button';
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   className?: string;
@@ -64,7 +64,7 @@ const handleButtonType = (btnStyle = 'primary') => {
           &:active {
             background: #0A559E 0% 0% no-repeat padding-box;
           }
-  
+
           &:focus {
             text-decoration: underline;
           }

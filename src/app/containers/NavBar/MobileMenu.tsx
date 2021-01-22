@@ -1,154 +1,137 @@
-import React, { useState } from 'react';
-import styled from 'styled-components/macro';
+import React from 'react';
+import styled, { css } from 'styled-components/macro';
 import { useAuth } from 'context/auth-context';
 import { Modal } from 'app/components/Modal';
 import { AuthenticationModal } from '../AuthenticationModal';
 import { Logo } from './Logo';
-import icon from './assets/hamburger-icon.png';
 import { Button } from 'app/components/Button';
+import { ReactComponent as ButtonClear } from './assets/ButtonClear.svg';
+import { NavLink } from 'react-router-dom';
+import NavTabs from './MobileNavTabs';
 
-export function MobileMenu() {
-  const [show, toggle] = useState(false);
+const activeLinkStyle = {
+  color: '#fff',
+  background: '#0a559e 0% 0% no-repeat padding-box',
+};
 
-  function _toggleMenu() {
-    toggle(!show);
-  }
+export const MobileMenu = ({ show, toggleMenu }) => {
   const { user, logout } = useAuth();
+
   return (
-    <Div>
-      <img src={icon} alt="Menu" onClick={_toggleMenu} />
-      {show && (
-        <Menu>
-          <Row>
-            <p onClick={_toggleMenu}>X</p>
-            <Logo />
-          </Row>
-          <ul>
-            <li key="Home">
-              <a href="/">Home</a>
-            </li>
-            <Hr />
-            {/*<li key="About">
-              <a href="/about">About</a>
-      </li>
-      <Hr /> */}
-            <li key="Charities">
-              <a href="/charities">Charities</a>
-            </li>
-            <Hr />
-            <li key="Info for Charities">
-              <a href="/charities/new">Info for Charities</a>
-            </li>
-            <Hr />
-            {user && user.id ? (
-              <>
-                <li key="My Account">
-                  <a href="/settings">My Account</a>
+    <MobileNavMenu show={show}>
+      <CloseButton onClick={toggleMenu}>
+        <ButtonClear title="close menu" />
+      </CloseButton>
 
-                  <Hr />
-                </li>
-                <Li key="Sign Out">
-                  <MyButton btnStyle="secondary" onClick={logout}>
-                    Sign Out
-                  </MyButton>
-                </Li>
-              </>
-            ) : (
-              <>
-                <Li key="Sign Up">
-                  <Modal
-                    buttonElement={
-                      <MyButton btnStyle="secondary">Sign In</MyButton>
-                    }
-                    modalBody={<AuthenticationModal isSignup />}
-                  />
-                </Li>
-              </>
-            )}
-          </ul>
-        </Menu>
+      <Logo />
+
+      <NavItems>
+        {NavTabs.map(tab => (
+          <NavItem>
+            <StyledLink
+              onClick={toggleMenu}
+              activeStyle={activeLinkStyle}
+              exact
+              to={tab.link}
+            >
+              {tab.text}
+            </StyledLink>
+          </NavItem>
+        ))}
+
+        {user && user.id && (
+          <NavItem>
+            <StyledLink
+              onClick={toggleMenu}
+              activeStyle={activeLinkStyle}
+              to="/settings"
+            >
+              My Account
+            </StyledLink>
+          </NavItem>
+        )}
+      </NavItems>
+
+      {user && user.id ? (
+        <ButtonWrapper>
+          <Button onClick={logout} btnStyle="secondary" width={130}>
+            Sign Out
+          </Button>
+        </ButtonWrapper>
+      ) : (
+        <Modal
+          buttonElement={
+            <Button noBoxShadow={true} width={130} btnStyle="secondary">
+              Sign In
+            </Button>
+          }
+          modalBody={<AuthenticationModal isSignup />}
+        />
       )}
-    </Div>
+    </MobileNavMenu>
   );
-}
+};
 
-const Li = styled.li`
+const MobileNavMenu = styled.div<{ show: boolean }>`
   display: flex;
-  justify-content: center;
-`;
+  flex-direction: column;
+  padding: 0 1rem;
 
-const Hr = styled.hr`
-  margin: 10px 40px 0 0;
-  border-top: 0.5px solid #bbb;
-`;
-
-const MyButton = styled(Button)`
-  box-shadow: none;
-  border: 3px solid #0a559e;
-  font-size: 0.85em;
-`;
-
-const Div = styled.div`
-  text-align: center;
-  height: 1.5rem;
-  img {
-    height: 100%;
-    margin: 0 auto;
-    &:hover {
-      opacity: 0.6;
-      cursor: pointer;
-    }
-  }
-  li {
-    color: #333333;
-    margin-top: 20px;
-    font-size: 1.25em;
-    font-weight: 600;
-  }
-  @media (min-width: 651px) {
-    display: none;
-  }
-`;
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-
-  img {
-    height: 40px;
-  }
-
-  p {
-    margin-right: 50px;
-    color: #9fa2a8;
-    font-weight: lighter;
-  }
-`;
-
-const Menu = styled.div`
-  height: 100vh;
-  background-color: #f2f2f2;
-  width: 70vw;
-  max-width: 300px;
-  position: fixed;
+  position: absolute;
+  z-index: 6;
   top: 0;
   left: 0;
-  text-align: left;
-  padding-left: 2rem;
-  padding-top: 1rem;
-  p {
-    font-size: 1.5rem;
-    font-weight: bold;
-    &:hover {
-      opacity: 0.6;
-      cursor: pointer;
-    }
-  }
-  ul {
-    padding-top: 2rem;
+  height: 100vh;
+  width: 100vw;
+  opacity: 0;
+  background: #f2f2f2 0% 0% no-repeat padding-box;
 
-    a:hover {
-      opacity: 0.6;
-    }
+  transform: translateX(-100%);
+  transition: all 0.3s ease-out;
+
+  ${props =>
+    props.show &&
+    css`
+      opacity: 1;
+      transform: translateX(0);
+    `}
+`;
+
+const CloseButton = styled.span`
+  position: absolute;
+  cursor: pointer;
+
+  top: 1.546875rem;
+  left: 1.046875rem;
+`;
+
+const NavItem = styled.div`
+  padding: .5rem 1rem .5rem 1rem;
+  color: #333;
+  border-bottom 1px solid #9fa2a8;
+`;
+
+const StyledLink = styled(NavLink)`
+  font-size: 1.25rem;
+  font-weight: 900;
+  border-radius: 5px;
+  display: inline-block;
+  width: 100%;
+  padding: 0.75rem 0 0.5625rem 1rem;
+
+  &:hover {
+    color: #0a559e;
   }
+`;
+
+const NavItems = styled.nav`
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 4.8125rem;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
 `;

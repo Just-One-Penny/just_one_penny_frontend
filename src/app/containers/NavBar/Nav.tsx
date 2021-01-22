@@ -6,6 +6,8 @@ import { Modal } from 'app/components/Modal';
 import { useAuth } from 'context/auth-context';
 import { Button } from '../../components/Button';
 import { NavLink } from 'react-router-dom';
+import { ReactComponent as HamburgerIcon } from './assets/ButtonHamburgerMenu.svg';
+import { Logo } from './Logo';
 
 const sharedCss = css`
   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
@@ -19,48 +21,73 @@ const sharedCss = css`
   cursor: pointer;
 `;
 
-export function Nav() {
+export const DesktopMenu = ({ toggleMenu }) => {
   const { user, logout } = useAuth();
 
   return (
-    <Wrapper>
-      <StyledLink to="/charities/new">For Charities</StyledLink>
+    <>
+      <HamburgerButton onClick={toggleMenu}>
+        <HamburgerIcon title="open menu" />
+      </HamburgerButton>
 
-      {/* <StyledLink to="/about">
+      <Logo />
+
+      <DesktopNav>
+        <StyledLink activeStyle={{ color: '#0a559e' }} to="/charities/new">
+          For Charities
+        </StyledLink>
+
+        {/* <StyledLink to="/about">
         <NavLink className="mr-4">About</NavLink>
       </StyledLink> */}
 
-      {user && user.id ? (
-        <>
-          <StyledLink to="/settings">My Accounts</StyledLink>
+        {user && user.id ? (
+          <>
+            <StyledLink to="/settings">My Accounts</StyledLink>
 
-          <Button width={138} btnStyle="secondary" onClick={logout}>
-            Logout
-          </Button>
-        </>
-      ) : (
-        <>
-          <Modal
-            buttonElement={<NavTextLink>Login</NavTextLink>}
-            modalBody={<AuthenticationModal />}
-          />
+            <Button width={138} btnStyle="secondary" onClick={logout}>
+              Logout
+            </Button>
+          </>
+        ) : (
+          <>
+            <Modal
+              buttonElement={<NavTextLink>Login</NavTextLink>}
+              modalBody={<AuthenticationModal />}
+            />
 
-          <Modal
-            buttonElement={
-              <Button noBoxShadow={true} width={138} btnStyle="secondary">
-                Sign Up
-              </Button>
-            }
-            modalBody={<AuthenticationModal isSignup />}
-          />
-        </>
-      )}
-    </Wrapper>
+            <Modal
+              buttonElement={
+                <Button noBoxShadow={true} width={138} btnStyle="secondary">
+                  Sign Up
+                </Button>
+              }
+              modalBody={<AuthenticationModal isSignup />}
+            />
+          </>
+        )}
+      </DesktopNav>
+    </>
   );
-}
+};
 
-const Wrapper = styled.nav`
+const HamburgerButton = styled.span`
   display: none;
+  position: absolute;
+  cursor: pointer;
+
+  top: 1.5rem;
+  left: 1rem;
+
+  @media only screen and (max-width: 650px) {
+    display: flex;
+  }
+`;
+
+const DesktopNav = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 
   > * {
     &:not(:last-child) {
@@ -68,26 +95,13 @@ const Wrapper = styled.nav`
     }
   }
 
-  @media (min-width: 651px) {
-    display: flex;
-    align-items: center;
-    max-width: 500px;
-
-    .icon {
-      display: inline;
-    }
+  @media only screen and (max-width: 650px) {
+    display: none;
   }
 `;
 
 const StyledLink = styled(NavLink)`
   ${sharedCss}
-
-  &:hover,
-  &:active,
-  &:focus,
-  &:link {
-    color: #0a559e;
-  }
 `;
 
 const NavTextLink = styled.span`
