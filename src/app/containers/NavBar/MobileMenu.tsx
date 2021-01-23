@@ -27,7 +27,7 @@ export const MobileMenu = ({ show, toggleMenu }) => {
 
       <NavItems>
         {NavTabs.map(tab => (
-          <NavItem>
+          <NavItem key={tab.text}>
             <StyledLink
               onClick={toggleMenu}
               activeStyle={activeLinkStyle}

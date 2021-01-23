@@ -91,7 +91,8 @@ export const Search = props => {
 };
 
 const FormContainer = styled.form`
-  width: 70%;
+  // width: 70%;
+  width: 100%;
   @media only screen and (max-width: 475px) {
     width: 100%;
   }
