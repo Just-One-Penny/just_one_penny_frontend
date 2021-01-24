@@ -516,102 +516,121 @@ export function CharityTerms(props: Props) {
           </NumberedItemWrapper>
         </Text>
 
-        <SubHeading>9. INDEMNITY</SubHeading>
-        <Text>
-          YOU AGREE TO DEFEND, INDEMNIFY AND HOLD HARMLESS JUST ONE PENNY AND
-          ITS EMPLOYEES, AGENTS, VENDORS OR SUPPLIERS, AND REPRESENTATIVES FROM
-          ANY CLAIM OR DEMAND, INCLUDING ATTORNEY’S FEES, MADE BY ANY THIRD
-          PARTY TO OR ARISING OUT OF YOUR USE OF THE SERVICE, OR YOUR USE OF OR
-          CONNECTION TO JUST ONE PENNY (INCLUDING ANY USE BY YOU ON BEHALF OF A
-          THIRD PARTY), AND ANY REPRESENTATIONS OR WARRANTIES UNDER THIS
-          AGREEMENT. WE RESERVE THE RIGHT, AT OUR OWN EXPENSE, TO PARTICIPATE IN
-          OR ASSUME THE EXCLUSIVE DEFENSE AND CONTROL OF ANY MATTER OTHERWISE
-          SUBJECT TO INDEMNIFICATION BY YOU, IN WHICH EVENT YOU WILL COOPERATE
-          WITH US IN ASSERTING ANY AVAILABLE DEFENSES.
-        </Text>
+        <NumberedItemWrapper>
+          <SubHeading>9. INDEMNITY</SubHeading>
+          <Text>
+            YOU AGREE TO DEFEND, INDEMNIFY AND HOLD HARMLESS JUST ONE PENNY AND
+            ITS EMPLOYEES, AGENTS, VENDORS OR SUPPLIERS, AND REPRESENTATIVES
+            FROM ANY CLAIM OR DEMAND, INCLUDING ATTORNEY’S FEES, MADE BY ANY
+            THIRD PARTY TO OR ARISING OUT OF YOUR USE OF THE SERVICE, OR YOUR
+            USE OF OR CONNECTION TO JUST ONE PENNY (INCLUDING ANY USE BY YOU ON
+            BEHALF OF A THIRD PARTY), AND ANY REPRESENTATIONS OR WARRANTIES
+            UNDER THIS AGREEMENT. WE RESERVE THE RIGHT, AT OUR OWN EXPENSE, TO
+            PARTICIPATE IN OR ASSUME THE EXCLUSIVE DEFENSE AND CONTROL OF ANY
+            MATTER OTHERWISE SUBJECT TO INDEMNIFICATION BY YOU, IN WHICH EVENT
+            YOU WILL COOPERATE WITH US IN ASSERTING ANY AVAILABLE DEFENSES.
+          </Text>
+        </NumberedItemWrapper>
 
-        <SubHeading>10. TERMINATION OF SERVICE</SubHeading>
-        <Text>
-          WE RESERVE THE RIGHT TO DENY SERVICE TO ANYONE, AT ANY TIME, AND FOR
-          ANY REASON, AS ALLOWED BY LAW, OR FOR ANY OTHER REASON.
-          <br />
-          <br />
-          We also reserve the right, at our sole discretion, to discontinue any
-          service or modify any Service without notice, at any time, and without
-          liability. We reserve the right, at our sole discretion, to deactivate
-          your account. We shall not be liable to you or any third party if we
-          terminate your account, deny service, discontinue service, or modify
-          any service, and you agree to hold us harmless and indemnify us from
-          any third party claims arising from the termination of your account.
-          <br />
-          <br />
-          You also reserve the right to terminate your use of the Just One Penny
-          platform at your discretion. This can be accomplished by contacting
-          Just One Penny via the information below, and at such time Just One
-          Penny will remove your account within a reasonable timeframe.
-        </Text>
+        <NumberedItemWrapper>
+          <SubHeading>10. TERMINATION OF SERVICE</SubHeading>
+          <Text>
+            WE RESERVE THE RIGHT TO DENY SERVICE TO ANYONE, AT ANY TIME, AND FOR
+            ANY REASON, AS ALLOWED BY LAW, OR FOR ANY OTHER REASON.
+            <br />
+            <br />
+            We also reserve the right, at our sole discretion, to discontinue
+            any service or modify any Service without notice, at any time, and
+            without liability. We reserve the right, at our sole discretion, to
+            deactivate your account. We shall not be liable to you or any third
+            party if we terminate your account, deny service, discontinue
+            service, or modify any service, and you agree to hold us harmless
+            and indemnify us from any third party claims arising from the
+            termination of your account.
+            <br />
+            <br />
+            You also reserve the right to terminate your use of the Just One
+            Penny platform at your discretion. This can be accomplished by
+            contacting Just One Penny via the information below, and at such
+            time Just One Penny will remove your account within a reasonable
+            timeframe.
+          </Text>
+        </NumberedItemWrapper>
 
-        <SubHeading>11. TERMS AND CONDITIONS MAY CHANGE</SubHeading>
-        <Text>
-          We reserve the right to update this Agreement by prominently posting
-          notice of the update on our Services. Unless otherwise noted, any
-          updates will become effective thirty (30) days after posting the
-          updates to the Terms, and apply to all information collected about
-          you. If we make any changes to this Agreement that materially impact
-          previously collected information about you, we will, to the extent
-          that we have your email address, notify you by email.
-        </Text>
+        <NumberedItemWrapper>
+          <SubHeading>11. TERMS AND CONDITIONS MAY CHANGE</SubHeading>
+          <Text>
+            We reserve the right to update this Agreement by prominently posting
+            notice of the update on our Services. Unless otherwise noted, any
+            updates will become effective thirty (30) days after posting the
+            updates to the Terms, and apply to all information collected about
+            you. If we make any changes to this Agreement that materially impact
+            previously collected information about you, we will, to the extent
+            that we have your email address, notify you by email.
+          </Text>
+        </NumberedItemWrapper>
 
-        <SubHeading>12. THIRD PARTY CONTENT</SubHeading>
-        <Text>
-          You may find links to other Internet sites or resources on the
-          Services. You acknowledge and agree that Just One Penny is not
-          responsible for the availability of such external sites or resources,
-          and does not endorse and is not responsible or liable for any the
-          Services Content, advertising, products, or other materials on or
-          available from such sites or resources. Just One Penny will not be
-          responsible or liable, directly or indirectly, for any actual or
-          alleged damage or loss caused by or in connection with use of or
-          reliance on any such the Services Content, goods or services available
-          on or through any such site or resource.
-        </Text>
+        <NumberedItemWrapper>
+          <SubHeading>12. THIRD PARTY CONTENT</SubHeading>
+          <Text>
+            You may find links to other Internet sites or resources on the
+            Services. You acknowledge and agree that Just One Penny is not
+            responsible for the availability of such external sites or
+            resources, and does not endorse and is not responsible or liable for
+            any the Services Content, advertising, products, or other materials
+            on or available from such sites or resources. Just One Penny will
+            not be responsible or liable, directly or indirectly, for any actual
+            or alleged damage or loss caused by or in connection with use of or
+            reliance on any such the Services Content, goods or services
+            available on or through any such site or resource.
+          </Text>
+        </NumberedItemWrapper>
 
-        <SubHeading>13. GOVERNING LAW AND CHOICE OF FORUM</SubHeading>
-        <Text>
-          This Agreement shall be governed by, construed, and enforced in
-          accordance with the laws of the State of Indiana. The sole, exclusive
-          and mandatory venue for any disputes arising from or concerning this
-          Agreement shall be in Marion County, Indiana.
-        </Text>
+        <NumberedItemWrapper>
+          <SubHeading>13. GOVERNING LAW AND CHOICE OF FORUM</SubHeading>
+          <Text>
+            This Agreement shall be governed by, construed, and enforced in
+            accordance with the laws of the State of Indiana. The sole,
+            exclusive and mandatory venue for any disputes arising from or
+            concerning this Agreement shall be in Marion County, Indiana.
+          </Text>
+        </NumberedItemWrapper>
 
-        <SubHeading>14. ENTIRE AGREEMENT</SubHeading>
-        <Text>
-          This Agreement contains the full understanding between the parties and
-          supersedes all prior representations or agreements, whether oral or
-          written, with respect to such matters. If any provision of these Terms
-          of Use is held invalid by any law or regulation of any government, or
-          by any court, the parties agree that such provision will be replaced
-          with a new provision that accomplishes the original business purpose,
-          and the other provisions of the Terms of Use will remain in full force
-          and effect.
-        </Text>
+        <NumberedItemWrapper>
+          <SubHeading>14. ENTIRE AGREEMENT</SubHeading>
+          <Text>
+            This Agreement contains the full understanding between the parties
+            and supersedes all prior representations or agreements, whether oral
+            or written, with respect to such matters. If any provision of these
+            Terms of Use is held invalid by any law or regulation of any
+            government, or by any court, the parties agree that such provision
+            will be replaced with a new provision that accomplishes the original
+            business purpose, and the other provisions of the Terms of Use will
+            remain in full force and effect.
+          </Text>
+        </NumberedItemWrapper>
 
-        <SubHeading>15. CONTACT US</SubHeading>
-        <Text>
-          If you need to contact us, you may do so via:
-          <br />
-          Email: greg@justonepenny.org
-          <br />
-          Mail: 1020 E Palmer St, Indianapolis, IN 46203 USA
-        </Text>
-        <SubHeading>
-          16. AGREEMENT TO CONDUCT TRANSACTION ELECTRONICALLY
-        </SubHeading>
-        <Text>
-          By selecting “I Agree” at the end of this document, you are signing
-          this Agreement electronically and you agree that you will be legally
-          bound by these Terms of Use.
-        </Text>
+        <NumberedItemWrapper>
+          <SubHeading>15. CONTACT US</SubHeading>
+          <Text>
+            If you need to contact us, you may do so via:
+            <br />
+            Email: greg@justonepenny.org
+            <br />
+            Mail: 1020 E Palmer St, Indianapolis, IN 46203 USA
+          </Text>
+        </NumberedItemWrapper>
+
+        <NumberedItemWrapper>
+          <SubHeading>
+            16. AGREEMENT TO CONDUCT TRANSACTION ELECTRONICALLY
+          </SubHeading>
+          <Text>
+            By selecting “I Agree” at the end of this document, you are signing
+            this Agreement electronically and you agree that you will be legally
+            bound by these Terms of Use.
+          </Text>
+        </NumberedItemWrapper>
       </SubHeaderWrapper>
     </Wrapper>
   );
@@ -665,7 +684,7 @@ const SubHeading = styled.h3`
   }
 `;
 
-const Text = styled.p`
+const Text = styled.div`
   font-size: 1rem;
 `;
 

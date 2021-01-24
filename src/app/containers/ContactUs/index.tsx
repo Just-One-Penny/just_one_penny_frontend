@@ -10,6 +10,8 @@ import styled from 'styled-components/macro';
 import { Button } from '../../components/Button';
 import { contactUsApi } from '../../../api/contactUsApi';
 import { HeroSection } from '../../components/HeroSection';
+import { ReactComponent as Checkmark } from './assets/IconCheckmark.svg';
+import { ReactComponent as ButtonClear } from './assets/ButtonClear.svg';
 
 interface Props {}
 
@@ -61,6 +63,7 @@ export const ContactUs = memo((props: Props) => {
                     required
                   />
                 </FormFieldContainer>
+
                 <FormFieldContainer>
                   <Label htmlFor="inputEmail">Email</Label>
                   <Input
@@ -72,6 +75,7 @@ export const ContactUs = memo((props: Props) => {
                     required
                   />
                 </FormFieldContainer>
+
                 <FormFieldContainer>
                   <Label htmlFor="organization">Organization (optional)</Label>
                   <Input
@@ -80,9 +84,9 @@ export const ContactUs = memo((props: Props) => {
                     value={organization}
                     placeholder="Organization Name"
                     onChange={e => setOrganization(e.target.value)}
-                    required
                   />
                 </FormFieldContainer>
+
                 <FormFieldContainer>
                   <Label htmlFor="messageBody">Message</Label>
                   <Textarea
@@ -93,12 +97,26 @@ export const ContactUs = memo((props: Props) => {
                     required
                   />
                 </FormFieldContainer>
-                <Button btnStyle={'primary'}>Submit</Button>
+
+                <ButtonWrapper>
+                  <Button width={188} btnStyle={'primary'}>
+                    Send Message
+                  </Button>
+                </ButtonWrapper>
               </form>
             </FormBox>
           ) : (
             <SubmitContainer>
-              Message Sent. We'll get back to you soon.
+              <SubmissionText>
+                {/* <span>
+                  <Checkmark />
+                </span> */}
+                Message Sent. We'll get back to you soon.
+              </SubmissionText>
+
+              {/* <span>
+                <ButtonClear />
+              </span> */}
             </SubmitContainer>
           )}
         </MainBox>
@@ -111,25 +129,29 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-flow: column;
-  padding-bottom: 10px;
+  padding: 3rem 2.5rem;
+
+  @media only screen and (max-width: 475px) {
+    padding: 1.5rem 1rem;
+  }
 `;
 
 const MainBox = styled.div`
   display: flex;
   flex-flow: column;
-  max-width: 704px;
+  // width: 36.6666666%;
+  max-width: 44rem;
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 5px;
-  opacity: 1;
+  padding: 1.75rem 4rem 7.5rem 4rem;
 
-  @media (min-width: 476px) {
-    padding: 1rem;
-    margin: 1rem;
+  @media only screen and (max-width: 650px) {
+    padding: 1.25rem 2rem 1.5rem 2rem;
   }
 
-  @media (max-width: 475px) {
-    padding: 1rem;
-    margin: 1rem;
+  @media only screen and (max-width: 475px) {
+    width: 100%;
+    padding: 1.25rem 0.6875rem 1.5rem 0.75rem;
   }
 `;
 
@@ -145,16 +167,14 @@ const PageHeading = styled.div`
   letter-spacing: 0px;
   color: #333333;
   opacity: 1;
-  padding: 0.3rem 0;
+  margin-bottom: 1.375rem;
 
-  @media (max-width: 475px) {
-  }
-
-  @media (min-width: 476px) {
+  @media only screen and (max-width: 475px) {
+    margin-bottom: 0.875rem;
   }
 `;
 
-const B1 = styled.b`
+const B1 = styled.p`
   font: var(--unnamed-font-style-normal) normal
     var(--unnamed-font-weight-normal) var(--unnamed-font-size-16) /
     var(--unnamed-line-spacing-24) var(--unnamed-font-family-avenir);
@@ -164,14 +184,10 @@ const B1 = styled.b`
   letter-spacing: 0px;
   color: #333333;
   opacity: 1;
-  padding-bottom: 0.5rem;
+  margin-bottom: 1.625rem;
 
-  @media (min-width: 476px) {
-    text-align: left;
-  }
-
-  @media (max-width: 475px) {
-    text-align: left;
+  @media only screen and (max-width: 475px) {
+    margin-bottom: 1.125rem;
   }
 `;
 
@@ -181,30 +197,28 @@ const FormBox = styled.div`
   justify-content: center;
   text-align: center;
   align-items: stretch;
-  @media (min-width: 476px) {
-    margin-left: 8rem;
-    margin-right: 8rem;
+  margin: 0 3.5rem;
+
+  @media only screen and (max-width: 650px) {
+    margin: 0 1.75rem;
+  }
+
+  @media only screen and (max-width: 475px) {
+    margin: 0 0.25rem;
   }
 `;
-
-// const Button = styled.button`
-//   background: transparent
-//     linear-gradient(0deg, #11569b 0%, #54aecc 100%, #6ccddd 100%, #7ae0e8 100%)
-//     0% 0% no-repeat padding-box;
-//   box-shadow: 0px 2px 6px #0000005a;
-//   border-radius: 50px;
-//   opacity: 1;
-// `;
 
 const FormFieldContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 1rem 1rem 1rem 1rem;
+  margin-bottom: 1.125rem;
 `;
 
 const Label = styled.label`
-  width: 100%
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-medium) var(--unnamed-font-size-14)/var(--unnamed-line-spacing-21) var(--unnamed-font-family-avenir);
+  width: 100%;
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-medium) var(--unnamed-font-size-14) /
+    var(--unnamed-line-spacing-21) var(--unnamed-font-family-avenir);
   letter-spacing: var(--unnamed-character-spacing-0);
   color: var(---333333-dark);
   text-align: left;
@@ -218,30 +232,59 @@ const Input = styled.input`
   border: 1px solid var(---9fa2a8-mid);
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #9fa2a8;
-  padding: 0.3rem;
-
+  padding: 0.375rem 0 0.25rem 0.9375rem;
+  border-radius: 5px;
   opacity: 1;
+  color: #333;
 
-  @media (min-width: 476px) {
-    border-radius: 5px;
+  &::placeholder {
+    color: #333333;
+    font-size: 1rem;
+    font-weight: normal;
   }
 `;
 
 const Textarea = styled.textarea`
   border: 1px solid var(---9fa2a8-mid);
-  padding: 0.3rem;
+
   padding-bottom: 5rem;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #9fa2a8;
   border-radius: 5px;
   opacity: 1;
+
+  padding: 0.375rem 0 7.75rem 0.9375rem;
+
+  &::placeholder {
+    color: #333333;
+    font-size: 1rem;
+    font-weight: normal;
+  }
+`;
+
+const ButtonWrapper = styled.div`
+  margin-top: 2.5rem;
 `;
 
 const SubmitContainer = styled.div`
   background: transparent linear-gradient(90deg, #005799 0%, #6996fd 100%) 0% 0%
     no-repeat padding-box;
   border-radius: 8px;
-  opacity: 1;
+
+  padding: 0.75rem 0 0.5625rem 4rem;
+
+  @media only screen and (max-width: 650px) {
+    padding: 0.5rem 0 0.625rem 3rem;
+  }
+
+  // & span {
+  //   & svg {
+  //     fill: transparent;
+  //   }
+  // }
+`;
+
+const SubmissionText = styled.p`
   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
     var(--unnamed-font-size-20) / var(--unnamed-line-spacing-30)
     var(--unnamed-font-family-avenir);
@@ -251,5 +294,8 @@ const SubmitContainer = styled.div`
   letter-spacing: 0px;
   color: #ffffff;
   opacity: 1;
-  padding: 0.5rem;
+
+  @media only screen and (max-width: 650px) {
+    font-size: 1rem;
+  }
 `;

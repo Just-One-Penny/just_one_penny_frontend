@@ -21,7 +21,8 @@ export function NavBar() {
 }
 
 const Wrapper = styled.header`
-  box-shadow: 0 1px 0 0 ${p => p.theme.colors.light};
+  // box-shadow: 0 1px 0 0 ${p => p.theme.colors.light};
+  box-shadow: 0px 3px 6px #0000001A;
   height: ${StyleConstants.DESKTOP_NAV_BAR_HEIGHT};
   display: flex;
   justify-content: center;
