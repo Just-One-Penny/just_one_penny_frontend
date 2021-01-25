@@ -34,6 +34,7 @@ export const CharityTable = (props: Props) => {
         {!props.loading && props.charities.length > 0 ? (
           props.charities.map((charity, i) => (
             <CharityRow>
+              {console.log(charity)}
               <StyledLink to={`/charities/${charity.id}`}>
                 <CharityImage src={charity.logo} />
               </StyledLink>
@@ -52,6 +53,9 @@ export const CharityTable = (props: Props) => {
                         charity.lastYearRevenue.revenue,
                       )}`}
                     </div>
+                  ) : null}
+                  {charity.state ? (
+                    <div>{`Location: ${charity.city}, ${charity.state}`}</div>
                   ) : null}
                 </CharityDetails>
 
@@ -258,6 +262,6 @@ const CharityImage = styled.div`
 
   @media only screen and (max-width: 650px) {
     background-position: left;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
   }
 `;
