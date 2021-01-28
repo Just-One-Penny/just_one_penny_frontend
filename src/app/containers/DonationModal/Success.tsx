@@ -18,7 +18,9 @@ export const Success = props => {
           <InfoText>Email: {props.email}</InfoText>
           <InfoText>Donation: {props.amount}</InfoText>
           <InfoText>Total Amount: {props.total}</InfoText>
-          <InfoText>Card #: Ending in {props.token.card.last4}</InfoText>
+          <InfoText>
+            Card #: Ending in {props.token ? props.token.card.last4 : ''}
+          </InfoText>
         </div>
         <div className="flex flex-col w-full justify-center items-center">
           <LinkText>Print Confirmation</LinkText>

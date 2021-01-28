@@ -43,11 +43,13 @@ export const DesktopMenu = ({ toggleMenu }) => {
 
         {user && user.id ? (
           <>
-            <StyledLink to="/settings">My Accounts</StyledLink>
+            <StyledLink to="/settings">My Account</StyledLink>
 
             <Button width={138} btnStyle="secondary" onClick={logout}>
               Logout
             </Button>
+
+            <Text>Hi {user.fullName}</Text>
           </>
         ) : (
           <>
@@ -111,4 +113,10 @@ const NavTextLink = styled.span`
   &:active {
     color: #0a559e;
   }
+`;
+
+const Text = styled.p`
+  ${sharedCss};
+
+  cursor: text;
 `;

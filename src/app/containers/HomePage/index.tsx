@@ -41,7 +41,7 @@ export function HomePage() {
         />
       </Helmet>
       <HeroBox />
-      <CharityNews />
+      {/* <CharityNews /> */}
     </>
   );
 }
