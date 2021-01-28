@@ -29,7 +29,7 @@ export const Footer = memo((props: Props) => {
           About
         </NavLink>
 
-        <Copyright>Copyright Information</Copyright>
+        <Copyright>Copyright {new Date().getFullYear()}</Copyright>
       </FooterContent>
     </FooterSection>
   );
