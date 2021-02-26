@@ -42,7 +42,7 @@ export function App() {
       <PageWrapper>
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/settings" component={AccountSettings} />
+          <Route exact path="/settings/:setting?" component={AccountSettings} />
           <Route exact path="/contactUs" component={ContactUs} />
           <Route exact path="/about" component={About} />
           <Route exact path="/faq" component={Faq} />

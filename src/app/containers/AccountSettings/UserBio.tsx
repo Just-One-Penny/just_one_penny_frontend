@@ -5,9 +5,7 @@ import styled from 'styled-components/macro';
 import { ReactComponent as EditIcon } from './assets/edit-regular.svg';
 import { InputText } from '@welcome-ui/input-text';
 import { Box } from '@welcome-ui/box';
-import { Button } from '@welcome-ui/button';
 // import { Field } from '@welcome-ui/field';
-// import { Form } from 'react-final-form';
 import { reducer, sliceKey, actions } from './slice';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -21,9 +19,11 @@ import {
 } from './selectors';
 import { accountSettingsSaga } from './saga';
 import { UpdatedUser } from './types';
+import { Form, Field } from 'react-final-form';
+
 import { Modal } from '../../components/Modal';
 import { FormField } from '../../components/FormField';
-import { Form, Field } from 'react-final-form';
+import { Button } from 'app/components/Button';
 
 export function UserBio() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
@@ -134,168 +134,165 @@ export function UserBio() {
     dispatch(actions.changeName(selectedFullName));
     dispatch(actions.changeRole(selectedRole));
   };
-  console.log('SELECTED FN', selectedFullName);
+
   return (
     <PageWrapper>
-      {user ? (
-        <div>
-          {!isEditing ? (
-            <div>
-              <div>
-                <FieldGrid>
-                  <TitleContainer>Name:</TitleContainer>
-                  <FieldContent>{user?.fullName}</FieldContent>
-                  <Modal
-                    buttonElement={<EditButton>Edit</EditButton>}
-                    modalBody={
-                      <ModalContainer>
-                        <ModalHeader>
-                          <H3>Edit Name</H3>
-                          <HR />
-                          <Form
-                            initialValues={{ fullName: user.fullName }}
-                            onSubmit={submitNameForm}
-                          >
-                            {({ handleSubmit }) => (
-                              <FormContainer>
-                                <form onSubmit={handleSubmit}>
-                                  <FieldContainer>
-                                    <FormField
-                                      name="fullName"
-                                      label="Full Name"
-                                      placeholder="Greg Barrow"
-                                    />
-                                  </FieldContainer>
-                                  <SaveContainer>
-                                    <SaveButton type="submit">Save</SaveButton>
-                                  </SaveContainer>
-                                </form>
-                              </FormContainer>
-                            )}
-                          </Form>
-                        </ModalHeader>
-                      </ModalContainer>
-                    }
-                  />
-                  <TitleContainer>Email:</TitleContainer>
-                  <FieldContent>{user?.email}</FieldContent>
-                  <Modal
-                    buttonElement={<EditButton>Edit</EditButton>}
-                    modalBody={
-                      <ModalContainer>
-                        <ModalHeader>
-                          <H3>Edit Email</H3>
-                          <HR />
-                          <Form
-                            initialValues={{ email: user.email }}
-                            onSubmit={submitEmailForm}
-                          >
-                            {({ handleSubmit }) => (
-                              <FormContainer>
-                                <form onSubmit={handleSubmit}>
-                                  <FieldContainer>
-                                    <FormField
-                                      name="email"
-                                      label="Email"
-                                      placeholder="test@example.com"
-                                    />
-                                  </FieldContainer>
-                                  <SaveContainer>
-                                    <SaveButton type="submit">Save</SaveButton>
-                                  </SaveContainer>
-                                </form>
-                              </FormContainer>
-                            )}
-                          </Form>
-                        </ModalHeader>
-                      </ModalContainer>
-                    }
-                  />
-                  <TitleContainer>Password:</TitleContainer>
-                  <FieldContent>
-                    &#8226; &#8226; &#8226; &#8226; &#8226; &#8226; &#8226;
-                    &#8226; &#8226;
-                  </FieldContent>
-                  <Modal
-                    buttonElement={<EditButton>Edit</EditButton>}
-                    modalBody={
-                      <ModalContainer>
-                        <ModalHeader>
-                          <H3>Edit Password</H3>
-                          <HR />
-                          <Form onSubmit={submitPasswordForm}>
-                            {({ handleSubmit }) => (
-                              <FormContainer>
-                                <form onSubmit={handleSubmit}>
-                                  <FieldContainer>
-                                    <FormField
-                                      name="currentPassword"
-                                      label="Confirm Current Password"
-                                      placeholder="Current Password"
-                                      type="password"
-                                    />
-                                  </FieldContainer>
-                                  <FieldContainer>
-                                    <FormField
-                                      name="newPassword"
-                                      label="New Password"
-                                      placeholder="New Password"
-                                      type="password"
-                                    />
-                                  </FieldContainer>
-                                  <FieldContainer>
-                                    <FormField
-                                      name="confirmPassword"
-                                      label="Confirm New Password"
-                                      placeholder="Confirm New Password"
-                                      type="password"
-                                    />
-                                  </FieldContainer>
-                                  <SaveContainer>
-                                    <SaveButton type="submit">Save</SaveButton>
-                                  </SaveContainer>
-                                </form>
-                              </FormContainer>
-                            )}
-                          </Form>
-                        </ModalHeader>
-                      </ModalContainer>
-                    }
-                  />
-                </FieldGrid>
-              </div>
-              {/* <div>
-                <Button onClick={handleClick} name="edit">
-                  <EditIcon />
-                </Button>
-              </div> */}
-            </div>
-          ) : (
-            // <Form
-            //   onSubmit={submitForm}
-            //   initialValues={{
-            //     fullName: selectedFullName,
-            //     email: selectedEmail,
-            //     role: selectedRole,
-            //   }}
-            // >
-            //   <Field
-            //     name="fullName"
-            //     component={InputText}
-            //     onChange={onChange}
-            //   />
-            //   <Field name="email" component={InputText} onChange={onChange} />
-            //   <Field name="role" component={InputText} onChange={onChange} />
-            //   <Button onClick={() => submitForm()}>SAVE</Button>
-            //   <Button name="cancel" onClick={() => cancelForm()}>
-            //     CANCEL
-            //   </Button>
-            // </Form>
-            <div />
-          )}
-        </div>
-      ) : (
-        <div></div>
+      {user && !isEditing && (
+        <>
+          <SubHeading>Settings</SubHeading>
+
+          <SettingRow>
+            <TitleContainer>Name</TitleContainer>
+
+            <FieldContent>{user?.fullName}</FieldContent>
+
+            <Modal
+              buttonElement={<EditButton>Edit</EditButton>}
+              modalBody={
+                <ModalContainer>
+                  <ModalHeader>
+                    <H3>Edit Name</H3>
+                    <HR />
+                    <Form
+                      initialValues={{ fullName: user.fullName }}
+                      onSubmit={submitNameForm}
+                    >
+                      {({ handleSubmit }) => (
+                        <FormContainer>
+                          <form onSubmit={handleSubmit}>
+                            <FieldContainer>
+                              <FormField
+                                name="fullName"
+                                label="Full Name"
+                                placeholder="Greg Barrow"
+                              />
+                            </FieldContainer>
+                            <SaveContainer>
+                              <Button
+                                btnStyle="primary"
+                                width={116}
+                                type="submit"
+                              >
+                                Save
+                              </Button>
+                            </SaveContainer>
+                          </form>
+                        </FormContainer>
+                      )}
+                    </Form>
+                  </ModalHeader>
+                </ModalContainer>
+              }
+            />
+          </SettingRow>
+
+          <SettingRow>
+            <TitleContainer>Email</TitleContainer>
+
+            <FieldContent>{user?.email}</FieldContent>
+
+            <Modal
+              buttonElement={<EditButton>Edit</EditButton>}
+              modalBody={
+                <ModalContainer>
+                  <ModalHeader>
+                    <H3>Edit Email</H3>
+                    <HR />
+                    <Form
+                      initialValues={{ email: user.email }}
+                      onSubmit={submitEmailForm}
+                    >
+                      {({ handleSubmit }) => (
+                        <FormContainer>
+                          <form onSubmit={handleSubmit}>
+                            <FieldContainer>
+                              <FormField
+                                name="email"
+                                label="Email"
+                                placeholder="test@example.com"
+                              />
+                            </FieldContainer>
+                            <SaveContainer>
+                              <Button
+                                btnStyle="primary"
+                                width={116}
+                                type="submit"
+                              >
+                                Save
+                              </Button>
+                            </SaveContainer>
+                          </form>
+                        </FormContainer>
+                      )}
+                    </Form>
+                  </ModalHeader>
+                </ModalContainer>
+              }
+            />
+          </SettingRow>
+
+          <SettingRow>
+            <TitleContainer>Password</TitleContainer>
+
+            <FieldContent>
+              &#8226; &#8226; &#8226; &#8226; &#8226; &#8226; &#8226; &#8226;
+              &#8226;
+            </FieldContent>
+
+            <Modal
+              buttonElement={<EditButton>Edit</EditButton>}
+              modalBody={
+                <ModalContainer>
+                  <ModalHeader>
+                    <H3>Edit Password</H3>
+                    <HR />
+                    <Form onSubmit={submitPasswordForm}>
+                      {({ handleSubmit }) => (
+                        <FormContainer>
+                          <form onSubmit={handleSubmit}>
+                            <FieldContainer>
+                              <FormField
+                                name="currentPassword"
+                                label="Confirm Current Password"
+                                placeholder="Current Password"
+                                type="password"
+                              />
+                            </FieldContainer>
+                            <FieldContainer>
+                              <FormField
+                                name="newPassword"
+                                label="New Password"
+                                placeholder="New Password"
+                                type="password"
+                              />
+                            </FieldContainer>
+                            <FieldContainer>
+                              <FormField
+                                name="confirmPassword"
+                                label="Confirm New Password"
+                                placeholder="Confirm New Password"
+                                type="password"
+                              />
+                            </FieldContainer>
+                            <SaveContainer>
+                              <Button
+                                btnStyle="primary"
+                                width={116}
+                                type="submit"
+                              >
+                                Save
+                              </Button>
+                            </SaveContainer>
+                          </form>
+                        </FormContainer>
+                      )}
+                    </Form>
+                  </ModalHeader>
+                </ModalContainer>
+              }
+            />
+          </SettingRow>
+        </>
       )}
     </PageWrapper>
   );
@@ -305,19 +302,65 @@ const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  box-sizing: content-box;
+  padding: 1.25rem 1rem 0 1rem;
+  color: #333;
+  min-height: 49rem;
+
+  @media only screen and (max-width: 475px) {
+    padding: 1.25rem 0.5rem 1.5rem 0.5rem;
+    min-height: 0;
+  }
 `;
 
-const FieldGrid = styled.div`
-  display: grid;
+const SubHeading = styled.h3`
+  font-size: 1.25rem;
+  font-weight: 900;
+  margin-bottom: 1.0625rem;
+  color: #333;
+
+  @media only screen and (max-width: 475px) {
+    margin-bottom: 0.5625rem;
+  }
+`;
+
+const SettingRow = styled.div`
+  display: flex;
+  align-items: center;
   width: 100%;
-  grid-template-columns: 40% 40% 20%;
-  row-gap: 80%;
+  padding: 1rem 1rem 1.125rem 1rem;
+
+  border-top: 0.25px solid #e1e1e1;
+
+  &:last-child {
+    border-bottom: 0.25px solid #e1e1e1;
+  }
+
+  @media only screen and (max-width: 475px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 0 1.125rem 0.5rem;
+  }
 `;
 
-const TitleContainer = styled.div``;
+const TitleContainer = styled.div`
+  flex: 0 1 32.58426966%;
+  font-weight: 500;
 
-const FieldContent = styled.p``;
+  @media only screen and (max-width: 475px) {
+    flex: none;
+  }
+`;
+
+const FieldContent = styled.p`
+  margin-right: auto;
+  flex-shrink: 1;
+
+  @media only screen and (max-width: 475px) {
+    margin-right: 0;
+    flex: none;
+    margin-bottom: 1.125rem;
+  }
+`;
 
 const EditButton = styled.button`
   font: var(--unnamed-font-style-normal) normal
@@ -371,6 +414,8 @@ const FormContainer = styled.div`
   margin-bottom: 100px;
 `;
 
+const FieldContainer = styled.div``;
+
 const SaveContainer = styled.div`
   position: absolute;
   bottom: 0;
@@ -388,28 +433,3 @@ const SaveContainer = styled.div`
   padding-top: 1rem;
   padding-bottom: 1rem;
 `;
-
-const SaveButton = styled.button`
-  background: transparent
-    linear-gradient(0deg, #11569b 0%, #54aecc 100%, #6ccddd 100%, #7ae0e8 100%)
-    0% 0% no-repeat padding-box;
-  box-shadow: 0px 2px 6px #0000005a;
-  border-radius: 50px;
-  opacity: 1;
-
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
-    var(--unnamed-font-size-16) / 22px var(--unnamed-font-family-avenir);
-  letter-spacing: var(--unnamed-character-spacing-0);
-  text-align: center;
-  font: normal normal 900 16px/22px Avenir;
-  letter-spacing: 0px;
-  color: #ffffff;
-  opacity: 1;
-
-  margin: auto 0;
-  width: 75%;
-  height: 90%;
-  max-width: 250px;
-`;
-
-const FieldContainer = styled.div``;

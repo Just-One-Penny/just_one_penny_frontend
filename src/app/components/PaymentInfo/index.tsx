@@ -15,10 +15,11 @@ interface Props {
   submitting?: boolean;
 }
 
+const stripePromise = loadStripe(
+  'pk_test_51HWR6NHp3C1otng9BzgliWzedOOJE7iXz0hE4vKQpB2txOHPdD97Kfvzh4wvHtmSxK7QMbSG2xmI7hmFdf1uOBEt00Vh35ooIT',
+);
+
 export const PaymentInfo = (props: Props) => {
-  const stripePromise = loadStripe(
-    'pk_test_51HWR6NHp3C1otng9BzgliWzedOOJE7iXz0hE4vKQpB2txOHPdD97Kfvzh4wvHtmSxK7QMbSG2xmI7hmFdf1uOBEt00Vh35ooIT',
-  );
   const { submitForm, values, submitting } = props;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();

@@ -69,7 +69,7 @@ export function StripeForm(props: Props) {
     if (submitting) {
       handleSubmit();
     }
-  }, [submitting]);
+  }, [submitting, values, stripe, elements, submitForm]);
 
   return (
     <Row>

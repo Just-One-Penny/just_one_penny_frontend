@@ -18,7 +18,7 @@ interface Props {
 export const DonationButton = memo((props: Props) => {
   return (
     <Modal
-      size={Size.sm}
+      size={Size.md}
       buttonElement={
         <Button btnStyle={props.buttonStyle} className="mt-2">
           Donate to This Charity

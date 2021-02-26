@@ -20,21 +20,24 @@ export const AccountDonations = () => {
     if (userId) {
       dispatch(actions.getUserDonations());
     }
-  }, [userId]);
+  }, [userId, dispatch]);
   const donations = useSelector(selectUserDonations);
   return (
-    <div>
+    <Wrapper>
       <Tab.List aria-label="Tabs" {...tab}>
-        <Tab {...tab} id="tab1">
+        <StyledTab {...tab} id="tab1">
           <HistoryTab>Charities</HistoryTab>
-        </Tab>
-        <Tab {...tab} id="tab2">
+        </StyledTab>
+
+        <StyledTab {...tab} id="tab2">
           <HistoryTab>History</HistoryTab>
-        </Tab>
+        </StyledTab>
       </Tab.List>
+
       <Tab.Panel {...tab} tabId="tab1">
         <AccountCharities />
       </Tab.Panel>
+
       <Tab.Panel {...tab} tabId="tab2">
         {donations === null || donations.length === 0 ? (
           <NoCharities />
@@ -74,9 +77,19 @@ export const AccountDonations = () => {
           </>
         )}
       </Tab.Panel>
-    </div>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  padding: 3.0625rem 1rem 0 1rem;
+  min-height: 49rem;
+
+  @media only screen and (max-width: 650px) {
+    padding: 1.5625rem 0.5rem 0 0.5rem;
+    min-height: 30rem;
+  }
+`;
 
 const CharitiesTab = styled.span`
   color: var(---0a559e-primary);
@@ -87,12 +100,19 @@ const CharitiesTab = styled.span`
   opacity: 1;
 `;
 
+const StyledTab = styled(Tab)`
+  color: #333333;
+
+  padding: 0 0.9375rem 0.25rem 0.9375rem;
+`;
+
 const HistoryTab = styled.span`
   color: var(---0a559e-primary);
   text-align: center;
   font: normal normal 900 20px/27px Avenir;
   letter-spacing: 0px;
-  color: #0a559e;
+  // color: #0a559e;
+  // color: #333333;
   opacity: 1;
 `;
 
