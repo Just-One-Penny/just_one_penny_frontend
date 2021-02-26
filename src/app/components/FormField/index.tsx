@@ -27,6 +27,7 @@ interface Props {
   format?: Function;
   options?: any[];
   formatOnBlur?: boolean;
+  parse?: Function;
 }
 
 export function FormField(props: Props) {
@@ -42,6 +43,7 @@ export function FormField(props: Props) {
     format,
     formatOnBlur,
     options,
+    parse,
   } = props;
 
   return (
@@ -56,6 +58,7 @@ export function FormField(props: Props) {
           required={required}
           format={format}
           formatOnBlur={formatOnBlur}
+          parse={parse}
         >
           {options.map(o => o)}
         </Input>
@@ -68,6 +71,7 @@ export function FormField(props: Props) {
           required={required}
           format={format}
           formatOnBlur={formatOnBlur}
+          parse={parse}
         />
       )}
     </>

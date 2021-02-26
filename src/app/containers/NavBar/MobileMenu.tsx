@@ -7,7 +7,7 @@ import { Logo } from './Logo';
 import { Button } from 'app/components/Button';
 import { ReactComponent as ButtonClear } from './assets/ButtonClear.svg';
 import { NavLink } from 'react-router-dom';
-import NavTabs from './MobileNavTabs';
+import MobileNavTabs from './MobileNavTabs';
 
 const activeLinkStyle = {
   color: '#fff',
@@ -25,8 +25,8 @@ export const MobileMenu = ({ show, toggleMenu }) => {
 
       <Logo />
 
-      <NavItems>
-        {NavTabs.map(tab => (
+      <NavItems user={user}>
+        {MobileNavTabs.NavTabs.map(tab => (
           <NavItem key={tab.text}>
             <StyledLink
               onClick={toggleMenu}
@@ -38,44 +38,62 @@ export const MobileMenu = ({ show, toggleMenu }) => {
             </StyledLink>
           </NavItem>
         ))}
-
-        {user && user.id && (
-          <NavItem>
-            <StyledLink
-              onClick={toggleMenu}
-              activeStyle={activeLinkStyle}
-              to="/settings"
-            >
-              My Account
-            </StyledLink>
-          </NavItem>
-        )}
       </NavItems>
 
-      {user && user.id ? (
-        <ButtonWrapper>
-          <Button onClick={logout} btnStyle="secondary" width={130}>
+      {user && user.id && (
+        <NavItems user={user}>
+          <AuthNavHeading>My Account</AuthNavHeading>
+
+          {MobileNavTabs.AuthTabs.map(tab => (
+            <NavItem key={tab.text}>
+              <StyledLink
+                onClick={toggleMenu}
+                activeStyle={activeLinkStyle}
+                exact
+                to={tab.link}
+              >
+                {tab.text}
+              </StyledLink>
+            </NavItem>
+          ))}
+        </NavItems>
+      )}
+
+      <ButtonWrapper user={user}>
+        {user && user.id ? (
+          <Button
+            noBoxShadow={true}
+            onClick={logout}
+            btnStyle="secondary"
+            width={130}
+          >
             Sign Out
           </Button>
-        </ButtonWrapper>
-      ) : (
-        <Modal
-          buttonElement={
-            <Button noBoxShadow={true} width={130} btnStyle="secondary">
-              Sign In
-            </Button>
-          }
-          modalBody={<AuthenticationModal isSignup />}
-        />
-      )}
+        ) : (
+          <Modal
+            buttonElement={
+              <Button noBoxShadow={true} width={130} btnStyle="secondary">
+                Sign In
+              </Button>
+            }
+            modalBody={<AuthenticationModal isSignup />}
+          />
+        )}
+      </ButtonWrapper>
     </MobileNavMenu>
   );
 };
 
 const MobileNavMenu = styled.div<{ show: boolean }>`
-  display: flex;
+  display: none;
+
+  @media only screen and (max-width: 650px) {
+    display: flex;
+  }
+
   flex-direction: column;
   padding: 0 1rem;
+  overflow-y: scroll;
 
   position: absolute;
   z-index: 6;
@@ -108,7 +126,7 @@ const CloseButton = styled.span`
 const NavItem = styled.div`
   padding: .5rem 1rem .5rem 1rem;
   color: #333;
-  border-bottom 1px solid #9fa2a8;
+  border-bottom .25px solid #e1e1e1;
 `;
 
 const StyledLink = styled(NavLink)`
@@ -124,14 +142,22 @@ const StyledLink = styled(NavLink)`
   }
 `;
 
-const NavItems = styled.nav`
+const NavItems = styled.nav<{ user: object }>`
   display: flex;
   flex-direction: column;
 
-  margin-bottom: 4.8125rem;
+  margin-bottom: ${props => (props.user ? '2.5rem' : '4rem')};
 `;
 
-const ButtonWrapper = styled.div`
+const AuthNavHeading = styled.p`
+  font-size: 1rem;
+  padding: 0.5rem 1rem 0.125rem 1rem;
+  border-bottom .25px solid #e1e1e1;
+  color: #333;
+`;
+
+const ButtonWrapper = styled.div<{ user: object }>`
   display: flex;
   justify-content: center;
+  margin-bottom: ${props => (props.user ? '13.75rem' : '0')};
 `;

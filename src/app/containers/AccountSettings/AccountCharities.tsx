@@ -23,7 +23,7 @@ export function AccountCharities() {
     if (userId) {
       dispatch(actions.getUserDonationSchedules());
     }
-  }, [userId]);
+  }, [userId, dispatch]);
 
   const donationSchedules = useSelector(selectUserDonationSchedules);
 

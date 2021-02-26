@@ -51,11 +51,15 @@ export function DonationModal(props: Props) {
     if (success && props.hide) {
       props.hide();
     }
-  }, [success]);
+  }, [success, props]);
 
   const formatPrice = value => {
+    if (value === 0) {
+      return numeral('0').format('0,0.00');
+    }
+
     if (value !== undefined && value >= 3)
-      return numeral(value).format('$0,0.00');
+      return numeral(value).format('0,0.00');
     return '';
   };
 
@@ -69,12 +73,25 @@ export function DonationModal(props: Props) {
     const support = values.support ? Boolean(values.support.length) : false;
 
     if (support) {
-      amount += 2;
+      if (amount + 2 > 999999.99) {
+        values.amount = Number(values.amount) - 2 + '';
+        amount += 2;
+      } else {
+        amount += 2;
+      }
     }
 
     if (coverCost) {
-      amount += amount * 0.029 + 0.3;
+      if (amount + (amount * 0.029 + 0.3) > 999999.99) {
+        values.amount = String(
+          Number(values.amount) - (Number(values.amount) * 0.029 + 0.3),
+        );
+        amount += amount * 0.029 + 0.3;
+      } else {
+        amount += amount * 0.029 + 0.3;
+      }
     }
+
     return amount;
   };
 
@@ -115,7 +132,9 @@ export function DonationModal(props: Props) {
           label="Donation Amount"
           type="text"
           placeholder="Minimum $3.00"
-          format={formatPrice}
+          // format={value => formatPrice(value)}
+          format={value => (Number(value) > 999999.99 ? '999999.99' : value)}
+          parse={value => (Number(value) > 999999.99 ? '999999.99' : value)}
           formatOnBlur
         />
       ) : null}
@@ -196,7 +215,10 @@ export function DonationModal(props: Props) {
         onSubmit={onSubmit}
         render={({ handleSubmit, form, values }) => (
           <>
-            <Header>{formatPrice(calculateTotal(values))}</Header>
+            <Header>
+              <span>$</span>
+              {formatPrice(calculateTotal(values))}
+            </Header>
             <ModalContent>
               <form onSubmit={handleSubmit}>
                 <div>
@@ -264,8 +286,21 @@ const Header = styled.div`
   padding-bottom: 3rem;
   justify-content: center;
   align-items: center;
-  background-color: #11569b;
-  height: 5rem;
+  // background-color: #11569b;
+  // background: linear-gradient(
+  //   123deg,
+  //   rgb(36, 42, 88) 0%,
+  //   rgb(68, 82, 136) 80%,
+  //   rgb(76, 91, 152) 100%
+  // );
+  background: linear-gradient(
+    123deg,
+    rgb(36, 42, 88) 0%,
+    rgb(68, 82, 136) 48%,
+    rgb(99, 111, 158) 84%
+  );
+
+  height: 6rem;
   width: 100%;
   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
     70px/96px var(--unnamed-font-family-avenir);
@@ -275,6 +310,19 @@ const Header = styled.div`
   letter-spacing: 0px;
   color: #ffffff;
   opacity: 1;
+
+  & span {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
+      37px/51px var(--unnamed-font-family-avenir);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: center;
+    font: normal normal 900 37px/51px Avenir;
+    letter-spacing: 0px;
+    color: #ffffff;
+    opacity: 1;
+
+    margin-right: 0.625rem;
+  }
 `;
 
 const ModalContent = styled.div`

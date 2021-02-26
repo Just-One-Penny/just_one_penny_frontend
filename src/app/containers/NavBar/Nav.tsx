@@ -43,7 +43,9 @@ export const DesktopMenu = ({ toggleMenu }) => {
 
         {user && user.id ? (
           <>
-            <StyledLink to="/settings">My Account</StyledLink>
+            <StyledLink activeStyle={{ color: '#0a559e' }} to="/settings">
+              My Account
+            </StyledLink>
 
             <Button width={138} btnStyle="secondary" onClick={logout}>
               Logout
