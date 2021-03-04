@@ -73,23 +73,24 @@ export function DonationModal(props: Props) {
     const support = values.support ? Boolean(values.support.length) : false;
 
     if (support) {
-      if (amount + 2 > 999999.99) {
-        values.amount = Number(values.amount) - 2 + '';
-        amount += 2;
-      } else {
-        amount += 2;
-      }
+      // if (amount + 2 > 999999.99) {
+      //   values.amount = Number(values.amount) - 2 + '';
+      //   amount += 2;
+      // } else {
+      // }
+      amount += 2;
     }
 
     if (coverCost) {
-      if (amount + (amount * 0.029 + 0.3) > 999999.99) {
-        values.amount = String(
-          Number(values.amount) - (Number(values.amount) * 0.029 + 0.3),
-        );
-        amount += amount * 0.029 + 0.3;
-      } else {
-        amount += amount * 0.029 + 0.3;
-      }
+      // if (amount + (amount * 0.029 + 0.3) > 999999.99) {
+      //   values.amount = String(
+      //     Number(values.amount) - (Number(values.amount) * 0.029 + 0.3),
+      //   );
+      //   amount += amount * 0.029 + 0.3;
+      // } else {
+      // }
+
+      amount += amount * 0.029 + 0.3;
     }
 
     return amount;
@@ -133,8 +134,8 @@ export function DonationModal(props: Props) {
           type="text"
           placeholder="Minimum $3.00"
           // format={value => formatPrice(value)}
-          format={value => (Number(value) > 999999.99 ? '999999.99' : value)}
-          parse={value => (Number(value) > 999999.99 ? '999999.99' : value)}
+          format={value => (Number(value) > 800000 ? '800000' : value)}
+          parse={value => (Number(value) > 800000 ? '800000' : value)}
           formatOnBlur
         />
       ) : null}
@@ -286,13 +287,6 @@ const Header = styled.div`
   padding-bottom: 3rem;
   justify-content: center;
   align-items: center;
-  // background-color: #11569b;
-  // background: linear-gradient(
-  //   123deg,
-  //   rgb(36, 42, 88) 0%,
-  //   rgb(68, 82, 136) 80%,
-  //   rgb(76, 91, 152) 100%
-  // );
   background: linear-gradient(
     123deg,
     rgb(36, 42, 88) 0%,
@@ -311,6 +305,10 @@ const Header = styled.div`
   color: #ffffff;
   opacity: 1;
 
+  @media only screen and (max-width: 650px) {
+    font-size: 3.28125rem;
+  }
+
   & span {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-900)
       37px/51px var(--unnamed-font-family-avenir);
@@ -322,6 +320,10 @@ const Header = styled.div`
     opacity: 1;
 
     margin-right: 0.625rem;
+
+    @media only screen and (max-width: 650px) {
+      font-size: 1.734375rem;
+    }
   }
 `;
 
