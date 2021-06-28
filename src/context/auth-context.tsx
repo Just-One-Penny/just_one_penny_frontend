@@ -78,6 +78,7 @@ function AuthProvider(props) {
     userApi.logout();
     queryCache.clear();
     setData(null);
+    window.location.reload();
   }, [setData]);
 
   const value = React.useMemo(
